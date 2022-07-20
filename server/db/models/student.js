@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     Grade: DataTypes.NUMBER
   }, {
     sequelize,
-    modelName: 'Students',
+    modelName: 'Student',
   });
   return Students;
 };
