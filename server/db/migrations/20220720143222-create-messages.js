@@ -9,13 +9,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       Sender_id: {
-        type: Sequelize.NUMBER
+        type: Sequelize.NUMBER,
+        allowNull: false
       },
       Getter_id: {
-        type: Sequelize.NUMBER
+        type: Sequelize.NUMBER,
+        allowNull: false
       },
       Message: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
