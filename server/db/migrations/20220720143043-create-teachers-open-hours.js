@@ -21,7 +21,7 @@ module.exports = {
       Time: {
         type: Sequelize.TIME
       },
-      Doration: {
+      Duration: {
         type: Sequelize.FLOAT
       },
       createdAt: {

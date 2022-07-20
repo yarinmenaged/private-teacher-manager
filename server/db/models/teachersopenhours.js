@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     Student_id: DataTypes.NUMBER,
     Date: DataTypes.DATE,
     Time: DataTypes.TIME,
-    Doration: DataTypes.FLOAT
+    Duration: DataTypes.FLOAT
   }, {
     sequelize,
     modelName: 'TeachersOpenHours',
