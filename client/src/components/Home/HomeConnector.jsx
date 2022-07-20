@@ -1,6 +1,12 @@
+import Home from './Home';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Home from './Home';
+
+const mapStateToProps = state => {
+    return {
+
+    };
+};
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
@@ -11,4 +17,4 @@ const mapDispatchToProps = dispatch => {
     );
 }
 
-export default connect(undefined, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

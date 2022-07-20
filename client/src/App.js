@@ -2,8 +2,9 @@ import './App.css';
 import Login from './components/Login/LoginConnector';
 import RegisterForm from "./components/RegisterForm/RegisterFormConnector";
 import Home from "./components/Home/HomeConnector";
-import Schedule from './components/Schedule/ScheduleConnector'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Schedule from './components/Schedule/ScheduleConnector';
+import Messenger from './components/Messenger/MessengerConnector';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path='/register' element={<RegisterForm />} />
             <Route path='/home' element={<Home />} />
             <Route path='/schedule' element={<Schedule />} />
+            <Route path='/messenger' element={<Messenger />} />
          </Routes>
         </div>
       </div>

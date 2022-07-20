@@ -2,6 +2,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Schedule from './Schedule';
 
+const mapStateToProps = state => {
+    return {
+
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
@@ -11,4 +17,4 @@ const mapDispatchToProps = dispatch => {
     );
 }
 
-export default connect(undefined, mapDispatchToProps)(Schedule);
+export default connect(mapStateToProps, mapDispatchToProps)(Schedule);
