@@ -9,10 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       User_info_id: {
-        type: Sequelize.NUMBER
+        type: Sequelize.NUMBER,
+        unique: true
       },
       Grade: {
-        type: Sequelize.NUMBER
+        type: Sequelize.NUMBER,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
