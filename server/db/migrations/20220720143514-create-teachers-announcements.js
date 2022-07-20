@@ -9,13 +9,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       Teacher_id: {
-        type: Sequelize.NUMBER
+        type: Sequelize.NUMBER,
+        allowNull: false
       },
       Meassage: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       Subject_id: {
-        type: Sequelize.NUMBER
+        type: Sequelize.NUMBER,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
