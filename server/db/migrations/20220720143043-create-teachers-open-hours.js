@@ -12,7 +12,8 @@ module.exports = {
         type: Sequelize.NUMBER
       },
       Student_id: {
-        type: Sequelize.NUMBER
+        type: Sequelize.NUMBER,
+        allowNull: true
       },
       Date: {
         type: Sequelize.DATE
