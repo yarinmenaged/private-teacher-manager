@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.NUMBER,
         allowNull: false
       },
-      Meassage: {
+      Message: {
         type: Sequelize.STRING,
         allowNull: false
       },

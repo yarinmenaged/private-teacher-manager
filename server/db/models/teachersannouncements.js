@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   TeachersAnnouncements.init({
     Teacher_id: DataTypes.NUMBER,
-    Meassage: DataTypes.STRING,
+    Message: DataTypes.STRING,
     Subject_id: DataTypes.NUMBER
   }, {
     sequelize,
