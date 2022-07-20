@@ -11,6 +11,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Teacher.hasOne(models.UserInfo, {
+        foreignKey: 'User_info_id'
+      });
+      Teacher.hasMany(models.Messages, {
+        foreignKey: "Getter_id"
+      });
+      Teacher.hasMany(models.Messages, {
+        foreignKey: "Sender_id"
+      });
+      Teacher.hasMany(models.TeachersAnnouncements, {
+        foreignKey: "Teacher_id"
+      });
+      Teacher.hasMany(models.TeachersOpenHours, {
+        foreignKey: "Teacher_id"
+      });
+      Teacher.hasMany(models.TeacherStudentRelationship, {
+        foreignKey: "Teacher_id"
+      });
     }
   }
   Teacher.init({
