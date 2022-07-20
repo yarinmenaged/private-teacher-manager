@@ -1,0 +1,32 @@
+.form {
+    color: black;
+    width: 80%;
+}
+
+.input {
+    background-color: whites;
+    border: 0px;
+    border-radius: 5px;
+    margin: 8px 0px;
+    width: 100%;
+    padding-left: 30px;
+    height: 60px;
+    font-size: medium;
+}
+
+.span {
+    color: blueviolet;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.submit {
+    background-color: rgb(78, 99, 165);
+    color: white;
+    height: 60px;
+    cursor: pointer;
+}
+
+.submit:hover {
+    opacity: 50%;
+}

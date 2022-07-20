@@ -1,0 +1,17 @@
+.navBar {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(78, 99, 165);
+}
+
+.button {
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding: 1.8%;
+    cursor: pointer;
+}
+
+.button:hover {
+    opacity: 50%;
+}
