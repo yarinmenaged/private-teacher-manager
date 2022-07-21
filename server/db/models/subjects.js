@@ -11,9 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Subjects.belongsTo(models.Teacher, {
-        through: models.TeachersAnnouncements
-      });
     }
   }
   Subjects.init({

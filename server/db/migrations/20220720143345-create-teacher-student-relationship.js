@@ -7,7 +7,15 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
-      },      
+      },
+      Teacher_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      Student_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       Subject_id: {
         type: Sequelize.INTEGER,
         allowNull: false

@@ -11,21 +11,26 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Student.belongsTo(models.UserInfo, {
-        foreignKey: "User_info_id"
+      Student.hasOne(models.UserInfo, {
+        foreignKey: 'User_info_id'
       });
-
-      Student.belongsToMany(models.Teacher, {
-        through: models.TeachersOpenHours
+      Student.hasMany(models.Messages, {
+        foreignKey: "Getter_id"
       });
-
-      Student.belongsToMany(models.Teacher, {
-        through: models.TeacherStudentRelationship
+      Student.hasMany(models.Messages, {
+        foreignKey: "Sender_id"
+      });
+      Student.hasMany(models.TeachersOpenHours, {
+        foreignKey: "Student_id"
+      });
+      Student.hasMany(models.TeacherStudentRelationship, {
+        foreignKey: "Student_id"
       });
     }
   }
   Student.init({
-    Grade: DataTypes.INTEGER
+    User_info_id: DataTypes.INTEGER,
+    Grade: DataTypes.NUMBER
   }, {
     sequelize,
     modelName: 'Student',
