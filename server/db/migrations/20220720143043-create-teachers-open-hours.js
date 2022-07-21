@@ -8,13 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      Teacher_id: {
-        type: Sequelize.INTEGER
-      },
-      Student_id: {
-        type: Sequelize.INTEGER,
-        allowNull: true
-      },
       Date: {
         type: Sequelize.DATE
       },

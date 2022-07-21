@@ -1,0 +1,8 @@
+.column {
+    padding-left: 5%;
+    padding-right: 10%;
+}
+
+.inLine {
+    display: flex;
+}
