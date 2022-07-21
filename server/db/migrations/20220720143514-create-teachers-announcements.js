@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       Teacher_id: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       Message: {
@@ -17,7 +17,7 @@ module.exports = {
         allowNull: false
       },
       Subject_id: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       createdAt: {

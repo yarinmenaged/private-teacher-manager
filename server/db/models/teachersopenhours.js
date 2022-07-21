@@ -11,13 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      TeachersOpenHours.belongsToMany(models.Teacher);
-      TeachersOpenHours.belongsToMany(models.Student);
     }
   }
   TeachersOpenHours.init({
-    Teacher_id: DataTypes.NUMBER,
-    Student_id: DataTypes.NUMBER,
+    Teacher_id: DataTypes.INTEGER,
+    Student_id: DataTypes.INTEGER,
     Date: DataTypes.DATE,
     Time: DataTypes.TIME,
     Duration: DataTypes.FLOAT

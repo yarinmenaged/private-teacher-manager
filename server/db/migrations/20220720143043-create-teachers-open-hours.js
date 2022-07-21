@@ -9,10 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       Teacher_id: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       Student_id: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: true
       },
       Date: {

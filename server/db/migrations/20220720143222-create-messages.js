@@ -9,11 +9,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       Sender_id: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       Getter_id: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       Message: {

@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Student.init({
-    User_info_id: DataTypes.NUMBER,
+    User_info_id: DataTypes.INTEGER,
     Grade: DataTypes.NUMBER
   }, {
     sequelize,
