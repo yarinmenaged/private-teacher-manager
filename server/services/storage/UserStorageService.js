@@ -50,10 +50,40 @@ async function InsertStudent(user_info_id, transaction){
     }, { transaction: transaction });
 }
 
+async function GetUserInfo(user_info_id){
+    return await UserInfo.findOne({
+        where: {
+            "id": user_info_id
+        }
+    });
+}
+
+async function GetTeacherById(teacher_id){
+    return await Teacher.findOne({
+        include: UserInfo,
+        where: {
+            "id": teacher_id
+        }
+    });
+}
+
+async function GetStudentById(teacher_id){
+    return await Student.findOne({
+        include: {
+            UserInfo
+        },
+        where: {
+            "id": teacher_id
+        }
+    });
+}
+
 
 const UserStorageService = {
     AddNewStudent,
-    AddNewTeacher
+    AddNewTeacher,
+    GetStudentById,
+    GetTeacherById
 };
 
 module.exports = UserStorageService;

@@ -13,12 +13,12 @@ describe('Testing User Storage Service', () => {
             validateOnly: true,
             models: [__dirname + '/models'],
         });
-        await mockedSequelize.sync({ force: true });
+        await sequelize.sync();
     })
 
     afterEach(async () => {
         jest.clearAllMocks();
-        await sequelize.truncate({ cascade: true })
+        
         await mockedSequelize.close();
     })
 
@@ -27,10 +27,10 @@ describe('Testing User Storage Service', () => {
         jest.spyOn(UserInfo, 'create');
 
         const mock_user = {
-            name: "Test Testing",
-            email: "test@testing.com",
-            phone: "0543133544",
-            password: "8bb6118f8fd6935ad0876a3be34a717d32708ffd"
+            Name: "Test Testing",
+            Email: "test@testing.com",
+            Phone: "0543133544",
+            Password: "8bb6118f8fd6935ad0876a3be34a717d32708ffd"
         }
         const [user_info, student] = await UserStorageService.AddNewStudent(mock_user);
 
@@ -50,11 +50,28 @@ describe('Testing User Storage Service', () => {
             Phone: "0543133544",
             Password: "8bb6118f8fd6935ad0876a3be34a717d32708ffd"
         }
-        const [user_info, student] = await UserStorageService.AddNewStudent(mock_user);
+        const [user_info, teacher] = await UserStorageService.AddNewTeacher(mock_user);
 
         expect(UserInfo.create).toHaveBeenCalledTimes(1);
-        expect(Student.create).toHaveBeenCalledTimes(1);
+        expect(Teacher.create).toHaveBeenCalledTimes(1);
         expect(user_info.Name).toEqual("Test Teacher");
-        expect(student.User_info_id).toEqual(user_info.id);
+        expect(teacher.User_info_id).toEqual(user_info.id);
+    }); 
+    
+    test('Get test teacher', async () => {
+        jest.spyOn(Teacher, 'findOne');
+
+        const mock_user = {
+            Name: "Test Teacher",
+            Email: "test@testing.com",
+            Phone: "0543133544",
+            Password: "8bb6118f8fd6935ad0876a3be34a717d32708ffd"
+        }
+        const [user_info, new_teacher] = await UserStorageService.AddNewTeacher(mock_user);
+        const teacher = await UserStorageService.GetTeacherById(new_teacher.id);
+
+        expect(Teacher.findOne).toHaveBeenCalledTimes(1);
+        expect(teacher.UserInfo.Name).toEqual("Test Teacher");
+        expect(teacher.User_info_id).toEqual(user_info.id);
     });
 });
