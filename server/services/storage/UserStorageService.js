@@ -28,10 +28,10 @@ async function AddNewStudent(user_info){
 
 async function InsertUserInfo(user_info, transaction){
     return await UserInfo.create({
-        "Name": user_info.name,
-        "Email": user_info.email,
-        "Phone": user_info.phone,
-        "Password": user_info.password
+        "Name": user_info.Name,
+        "Email": user_info.Email,
+        "Phone": user_info.Phone,
+        "Password": user_info.Password
     }, { transaction: transaction });
 }
 
