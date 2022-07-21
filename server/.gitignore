@@ -1,3 +1,4 @@
 /node_modules
 /.env
 /envModule.js
+/package-lock.json
