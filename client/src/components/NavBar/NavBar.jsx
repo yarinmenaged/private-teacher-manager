@@ -6,9 +6,9 @@ function NavBar() {
         <div className={style.navBar}>
             <Link to="/schedule" className={style.button}>Schedule</Link>
             <Link to="/messenger" className={style.button}>Messenger</Link>
-            <Link to="#" className={style.button}>Details</Link>
-            <Link to="#" className={style.button}>Settings</Link>
-            <Link to="/" className={style.button}>Log Out</Link>
+            <Link to="/profile" className={style.button}>Profile</Link>
+            <Link to="/settings" className={style.button}>Settings</Link>
+            <Link to="/login" className={style.button}>Log Out</Link>
         </div>
     );
 }

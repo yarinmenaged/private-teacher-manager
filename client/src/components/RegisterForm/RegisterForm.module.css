@@ -28,6 +28,7 @@ select {
     color: white;
     height: 50px;
     cursor: pointer;
+    width: 101%;
 }
 
 .submit:hover {

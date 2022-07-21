@@ -25,6 +25,7 @@
     color: white;
     height: 60px;
     cursor: pointer;
+    width: 104%;
 }
 
 .submit:hover {

@@ -7,7 +7,7 @@ function RegisterForm() {
     const navigate = useNavigate();
 
     const handleSubmit = () => {
-      navigate('/');
+      navigate('/login');
     }
 
     return (
@@ -38,20 +38,17 @@ function RegisterForm() {
                     <option value="student">student</option>
                 </select><br />
 
-                <label>Username:</label><br />
-                <input type="text" className={style.input} pattern="^\S{6,}" title="minimum length of 6 characters without spaces" required /><br />
-
+                <label>Email:</label><br />
+                <input type="email" className={style.input} required /><br />
+               
                 <label>Password:</label><br />
                 <input type="password" className={style.input} pattern=".{8,}" title="minimum length of 8 characters" required /><br />
 
                 <label>Mobile Number:</label><br />
                 <input type="tel" className={style.input} required /><br />
 
-                <label>Email:</label><br />
-                <input type="email" className={style.input} required /><br />
-
                 <input type="submit" value="Continue" className={cx(style.submit, style.input)} />
-                <Link to="/" className={style.back}>Back</Link>
+                <Link to="/login" className={style.back}>Back</Link>
             </form>
         </div>
     );
