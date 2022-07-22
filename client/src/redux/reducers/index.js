@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import screenReducer from './screenReducer'
+import userReducer from './userReducer'
 
 const allReducers = combineReducers({
-  screenReducer
+  userReducer
 });
 
 export default allReducers;

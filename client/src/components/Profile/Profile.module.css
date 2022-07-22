@@ -6,3 +6,9 @@
 .inLine {
     display: flex;
 }
+
+.edit {
+    color: blueviolet;
+    cursor: pointer;
+    text-decoration: underline;
+}
