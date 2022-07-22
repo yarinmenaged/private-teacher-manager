@@ -1,0 +1,7 @@
+.hour_block{
+    height: 75px;
+    width: -webkit-fill-available;
+    border-bottom: 1px solid #6b6b6b3d;
+    color: #00000090;
+    padding: 5px;
+}
