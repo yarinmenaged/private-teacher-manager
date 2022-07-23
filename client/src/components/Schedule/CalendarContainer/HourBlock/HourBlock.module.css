@@ -5,3 +5,19 @@
     color: #00000090;
     padding: 5px;
 }
+
+
+.entry {
+    border: 1px solid #ebebeb;
+    border-top: 0;
+    background: var(--body-bg);
+    height: 9em;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.entry:not(:last-of-type) {
+    border-bottom-style: dashed;
+}

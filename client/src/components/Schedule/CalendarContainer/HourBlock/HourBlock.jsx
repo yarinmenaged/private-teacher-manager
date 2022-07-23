@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import style from '../CalendarContainer.module.css';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import style from './HourBlock.module.css';
 import Event from '../Event/Event';
+import ConstantsHourBlock from './Constants';
 
-const HourBlock = ({ type = 'regular', hour, date, events }) => {
+const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events }) => {
   const [render_event, setRenderEvent] = useState(false);
+  const event_obj = useRef(null);
   const event = useCallback(
     () => {
       if (date) {
@@ -20,12 +22,13 @@ const HourBlock = ({ type = 'regular', hour, date, events }) => {
   );
 
   useEffect(() => {
-    if (event() !== null) {
+    event_obj.current = event();
+    if (event_obj.current) {
       setRenderEvent(true);
     }
   }, []);
 
-  if (type === 'time') {
+  if (type === ConstantsHourBlock.BLOCK_TYPES.TIME) {
     return (
       <div className={style.entry}>
         <time>{hour}</time>
@@ -34,8 +37,8 @@ const HourBlock = ({ type = 'regular', hour, date, events }) => {
   }
 
   return (
-    <div className={style.entry}>
-      {render_event && <Event event={event()}></Event>}
+    <div className={style.entry} onClick={() => {alert(`you clicked at block hour: ${hour} on date: ${date.day}/${date.month}/${date.year}`)}}>
+      {render_event && <Event event={event_obj.current}></Event>}
     </div>
   );
 };

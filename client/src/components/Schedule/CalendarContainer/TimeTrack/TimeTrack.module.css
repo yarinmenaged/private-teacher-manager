@@ -1,0 +1,10 @@
+time {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: .03em;
+}
+
+time {
+    color: hsl(210, 5%, 70%);
+    text-align: right;
+}

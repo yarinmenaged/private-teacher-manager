@@ -8,21 +8,27 @@ const mapStateToProps = (state, ownProps) => {
             teacherId: 1,        
             date: "2022-07-23 07:00:00",
             status: {} ,       
-            subject: {}        
+            subject: {
+                id: 5
+            }        
         },
         {
             studentId: 1,       
             teacherId: 3,        
             date: "2022-07-20 10:00:00",
             status: {} ,       
-            subject: {}        
+            subject: {
+                id: 1
+            }        
         },{
             studentId: 1,       
             teacherId: 2,        
             date: "2022-07-17 07:00:00",
             status: {} ,       
-            subject: {}        
-            }]
+            subject: {
+                id: 2
+            }        
+            }];
     return {...ownProps, events};
 };
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import style from './CalendarContainer.module.css';
-import HeadersTrack from './HeadersTrack';
-import TimeTrack from './TimeTrack';
+import HeadersTrack from './HeadersTrack/HeadersTrack';
+import TimeTrack from './TimeTrack/TimeTrack';
 import _ from 'lodash';
 import DayBlock from './DayBlock/DayBlock';
+import ConstantsCalendarContainer from './Constants';
 
 const CalendarContainer = () => {
     const mock_date = {
@@ -14,7 +15,7 @@ const CalendarContainer = () => {
   return (
     <div className={style.Calendar_container}>        
         <div className={style.table}>
-            <HeadersTrack type='date'></HeadersTrack>
+            <HeadersTrack type={ConstantsCalendarContainer.HEADERS_TYPES.DATES}></HeadersTrack>
             <HeadersTrack></HeadersTrack>
             <div className={`${style.tracks} ${style.syncscroll}`}>
                 <TimeTrack></TimeTrack>
@@ -23,7 +24,6 @@ const CalendarContainer = () => {
                 })}
             </div>    
         </div>
-        <div id={style.top_of_site_pixel_anchor}></div>
     </div>);
 }
 
