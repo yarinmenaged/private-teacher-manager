@@ -5,6 +5,7 @@ import TimeTrack from './TimeTrack/TimeTrack';
 import _ from 'lodash';
 import DayBlock from './DayBlock/DayBlock';
 import ConstantsCalendarContainer from './Constants';
+import WeekSelectorConnector from './WeekSelector/WeekSelectorConnector';
 
 const CalendarContainer = () => {
     const mock_date = {
@@ -13,7 +14,8 @@ const CalendarContainer = () => {
         year: 2022
     };
   return (
-    <div className={style.Calendar_container}>        
+    <div className={style.Calendar_container}> 
+        <WeekSelectorConnector></WeekSelectorConnector>
         <div className={style.table}>
             <HeadersTrack type={ConstantsCalendarContainer.HEADERS_TYPES.DATES}></HeadersTrack>
             <HeadersTrack></HeadersTrack>
