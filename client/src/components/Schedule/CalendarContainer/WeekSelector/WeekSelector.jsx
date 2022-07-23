@@ -4,7 +4,7 @@ import moment from 'moment';
 import { BsFillArrowLeftSquareFill, BsFillArrowRightSquareFill } from 'react-icons/bs';
 import ConstantsCalendarContainer from '../Constants';
 
-const WeekSelector = ({ week, AddWeekAction, DecrementWeekAction }) => {
+const WeekSelector = ({ week, IncrementWeekAction, DecrementWeekAction }) => {
   const [start_of_week, setStartOfWeek] = useState("");
   const [end_of_week, setEndOfWeek] = useState("");
 
@@ -14,9 +14,9 @@ const WeekSelector = ({ week, AddWeekAction, DecrementWeekAction }) => {
   }, [week]);
 
   const increment = useCallback(() => {
-      AddWeekAction();
+      IncrementWeekAction();
     },
-    [AddWeekAction]);
+    [IncrementWeekAction]);
 
   const decrement = useCallback(() => {
     DecrementWeekAction();

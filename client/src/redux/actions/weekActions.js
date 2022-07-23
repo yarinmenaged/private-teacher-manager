@@ -1,6 +1,6 @@
 import ACTIONS from "./actionConstants";
 
-const AddWeek = () => ({
+const IncrementWeek = () => ({
    type: ACTIONS.ADD_WEEK
 });
 
@@ -9,9 +9,9 @@ const DecrementWeek = () => ({
     type: ACTIONS.DECREMENT_WEEK
  });
 
- export const AddWeekAction = () => {
+ export const IncrementWeekAction = () => {
     return dispatch => {
-        dispatch(AddWeek());
+        dispatch(IncrementWeek());
     };
 };
 
