@@ -1,7 +1,7 @@
 import style from './RegisterForm.module.css';
 import cx from 'classnames';
 import { Link, useNavigate } from 'react-router-dom';
-import Register from '../../services/register';
+import dbConnection from '../../services/dbServices';
 
 function RegisterForm() {
 
@@ -16,7 +16,7 @@ function RegisterForm() {
         const Email = event.target.elements.email.value;
         const Password = event.target.elements.password.value;
         const Phone = event.target.elements.phone.value;
-        Register.addUser(Name, userType, Email, Password, Phone);
+        dbConnection.addUser(Name, userType, Email, Password, Phone);
         navigate('/login');
     }
 

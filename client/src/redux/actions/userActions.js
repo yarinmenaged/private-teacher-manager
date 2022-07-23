@@ -1,4 +1,5 @@
 import ACTIONS from './actionConstants';
+import dbConnection from '../../services/dbServices';
 
 const editAbout = (newAbout) => ({
     type: ACTIONS.EDIT_ABOUT,
@@ -6,7 +7,10 @@ const editAbout = (newAbout) => ({
 });
 
 export const editAboutAction = (newAbout) => {
-    return (dispatch) => {
+    return async(dispatch, getState) => {
+        const state = getState();
+        const id = state.userReducer.id;
+        dbConnection.editAbout(id, newAbout);
         dispatch(editAbout(newAbout));
     };
 }

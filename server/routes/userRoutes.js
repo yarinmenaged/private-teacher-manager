@@ -1,6 +1,7 @@
 const {
 	AddNewTeacher,
 	AddNewStudent,
+	setAboutTeacher
 } = require("../services/storage/UserStorageService");
 
 async function addTeacher(req, res) {
@@ -26,8 +27,15 @@ const loginRouter = () => {
 	}
 };
 
+async function setAbout(req, res) {
+	console.log("set about");
+	await setAboutTeacher(req.params.id, req.body.newAbout);
+	res.status(200).json({ health: "ok" });
+}
+
 module.exports = {
 	addTeacher,
 	addStudent,
 	loginRouter,
+	setAbout
 };

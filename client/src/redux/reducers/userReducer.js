@@ -1,7 +1,8 @@
 import ACTIONS from "../actions/actionConstants";
 
-const initState = { // user info. shoud get it from server!
-    Name: "yarin",
+const initState = { // user info. shoud get it from server at the login!
+    id: 8,
+    Name: "yarin menaged",
     Email: "yarinmenaged@gmail.com",
     Phone: "0509209192",
     Type: "Teacher",

@@ -68,7 +68,7 @@ async function GetUserInfo(user_info_id) {
 
 async function GetTeacherById(teacher_id) {
 	return await Teacher.findOne({
-		include: UserInfo,
+		//include: UserInfo,
 		where: {
 			id: teacher_id,
 		},
@@ -86,12 +86,20 @@ async function GetStudentById(teacher_id) {
 	});
 }
 
+async function setAboutTeacher(id, newAbout) {
+	const teacher = await GetTeacherById(id);
+	teacher.update({
+		About: newAbout
+	})
+}
+
 const UserStorageService = {
 	AddNewStudent,
 	AddNewTeacher,
 	GetStudentById,
 	GetTeacherById,
 	GetUserInfo,
+	setAboutTeacher
 };
 
 module.exports = UserStorageService;
