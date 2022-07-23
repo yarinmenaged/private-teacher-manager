@@ -3,8 +3,11 @@ const BLOCK_TYPES = {
     EVENT: "EVENT"
 };
 
+const ADD_NEW_EVENT_TOOLTIP = "Click here to schedule new teaching session";
+
 const ConstantsHourBlock = {
-    BLOCK_TYPES
+    BLOCK_TYPES,
+    ADD_NEW_EVENT_TOOLTIP
 }
 
 
