@@ -2,11 +2,12 @@ import style from './Login.module.css'
 import cx from 'classnames';
 import { Link, useNavigate } from 'react-router-dom';
 
-function Login() {
+function Login({getUserInfoAction}) {
 
   const navigate = useNavigate();
 
   const handleSubmit = () => {
+    getUserInfoAction("yarinmenaged@gmail.com", "12345678");
     navigate('/home');
   }
 

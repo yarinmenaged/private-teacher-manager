@@ -21,4 +21,13 @@ export default class dbConnection {
             body: JSON.stringify({ newAbout })
         });
     }
+
+    static async getUserInfo(email, password) {
+        const response = await fetch(`http://localhost:2000/users/login`, {
+            method: "POST",
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+        return await response.json();
+    }
 }

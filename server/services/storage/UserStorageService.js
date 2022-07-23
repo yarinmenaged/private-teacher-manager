@@ -66,13 +66,14 @@ async function GetUserInfo(user_info_id) {
 	});
 }
 
-async function GetTeacherById(teacher_id) {
-	return await Teacher.findOne({
+async function GetTeacherById(userId) {
+	const teacher = await Teacher.findOne({
 		//include: UserInfo,
 		where: {
-			id: teacher_id,
+			User_info_id: userId,
 		},
 	});
+	return teacher;
 }
 
 async function GetStudentById(teacher_id) {
@@ -86,8 +87,8 @@ async function GetStudentById(teacher_id) {
 	});
 }
 
-async function setAboutTeacher(id, newAbout) {
-	const teacher = await GetTeacherById(id);
+async function setAboutTeacher(userId, newAbout) {
+	const teacher = await GetTeacherById(userId);
 	teacher.update({
 		About: newAbout
 	})

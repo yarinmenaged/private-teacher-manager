@@ -10,7 +10,20 @@ export const editAboutAction = (newAbout) => {
     return async(dispatch, getState) => {
         const state = getState();
         const id = state.userReducer.id;
-        dbConnection.editAbout(id, newAbout);
+        await dbConnection.editAbout(id, newAbout);
         dispatch(editAbout(newAbout));
+    };
+}
+
+const getUserInfo = (userInfo) => ({
+    type: ACTIONS.GET_USER,
+    payload: userInfo
+});
+
+export const getUserInfoAction = (email, password) => {
+    return async(dispatch) => {
+        const userInfo = await dbConnection.getUserInfo(email, password);
+        console.log(userInfo);
+        dispatch(getUserInfo(userInfo));
     };
 }
