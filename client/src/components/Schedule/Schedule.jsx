@@ -1,14 +1,14 @@
 import style from './Schedule.module.css';
 import { Link } from "react-router-dom";
 import NavBar from '../NavBar/NavBar';
-import CalendarContainer from './CalendarContainer/CalendarContainer';
+import CalendarContainerConnector from './CalendarContainer/CalendarContainerConnector';
 
 function Schedule() {
 
     return (
         <div>
             <NavBar />
-            <CalendarContainer></CalendarContainer>
+            <CalendarContainerConnector></CalendarContainerConnector>
             <Link to="/home" >back</Link>
         </div>
     );

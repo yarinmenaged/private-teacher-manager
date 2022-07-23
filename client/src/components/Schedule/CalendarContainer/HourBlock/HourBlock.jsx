@@ -8,8 +8,8 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
   const event_obj = useRef(null);
   const event = useCallback(
     () => {
-      if (date) {
-        const blocks_date_in_utc = new Date(`${date.month}-${date.day}-${date.year} ${hour}`).getTime();
+      if(date){
+        const blocks_date_in_utc = new Date(`${date.format('MM-DD-YYYY')} ${hour}`).getTime();
         const event_filtered = events.find((event) => {
           const event_date_in_utc = new Date(event.date).getTime();
           return event_date_in_utc === blocks_date_in_utc;
@@ -23,10 +23,8 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
 
   useEffect(() => {
     event_obj.current = event();
-    if (event_obj.current) {
-      setRenderEvent(true);
-    }
-  }, []);
+    event_obj.current ? setRenderEvent(true) : setRenderEvent(false);
+  }, [date, event]);
 
   if (type === ConstantsHourBlock.BLOCK_TYPES.TIME) {
     return (
@@ -37,7 +35,7 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
   }
 
   return (
-    <div className={style.entry} onClick={() => {alert(`you clicked at block hour: ${hour} on date: ${date.day}/${date.month}/${date.year}`)}}>
+    <div className={style.entry} onClick={() => {alert(`you clicked at block hour: ${hour} on date: ${date.format('DD/MM/YYYY')}`)}}>
       {render_event && <Event event={event_obj.current}></Event>}
     </div>
   );
