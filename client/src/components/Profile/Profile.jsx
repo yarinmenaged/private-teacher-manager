@@ -1,6 +1,6 @@
 import style from './Profile.module.css';
 import { Link } from "react-router-dom";
-import NavBar from '../NavBar/NavBar';
+import NavBar from '../NavBar/NavBarConnector';
 import { useState } from 'react'
 
 function Profile({ userInfo, editAboutAction }) {

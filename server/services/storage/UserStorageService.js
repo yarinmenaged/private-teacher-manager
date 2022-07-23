@@ -66,9 +66,21 @@ async function GetUserInfo(user_info_id) {
 	});
 }
 
+async function getUserInfoByEmail(email){
+	try {
+		return await UserInfo.findOne({
+			where: {
+				Email: email,
+			},
+			attributes: ['id', 'Name', 'Email', 'Password', 'Phone']
+		});
+	} catch (err) {
+		console.error(err);
+	}
+};
+
 async function GetTeacherById(userId) {
 	const teacher = await Teacher.findOne({
-		//include: UserInfo,
 		where: {
 			User_info_id: userId,
 		},
@@ -100,7 +112,8 @@ const UserStorageService = {
 	GetStudentById,
 	GetTeacherById,
 	GetUserInfo,
-	setAboutTeacher
+	setAboutTeacher,
+	getUserInfoByEmail
 };
 
 module.exports = UserStorageService;

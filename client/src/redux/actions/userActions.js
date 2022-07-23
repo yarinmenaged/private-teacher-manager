@@ -23,7 +23,16 @@ const getUserInfo = (userInfo) => ({
 export const getUserInfoAction = (email, password) => {
     return async(dispatch) => {
         const userInfo = await dbConnection.getUserInfo(email, password);
-        console.log(userInfo);
         dispatch(getUserInfo(userInfo));
+    };
+}
+
+const logOut = () => ({
+    type: ACTIONS.LOG_OUT,
+});
+
+export const logOutAction = () => {
+    return (dispatch) => {
+        dispatch(logOut());
     };
 }
