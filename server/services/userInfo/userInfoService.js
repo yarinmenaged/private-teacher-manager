@@ -1,9 +1,13 @@
 const { UserInfo, sequelize } = require("../../db/models");
 
-const getUserInfoByEmail = (Email, Password) => {
+const getUserInfoByEmail = async(email) => {
 	try {
-		debugger;
-		return UserInfo.findAll({ where: { Email, Password } });
+		return await UserInfo.findOne({
+			where: {
+				Email: email,
+			},
+			attributes: ['id', 'Name', 'Email', 'Password', 'Phone']
+		});
 	} catch (err) {
 		console.error(err);
 	}
