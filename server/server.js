@@ -4,12 +4,16 @@ const { sequelize } = require("./db/models");
 const envModule = require("./envModule");
 const app = express();
 const router = require("./routes/routes");
+const subjects_router = require('./routes/subjectsRoute');
 
 sequelize.sync();
 
 app.use(express.json());
 app.use(cors());
+
 app.use("/users", router);
+
+app.use('/subjects', router)
 
 app.listen(envModule.PORT, () =>
 	console.log(`server is listening on port ${envModule.PORT}`)
