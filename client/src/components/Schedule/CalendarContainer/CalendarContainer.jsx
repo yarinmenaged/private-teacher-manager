@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import style from './CalendarContainer.module.css';
 import HeadersTrack from './HeadersTrack/HeadersTrack';
 import HeadersTrackConnector from './HeadersTrack/HeadersTrackConnector';
@@ -9,7 +9,11 @@ import DayBlock from './DayBlock/DayBlock';
 import ConstantsCalendarContainer from './Constants';
 import WeekSelectorConnector from './WeekSelector/WeekSelectorConnector';
 
-const CalendarContainer = ({ week }) => {
+const CalendarContainer = ({ week, GetEventsAction, user_id }) => {
+    useEffect(() => {
+        GetEventsAction(user_id, week);
+    }, [week, GetEventsAction, user_id])
+
   return (
     <div className={style.Calendar_container}> 
         <WeekSelectorConnector></WeekSelectorConnector>
