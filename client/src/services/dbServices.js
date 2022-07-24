@@ -1,4 +1,4 @@
-export default class dbConnection {
+export default class severConnection {
 
     static async addUser(Name, userType, Email, Password, Phone) {
         const newUser = {
