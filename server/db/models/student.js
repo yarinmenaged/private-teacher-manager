@@ -20,12 +20,17 @@ module.exports = (sequelize, DataTypes) => {
       Student.belongsToMany(models.Teacher, {
         through: models.TeacherStudentRelationship
       });
-      Student.belongsToMany(models.Teacher, {
+      Student.belongsToMany(models.Subjects, {
         through: models.Event
-      });
+      });      
     }
   }
   Student.init({
+    id:{
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true
+    },
     Grade: DataTypes.INTEGER
   }, {
     sequelize,

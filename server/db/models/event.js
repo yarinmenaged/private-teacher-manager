@@ -15,7 +15,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Event.init({
-    date: DataTypes.DATE
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
+    },
+    date: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'Event',
