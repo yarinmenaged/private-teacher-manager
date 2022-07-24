@@ -6,7 +6,7 @@ async function GetAllEventsOfUserInWeek(user_id, week){
     try{
         const teacher = UserStorageService.GetTeacherById(user_id);
         return teacher ? 
-            await EventStorageService.GetEventsByUserIdFilterByWeek(user_id, week, UserType.STUDENT) 
+            await EventStorageService.GetEventsByUserIdFilterByWeek(user_id, week, UserType.TEACHER) 
             :
             await EventStorageService.GetEventsByUserIdFilterByWeek(user_id, week, UserType.STUDENT);
     }catch(error){
