@@ -2,8 +2,9 @@
     padding-left: 5%;
     padding-right: 10%;
     height: 434px;
-    width: 40%;
+    width: 60%;
     background-color: rgba(135, 207, 235, 0.63);
+    font-size: medium;
 }
 
 .inLine {
