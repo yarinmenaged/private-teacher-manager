@@ -1,20 +1,21 @@
-import Home from './Home';
+import NavBar from './NavBar'; 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getUserInfo } from '../../redux/selectors/userSelectors';
+import { logOutAction } from "../../redux/actions/userActions";
 
 const mapStateToProps = state => {
-        const name = getUserInfo(state).Name;
-        return { name } ;
+    return {
+         
+    };
 };
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-
+            logOutAction
         },
         dispatch
     );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+  export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

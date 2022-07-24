@@ -1,8 +1,36 @@
 .column {
     padding-left: 5%;
     padding-right: 10%;
+    height: 434px;
+    width: 60%;
+    background-color: rgba(135, 207, 235, 0.63);
+    font-size: medium;
 }
 
 .inLine {
     display: flex;
+}
+
+.edit {
+    color: blueviolet;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.textbox {
+    border-radius: 10px;
+    border-width: 0;
+}
+
+.submit {
+    margin-top: 8px;
+    background-color: rgb(78, 99, 165);
+    color: white;
+    padding: 8px 20px 8px 20px;
+    border-radius: 20px;
+}
+
+.aboutCont {
+    width: 100%;
+    background-color: rgba(32, 178, 171, 0.438);
 }

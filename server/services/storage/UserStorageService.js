@@ -66,24 +66,54 @@ async function GetUserInfo(user_info_id) {
 	});
 }
 
-async function GetTeacherById(teacher_id) {
+async function getUserInfoByEmail(email) {
+	try {
+		const user = await UserInfo.findOne({
+			where: {
+				Email: email,
+			},
+			attributes: ['id', 'Name', 'Email', 'Password', 'Phone']
+		});
+
+		return await getUserType(user);
+
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+const getUserType = async(user) => {
+	const teacher = await GetTeacherById(user.id);
+		if (teacher) {
+			user.dataValues.About = teacher.About
+			user.dataValues.Type = "Teacher";
+		} else {
+			user.dataValues.Type = "Student";
+		}
+		return user;
+}
+
+async function GetTeacherById(userId) {
 	return await Teacher.findOne({
-		include: UserInfo,
 		where: {
-			id: teacher_id,
+			User_info_id: userId,
 		},
 	});
 }
 
-async function GetStudentById(teacher_id) {
+async function GetStudentById(userId) {
 	return await Student.findOne({
-		include: {
-			UserInfo,
-		},
 		where: {
-			id: teacher_id,
+			User_info_id: userId,
 		},
 	});
+}
+
+async function setAboutTeacher(userId, newAbout) {
+	const teacher = await GetTeacherById(userId);
+	teacher.update({
+		About: newAbout
+	})
 }
 
 const UserStorageService = {
@@ -92,6 +122,8 @@ const UserStorageService = {
 	GetStudentById,
 	GetTeacherById,
 	GetUserInfo,
+	setAboutTeacher,
+	getUserInfoByEmail
 };
 
 module.exports = UserStorageService;

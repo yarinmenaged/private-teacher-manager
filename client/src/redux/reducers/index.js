@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import screenReducer from './screenReducer';
+import userReducer from './userReducer';
 import weekReducer from './weekReducer';
 
 const allReducers = combineReducers({
-  screenReducer,
+  userReducer,
   weekReducer
 });
 

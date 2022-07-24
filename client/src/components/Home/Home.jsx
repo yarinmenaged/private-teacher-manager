@@ -1,12 +1,12 @@
 import style from './Home.module.css';
-import NavBar from '../NavBar/NavBar';
+import NavBar from '../NavBar/NavBarConnector';
 
 
-function Home () {
+function Home ({name}) {
     return (
         <div>
             <NavBar />
-            <h1 className={style.screenContainer}>Welcome yarinmenaged</h1>
+            <h1 className={style.screenContainer}>Welcome {name}</h1>
         </div>
     );
 }
