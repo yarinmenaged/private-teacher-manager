@@ -5,7 +5,8 @@ function NavBar({ logOutAction }) {
 
     const navigate = useNavigate();
 
-    const logOut = () => {
+    const logOut = (event) => {
+        event.preventDefault();
         if (window.confirm("Are you sure you want to log out?")) {
             logOutAction();
             navigate('/login');
@@ -18,7 +19,7 @@ function NavBar({ logOutAction }) {
             <Link to="/messenger" className={style.button}>Messenger</Link>
             <Link to="/profile" className={style.button}>Profile</Link>
             <Link to="/settings" className={style.button}>Settings</Link>
-            <a href='' onClick={logOut} className={style.button}>Log Out</a>
+            <a href='' onClick={(event) => logOut(event) } className={style.button}>Log Out</a>
         </div>
     );
 }

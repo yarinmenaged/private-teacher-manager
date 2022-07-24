@@ -80,21 +80,20 @@ async function getUserInfoByEmail(email){
 };
 
 async function GetTeacherById(userId) {
-	const teacher = await Teacher.findOne({
+	return await Teacher.findOne({
 		where: {
 			User_info_id: userId,
 		},
 	});
-	return teacher;
 }
 
-async function GetStudentById(teacher_id) {
+async function GetStudentById(userId) {
 	return await Student.findOne({
-		include: {
+		/*include: {
 			UserInfo,
-		},
+		},*/
 		where: {
-			id: teacher_id,
+			User_info_id: userId,
 		},
 	});
 }

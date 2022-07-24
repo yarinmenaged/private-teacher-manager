@@ -2,6 +2,7 @@ import style from './Profile.module.css';
 import { Link } from "react-router-dom";
 import NavBar from '../NavBar/NavBarConnector';
 import { useState } from 'react'
+import cx from 'classnames';
 
 function Profile({ userInfo, editAboutAction }) {
 
@@ -27,26 +28,24 @@ function Profile({ userInfo, editAboutAction }) {
                     <p>mobile number: {userInfo.Phone}</p>
                     <Link to="/home" >back</Link>
                 </div>
-
-                <div className={style.column}>
+                <div className={cx(style.column, style.aboutCont)}>
                     <h3>About</h3>
                     <p>{userInfo.About}</p>
                     <p className={style.edit} onClick={setTextboxDisplay}>edit</p>
-                    {showTextbox ? <EditAboutComponent editAbout={editAbout} /> : <div />}
+                    {showTextbox ? <EditAboutComponent editAbout={editAbout} userInfo={userInfo} /> : <div />}
                 </div>
-
             </div>
         </div>
     );
 }
 
-function EditAboutComponent({ editAbout }) {
+function EditAboutComponent({ editAbout, userInfo }) {
     const [inputValue, setInputValue] = useState("");
     return (
         <div>
-            <p>insert your new about:</p>
-            <input onChange={(event) => setInputValue(event.target.value)} type="text" />
-            <button onClick={() => editAbout(inputValue)}>submit</button>
+            <textarea rows="6" cols="50" defaultValue={userInfo.About} className={style.textbox}
+                onChange={(event) => setInputValue(event.target.value)} type="text" /><br />
+            <button className={style.submit} onClick={() => editAbout(inputValue)}>submit</button>
         </div>
     );
 }
