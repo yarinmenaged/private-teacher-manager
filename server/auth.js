@@ -4,8 +4,8 @@ const GoogleStrategy = require("passport-google-oidc");
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env["GOOGLE_CLIENT_ID"], // TO BE FILLED AFTER HEROKU DEPLOYMENT
-      clientSecret: process.env["GOOGLE_CLIENT_SECRET"], // TO BE FILLED AFTER HEROKU DEPLOYMENT
+      clientID: process.env["GOOGLE_CLIENT_ID"],
+      clientSecret: process.env["GOOGLE_CLIENT_SECRET"],
       callbackURL: "https://localhost:3000/oauth2/redirect/google", // TO BE FILLED AFTER HEROKU DEPLOYMENT - SWITCH WITH
     },
     function (issuer, profile, cb) {
