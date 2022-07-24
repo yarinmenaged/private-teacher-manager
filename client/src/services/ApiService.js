@@ -3,7 +3,7 @@ import axios from 'axios';
 export default class ApiService {
   
   static async GetResourceRequest(url) {    
-    return await axios.get(`/${url}`).then((response) => {
+    return await axios.get(`http://localhost:2000/${url}`).then((response) => {
       return response.data;
     }).catch((error) => {
       throw this.CreateError(error.code, error.message);
@@ -11,7 +11,7 @@ export default class ApiService {
   }
 
   static async AddNewResourceRequest(url, data) {
-    return await axios.post(`/${url}`, data).then((response) => {
+    return await axios.post(`http://localhost:2000/${url}`, data).then((response) => {
       return response.data;
     }).catch((error) => {
       throw this.CreateError(error.code, error.message);
@@ -19,7 +19,7 @@ export default class ApiService {
   }
 
   static async DeleteResourceRequest(url) {
-    return await axios.delete(`/${url}`).then((response) => {
+    return await axios.delete(`http://localhost:2000/${url}`).then((response) => {
       return response.data;
     }).catch((error) => {
       throw this.CreateError(error.code, error.message);
@@ -27,7 +27,7 @@ export default class ApiService {
   }
 
   static async PatchResourceRequest(url) {
-    return await axios.patch(`/${url}`).then((response) => {
+    return await axios.patch(`http://localhost:2000/${url}`).then((response) => {
       return response.data;
     }).catch((error) => {
       throw this.CreateError(error.code, error.message);
@@ -35,7 +35,7 @@ export default class ApiService {
   }
 
   static async PutResourceRequest(url, data) {
-    return await axios.put(`/${url}`, data).then((response) => {
+    return await axios.put(`http://localhost:2000/${url}`, data).then((response) => {
       return response.data;
     }).catch((error) => {
       throw this.CreateError(error.code, error.message);
