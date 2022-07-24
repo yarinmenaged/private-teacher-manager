@@ -23,7 +23,7 @@ const getUserInfo = (userInfo) => ({
 export const getUserInfoAction = (email, password) => {
 	return async (dispatch) => {
 		const userInfo = await severConnection.getUserInfo(email, password);
-		debugger;
+
 		dispatch(getUserInfo(userInfo.data));
 	};
 };

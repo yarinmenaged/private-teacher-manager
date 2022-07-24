@@ -1,5 +1,4 @@
 export const getUserInfo = (state) => {
-	debugger;
 	return state.userReducer.user;
 };
 

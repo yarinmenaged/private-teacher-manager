@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { getUserInfo } from "../../redux/selectors/userSelectors";
 
 const mapStateToProps = (state) => {
-	debugger;
 	const name = getUserInfo(state).Name;
 	return { name };
 };

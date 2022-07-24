@@ -9,8 +9,8 @@ const router = require("./routes/routes");
 sequelize.sync();
 
 app.use(express.json());
-app.use(cookieParser());
 app.use(cors());
+app.use(cookieParser());
 app.use("/users", router);
 
 app.listen(port, () => console.log(`server is listening on port ${port}`));

@@ -36,6 +36,7 @@ export default class severConnection {
 			},
 			body: JSON.stringify({ email, password }),
 		});
+		debugger;
 		return await response.json();
 	}
 }
