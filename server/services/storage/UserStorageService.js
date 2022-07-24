@@ -66,14 +66,24 @@ async function GetUserInfo(user_info_id) {
 	});
 }
 
-async function getUserInfoByEmail(email){
+async function getUserInfoByEmail(email) {
 	try {
-		return await UserInfo.findOne({
+		const user = await UserInfo.findOne({
 			where: {
 				Email: email,
 			},
 			attributes: ['id', 'Name', 'Email', 'Password', 'Phone']
 		});
+
+		const teacher = await GetTeacherById(user.id);
+		if (teacher) {
+			user.dataValues.About = teacher.About
+			user.dataValues.Type = "Teacher";
+		} else {
+			user.dataValues.Type = "Student";
+		}
+		return user;
+
 	} catch (err) {
 		console.error(err);
 	}
@@ -89,9 +99,6 @@ async function GetTeacherById(userId) {
 
 async function GetStudentById(userId) {
 	return await Student.findOne({
-		/*include: {
-			UserInfo,
-		},*/
 		where: {
 			User_info_id: userId,
 		},
