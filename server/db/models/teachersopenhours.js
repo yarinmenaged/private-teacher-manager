@@ -14,8 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   TeachersOpenHours.init({
-    Teacher_id: DataTypes.INTEGER,
-    Student_id: DataTypes.INTEGER,
     Date: DataTypes.DATE,
     Time: DataTypes.TIME,
     Duration: DataTypes.FLOAT
