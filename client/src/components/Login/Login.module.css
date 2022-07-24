@@ -14,10 +14,22 @@
     font-size: medium;
 }
 
+.inLine {
+    display: flex;
+    justify-content: center;
+}
+
 .span {
     color: blueviolet;
     cursor: pointer;
     text-decoration: underline;
+}
+
+.incorrect {
+    font-size: medium;
+    font-weight: bold;
+    color: red;
+    padding: 10px;
 }
 
 .submit {

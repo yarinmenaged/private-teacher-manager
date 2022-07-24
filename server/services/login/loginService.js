@@ -1,11 +1,13 @@
 const { UserInfo, sequelize } = require("../../db/models");
-const { getUserInfoByEmail } = require("../userInfo/userInfoService");
+const { getUserInfoByEmail } = require("../storage/UserStorageService");
 
-const login = (email, password) => {
-	const currentUserInfo = getUserInfoByEmail(email);
+const login = async (email, password) => {
+	const currentUserInfo = await getUserInfoByEmail(email);
 	if (currentUserInfo) {
-		const x = currentUserInfo.Password === password;
-		return x;
+		if (currentUserInfo.Password === password) {
+			return currentUserInfo.dataValues;
+		}
 	}
+	return { status: "Incorrect email or password" };
 };
 module.exports = { login };
