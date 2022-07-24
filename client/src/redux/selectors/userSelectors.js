@@ -1,7 +1,8 @@
 export const getUserInfo = (state) => {
-    return state.userReducer;
-}
+	debugger;
+	return state.userReducer.user;
+};
 
 export const getLoginStatus = (state) => {
-    return state.userReducer.loginStatus;
-}
+	return state.userReducer.loginStatus;
+};

@@ -7,7 +7,7 @@ const login = async (email, password) => {
 	if (currentUserInfo) {
 		if (currentUserInfo.Password === password) {
 			const token = await auth.sign(currentUserInfo);
-			return { userData: currentUserInfo.dataValues, token };
+			return { data: currentUserInfo.dataValues, token };
 		}
 	}
 	return { status: "Incorrect email or password" };
