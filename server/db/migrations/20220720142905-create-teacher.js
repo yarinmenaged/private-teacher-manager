@@ -9,8 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       User_info_id: {
-        type: Sequelize.INTEGER,
-        unique: true
+        type: Sequelize.INTEGER
       },
       About: {
         type: Sequelize.STRING,

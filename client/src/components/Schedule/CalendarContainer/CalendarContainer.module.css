@@ -1,0 +1,84 @@
+:root {
+    --body-bg: #FDFDFD;
+    --thead-bg: #F7F9FB;
+    --thead-color: hsl(210, 5%, 40%);
+    --bd-color: #ebebeb;
+    --time-color: hsl(210, 5%, 70%);
+
+    --time-width: 75px;
+}
+
+.Calendar_container {
+    padding: 10px;
+}
+
+.table {
+    position: relative;
+    border: solid var(--bd-color);
+    border-width: 0 1px 0 0;
+    overscroll-behavior: contain;
+}
+
+
+.tracks,
+.scroller {
+    display: flex;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.scroller {
+    overflow-x: hidden;
+    flex: 1;
+}
+
+.tracks {
+    overflow: auto;
+}
+
+.tracks::-webkit-scrollbar,
+.scroller::-webkit-scrollbar {
+    display: none;
+}
+
+.track {
+    flex: 1 0 13%;
+}
+
+.track+.track {
+    margin-left: -1px;
+}
+
+.time {
+    flex: 0 0 var(--time-width);
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+}
+
+.headers .time {
+    z-index: 5;
+}
+
+.tracks .time {
+    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.05);
+}
+
+.time .heading {
+    justify-content: flex-end;
+    padding-right: 1em;
+    font-weight: 500;
+    background: #F9F9F9;
+}
+
+
+.track:last-of-type > div {
+    border-right: 0;
+}
+
+.time .entry,
+.time .heading {
+    position: relative;
+    border-color: transparent var(--bd-color) var(--bd-color) transparent;
+    border-color: transparent var(--bd-color) transparent transparent;
+}
