@@ -1,3 +1,5 @@
 /node_modules
 /.env
 /envModule.js
+/.vscode
+/.vscode/launch.json

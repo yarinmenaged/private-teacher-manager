@@ -1,7 +1,7 @@
 const {
 	AddNewTeacher,
 	AddNewStudent,
-	setAboutTeacher
+	setAboutTeacher,
 } = require("../services/storage/UserStorageService");
 const { login } = require("../services/login/loginService");
 
@@ -17,14 +17,17 @@ async function addStudent(req, res) {
 	res.status(200).json(newStudent);
 }
 
-const loginRouter = async(req, res) => {
+const loginRouter = async (req, res, next) => {
 	try {
 		const { email, password } = req.body;
-		const userInfo = await login(email, password);
-		delete userInfo.Password //shoud not send the password back!
-		res.status(200).send(userInfo);
+		const authorizedUser = await login(email, password);
+		// delete authorizedUser.userData.Password; //shoud not send the password back!
+		res
+			.cookie("token", authorizedUser.token, { maxAge: 86400000 })
+			.status(200)
+			.send(authorizedUser);
 	} catch (err) {
-		console.error(err);
+		next(err);
 	}
 };
 
@@ -38,5 +41,5 @@ module.exports = {
 	addTeacher,
 	addStudent,
 	loginRouter,
-	setAbout
+	setAbout,
 };
