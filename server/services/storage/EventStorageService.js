@@ -1,6 +1,7 @@
 const { UserType, TimeStampFormat } = require("./Constants");
-const { Event } = require('../../db/models');
+const { Event, Sequelize } = require('../../db/models');
 const moment = require('moment');
+const Op = Sequelize.Op;
 
 async function GetEventsByUserIdFilterByWeek(user_id, week, user_type) {
     const start_of_week = moment().week(week).startOf('week').format(TimeStampFormat);
@@ -11,17 +12,16 @@ async function GetEventsByUserIdFilterByWeek(user_id, week, user_type) {
             where: {
                 StudentId: user_id,
                 date: {
-                    $between: [start_of_week, end_of_week]
+                    [Op.between]: [start_of_week, end_of_week]
                 }
             }
         });
-    }
-    else{
+    } else {
         events_in_week = await Event.findAll({
             where: {
                 TeacherId: user_id,
                 date: {
-                    $between: [start_of_week, end_of_week]
+                    [Op.between]: [start_of_week, end_of_week]
                 }
             }
         });

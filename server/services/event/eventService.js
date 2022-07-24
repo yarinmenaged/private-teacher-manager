@@ -4,7 +4,7 @@ const UserStorageService = require("../storage/UserStorageService");
 
 async function GetAllEventsOfUserInWeek(user_id, week){
     try{
-        const teacher = UserStorageService.GetTeacherById(user_id);
+        const teacher = await UserStorageService.GetTeacherById(user_id);
         return teacher ? 
             await EventStorageService.GetEventsByUserIdFilterByWeek(user_id, week, UserType.TEACHER) 
             :
