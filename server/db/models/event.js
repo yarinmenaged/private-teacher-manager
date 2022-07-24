@@ -11,11 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      
     }
   }
   Event.init({
-    studentId: DataTypes.NUMBER,
-    teacherId: DataTypes.NUMBER,
     date: DataTypes.DATE,
     subject: DataTypes.STRING
   }, {

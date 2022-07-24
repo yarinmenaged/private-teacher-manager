@@ -1,6 +1,5 @@
 .App-header {
   background-image: url("./images/bg-image.jpg");
-  height: 100vh;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,7 +9,7 @@
 }
 
 .container {
-  width: 1000px;
+  width: 75vw;
   min-width: 400px;
   height: fit-content;
   min-height: 540px;

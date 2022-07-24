@@ -2,6 +2,8 @@ const ACTIONS = {
     EDIT_ABOUT: "EDIT_ABOUT",
     GET_USER: "GET_USER",
     LOG_OUT: "LOG_OUT",
+    ADD_WEEK: "ADD_WEEK",
+    DECREMENT_WEEK: "DECREMENT_WEEK"
 };
 
 export default ACTIONS;
