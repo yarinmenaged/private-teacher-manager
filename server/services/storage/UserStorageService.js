@@ -76,7 +76,15 @@ async function getUserInfoByEmail(email) {
 			attributes: ['id', 'Name', 'Email', 'Password', 'Phone']
 		});
 
-		const teacher = await GetTeacherById(user.id);
+		return await getUserType(user);
+
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+const getUserType = async(user) => {
+	const teacher = await GetTeacherById(user.id);
 		if (teacher) {
 			user.dataValues.About = teacher.About
 			user.dataValues.Type = UserType.TEACHER;
@@ -84,11 +92,7 @@ async function getUserInfoByEmail(email) {
 			user.dataValues.Type = UserType.STUDENT;
 		}
 		return user;
-
-	} catch (err) {
-		console.error(err);
-	}
-};
+}
 
 async function GetTeacherById(userId) {
 	return await Teacher.findOne({

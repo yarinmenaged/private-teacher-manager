@@ -7,8 +7,7 @@ const login = async (email, password) => {
 		if (currentUserInfo.Password === password) {
 			return currentUserInfo.dataValues;
 		}
-		return { status: "Incorrect password" };
 	}
-	return { status: "Incorrect email" };
+	return { status: "Incorrect email or password" };
 };
 module.exports = { login };
