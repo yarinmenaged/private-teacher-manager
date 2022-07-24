@@ -1,6 +1,6 @@
 import style from './Schedule.module.css';
 import { Link } from "react-router-dom";
-import NavBar from '../NavBar/NavBarConnector';
+import NavBar from '../NavBar/NavBar';
 
 function Schedule() {
 
