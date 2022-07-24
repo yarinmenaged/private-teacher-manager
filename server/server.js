@@ -10,7 +10,8 @@ sequelize.sync();
 app.use(express.json());
 app.use(cors());
 app.use("/users", router);
+app.get("/login/google", passport.authenticate("google"));
 
 app.listen(envModule.PORT, () =>
-	console.log(`server is listening on port ${envModule.PORT}`)
+  console.log(`server is listening on port ${envModule.PORT}`)
 );
