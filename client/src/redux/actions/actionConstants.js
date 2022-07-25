@@ -4,7 +4,8 @@ const ACTIONS = {
     LOG_OUT: "LOG_OUT",
     ADD_WEEK: "ADD_WEEK",
     DECREMENT_WEEK: "DECREMENT_WEEK",
-    GET_EVENTS: "GET_EVENTS"
+    GET_EVENTS: "GET_EVENTS",
+    ADD_EVENT: "ADD_EVENT"
 };
 
 export default ACTIONS;

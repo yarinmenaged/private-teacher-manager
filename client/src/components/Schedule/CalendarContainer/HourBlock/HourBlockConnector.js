@@ -3,15 +3,17 @@ import { bindActionCreators } from 'redux';
 import HourBlock from './HourBlock';
 import { getEvents } from '../../../../redux/selectors/eventSelector';
 import { getUserInfo } from '../../../../redux/selectors/userSelectors';
+import { AddEventAction, GetEventsAction } from '../../../../redux/actions/eventActions';
 
 const mapStateToProps = (state, ownProps) => {
     const events = getEvents(state);
     const user_type = getUserInfo(state).Type;
-    return { ...ownProps, events, user_type };
+    const user_id = getUserInfo(state).id;
+    return { ...ownProps, events, user_type, user_id };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return bindActionCreators({  ...ownProps }, dispatch);
+    return bindActionCreators({  ...ownProps, AddEventAction, GetEventsAction }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HourBlock);

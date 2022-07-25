@@ -3,8 +3,9 @@ import style from './HourBlock.module.css';
 import Event from '../Event/Event';
 import ConstantsHourBlock from './Constants';
 import { Tooltip } from 'monday-ui-react-core';
+import moment from 'moment';
 
-const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type }) => {
+const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, GetEventsAction }) => {
   const [render_event, setRenderEvent] = useState(false);
   const event_obj = useRef(null);
   const event = useCallback(
@@ -13,7 +14,6 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
         const blocks_date_in_utc = new Date(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`).getTime();
         const event_filtered = events.find((event) => {
           const event_date_in_utc = new Date(event.date).getTime();
-          console.log(event_date_in_utc);
           return event_date_in_utc === blocks_date_in_utc;
         });
         return event_filtered || null;
@@ -26,7 +26,11 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
   useEffect(() => {
     event_obj.current = event();
     event_obj.current ? setRenderEvent(true) : setRenderEvent(false);
-  }, [date, event]);
+  }, [date, event, events]);
+
+  const add_event_call__back = useCallback(() => {
+    AddEventAction(user_id, date, hour, user_type);
+  }, [AddEventAction]);
 
   if (type === ConstantsHourBlock.BLOCK_TYPES.TIME) {
     return (
@@ -40,7 +44,7 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
             immediateShowDelay={0} 
             position={Tooltip.positions.BOTTOM}
             content={ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP}>
-            <div className={style.entry} onClick={() => {alert(`you clicked at block hour: ${hour} on date: ${date.format('DD/MM/YYYY')}`)}}>
+            <div className={style.entry} onClick={() => {add_event_call__back()}}>
               {render_event && <Event event={event_obj.current} user_type={user_type}></Event>}
             </div>
          </Tooltip>);
