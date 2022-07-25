@@ -1,0 +1,29 @@
+# Trigger on push to master (+ allow manual runs of this workflow)
+# First job: identical steps to PR workflow
+# Second job: Deploy to Heroku
+
+name: on-merge-workflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - release
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Heroku login container
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run:  heroku container:login
+      - name: Build and push
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:push -a private-teachers web
+      - name: Deploy
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release -a private-teachers web
