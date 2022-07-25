@@ -4,6 +4,7 @@ const { sequelize } = require("./db/models");
 const envModule = require("./envModule");
 const app = express();
 const router = require("./routes/routes");
+const path = require('path');
 
 sequelize.sync({ force: true });
 
