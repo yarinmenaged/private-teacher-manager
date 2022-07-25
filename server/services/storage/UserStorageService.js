@@ -1,4 +1,5 @@
 const { Student, Teacher, UserInfo, sequelize } = require("../../db/models");
+const { UserType } = require("./Constants");
 
 async function AddNewTeacher(user_info) {
 	const transaction = await sequelize.transaction();
@@ -86,9 +87,9 @@ const getUserType = async(user) => {
 	const teacher = await GetTeacherById(user.id);
 		if (teacher) {
 			user.dataValues.About = teacher.About
-			user.dataValues.Type = "Teacher";
+			user.dataValues.Type = UserType.TEACHER;
 		} else {
-			user.dataValues.Type = "Student";
+			user.dataValues.Type = UserType.STUDENT;
 		}
 		return user;
 }
