@@ -1,7 +1,7 @@
 import style from './Login.module.css'
 import cx from 'classnames';
 import { Link, useNavigate } from 'react-router-dom';
-import severConnection from '../../services/dbServices';
+import serverConnection from '../../services/dbServices';
 import { useEffect } from 'react';
 
 function Login({ getUserInfoAction, loginStatus }) {
