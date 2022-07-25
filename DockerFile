@@ -1,14 +1,14 @@
 FROM node:18-alpine
 WORKDIR /client
 
-COPY ./src/client .
+COPY ./client .
 
 RUN npm install
 RUN npm run build
 
 WORKDIR /app
 
-COPY ./src/server .
+COPY ./server .
 
 RUN npm install
 RUN npm install -g sequelize-cli
