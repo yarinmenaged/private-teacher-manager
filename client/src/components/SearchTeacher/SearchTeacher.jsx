@@ -2,7 +2,11 @@ import style from "./SearchTeacher.module.css";
 import map from "lodash/map";
 import { useEffect } from 'react'
 
-function SearchTeacher({ allTeachers, chosenTeacher, fetchTeachersAction }) {
+function SearchTeacher({
+    allTeachers,
+    fetchTeachersAction,
+    chooseTeacherAction
+}) {
 
     useEffect(() => {
         if (JSON.stringify(allTeachers) === '{}') {
@@ -10,15 +14,22 @@ function SearchTeacher({ allTeachers, chosenTeacher, fetchTeachersAction }) {
         }
     }, []);
 
-    const chooseTeacher = () => {
-
+    const chooseTeacher = (event) => {
+        chooseTeacherAction(event.target.value)
     }
 
+    let index = -1;
     return (
         <div>
-            <select type="select" defaultValue="search-teacher" required>
-                {map(allTeachers, teacher =>
-                    <option onChange={chooseTeacher} key={teacher.id}>{teacher.Name}</option>)}
+            <select type="select" onChange={(event) => chooseTeacher(event)}
+                defaultValue="default" required>
+                <option value="default" disabled>select teacher</option>
+                {
+                    map(allTeachers, teacher => {
+                        index++;
+                        return <option value={index} key={teacher.id}>{teacher.Name}</option>
+                    })
+                }
             </select>
         </div>
     );

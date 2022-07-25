@@ -1,19 +1,18 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getAllTeachers, getChoosenTeacher } from '../../redux/selectors/teachersSelectors'
+import { getAllTeachers } from '../../redux/selectors/teachersSelectors'
 import SearchTeacher from './SearchTeacher';
-import { fetchTeachersAction } from '../../redux/actions/teachersActions';
+import { fetchTeachersAction, chooseTeacherAction } from '../../redux/actions/teachersActions';
 
 const mapStateToProps = state => {
     const allTeachers = getAllTeachers(state);
-    const chosenTeacher = getChoosenTeacher(state);
-    return { allTeachers, chosenTeacher } ;
+    return { allTeachers } ;
 };
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            fetchTeachersAction
+            fetchTeachersAction, chooseTeacherAction
         },
         dispatch
     );

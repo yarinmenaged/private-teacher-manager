@@ -2,7 +2,7 @@ import ACTIONS from "../actions/actionConstants";
 
 const initState = {
     teachers: {},
-    chosenTeacher: {}
+    chosenTeacher: undefined
 };
 
 const reducer = (state = initState, action) => {
@@ -10,10 +10,13 @@ const reducer = (state = initState, action) => {
     switch (type) {
 
         case ACTIONS.GET_ALL_TEACHERS:
-            return { teachers: payload }
+            return { ...state, teachers: payload };
 
         case ACTIONS.LOG_OUT:
-            return { teachers: {} }
+            return { ...state, teachers: {} };
+
+        case ACTIONS.CHOOSE_TEACHER:
+            return { ...state, chosenTeacher: payload * 1}
 
         default:
             return state;

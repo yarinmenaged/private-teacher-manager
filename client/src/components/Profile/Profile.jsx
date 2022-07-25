@@ -5,7 +5,7 @@ import { useState } from 'react'
 import cx from 'classnames';
 import SearchTeacher from '../SearchTeacher/SearchTeacherConnector';
 
-function Profile({ userInfo, editAboutAction, allTeachers, fetchTeachersAction }) {
+function Profile({userInfo, editAboutAction, chosenTeacher }) {
 
     const [showTextbox, setShowTextbox] = useState(false);
 
@@ -21,31 +21,33 @@ function Profile({ userInfo, editAboutAction, allTeachers, fetchTeachersAction }
     return (
         <div>
             <NavBar />
-            <div className={style.inLine}>
-                <div className={style.column}>
-                    <h3>{userInfo.Type} Profile</h3>
-                    <p>name: {userInfo.Name}</p>
-                    <p>email: {userInfo.Email}</p>
-                    <p>mobile number: {userInfo.Phone}</p>
-                    <SearchTeacher />
-                    <Link to="/home" >back</Link>
+            <SearchTeacher />
+            { chosenTeacher === undefined ? <div /> :
+                <div className={style.inLine}>
+                    <div className={style.column}>
+                        <h3>Teacher Profile</h3>
+                        <p>name: {chosenTeacher.Name}</p>
+                        <p>email: {chosenTeacher.Email}</p>
+                        <p>mobile number: {chosenTeacher.Phone}</p>
+                        <Link to="/home" >back</Link>
+                    </div>
+                    <div className={cx(style.column, style.aboutCont)}>
+                        <h3>About</h3>
+                        <p>{userInfo.About}</p>
+                        { (userInfo.Type === 'Student') ? <p className={style.edit} onClick={setTextboxDisplay}>edit</p>: <div />}
+                        {(showTextbox) ? <EditAboutComponent editAbout={editAbout} About={chosenTeacher.About} /> : <div />}
+                    </div>
                 </div>
-                <div className={cx(style.column, style.aboutCont)}>
-                    <h3>About</h3>
-                    <p>{userInfo.About}</p>
-                    <p className={style.edit} onClick={setTextboxDisplay}>edit</p>
-                    {showTextbox ? <EditAboutComponent editAbout={editAbout} userInfo={userInfo} /> : <div />}
-                </div>
-            </div>
+            }
         </div>
     );
 }
 
-function EditAboutComponent({ editAbout, userInfo }) {
+function EditAboutComponent({ editAbout, About }) {
     const [inputValue, setInputValue] = useState("");
     return (
         <div>
-            <textarea rows="6" cols="50" defaultValue={userInfo.About} className={style.textbox}
+            <textarea rows="6" cols="50" defaultValue={About} className={style.textbox}
                 onChange={(event) => setInputValue(event.target.value)} type="text" /><br />
             <button className={style.submit} onClick={() => editAbout(inputValue)}>submit</button>
         </div>

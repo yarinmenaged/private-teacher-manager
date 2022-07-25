@@ -3,5 +3,6 @@ export const getAllTeachers = (state) => {
 }
 
 export const getChoosenTeacher = (state) => {
-    return state.teachersReducer.chosenTeacher
+    const index = state.teachersReducer.chosenTeacher;
+    return state.teachersReducer.teachers[index];
 }

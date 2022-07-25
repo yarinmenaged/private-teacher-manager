@@ -12,3 +12,14 @@ export const fetchTeachersAction = () => {
         dispatch(fetchTeachers(teachersList));
     };
 }
+
+const chooseTeacher = (index) => ({
+    type: ACTIONS.CHOOSE_TEACHER,
+    payload: index
+});
+
+export const chooseTeacherAction = (index) => {
+    return async(dispatch) => {
+        dispatch(chooseTeacher(index));
+    };
+}
