@@ -32,21 +32,10 @@ function Login({ getUserInfoAction, loginStatus }) {
 
         <div className={style.incorrect}>{loginStatus}</div>
 
-        <input
-          type="submit"
-          value="Continue"
-          className={cx(style.submit, style.input)}
-        />
+        <input type="submit" value="Continue" className={cx(style.submit, style.input)} />
 
-        <a href="/login/google" class="button">
-          Sign in with Google
-        </a>
-
-        <p>
-          If you do not have an account?
-          <Link to="/register" className={style.span}>
-            Register
-          </Link>
+        <p>If you do not have an account?
+          <Link to="/register" className={style.span}>Register</Link>
         </p>
       </form>
     </div>
