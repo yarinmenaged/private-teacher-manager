@@ -1,7 +1,8 @@
 const { UserType, TimeStampFormat } = require("./Constants");
-const { Event, Sequelize, Subjects } = require('../../db/models');
+const { Event, Sequelize, Subjects, Teacher, Student, UserInfo } = require('../../db/models');
 const moment = require('moment');
 const SubjectsController = require("../../controllers/subjectController");
+const { all } = require("../../routes/routes");
 const Op = Sequelize.Op;
 
 async function GetEventsByUserIdFilterByWeek(user_id, week, user_type) {
@@ -10,6 +11,16 @@ async function GetEventsByUserIdFilterByWeek(user_id, week, user_type) {
     let events_in_week = [];
     if (user_type === UserType.STUDENT) {
         events_in_week = await Event.findAll({
+            include: [{
+                model: Subjects,
+                attributes: ["id", "Name"]
+            },{
+                model: Teacher,
+                include: [{
+                    model: UserInfo,
+                    attributes: ["Name", "Email", "Phone"]
+                }]
+            }],
             where: {
                 StudentId: user_id,
                 date: {
@@ -19,6 +30,16 @@ async function GetEventsByUserIdFilterByWeek(user_id, week, user_type) {
         });
     } else {
         events_in_week = await Event.findAll({
+            include: [{
+                model: Subjects,
+                attributes: ["id", "Name"]
+            },{
+                model: Student,
+                include: [{
+                    model: UserInfo,
+                    attributes: ["Name", "Email", "Phone"]
+                }]
+            }],
             where: {
                 TeacherId: user_id,
                 date: {
