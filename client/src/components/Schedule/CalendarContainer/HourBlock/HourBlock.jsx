@@ -13,6 +13,7 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
         const blocks_date_in_utc = new Date(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`).getTime();
         const event_filtered = events.find((event) => {
           const event_date_in_utc = new Date(event.date).getTime();
+          console.log(event_date_in_utc);
           return event_date_in_utc === blocks_date_in_utc;
         });
         return event_filtered || null;

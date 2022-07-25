@@ -1,4 +1,4 @@
-import axios from 'axios';
+import ApiService from "./ApiService";
 
 export default class severConnection {
 
@@ -9,15 +9,18 @@ export default class severConnection {
             Password,
             Phone
         }
-        await axios.post(`http://localhost:2000/users/${userType}s`, newUser);
+        return await ApiService.AddNewResourceRequest(`users/${userType}s`, newUser);
+        //TODO: error
     }
 
     static async editAbout(id, newAbout) {
-        await axios.put(`http://localhost:2000/users/about/${id}`, { newAbout });
+        return await ApiService.PutResourceRequest(`users/about/${id}`);
+        //TODO: error
     }
 
     static async getUserInfo(email, password) {
-        const response = await axios.post(`http://localhost:2000/users/login`, { email, password });
-        return await response.data;
+        return await ApiService.AddNewResourceRequest(`users/login`, { email, password });
+        //TODO: error
+
     }
 }
