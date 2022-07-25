@@ -9,7 +9,7 @@ const editAbout = (newAbout) => ({
 export const editAboutAction = (newAbout) => {
 	return async (dispatch, getState) => {
 		const state = getState();
-		const id = state.userReducer.id;
+		const id = state.userReducer.user.id;
 		await severConnection.editAbout(id, newAbout);
 		dispatch(editAbout(newAbout));
 	};
@@ -23,7 +23,6 @@ const getUserInfo = (userInfo) => ({
 export const getUserInfoAction = (email, password) => {
 	return async (dispatch) => {
 		const userInfo = await severConnection.getUserInfo(email, password);
-
 		dispatch(getUserInfo(userInfo.data));
 	};
 };
