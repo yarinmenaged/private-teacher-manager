@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import NavBar from '../NavBar/NavBarConnector';
 import { useState } from 'react'
 import cx from 'classnames';
+import SearchTeacher from '../SearchTeacher/SearchTeacherConnector';
 
-function Profile({ userInfo, editAboutAction }) {
+function Profile({ userInfo, editAboutAction, allTeachers, fetchTeachersAction }) {
 
     const [showTextbox, setShowTextbox] = useState(false);
 
@@ -26,6 +27,7 @@ function Profile({ userInfo, editAboutAction }) {
                     <p>name: {userInfo.Name}</p>
                     <p>email: {userInfo.Email}</p>
                     <p>mobile number: {userInfo.Phone}</p>
+                    <SearchTeacher />
                     <Link to="/home" >back</Link>
                 </div>
                 <div className={cx(style.column, style.aboutCont)}>
