@@ -1,3 +1,5 @@
+import ApiService from "./ApiService";
+
 export default class severConnection {
 
     static async addUser(Name, userType, Email, Password, Phone) {
@@ -7,27 +9,17 @@ export default class severConnection {
             Password,
             Phone
         }
-        await fetch(`http://localhost:2000/users/${userType}s`, {
-            method: "POST",
-            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-            body: JSON.stringify(newUser)
-        });
+        return await ApiService.AddNewResourceRequest(`users/${userType}s`, newUser);
+        //TODO: error
     }
 
     static async editAbout(id, newAbout) {
-        await fetch(`http://localhost:2000/users/about/${id}`, {
-            method: "PUT",
-            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-            body: JSON.stringify({ newAbout })
-        });
+        return await ApiService.PutResourceRequest(`users/about/${id}`);
+        //TODO: error
     }
 
     static async getUserInfo(email, password) {
-        const response = await fetch(`http://localhost:2000/users/login`, {
-            method: "POST",
-            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
-        });
-        return await response.json();
+        return await ApiService.AddNewResourceRequest(`users/login`, { email, password });
+        //TODO: error
     }
 }
