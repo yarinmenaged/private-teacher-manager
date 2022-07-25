@@ -2,11 +2,11 @@ import NavBar from './NavBar';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { logOutAction } from "../../redux/actions/userActions";
+import { getUserType } from "../../redux/selectors/userSelectors"
 
 const mapStateToProps = state => {
-    return {
-         
-    };
+    const Type = getUserType(state);
+    return { Type };
 };
 
 const mapDispatchToProps = dispatch => {

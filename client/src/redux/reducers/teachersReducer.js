@@ -13,7 +13,7 @@ const reducer = (state = initState, action) => {
             return { ...state, teachers: payload };
 
         case ACTIONS.LOG_OUT:
-            return { ...state, teachers: {} };
+            return { teachers: {}, chosenTeacher: undefined };
 
         case ACTIONS.CHOOSE_TEACHER:
             return { ...state, chosenTeacher: payload * 1}
