@@ -1,4 +1,4 @@
-const TimeFormat = 'HH:MM';
+const TimeFormat = 'HH:mm';
 
 const USER_TYPE = {
     Student: "Student",
