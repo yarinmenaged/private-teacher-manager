@@ -21,5 +21,6 @@ export default class severConnection {
     static async getUserInfo(email, password) {
         return await ApiService.AddNewResourceRequest(`users/login`, { email, password });
         //TODO: error
+
     }
 }
