@@ -11,7 +11,6 @@ sequelize.sync({ force: true });
 app.use(express.json());
 app.use(cors());
 app.use("/users", router);
-app.get("/login/google", passport.authenticate("google"));
 
 
 app.use('/static', express.static(path.join(__dirname, '../client/build/static')));
@@ -20,5 +19,5 @@ app.get('*', function(req, res) {
 });
 
 app.listen(envModule.PORT, () =>
-  console.log(`server is listening on port ${envModule.PORT}`)
+	console.log(`server is listening on port ${envModule.PORT}`)
 );
