@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export default class severConnection {
 
     static async addUser(Name, userType, Email, Password, Phone) {
@@ -7,27 +9,15 @@ export default class severConnection {
             Password,
             Phone
         }
-        await fetch(`http://localhost:2000/users/${userType}s`, {
-            method: "POST",
-            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-            body: JSON.stringify(newUser)
-        });
+        await axios.post(`http://localhost:2000/users/${userType}s`, newUser);
     }
 
     static async editAbout(id, newAbout) {
-        await fetch(`http://localhost:2000/users/about/${id}`, {
-            method: "PUT",
-            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-            body: JSON.stringify({ newAbout })
-        });
+        await axios.put(`http://localhost:2000/users/about/${id}`, { newAbout });
     }
 
     static async getUserInfo(email, password) {
-        const response = await fetch(`http://localhost:2000/users/login`, {
-            method: "POST",
-            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
-        });
-        return await response.json();
+        const response = await axios.post(`http://localhost:2000/users/login`, { email, password });
+        return await response.data;
     }
 }
