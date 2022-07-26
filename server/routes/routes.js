@@ -12,7 +12,7 @@ const router = express.Router();
 router.post("/teachers", addTeacher);
 router.post("/students", addStudent);
 router.post("/login", loginRouter);
-router.put("/about/:id", authVerify, setAbout);
 router.get("/verifies", getUserByTokenRouter);
+router.put("/about/:id", authVerify, setAbout);
 
 module.exports = router;
