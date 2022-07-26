@@ -23,6 +23,9 @@ function SearchProfile({ chosenTeacher }) {
                         <div className={cx(style.column, style.aboutCont)}>
                             <h3>About</h3>
                             <p>{chosenTeacher.About}</p>
+                            <Link to="/schedule" >
+                                <button className={style.submit}>Schedule a lesson now!</button><br />
+                            </Link>
                         </div>
                     </div>
                     : <div />
