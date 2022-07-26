@@ -50,7 +50,7 @@ function EditAboutComponent({ editAbout, About }) {
         <div>
             <textarea rows="6" cols="50" defaultValue={About} className={style.textbox}
                 onChange={(event) => setInputValue(event.target.value)} type="text" /><br />
-            <button className={style.submit} onClick={() => editAbout(inputValue)}>submit</button>
+            <button className={style.button} onClick={() => editAbout(inputValue)}>submit</button>
         </div>
     );
 }

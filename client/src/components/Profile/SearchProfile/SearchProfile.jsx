@@ -24,7 +24,7 @@ function SearchProfile({ chosenTeacher }) {
                             <h3>About</h3>
                             <p>{chosenTeacher.About}</p>
                             <Link to="/schedule" >
-                                <button className={style.submit}>Schedule a lesson now!</button><br />
+                                <button className={style.button}>Schedule a lesson now!</button><br />
                             </Link>
                         </div>
                     </div>
