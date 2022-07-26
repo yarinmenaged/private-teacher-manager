@@ -12,7 +12,7 @@ function SearchProfile({ chosenTeacher, SetCalendarToUserAction }) {
     const goToCalender = useCallback(() => {
         SetCalendarToUserAction(chosenTeacher.id);
         navigate("/schedule");
-    }, [chosenTeacher, SetCalendarToUserAction]);
+    }, [chosenTeacher, SetCalendarToUserAction, navigate]);
 
     return (
         <div>
