@@ -1,4 +1,5 @@
 import './App.css';
+import logo from './images/logo.jpeg';
 import Login from './components/Login/LoginConnector';
 import RegisterForm from "./components/RegisterForm/RegisterFormConnector";
 import Home from "./components/Home/HomeConnector";
@@ -15,10 +16,10 @@ function App() {
     <Router>
       <div className="App-header">
         <div className='container'>
-          <h2 style={{ textAlign: "center" }}>the application logo will be here</h2>
+          <img alt='' src={logo} className="logo" />
           <Routes>
             <Route path='/' exact element={<Landing />} />
-            <Route path='/login'  element={<Login />} />
+            <Route path='/login' element={<Login />} />
             <Route path='/register' element={<RegisterForm />} />
             <Route path='/home' element={<Home />} />
             <Route path='/schedule' element={<Schedule />} />
