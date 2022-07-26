@@ -1,7 +1,6 @@
 import ACTIONS from './actionConstants';
 import EventService from '../../services/EventService';
 import ReduxContents from '../Constants';
-import moment from 'moment';
 
 
 const GetEvents = (id, week) => {
