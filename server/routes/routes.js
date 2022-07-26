@@ -1,9 +1,10 @@
 const express = require("express");
-const { addStudent, addTeacher, loginRouter, setAbout } = require("./userRoutes");
+const { addStudent, addTeacher, loginRouter, setAbout, getTeachers } = require("../controllers/userController");
 
 const router = express.Router();
 
 router.post("/teachers", addTeacher);
+router.get("/teachers", getTeachers);
 router.post("/students", addStudent);
 router.post("/login", loginRouter);
 router.put("/about/:id", setAbout)
