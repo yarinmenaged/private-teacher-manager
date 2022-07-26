@@ -23,4 +23,9 @@ export default class serverConnection {
         //TODO: error
 
     }
+
+    static async getTeacherList() {
+        const teacherList = await ApiService.GetResourceRequest(`users/teachers`);
+        return { ...teacherList }
+    }
 }

@@ -1,10 +1,11 @@
-import style from './Profile.module.css';
+import style from '../Profile.module.css';
 import { Link } from "react-router-dom";
-import NavBar from '../NavBar/NavBarConnector';
+import NavBar from '../../NavBar/NavBarConnector';
 import { useState } from 'react'
 import cx from 'classnames';
+import SearchTeacher from '../../SearchTeacher/SearchTeacherConnector';
 
-function Profile({ userInfo, editAboutAction }) {
+function MyProfile({ userInfo, editAboutAction }) {
 
     const [showTextbox, setShowTextbox] = useState(false);
 
@@ -22,7 +23,7 @@ function Profile({ userInfo, editAboutAction }) {
             <NavBar />
             <div className={style.inLine}>
                 <div className={style.column}>
-                    <h3>{userInfo.Type} Profile</h3>
+                    <h3>Teacher Profile</h3>
                     <p>name: {userInfo.Name}</p>
                     <p>email: {userInfo.Email}</p>
                     <p>mobile number: {userInfo.Phone}</p>
@@ -32,22 +33,26 @@ function Profile({ userInfo, editAboutAction }) {
                     <h3>About</h3>
                     <p>{userInfo.About}</p>
                     <p className={style.edit} onClick={setTextboxDisplay}>edit</p>
-                    {showTextbox ? <EditAboutComponent editAbout={editAbout} userInfo={userInfo} /> : <div />}
+                    {
+                        showTextbox
+                            ? <EditAboutComponent editAbout={editAbout} About={userInfo.About} />
+                            : <div />
+                    }
                 </div>
             </div>
         </div>
     );
 }
 
-function EditAboutComponent({ editAbout, userInfo }) {
+function EditAboutComponent({ editAbout, About }) {
     const [inputValue, setInputValue] = useState("");
     return (
         <div>
-            <textarea rows="6" cols="50" defaultValue={userInfo.About} className={style.textbox}
+            <textarea rows="6" cols="50" defaultValue={About} className={style.textbox}
                 onChange={(event) => setInputValue(event.target.value)} type="text" /><br />
-            <button className={style.submit} onClick={() => editAbout(inputValue)}>submit</button>
+            <button className={style.button} onClick={() => editAbout(inputValue)}>submit</button>
         </div>
     );
 }
 
-export default Profile
+export default MyProfile
