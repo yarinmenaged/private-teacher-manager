@@ -1,28 +1,35 @@
 const jwt = require("jsonwebtoken");
 const jwt_secret = "someKey";
+const { getUserInfoById } = require("../storage/UserStorageService");
 
 async function sign(userDetails) {
-	return await jwt.sign(
-		{ id: userDetails?.id, Name: userDetails?.Name, Email: userDetails.Email },
-		jwt_secret,
-		{
-			expiresIn: 86400000,
-		}
-	);
+	return await jwt.sign({ id: userDetails?.id }, jwt_secret, {
+		expiresIn: 86400000,
+	});
 }
 
-async function verify(req, res, next) {
+async function authVerify(req, res, next) {
 	try {
 		let token = req.cookies.token;
 		if (!token) {
 			res.status(401).send("Unauthorized");
 		}
-		let userDetails = await jwt.verify(token, jwt_secret);
-		req.userDetails = userDetails;
-		next();
+		const userDetails = await jwt.verify(token, jwt_secret);
+		if (userDetails.id) {
+			next();
+		}
 	} catch (err) {
-		next(err);
+		res.status(401).send("Authorization failed");
 	}
 }
 
-module.exports = { sign, verify };
+const getUserInfoByToken = (token) => {
+	const user = jwt.decode(token, jwt_secret);
+	if (user) {
+		const userId = user.id;
+		return getUserInfoById(userId);
+	}
+	return null;
+};
+
+module.exports = { sign, authVerify, getUserInfoByToken };

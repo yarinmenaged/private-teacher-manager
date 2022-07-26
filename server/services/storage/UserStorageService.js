@@ -81,6 +81,21 @@ async function getUserInfoByEmail(email) {
 	}
 }
 
+async function getUserInfoById(userId) {
+	try {
+		const user = await UserInfo.findOne({
+			where: {
+				id: userId,
+			},
+			attributes: ["id", "Name", "Email", "Password", "Phone"],
+		});
+
+		return await getUserType(user);
+	} catch (err) {
+		console.error(err);
+	}
+}
+
 const getUserType = async (user) => {
 	const teacher = await GetTeacherById(user.id);
 	if (teacher) {
@@ -123,6 +138,7 @@ const UserStorageService = {
 	GetUserInfo,
 	setAboutTeacher,
 	getUserInfoByEmail,
+	getUserInfoById,
 };
 
 module.exports = UserStorageService;

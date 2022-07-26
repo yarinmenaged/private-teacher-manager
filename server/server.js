@@ -1,5 +1,4 @@
 const express = require("express");
-const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { sequelize } = require("./db/models");
 const port = require("./envModule").PORT || 2000;
@@ -9,7 +8,6 @@ const router = require("./routes/routes");
 sequelize.sync();
 
 app.use(express.json());
-// app.use(cors());
 app.use(cookieParser());
 app.use((req, res, next) => {
 	res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");

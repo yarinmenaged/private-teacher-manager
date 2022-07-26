@@ -2,7 +2,7 @@ import ACTIONS from "../actions/actionConstants";
 
 const initState = {
 	// user info. shoud get it from server at the login!
-	loginStatus: "",
+	loginStatus: false,
 	user: null,
 };
 
@@ -18,11 +18,17 @@ const reducer = (state = initState, action) => {
 			} else {
 				return {
 					...state,
-					loginStatus: "in",
+					loginStatus: true,
 					user: payload,
 				};
 			}
 
+		case ACTIONS.GET_USER_BY_TOKEN:
+			return {
+				...state,
+				loginStatus: true,
+				user: payload,
+			};
 		case ACTIONS.LOG_OUT:
 			return {
 				...state,

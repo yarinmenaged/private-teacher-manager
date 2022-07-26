@@ -42,4 +42,17 @@ export default class severConnection {
 		});
 		return await response.json();
 	}
+
+	static async getUserInfoByToken() {
+		const response = await fetch(`http://localhost:2000/users/verifies`, {
+			method: "GET",
+			credentials: "include",
+			SameSite: "None",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+		});
+		return await response.json();
+	}
 }

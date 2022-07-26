@@ -27,6 +27,19 @@ export const getUserInfoAction = (email, password) => {
 	};
 };
 
+const getUserInfoByToken = async (userInfo) => ({
+	type: ACTIONS.GET_USER_BY_TOKEN,
+	payload: userInfo,
+});
+
+export const getUserInfoByTokenAction = () => {
+	return async (dispatch) => {
+		const userInfo = await severConnection.getUserInfoByToken();
+
+		dispatch(await getUserInfoByToken(userInfo));
+	};
+};
+
 const logOut = () => ({
 	type: ACTIONS.LOG_OUT,
 });

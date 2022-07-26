@@ -4,6 +4,7 @@ const {
 	setAboutTeacher,
 } = require("../services/storage/UserStorageService");
 const { login } = require("../services/login/loginService");
+const { getUserInfoByToken } = require("../services/auth/auth");
 
 async function addTeacher(req, res) {
 	console.log("create teacher");
@@ -35,6 +36,15 @@ const loginRouter = async (req, res, next) => {
 	}
 };
 
+const getUserByTokenRouter = async (req, res) => {
+	const user = await getUserInfoByToken(req.cookies.token);
+	if (user) {
+		res.status(200).send(user);
+	} else {
+		res.status(401).send("Unauthorized");
+	}
+};
+
 async function setAbout(req, res) {
 	console.log("set about");
 	await setAboutTeacher(req.params.id, req.body.newAbout);
@@ -46,4 +56,5 @@ module.exports = {
 	addStudent,
 	loginRouter,
 	setAbout,
+	getUserByTokenRouter,
 };

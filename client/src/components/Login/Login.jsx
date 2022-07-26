@@ -4,11 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 function Login({ getUserInfoAction, loginStatus }) {
-	useEffect(() => {
-		if (loginStatus === "in") navigate("/home");
-	}, [loginStatus]);
-
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (loginStatus) navigate("/home");
+	}, [loginStatus]);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
