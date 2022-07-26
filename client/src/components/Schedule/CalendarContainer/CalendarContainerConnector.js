@@ -8,7 +8,7 @@ import { getShowCalenderOfOtherUser, getUserId } from "../../../redux/selectors/
 
 const mapStateToProps = (state, ownProps) => {
     const week = getWeek(state);
-    const user_id = getShowCalenderOfOtherUser(state) ? getUserId(state).user_id : getUserInfo(state).id;
+    const user_id = getShowCalenderOfOtherUser(state) ? getUserId(state) : getUserInfo(state).id;
     return {...ownProps, week, user_id};
 };
 
