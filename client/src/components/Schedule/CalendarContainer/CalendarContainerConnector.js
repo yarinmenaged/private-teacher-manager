@@ -4,10 +4,11 @@ import { getWeek } from "../../../redux/selectors/weekSelectors";
 import CalendarContainer from "./CalendarContainer";
 import { GetEventsAction } from '../../../redux/actions/eventActions';
 import { getUserInfo } from "../../../redux/selectors/userSelectors";
+import { getShowCalenderOfOtherUser, getUserId } from "../../../redux/selectors/calendarSelector";
 
 const mapStateToProps = (state, ownProps) => {
     const week = getWeek(state);
-    const user_id = getUserInfo(state).id;
+    const user_id = getShowCalenderOfOtherUser(state) ? getUserId(state).user_id : getUserInfo(state).id;
     return {...ownProps, week, user_id};
 };
 
