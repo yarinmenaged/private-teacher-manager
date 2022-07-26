@@ -1,8 +1,8 @@
 import ACTIONS from './actionConstants';
 
-const SetCalendarToUser = (id) => {
+const SetCalendarToUser = (user_id) => {
     return (dispatch) => {
-        dispatch({ type: ACTIONS.SET_USER_ID_OF_CALENDAR, payload: id });
+        dispatch({ type: ACTIONS.SET_USER_ID_OF_CALENDAR, payload: user_id });
         dispatch({ type: ACTIONS.SET_SHOW_CALENDER_OF_OTHER_USER });
     };
 };

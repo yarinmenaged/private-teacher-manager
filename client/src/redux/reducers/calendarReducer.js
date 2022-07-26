@@ -10,7 +10,7 @@ const reducer = (state = initState, action) => {
 
     switch(type){
         case ACTIONS.SET_USER_ID_OF_CALENDAR:
-            return { ...state, user_id: payload.user_id };
+            return { ...state, user_id: payload };
         case ACTIONS.SET_SHOW_CALENDER_OF_OTHER_USER:
             return { ...state, show_calender_of_other_user: true };
         case ACTIONS.UNSET_SHOW_CALENDER_OF_OTHER_USER:
