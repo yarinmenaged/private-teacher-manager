@@ -24,6 +24,12 @@ const reducer = (state = initState, action) => {
 			}
 
 		case ACTIONS.GET_USER_BY_TOKEN:
+			if (!payload) {
+				return {
+					...state,
+					loginStatus: false,
+				};
+			}
 			return {
 				...state,
 				loginStatus: true,
@@ -32,7 +38,7 @@ const reducer = (state = initState, action) => {
 		case ACTIONS.LOG_OUT:
 			return {
 				...state,
-				loginStatus: "",
+				loginStatus: false,
 				user: null,
 			};
 

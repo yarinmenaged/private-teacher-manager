@@ -13,11 +13,11 @@ import {
 	Route,
 	Navigate,
 } from "react-router-dom";
-
 import { useEffect } from "react";
 
 function App({ loginStatus, getUserInfoByTokenAction }) {
 	useEffect(() => {
+		debugger;
 		getUserInfoByTokenAction();
 	}, [loginStatus, getUserInfoByTokenAction]);
 

@@ -35,7 +35,6 @@ const getUserInfoByToken = async (userInfo) => ({
 export const getUserInfoByTokenAction = () => {
 	return async (dispatch) => {
 		const userInfo = await severConnection.getUserInfoByToken();
-
 		dispatch(await getUserInfoByToken(userInfo));
 	};
 };

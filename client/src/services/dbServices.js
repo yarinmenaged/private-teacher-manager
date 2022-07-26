@@ -30,17 +30,23 @@ export default class severConnection {
 	}
 
 	static async getUserInfo(email, password) {
-		const response = await fetch(`http://localhost:2000/users/login`, {
-			method: "POST",
-			credentials: "include",
-			SameSite: "None",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ email, password }),
-		});
-		return await response.json();
+		try {
+			const response = await fetch(`http://localhost:2000/users/login`, {
+				method: "POST",
+				credentials: "include",
+				SameSite: "None",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ email, password }),
+			});
+			debugger;
+			return await response.json();
+		} catch (err) {
+			debugger;
+			console.error(err);
+		}
 	}
 
 	static async getUserInfoByToken() {

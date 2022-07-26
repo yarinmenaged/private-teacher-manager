@@ -12,11 +12,12 @@ async function authVerify(req, res, next) {
 	try {
 		let token = req.cookies.token;
 		if (!token) {
-			res.status(401).send("Unauthorized");
-		}
-		const userDetails = await jwt.verify(token, jwt_secret);
-		if (userDetails.id) {
-			next();
+			res.status(401).send(null);
+		} else {
+			const userDetails = await jwt.verify(token, jwt_secret);
+			if (userDetails.id) {
+				next();
+			}
 		}
 	} catch (err) {
 		res.status(401).send("Authorization failed");
