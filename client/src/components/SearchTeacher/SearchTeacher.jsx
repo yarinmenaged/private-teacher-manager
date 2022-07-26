@@ -1,5 +1,6 @@
 import style from "./SearchTeacher.module.css";
 import map from "lodash/map";
+import SubjectsFilter from "./SubjectsFilter/SubjectsFilterConnector";
 import { useEffect } from 'react'
 import { useCallback } from "react";
 
@@ -40,6 +41,7 @@ function SearchTeacher({
                     })
                 }
             </select>
+            <SubjectsFilter />
         </div>
     );
 }

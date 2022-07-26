@@ -9,6 +9,10 @@ const fetchTeachers = (teachersList) => ({
 export const fetchTeachersAction = () => {
     return async(dispatch) => {
         const teachersList = await serverConnection.getTeacherList();
+        teachersList[0].subjects = ["math", "english", "biology"];
+        teachersList[1].subjects = ["math"];
+        teachersList[2].subjects = ["english", "chemistry"];
+        teachersList[3].subjects = ["history", "english", "math", "physics"];
         dispatch(fetchTeachers(teachersList));
     };
 }
