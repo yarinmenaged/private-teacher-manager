@@ -3,6 +3,7 @@ import style from './HourBlock.module.css';
 import Event from '../Event/Event';
 import ConstantsHourBlock from './Constants';
 import { Tooltip } from 'monday-ui-react-core';
+import EventConnector from '../Event/EventConnector';
 
 const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction }) => {
   const [render_event, setRenderEvent] = useState(false);
@@ -47,7 +48,7 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
             position={Tooltip.positions.BOTTOM}
             content={ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP}>
             <div className={`${style.entry}`} onClick={() => {add_event_call__back()}}>
-              {render_event && <Event event={event_obj.current} user_type={user_type}></Event>}
+              {render_event && <EventConnector event={event_obj.current} user_type={user_type}></EventConnector>}
             </div>
          </Tooltip>);
 };
