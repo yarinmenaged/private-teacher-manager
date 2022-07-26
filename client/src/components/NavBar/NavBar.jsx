@@ -1,5 +1,6 @@
 import style from './NavBar.module.css';
 import { Link, useNavigate } from "react-router-dom";
+import USER_TYPE from './Constants';
 
 function NavBar({ Type, logOutAction }) {
 
@@ -18,8 +19,11 @@ function NavBar({ Type, logOutAction }) {
             <Link to="/schedule" className={style.button}>Schedule</Link>
             <Link to="/messenger" className={style.button}>Messenger</Link>
             {
-                Type === "Teacher" 
+                Type === USER_TYPE.Teacher
+                    // teacher UI
                     ? <Link to="/my-profile" className={style.button}> My Profile</Link>
+
+                    // student UI
                     : <Link to="/search-profile" className={style.button}> Search Teacher</Link>
             }
             <Link to="/settings" className={style.button}>Settings</Link>
