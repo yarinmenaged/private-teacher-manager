@@ -17,7 +17,6 @@ import { useEffect } from "react";
 
 function App({ loginStatus, getUserInfoByTokenAction }) {
 	useEffect(() => {
-		debugger;
 		getUserInfoByTokenAction();
 	}, [loginStatus, getUserInfoByTokenAction]);
 
