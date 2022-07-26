@@ -1,8 +1,8 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getUserInfo } from '../../redux/selectors/userSelectors';
-import Profile from './Profile';
-import { editAboutAction } from '../../redux/actions/userActions'
+import { getUserInfo } from '../../../redux/selectors/userSelectors';
+import MyProfile from './MyProfile';
+import { editAboutAction } from '../../../redux/actions/userActions';
 
 const mapStateToProps = state => {
     const userInfo = getUserInfo(state);
@@ -12,10 +12,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            editAboutAction
+            editAboutAction, 
         },
         dispatch
     );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(MyProfile);

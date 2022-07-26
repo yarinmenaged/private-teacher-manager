@@ -1,7 +1,8 @@
 const {
 	AddNewTeacher,
 	AddNewStudent,
-	setAboutTeacher
+	setAboutTeacher,
+	getAllTeachers,
 } = require("../services/storage/UserStorageService");
 const { login } = require("../services/login/loginService");
 
@@ -34,9 +35,16 @@ async function setAbout(req, res) {
 	res.status(200).json({ health: "ok" });
 }
 
+async function getTeachers(req, res) {
+	console.log("get teachers");
+	const teachers = await getAllTeachers();
+	res.status(200).json(teachers);
+}
+
 module.exports = {
 	addTeacher,
 	addStudent,
 	loginRouter,
-	setAbout
+	setAbout,
+	getTeachers,
 };
