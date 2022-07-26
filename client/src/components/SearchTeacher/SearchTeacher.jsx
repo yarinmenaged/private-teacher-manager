@@ -9,7 +9,7 @@ function SearchTeacher({
     fetchTeachersAction,
     chooseTeacherAction
 }) {
-    
+
     const DEFAULT = "default";
 
     useEffect(() => {
@@ -31,7 +31,7 @@ function SearchTeacher({
                     choosenTeacherIndex
                         ? choosenTeacherIndex
                         : DEFAULT
-                    } required>
+                }>
                 <option value={DEFAULT} disabled>select teacher</option>
                 {
                     map(allTeachers, teacher => {

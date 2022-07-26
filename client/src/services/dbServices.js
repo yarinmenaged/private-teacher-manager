@@ -26,6 +26,7 @@ export default class serverConnection {
 
     static async getTeacherList() {
         const teacherList = await ApiService.GetResourceRequest(`users/teachers`);
+        teacherList.sort((a, b) => (a.Name > b.Name) ? 1 : ((b.Name > a.Name) ? -1 : 0));
         return { ...teacherList }
     }
 }
