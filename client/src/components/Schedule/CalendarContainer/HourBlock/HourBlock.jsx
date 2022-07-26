@@ -3,24 +3,26 @@ import style from './HourBlock.module.css';
 import Event from '../Event/Event';
 import ConstantsHourBlock from './Constants';
 import { Tooltip } from 'monday-ui-react-core';
-import moment from 'moment';
 
-const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, GetEventsAction }) => {
+const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction }) => {
   const [render_event, setRenderEvent] = useState(false);
   const event_obj = useRef(null);
+  const event_filtered = useCallback((blocks_date_in_utc)  => {
+    return events.find((event) => {
+      const event_date_in_utc = new Date(event.date).getTime();
+      return event_date_in_utc === blocks_date_in_utc;
+    });
+  }, [events]);
+
   const event = useCallback(
     () => {
       if(date){
-        const blocks_date_in_utc = new Date(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`).getTime();
-        const event_filtered = events.find((event) => {
-          const event_date_in_utc = new Date(event.date).getTime();
-          return event_date_in_utc === blocks_date_in_utc;
-        });
-        return event_filtered || null;
+        const blocks_date_in_utc = new Date(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`).getTime();        
+        return event_filtered(blocks_date_in_utc) || null;
       }
       return null;
     },
-    [events, date, hour],
+    [date, hour, event_filtered],
   );
 
   useEffect(() => {
@@ -30,7 +32,7 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
 
   const add_event_call__back = useCallback(() => {
     AddEventAction(user_id, date, hour, user_type);
-  }, [AddEventAction]);
+  }, [AddEventAction, user_id, date, hour, user_type]);
 
   if (type === ConstantsHourBlock.BLOCK_TYPES.TIME) {
     return (
@@ -44,7 +46,7 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
             immediateShowDelay={0} 
             position={Tooltip.positions.BOTTOM}
             content={ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP}>
-            <div className={style.entry} onClick={() => {add_event_call__back()}}>
+            <div className={`${style.entry}`} onClick={() => {add_event_call__back()}}>
               {render_event && <Event event={event_obj.current} user_type={user_type}></Event>}
             </div>
          </Tooltip>);

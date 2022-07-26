@@ -22,3 +22,12 @@
 .entry:not(:last-of-type) {
     border-bottom-style: dashed;
 }
+
+
+.double {
+    height: 18em;
+}
+
+.treble {
+    height: 27em;
+}
