@@ -13,9 +13,14 @@ const GetEvents = (id, week) => {
 
 const AddEvent = (user_id, date, hour, user_type) => {
     return async(dispatch) => {
-        if(user_type === ReduxContents.USER_TYPE.Teacher){           
-            dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour}});
-            const add_event = await EventService.AddBlockedEvent(user_id, date, hour);
+        try{
+            if(user_type === ReduxContents.USER_TYPE.Teacher){           
+                dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour}});
+                await EventService.AddBlockedEvent(user_id, date, hour);
+            }
+        }catch(error){
+            dispatch({ type: ACTIONS.DELETE_EVENT });
+            // TODO ADD error action
         }
     }
 }
