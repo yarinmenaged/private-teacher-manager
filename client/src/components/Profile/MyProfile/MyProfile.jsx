@@ -3,20 +3,20 @@ import { Link } from "react-router-dom";
 import NavBar from '../../NavBar/NavBarConnector';
 import { useState } from 'react'
 import cx from 'classnames';
-import SearchTeacher from '../../SearchTeacher/SearchTeacherConnector';
+import { useCallback } from 'react';
 
 function MyProfile({ userInfo, editAboutAction }) {
 
     const [showTextbox, setShowTextbox] = useState(false);
 
-    const editAbout = (newAbout) => {
+    const editAbout = useCallback((newAbout) => {
         editAboutAction(newAbout);
         setShowTextbox(false);
-    }
+    }, [setShowTextbox, editAboutAction]);
 
-    const setTextboxDisplay = () => {
+    const setTextboxDisplay = useCallback(() => {
         setShowTextbox(showTextbox => !showTextbox);
-    }
+    }, [setShowTextbox]);
 
     return (
         <div>

@@ -3,6 +3,7 @@ import cx from 'classnames';
 import { Link, useNavigate } from 'react-router-dom';
 import serverConnection from '../../services/dbServices';
 import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 function Login({ getUserInfoAction, loginStatus }) {
 
@@ -13,12 +14,13 @@ function Login({ getUserInfoAction, loginStatus }) {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = useCallback(async (event) => {
     event.preventDefault();
     const email = event.target.elements.email.value;
     const password = event.target.elements.password.value;
     getUserInfoAction(email, password);
-  }
+  }, [getUserInfoAction]);
+
 
   return (
     <div className={style.inLine}>

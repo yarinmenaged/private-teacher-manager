@@ -1,6 +1,7 @@
 import style from "./SearchTeacher.module.css";
 import map from "lodash/map";
 import { useEffect } from 'react'
+import { useCallback } from "react";
 
 function SearchTeacher({
     allTeachers,
@@ -14,9 +15,10 @@ function SearchTeacher({
         }
     }, []);
 
-    const chooseTeacher = (event) => {
+    
+    const chooseTeacher = useCallback((event) => {
         chooseTeacherAction(event.target.value)
-    }
+    }, [chooseTeacherAction]);
 
     let index = -1;
     return (
