@@ -10,8 +10,18 @@ async function GetEvents(id, week) {
     }
 }
 
+async function AddBlockedEvent(user_id, date, hour){
+    try{
+        const add_blocked_event = await ApiService.AddNewResourceRequest(`event/blocked`, { user_id, date, hour });
+        return add_blocked_event.status;
+    }catch(error){
+        throw error;
+    }
+}
+
 const EventService = {
-    GetEvents
+    GetEvents, 
+    AddBlockedEvent
 };
 
 export default EventService;

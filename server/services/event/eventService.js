@@ -1,6 +1,7 @@
 const { UserType } = require("../storage/Constants");
 const EventStorageService = require("../storage/EventStorageService");
 const UserStorageService = require("../storage/UserStorageService");
+const moment = require('moment');
 
 async function GetAllEventsOfUserInWeek(user_id, week){
     try{
@@ -16,8 +17,19 @@ async function GetAllEventsOfUserInWeek(user_id, week){
     }
 }
 
+async function AddEventBlockedToTeacher(user_id, date, hour){
+    try{
+        const format_date = moment(date).format('MM-DD-YYYY');
+        const formatted_date = new Date(`${format_date} ${hour}`);
+        return await EventStorageService.AddBlockedEventToTeacher(user_id, formatted_date);
+    }catch(error){
+        throw error;
+    }
+}
+
 const EventService = {
-    GetAllEventsOfUserInWeek
+    GetAllEventsOfUserInWeek,
+    AddEventBlockedToTeacher
 };
 
 module.exports = EventService;

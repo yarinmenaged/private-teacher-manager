@@ -3,6 +3,7 @@ const { Event, Sequelize, Subjects, Teacher, Student, UserInfo } = require('../.
 const moment = require('moment');
 const SubjectsController = require("../../controllers/subjectController");
 const { all } = require("../../routes/routes");
+const { GetTeacherById } = require("./UserStorageService");
 const Op = Sequelize.Op;
 
 async function GetEventsByUserIdFilterByWeek(user_id, week, user_type) {
@@ -51,8 +52,22 @@ async function GetEventsByUserIdFilterByWeek(user_id, week, user_type) {
     return events_in_week;
 }
 
+async function AddBlockedEventToTeacher(user_id, date){
+    const teacher = await GetTeacherById(user_id);
+    await Event.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null);
+    const add_blocked = await Event.create({
+        "date": date,
+        "StudentId": null,
+        "SubjectId": null,
+        "TeacherId": teacher.id
+    });
+    await Event.sequelize.query("SET FOREIGN_KEY_CHECKS = 1", null);
+    return add_blocked;
+}
+
 const EventStorageService = {
-    GetEventsByUserIdFilterByWeek
+    GetEventsByUserIdFilterByWeek,
+    AddBlockedEventToTeacher
 };
 
 module.exports = EventStorageService;
