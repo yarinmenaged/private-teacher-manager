@@ -19,9 +19,19 @@ async function AddBlockedEvent(user_id, date, hour){
     }
 }
 
+async function DeleteEvent(event_id) {
+    try{
+        const delete_event = await ApiService.DeleteResourceRequest(`event/${event_id}`);
+        return delete_event.status;
+    }catch(error){
+        throw error;
+    }
+}
+
 const EventService = {
     GetEvents, 
-    AddBlockedEvent
+    AddBlockedEvent,
+    DeleteEvent
 };
 
 export default EventService;
