@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import Event from "./Event";
 import { getUserInfo } from "../../../../redux/selectors/userSelectors";
 import { getUserId } from "../../../../redux/selectors/calendarSelector";
+import { DeleteEventAction } from "../../../../redux/actions/eventActions";
 
 const mapStateToProps = (state, ownProps) => {
     const my_user_id = getUserInfo(state).id;
@@ -11,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return bindActionCreators({  }, dispatch);
+    return bindActionCreators({ DeleteEventAction }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Event);

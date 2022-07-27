@@ -17,6 +17,7 @@
     flex-direction: column;
     justify-content: space-between;
     cursor: pointer;
+    position: relative;
 }
 
 .entry:not(:last-of-type) {

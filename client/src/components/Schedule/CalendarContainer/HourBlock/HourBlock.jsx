@@ -31,8 +31,11 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
     event_obj.current ? setRenderEvent(true) : setRenderEvent(false);
   }, [date, event, events]);
 
-  const add_event_call__back = useCallback(() => {
-    AddEventAction(user_id, date, hour, user_type);
+  const hour_block_click_call__back = useCallback((event) => {
+    if(!event_obj.current)
+      AddEventAction(user_id, date, hour, user_type);
+    else
+      event.preventDefault();    
   }, [AddEventAction, user_id, date, hour, user_type]);
 
   if (type === ConstantsHourBlock.BLOCK_TYPES.TIME) {
@@ -43,14 +46,16 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
     );
   }
 
+  const content_tool_tip = render_event ? ConstantsHourBlock.SHOW_MORE_INFO_ON_EVENT : ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP;
+
   return (<Tooltip 
             immediateShowDelay={0} 
             position={Tooltip.positions.BOTTOM}
-            content={ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP}>
-            <div className={`${style.entry}`} onClick={() => {add_event_call__back()}}>
+            content={content_tool_tip} >
+            <div className={`${style.entry}`} onClick={(event) => {hour_block_click_call__back(event)}}>
               {render_event && <EventConnector event={event_obj.current} user_type={user_type}></EventConnector>}
             </div>
-         </Tooltip>);
+        </Tooltip>);
 };
 
 export default HourBlock;
