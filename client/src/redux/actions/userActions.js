@@ -23,6 +23,10 @@ const getUserInfo = (userInfo) => ({
 export const getUserInfoAction = (email, password) => {
     return async(dispatch) => {
         const userInfo = await serverConnection.getUserInfo(email, password);
+        if (userInfo.Type === "Teacher") {
+            alert("hey");
+            userInfo.subjects = ["history", "english", "math", "physics"];
+        }
         dispatch(getUserInfo(userInfo));
     };
 }

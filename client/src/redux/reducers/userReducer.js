@@ -7,7 +7,8 @@ const initState = { // user info. shoud get it from server at the login!
     Email: "",
     Phone: "",
     Type: "",
-    About: ""
+    About: "",
+    subjects: [],
 };
 
 const reducer = (state = initState, action) => {
@@ -29,7 +30,8 @@ const reducer = (state = initState, action) => {
                     Email: payload.Email,
                     Phone: payload.Phone,
                     Type: payload.Type,
-                    About: payload.About
+                    About: payload.About,
+                    subjects: payload.subjects
                 };
             }
 
@@ -42,7 +44,8 @@ const reducer = (state = initState, action) => {
                 Email: "",
                 Phone: "",
                 Type: "",
-                About: ""
+                About: "",
+                subjects: []
             };
 
         default:

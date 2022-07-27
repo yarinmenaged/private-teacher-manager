@@ -8,9 +8,9 @@ import USER_TYPE from "../NavBar/Constants";
 function Schedule({ chosenTeacher, SetCalendarToUserAction, userInfo }) {
 
     useEffect(() => {
-        chosenTeacher 
-        ? SetCalendarToUserAction(chosenTeacher.id)
-        : SetCalendarToUserAction(userInfo.id);
+        chosenTeacher
+            ? SetCalendarToUserAction(chosenTeacher.id)
+            : SetCalendarToUserAction(userInfo.id);
     }, [chosenTeacher]);
 
     return (
@@ -18,9 +18,16 @@ function Schedule({ chosenTeacher, SetCalendarToUserAction, userInfo }) {
             <NavBar />
             {
                 userInfo.Type === USER_TYPE.Student
-                ? <SearchTeacher />
-                : <div />
+                    ? <SearchTeacher />
+                    : <div />
             }
+            <h2>
+                {
+                    chosenTeacher
+                    ? `Schedule of ${chosenTeacher.Name}`
+                    : "My Schedule"
+                }
+            </h2>
             <CalendarContainerConnector></CalendarContainerConnector>
             <Link to="/home" >back</Link>
         </div>

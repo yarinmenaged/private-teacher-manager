@@ -21,7 +21,7 @@ function MyProfile({ userInfo, editAboutAction }) {
     return (
         <div>
             <NavBar />
-            <div className={style.inLine}>
+            <div className={style.flex}>
                 <div className={style.column}>
                     <h3>Teacher Profile</h3>
                     <p>name: {userInfo.Name}</p>
@@ -38,6 +38,14 @@ function MyProfile({ userInfo, editAboutAction }) {
                             ? <EditAboutComponent editAbout={editAbout} About={userInfo.About} />
                             : <div />
                     }
+                    <h3>I'm teaching:</h3>
+                    <div className={style.flex}>
+                        {
+                            userInfo.subjects.map((subject, index) =>
+                                <div key={index} style={{ marginRight: "20px" }}>{subject}</div>
+                            )
+                        }
+                    </div>
                 </div>
             </div>
         </div>

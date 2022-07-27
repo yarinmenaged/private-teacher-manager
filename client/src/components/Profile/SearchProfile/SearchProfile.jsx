@@ -34,8 +34,8 @@ function SearchProfile({ chosenTeacher, SetCalendarToUserAction }) {
                             <h3>I'm teaching:</h3>
                             <div className={style.flex}>
                                 {
-                                    chosenTeacher.subjects.map(subject =>
-                                        <div style={{marginRight: "20px"}}>{subject}</div>
+                                    chosenTeacher.subjects.map((subject, index) =>
+                                        <div key={index} style={{marginRight: "20px"}}>{subject}</div>
                                     )
                                 }
                             </div><br />

@@ -27,13 +27,9 @@ function SearchTeacher({
     return (
         <div>
             <SubjectsFilter />
-            <select type="select" onChange={(event) => chooseTeacher(event)}
-                defaultValue={
-                    chosenTeacher
-                        ? chosenTeacher
-                        : DEFAULT
-                }>
+            <select type="select" onChange={(event) => chooseTeacher(event)} value={DEFAULT}>
                 <option value={DEFAULT} disabled>select teacher</option>
+                <option style={{fontWeight: "bold"}}>my own schedule</option>
                 {
                     map(selectedTeachers, teacher => {
                         return <option value={teacher.id} key={teacher.id}>{teacher.Name}</option>
