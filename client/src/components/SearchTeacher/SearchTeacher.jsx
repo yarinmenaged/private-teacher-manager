@@ -5,20 +5,19 @@ import { useEffect } from 'react'
 import { useCallback } from "react";
 
 function SearchTeacher({
-    allTeachers,
     choosenTeacherIndex,
     fetchTeachersAction,
-    chooseTeacherAction
+    chooseTeacherAction,
+    selectedTeachers,
 }) {
 
     const DEFAULT = "default";
 
     useEffect(() => {
-        if (JSON.stringify(allTeachers) === '{}') {
+        //if (JSON.stringify(allTeachers) === '{}') {
             fetchTeachersAction();
-        }
-    }, []);
-
+            
+        }, []);
 
     const chooseTeacher = useCallback((event) => {
         chooseTeacherAction(event.target.value)
@@ -35,7 +34,7 @@ function SearchTeacher({
                 }>
                 <option value={DEFAULT} disabled>select teacher</option>
                 {
-                    map(allTeachers, teacher => {
+                    map(selectedTeachers, teacher => {
                         index++;
                         return <option value={index} key={teacher.id}>{teacher.Name}</option>
                     })

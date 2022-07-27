@@ -1,10 +1,9 @@
-export const getAllTeachers = (state) => {
-    return state.teachersReducer.teachers;
-}
+import { filter } from "lodash";
 
-/*export const getSelectedTeachers = (state) => {
-    return state.teachersReducer.teachers.filter(teacher => teacher.subjects.includes());
-}*/
+export const getSelectedTeachers = (state, subjects) => {
+    const teachers = state.teachersReducer.teachers;
+    return filter(teachers, teacher => teacher.subjects.some(sub => subjects.indexOf(sub) >= 0));
+}
 
 export const getChoosenTeacherIndex = (state) => {
     return state.teachersReducer.chosenTeacher;

@@ -1,16 +1,16 @@
+import { useState } from 'react';
 import { useCallback } from 'react';
-import style from './SubjectsFilter.module.css'
+import style from './SubjectsFilter.module.css';
+import SUBJECTS_LIST from './subjectsConstant';
 
-function SubjectsFilter({ selectSubjectAction, deselectSubjectAction }) {
-
-    const subjectsList = ["history", "english", "math", "physics", "chemistry", "biology"];
+function SubjectsFilter({ selectSubjectAction, deselectSubjectAction, selectedSubjects }) {
 
     const selectSubject = useCallback((event) => {
 
         if (event.target.checked) {
-            selectSubjectAction(event.target.value);
+            selectSubjectAction(event.target.name);
         } else {
-            deselectSubjectAction(event.target.value);
+            deselectSubjectAction(event.target.name);
         }
 
     }, [selectSubjectAction]);
@@ -18,12 +18,18 @@ function SubjectsFilter({ selectSubjectAction, deselectSubjectAction }) {
     return (
         <div className={style.flex}>
             {
-                subjectsList.map((subject, index) => {
+                SUBJECTS_LIST.map((subject, index) => {
                     return (
                         <div key={index} className={style.flex}>
                             <p>{subject}</p>
                             <input type="checkbox" onChange={(event) => selectSubject(event)}
-                                value={subject} className={style.checkbox} />
+                                name={subject} className={style.checkbox}
+                                defaultChecked=
+                                {
+                                    selectedSubjects.includes(subject)
+                                        ? true
+                                        : false
+                                } />
                         </div>
                     );
                 })

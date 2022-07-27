@@ -19,6 +19,9 @@ const reducer = (state = initState, action) => {
             newSubjects.splice(index, 1);
             return { selectedSubjects: newSubjects };
 
+        case ACTIONS.LOG_OUT:
+            return { selectedSubjects: [] }
+
         default:
             return state;
     }
