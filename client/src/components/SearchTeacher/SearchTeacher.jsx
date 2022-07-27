@@ -28,7 +28,7 @@ function SearchTeacher({
         <div>
             <SubjectsFilter />
             <select type="select" onChange={(event) => chooseTeacher(event)}
-                value={
+                defaultValue={
                     chosenTeacher
                         ? chosenTeacher
                         : DEFAULT

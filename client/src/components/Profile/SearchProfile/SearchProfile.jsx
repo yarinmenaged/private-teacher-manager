@@ -20,7 +20,7 @@ function SearchProfile({ chosenTeacher, SetCalendarToUserAction }) {
             <SearchTeacher />
             {
                 chosenTeacher ?
-                    <div className={style.inLine}>
+                    <div className={style.flex}>
                         <div className={style.column}>
                             <h3>Teacher Profile</h3>
                             <p>name: {chosenTeacher.Name}</p>
@@ -31,8 +31,16 @@ function SearchProfile({ chosenTeacher, SetCalendarToUserAction }) {
                         <div className={style.column}>
                             <h3>About</h3>
                             <p>{chosenTeacher.About}</p>
-                            <button className={style.button} 
-                             onClick={ goToCalender }>Schedule a lesson now!</button><br />
+                            <h3>I'm teaching:</h3>
+                            <div className={style.flex}>
+                                {
+                                    chosenTeacher.subjects.map(subject =>
+                                        <div style={{marginRight: "20px"}}>{subject}</div>
+                                    )
+                                }
+                            </div><br />
+                            <button className={style.button}
+                                onClick={goToCalender}>Schedule a lesson now!</button><br />
                         </div>
                     </div>
                     : <div />
