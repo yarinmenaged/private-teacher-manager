@@ -3,10 +3,15 @@ import { useCallback } from 'react';
 import style from './SubjectsFilter.module.css';
 import SUBJECTS_LIST from './subjectsConstant';
 
-function SubjectsFilter({ selectSubjectAction, deselectSubjectAction, selectedSubjects }) {
+function SubjectsFilter({
+    selectSubjectAction,
+    deselectSubjectAction,
+    selectedSubjects,
+    unchooseTeacherAction,
+}) {
 
     const selectSubject = useCallback((event) => {
-
+        unchooseTeacherAction();
         if (event.target.checked) {
             selectSubjectAction(event.target.name);
         } else {

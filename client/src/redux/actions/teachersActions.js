@@ -28,3 +28,13 @@ export const chooseTeacherAction = (id) => {
         dispatch(chooseTeacher(id));
     };
 }
+
+const unchooseTeacher = () => ({
+    type: ACTIONS.UNCHOOSE_TEACHER,
+});
+
+export const unchooseTeacherAction = () => {
+    return async(dispatch) => {
+        dispatch(unchooseTeacher());
+    };
+}

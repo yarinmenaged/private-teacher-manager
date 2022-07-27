@@ -16,7 +16,10 @@ const reducer = (state = initState, action) => {
             return { teachers: {}, chosenTeacher: undefined };
 
         case ACTIONS.CHOOSE_TEACHER:
-            return { ...state, chosenTeacher: payload}
+            return { ...state, chosenTeacher: payload }
+
+        case ACTIONS.UNCHOOSE_TEACHER:
+            return { ...state, chosenTeacher: undefined }
 
         default:
             return state;

@@ -26,8 +26,9 @@ function SearchTeacher({
 
     return (
         <div>
+            <SubjectsFilter />
             <select type="select" onChange={(event) => chooseTeacher(event)}
-                defaultValue={
+                value={
                     chosenTeacher
                         ? chosenTeacher
                         : DEFAULT
@@ -39,7 +40,6 @@ function SearchTeacher({
                     })
                 }
             </select>
-            <SubjectsFilter />
         </div>
     );
 }
