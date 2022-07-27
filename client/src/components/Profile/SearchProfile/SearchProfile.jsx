@@ -28,7 +28,7 @@ function SearchProfile({ chosenTeacher, SetCalendarToUserAction }) {
                             <p>mobile number: {chosenTeacher.Phone}</p>
                             <Link to="/home" >back</Link>
                         </div>
-                        <div className={cx(style.column, style.aboutCont)}>
+                        <div className={style.column}>
                             <h3>About</h3>
                             <p>{chosenTeacher.About}</p>
                             <button className={style.button} 
