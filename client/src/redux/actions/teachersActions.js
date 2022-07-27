@@ -9,17 +9,22 @@ const fetchTeachers = (teachersList) => ({
 export const fetchTeachersAction = () => {
     return async(dispatch) => {
         const teachersList = await serverConnection.getTeacherList();
+        teachersList[0].subjects = ["dance"];
+        teachersList[1].subjects = ["math"];
+        teachersList[2].subjects = ["english", "chemistry"];
+        teachersList[3].subjects = ["history", "english", "math", "physics"];
+        teachersList[4].subjects = ["math", "english", "biology"];
         dispatch(fetchTeachers(teachersList));
     };
 }
 
-const chooseTeacher = (index) => ({
+const chooseTeacher = (id) => ({
     type: ACTIONS.CHOOSE_TEACHER,
-    payload: index
+    payload: id
 });
 
-export const chooseTeacherAction = (index) => {
+export const chooseTeacherAction = (id) => {
     return async(dispatch) => {
-        dispatch(chooseTeacher(index));
+        dispatch(chooseTeacher(id));
     };
 }

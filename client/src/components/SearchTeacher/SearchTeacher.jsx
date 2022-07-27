@@ -1,45 +1,45 @@
 import style from "./SearchTeacher.module.css";
 import map from "lodash/map";
+import SubjectsFilter from "./SubjectsFilter/SubjectsFilterConnector";
 import { useEffect } from 'react'
 import { useCallback } from "react";
 
 function SearchTeacher({
-    allTeachers,
-    choosenTeacherIndex,
+    areTeachersFetched,
     fetchTeachersAction,
-    chooseTeacherAction
+    chooseTeacherAction,
+    chosenTeacher,
+    selectedTeachers,
 }) {
 
     const DEFAULT = "default";
 
     useEffect(() => {
-        if (JSON.stringify(allTeachers) === '{}') {
+        if (!areTeachersFetched) {
             fetchTeachersAction();
         }
     }, []);
-
 
     const chooseTeacher = useCallback((event) => {
         chooseTeacherAction(event.target.value)
     }, [chooseTeacherAction]);
 
-    let index = -1;
     return (
         <div>
             <select type="select" onChange={(event) => chooseTeacher(event)}
                 defaultValue={
-                    choosenTeacherIndex
-                        ? choosenTeacherIndex
+                    chosenTeacher
+                        ? chosenTeacher
                         : DEFAULT
                 }>
                 <option value={DEFAULT} disabled>select teacher</option>
                 {
-                    map(allTeachers, teacher => {
-                        index++;
-                        return <option value={index} key={teacher.id}>{teacher.Name}</option>
+                    map(selectedTeachers, teacher => {
+                        return <option value={teacher.id} key={teacher.id}>{teacher.Name}</option>
                     })
                 }
             </select>
+            <SubjectsFilter />
         </div>
     );
 }
