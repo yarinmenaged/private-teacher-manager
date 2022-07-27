@@ -1,5 +1,6 @@
 import ACTIONS from "./actionConstants";
 import severConnection from "../../services/dbServices";
+
 const editAbout = (newAbout) => ({
 	type: ACTIONS.EDIT_ABOUT,
 	payload: newAbout,

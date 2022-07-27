@@ -2,20 +2,24 @@ import style from "./Login.module.css";
 import cx from "classnames";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useCallback } from "react";
 
 function Login({ getUserInfoAction, loginStatus }) {
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (loginStatus) navigate("/home");
-	}, [loginStatus]);
+	}, [loginStatus, navigate]);
 
-	const handleSubmit = async (event) => {
-		event.preventDefault();
-		const email = event.target.elements.email.value;
-		const password = event.target.elements.password.value;
-		getUserInfoAction(email, password);
-	};
+	const handleSubmit = useCallback(
+		async (event) => {
+			event.preventDefault();
+			const email = event.target.elements.email.value;
+			const password = event.target.elements.password.value;
+			getUserInfoAction(email, password);
+		},
+		[getUserInfoAction]
+	);
 
 	return (
 		<div className={style.inLine}>

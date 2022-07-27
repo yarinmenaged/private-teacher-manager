@@ -11,9 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Subjects.belongsToMany(models.Student, {
+        through: models.Event
+      }); 
       Subjects.belongsToMany(models.Teacher, {
         through: models.Event
-      });
+      }); 
+      Subjects.hasMany(models.Event);
     }
   }
   Subjects.init({

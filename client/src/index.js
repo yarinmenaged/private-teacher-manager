@@ -6,14 +6,11 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
 import "monday-ui-react-core/dist/main.css";
 import AppConnector from "./AppConnector";
-import { CookiesProvider } from "react-cookie";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<Provider store={store}>
-		<CookiesProvider>
-			<AppConnector />
-		</CookiesProvider>
+		<AppConnector />
 	</Provider>
 );
 

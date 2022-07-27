@@ -34,15 +34,15 @@ function NavBar({ logOutAction }) {
 			<Link to="/messenger" className={style.button}>
 				Messenger
 			</Link>
-			<Link to="/profile" className={style.button}>
+			<Link to="/my-profile" className={style.button}>
 				Profile
 			</Link>
 			<Link to="/settings" className={style.button}>
 				Settings
 			</Link>
-			<a href="" onClick={(event) => logOut(event)} className={style.button}>
+			<div onClick={(event) => logOut(event)} className={style.button}>
 				Log Out
-			</a>
+			</div>
 		</div>
 	);
 }

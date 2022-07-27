@@ -1,4 +1,3 @@
-import style from "./Settings.module.css";
 import { Link } from "react-router-dom";
 import NavBar from "../NavBar/NavBarConnector";
 

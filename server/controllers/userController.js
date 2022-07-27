@@ -2,6 +2,7 @@ const {
 	AddNewTeacher,
 	AddNewStudent,
 	setAboutTeacher,
+	getAllTeachers,
 } = require("../services/storage/UserStorageService");
 const { login } = require("../services/login/loginService");
 const { getUserInfoByToken } = require("../services/auth/auth");
@@ -26,7 +27,7 @@ const loginRouter = async (req, res, next) => {
 		// delete authorizedUser.userData.Password; //shoud not send the password back!
 		res
 			.cookie("token", authorizedUser.token, {
-				maxAge: oneDayMilliseconds,
+				maxAge: 5000,
 				sameSite: "Lax",
 			})
 			.status(200)
@@ -51,10 +52,17 @@ async function setAbout(req, res) {
 	res.status(200).json({ health: "ok" });
 }
 
+async function getTeachers(req, res) {
+	console.log("get teachers");
+	const teachers = await getAllTeachers();
+	res.status(200).json(teachers);
+}
+
 module.exports = {
 	addTeacher,
 	addStudent,
 	loginRouter,
 	setAbout,
 	getUserByTokenRouter,
+	getTeachers,
 };

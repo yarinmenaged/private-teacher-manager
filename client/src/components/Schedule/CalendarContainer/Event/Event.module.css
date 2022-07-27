@@ -55,3 +55,8 @@
     --theme-color: var(--thead-bg);
     --theme-bg: #BBBCBC;
 }
+
+.blocked {
+    --theme-color: #fff;
+    --theme-bg: #ff353c;
+}

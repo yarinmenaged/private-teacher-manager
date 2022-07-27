@@ -1,4 +1,5 @@
 const { Student, Teacher, UserInfo, sequelize } = require("../../db/models");
+const { UserType } = require("./Constants");
 
 async function AddNewTeacher(user_info) {
 	const transaction = await sequelize.transaction();
@@ -81,6 +82,17 @@ async function getUserInfoByEmail(email) {
 	}
 }
 
+const getUserType = async (user) => {
+	const teacher = await GetTeacherById(user.id);
+	if (teacher) {
+		user.dataValues.About = teacher.About;
+		user.dataValues.Type = UserType.TEACHER;
+	} else {
+		user.dataValues.Type = UserType.STUDENT;
+	}
+	return user;
+};
+
 async function getUserInfoById(userId) {
 	try {
 		const user = await UserInfo.findOne({
@@ -95,17 +107,6 @@ async function getUserInfoById(userId) {
 		console.error(err);
 	}
 }
-
-const getUserType = async (user) => {
-	const teacher = await GetTeacherById(user.id);
-	if (teacher) {
-		user.dataValues.About = teacher.About;
-		user.dataValues.Type = "Teacher";
-	} else {
-		user.dataValues.Type = "Student";
-	}
-	return user;
-};
 
 async function GetTeacherById(userId) {
 	return await Teacher.findOne({
@@ -130,6 +131,23 @@ async function setAboutTeacher(userId, newAbout) {
 	});
 }
 
+async function getAllTeachers() {
+	const teacherIds = await Teacher.findAll({
+		attributes: ["User_info_id", "About"],
+	});
+
+	return await Promise.all(
+		teacherIds.map(async (teacher) => {
+			const info = await UserInfo.findOne({
+				where: { id: teacher.User_info_id },
+				attributes: ["id", "Name", "Email", "Phone"],
+			});
+			info.dataValues.About = teacher.About;
+			return info;
+		})
+	);
+}
+
 const UserStorageService = {
 	AddNewStudent,
 	AddNewTeacher,
@@ -139,6 +157,7 @@ const UserStorageService = {
 	setAboutTeacher,
 	getUserInfoByEmail,
 	getUserInfoById,
+	getAllTeachers,
 };
 
 module.exports = UserStorageService;

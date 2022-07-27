@@ -13,9 +13,14 @@
   min-width: 400px;
   height: fit-content;
   min-height: 540px;
-  
   border-radius: 5px;
-  background-color: rgba(244, 242, 242, 0.947);
+  background-color: white;
   font-size: small;
   color: black;
+}
+
+.logo {
+  height: 90px;
+  width: 310px;
+  margin: 20px 0px 10px 80px;
 }
