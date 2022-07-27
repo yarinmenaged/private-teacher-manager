@@ -1,13 +1,12 @@
-import style from '../Profile.module.css';
+import style from "../Profile.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import NavBar from '../../NavBar/NavBarConnector';
-import cx from 'classnames';
-import SearchTeacher from '../../SearchTeacher/SearchTeacherConnector';
-import { useCallback } from 'react';
+import NavBar from "../../NavBar/NavBarConnector";
+import cx from "classnames";
+import SearchTeacher from "../../SearchTeacher/SearchTeacherConnector";
+import { useCallback } from "react";
 
 function SearchProfile({ chosenTeacher, SetCalendarToUserAction }) {
-
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
     const goToCalender = useCallback(() => {
         SetCalendarToUserAction(chosenTeacher.id);
@@ -49,4 +48,4 @@ function SearchProfile({ chosenTeacher, SetCalendarToUserAction }) {
     );
 }
 
-export default SearchProfile
+export default SearchProfile;

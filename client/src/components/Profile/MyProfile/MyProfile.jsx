@@ -1,18 +1,20 @@
-import style from '../Profile.module.css';
+import style from "../Profile.module.css";
 import { Link } from "react-router-dom";
-import NavBar from '../../NavBar/NavBarConnector';
-import { useState } from 'react'
-import cx from 'classnames';
-import { useCallback } from 'react';
+import NavBar from "../../NavBar/NavBarConnector";
+import { useState } from "react";
+import cx from "classnames";
+import { useCallback } from "react";
 
 function MyProfile({ userInfo, editAboutAction }) {
+	const [showTextbox, setShowTextbox] = useState(false);
 
-    const [showTextbox, setShowTextbox] = useState(false);
-
-    const editAbout = useCallback((newAbout) => {
-        editAboutAction(newAbout);
-        setShowTextbox(false);
-    }, [setShowTextbox, editAboutAction]);
+	const editAbout = useCallback(
+		(newAbout) => {
+			editAboutAction(newAbout);
+			setShowTextbox(false);
+		},
+		[setShowTextbox, editAboutAction]
+	);
 
     const setTextboxDisplay = useCallback(() => {
         setShowTextbox(showTextbox => !showTextbox);
@@ -53,14 +55,23 @@ function MyProfile({ userInfo, editAboutAction }) {
 }
 
 function EditAboutComponent({ editAbout, About }) {
-    const [inputValue, setInputValue] = useState("");
-    return (
-        <div>
-            <textarea rows="6" cols="50" defaultValue={About} className={style.textbox}
-                onChange={(event) => setInputValue(event.target.value)} type="text" /><br />
-            <button className={style.button} onClick={() => editAbout(inputValue)}>submit</button>
-        </div>
-    );
+	const [inputValue, setInputValue] = useState("");
+	return (
+		<div>
+			<textarea
+				rows="6"
+				cols="50"
+				defaultValue={About}
+				className={style.textbox}
+				onChange={(event) => setInputValue(event.target.value)}
+				type="text"
+			/>
+			<br />
+			<button className={style.button} onClick={() => editAbout(inputValue)}>
+				submit
+			</button>
+		</div>
+	);
 }
 
-export default MyProfile
+export default MyProfile;

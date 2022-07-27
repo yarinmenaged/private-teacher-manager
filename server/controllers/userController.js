@@ -5,6 +5,8 @@ const {
 	getAllTeachers,
 } = require("../services/storage/UserStorageService");
 const { login } = require("../services/login/loginService");
+const { getUserInfoByToken } = require("../services/auth/auth");
+const oneDayMilliseconds = 86400000;
 
 async function addTeacher(req, res) {
 	console.log("create teacher");
@@ -18,14 +20,29 @@ async function addStudent(req, res) {
 	res.status(200).json(newStudent);
 }
 
-const loginRouter = async(req, res) => {
+const loginRouter = async (req, res, next) => {
 	try {
 		const { email, password } = req.body;
-		const userInfo = await login(email, password);
-		delete userInfo.Password //shoud not send the password back!
-		res.status(200).send(userInfo);
+		const authorizedUser = await login(email, password);
+		// delete authorizedUser.userData.Password; //shoud not send the password back!
+		res
+			.cookie("token", authorizedUser.token, {
+				maxAge: 5000,
+				sameSite: "Lax",
+			})
+			.status(200)
+			.send(authorizedUser);
 	} catch (err) {
-		console.error(err);
+		next(err);
+	}
+};
+
+const getUserByTokenRouter = async (req, res) => {
+	const user = await getUserInfoByToken(req.cookies.token);
+	if (user) {
+		res.status(200).send(user);
+	} else {
+		res.status(401).send("Unauthorized");
 	}
 };
 
@@ -46,5 +63,6 @@ module.exports = {
 	addStudent,
 	loginRouter,
 	setAbout,
+	getUserByTokenRouter,
 	getTeachers,
 };

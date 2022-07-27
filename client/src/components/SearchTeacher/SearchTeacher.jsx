@@ -1,4 +1,3 @@
-import style from "./SearchTeacher.module.css";
 import map from "lodash/map";
 import SubjectsFilter from "./SubjectsFilter/SubjectsFilterConnector";
 import { useEffect } from 'react'
@@ -11,6 +10,11 @@ function SearchTeacher({
     chosenTeacher,
     selectedTeachers,
 }) {
+	useEffect(() => {
+		if (JSON.stringify(allTeachers) === "{}") {
+			fetchTeachersAction();
+		}
+	}, [allTeachers, fetchTeachersAction]);
 
     const DEFAULT = "default";
 

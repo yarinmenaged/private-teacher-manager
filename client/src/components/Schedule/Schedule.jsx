@@ -34,4 +34,4 @@ function Schedule({ chosenTeacher, SetCalendarToUserAction, userInfo }) {
     );
 }
 
-export default Schedule
+export default Schedule;
