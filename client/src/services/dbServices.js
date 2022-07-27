@@ -41,10 +41,9 @@ export default class severConnection {
 				},
 				body: JSON.stringify({ email, password }),
 			});
-			debugger;
+
 			return await response.json();
 		} catch (err) {
-			debugger;
 			console.error(err);
 		}
 	}

@@ -5,6 +5,7 @@ const {
 } = require("../services/storage/UserStorageService");
 const { login } = require("../services/login/loginService");
 const { getUserInfoByToken } = require("../services/auth/auth");
+const oneDayMilliseconds = 86400000;
 
 async function addTeacher(req, res) {
 	console.log("create teacher");
@@ -25,8 +26,7 @@ const loginRouter = async (req, res, next) => {
 		// delete authorizedUser.userData.Password; //shoud not send the password back!
 		res
 			.cookie("token", authorizedUser.token, {
-				maxAge: 86400000,
-				httpOnly: true,
+				maxAge: oneDayMilliseconds,
 				sameSite: "Lax",
 			})
 			.status(200)

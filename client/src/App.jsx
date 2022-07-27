@@ -7,6 +7,8 @@ import Messenger from "./components/Messenger/MessengerConnector";
 import Profile from "./components/Profile/ProfileConnector";
 import Landing from "./components/Landing/Landing";
 import Settings from "./components/Settings/Settings";
+import { useCookies } from "react-cookie";
+
 import {
 	BrowserRouter as Router,
 	Routes,
@@ -14,11 +16,12 @@ import {
 	Navigate,
 } from "react-router-dom";
 import { useEffect } from "react";
-
 function App({ loginStatus, getUserInfoByTokenAction }) {
+	const [cookies, removeCookie] = useCookies(["token"]);
+
 	useEffect(() => {
 		getUserInfoByTokenAction();
-	}, [loginStatus, getUserInfoByTokenAction]);
+	}, [loginStatus, getUserInfoByTokenAction, cookies.token]);
 
 	return (
 		<div className="App-header">
@@ -36,13 +39,13 @@ function App({ loginStatus, getUserInfoByTokenAction }) {
 						</Routes>
 					) : (
 						<Routes>
+							<Route path="/" element={<Home />} />
 							<Route path="/home" element={<Home />} />
 							<Route path="/schedule" element={<Schedule />} />
 							<Route path="/messenger" element={<Messenger />} />
 							<Route path="/profile" element={<Profile />} />
 							<Route path="/settings" element={<Settings />} />
-							<Route path="/login" element={<Navigate to="/home" />} />
-							<Route path="/" element={<Navigate to="/home" />} />
+							<Route path="*" element={<Navigate to="/home" />} />
 						</Routes>
 					)}
 				</Router>
