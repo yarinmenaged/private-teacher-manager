@@ -48,18 +48,6 @@ export default class severConnection {
 		}
 	}
 
-    static async getUserInfo(email, password) {
-        return await ApiService.AddNewResourceRequest(`users/login`, { email, password });
-        //TODO: error
-
-    }
-
-    static async getTeacherList() {
-        const teacherList = await ApiService.GetResourceRequest(`users/teachers`);
-        teacherList.sort((a, b) => (a.Name > b.Name) ? 1 : ((b.Name > a.Name) ? -1 : 0));
-        return { ...teacherList }
-    }
-
 	static async getUserInfoByToken() {
 		const response = await fetch(`http://localhost:2000/users/verifies`, {
 			method: "GET",

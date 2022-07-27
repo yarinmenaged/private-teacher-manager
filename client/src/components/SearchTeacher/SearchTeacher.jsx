@@ -7,14 +7,8 @@ function SearchTeacher({
     areTeachersFetched,
     fetchTeachersAction,
     chooseTeacherAction,
-    chosenTeacher,
     selectedTeachers,
 }) {
-	useEffect(() => {
-		if (JSON.stringify(allTeachers) === "{}") {
-			fetchTeachersAction();
-		}
-	}, [allTeachers, fetchTeachersAction]);
 
     const DEFAULT = "default";
 

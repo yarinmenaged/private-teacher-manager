@@ -1,7 +1,8 @@
 import ACTIONS from "../actions/actionConstants";
 
 const initState = { // user info. shoud get it from server at the login!
-	loginStatus: "",
+	loginStatus: false,
+	incorrectPassword: false,
 	id: undefined,
 	Name: "",
 	Email: "",
@@ -14,27 +15,17 @@ const initState = { // user info. shoud get it from server at the login!
 const reducer = (state = initState, action) => {
 	const { type, payload } = action;
 	switch (type) {
+
 		case ACTIONS.EDIT_ABOUT:
 			return { ...state, About: payload };
 
 		case ACTIONS.GET_USER:
 			if (payload.status) {
-				return { ...state, loginStatus: payload.status };
+				return { ...state, incorrectPassword: true };
 			} else {
 				return {
-					...state,
 					loginStatus: true,
-					user: payload,
-				};
-			}
-
-		case ACTIONS.GET_USER:
-			if (payload.status) {
-				return { ...state, loginStatus: payload.status };
-			} else {
-				return {
-					...state,
-					loginStatus: "in",
+					incorrectPassword: false,
 					id: payload.id,
 					Name: payload.Name,
 					Email: payload.Email,
@@ -47,8 +38,7 @@ const reducer = (state = initState, action) => {
 
 		case ACTIONS.LOG_OUT:
 			return {
-				...state,
-				loginStatus: "",
+				loginStatus: false,
 				id: undefined,
 				Name: "",
 				Email: "",
@@ -57,6 +47,9 @@ const reducer = (state = initState, action) => {
 				About: "",
 				subjects: []
 			};
+
+		default:
+			return state;
 	}
 }
 

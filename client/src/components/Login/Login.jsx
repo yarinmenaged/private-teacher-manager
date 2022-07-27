@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useCallback } from "react";
 
-function Login({ getUserInfoAction, loginStatus }) {
+function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -46,8 +46,11 @@ function Login({ getUserInfoAction, loginStatus }) {
 					className={style.input}
 					required
 				/>
-
-				<div className={style.incorrect}>{loginStatus}</div>
+				{
+					incorrectPassword
+					? < div className={style.incorrect}>Incorrect email or password</div>
+					: <div />
+				}
 
 				<input
 					type="submit"
@@ -61,8 +64,8 @@ function Login({ getUserInfoAction, loginStatus }) {
 						Register
 					</Link>
 				</p>
-			</form>
-		</div>
+			</form >
+		</div >
 	);
 }
 

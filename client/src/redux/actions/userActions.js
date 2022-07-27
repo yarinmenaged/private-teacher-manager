@@ -1,5 +1,5 @@
 import ACTIONS from "./actionConstants";
-import severConnection from "../../services/dbServices";
+import serverConnection from "../../services/dbServices";
 
 const editAbout = (newAbout) => ({
 	type: ACTIONS.EDIT_ABOUT,
@@ -10,7 +10,7 @@ export const editAboutAction = (newAbout) => {
 	return async (dispatch, getState) => {
 		const state = getState();
 		const id = state.userReducer.user.id;
-		await severConnection.editAbout(id, newAbout);
+		await serverConnection.editAbout(id, newAbout);
 		dispatch(editAbout(newAbout));
 	};
 };
@@ -38,7 +38,7 @@ const getUserInfoByToken = async (userInfo) => ({
 
 export const getUserInfoByTokenAction = () => {
 	return async (dispatch) => {
-		const userInfo = await severConnection.getUserInfoByToken();
+		const userInfo = await serverConnection.getUserInfoByToken();
 		dispatch(await getUserInfoByToken(userInfo));
 	};
 };
