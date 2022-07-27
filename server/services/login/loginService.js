@@ -1,11 +1,13 @@
 const { UserInfo, sequelize } = require("../../db/models");
+const auth = require("../auth/auth");
 const { getUserInfoByEmail } = require("../storage/UserStorageService");
 
 const login = async (email, password) => {
 	const currentUserInfo = await getUserInfoByEmail(email);
 	if (currentUserInfo) {
 		if (currentUserInfo.Password === password) {
-			return currentUserInfo.dataValues;
+			const token = await auth.sign(currentUserInfo);
+			return { data: currentUserInfo.dataValues, token };
 		}
 	}
 	return { status: "Incorrect email or password" };
