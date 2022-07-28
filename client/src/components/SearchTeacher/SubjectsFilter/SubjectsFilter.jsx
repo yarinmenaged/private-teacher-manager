@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { useCallback } from 'react';
 import style from './SubjectsFilter.module.css';
-import SUBJECTS_LIST from './subjectsConstant';
 
 function SubjectsFilter({
     selectSubjectAction,
     deselectSubjectAction,
     selectedSubjects,
     unchooseTeacherAction,
-    onlyOneOptionAction
+    onlyOneOptionAction,
+    subjectsList,
 }) {
     return (
         <div>
@@ -18,10 +18,12 @@ function SubjectsFilter({
                         selectSubjectAction={selectSubjectAction}
                         unchooseTeacherAction={unchooseTeacherAction}
                         deselectSubjectAction={deselectSubjectAction}
-                        selectedSubjects={selectedSubjects} />
+                        selectedSubjects={selectedSubjects}
+                        subjectsList={subjectsList} />
                     : <OneSubjectOption
                         onlyOneOptionAction={onlyOneOptionAction}
-                        selectSubjectAction={selectSubjectAction} />
+                        selectSubjectAction={selectSubjectAction}
+                        subjectsList={subjectsList} />
             }
         </div>
     );
@@ -32,6 +34,7 @@ function MultipleSubjectsOptions({
     deselectSubjectAction,
     selectedSubjects,
     unchooseTeacherAction,
+    subjectsList
 }) {
 
     const selectSubject = useCallback((event) => {
@@ -47,7 +50,7 @@ function MultipleSubjectsOptions({
     return (
         <div className={style.flex}>
             {
-                SUBJECTS_LIST.map((subject, index) => {
+                subjectsList.map((subject, index) => {
                     return (
                         <div key={index} className={style.flex}>
                             <p>{subject}</p>
@@ -67,7 +70,7 @@ function MultipleSubjectsOptions({
     );
 }
 
-function OneSubjectOption({ onlyOneOptionAction, selectSubjectAction }) {
+function OneSubjectOption({ onlyOneOptionAction, selectSubjectAction, subjectsList }) {
 
     useEffect(() => {
         onlyOneOptionAction();
@@ -82,8 +85,8 @@ function OneSubjectOption({ onlyOneOptionAction, selectSubjectAction }) {
         <select defaultValue="deafult" type="select" onChange={(event) => selectSubject(event)}>
             <option value="deafult" disabled>select subject</option>
             {
-                SUBJECTS_LIST.map(subject => {
-                    return <option key={subject}> {subject}</option>
+                subjectsList.map((subject, index) => {
+                    return <option key={index}> {subject}</option>
                 })
             }
         </select>

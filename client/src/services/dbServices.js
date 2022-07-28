@@ -1,6 +1,6 @@
 import ApiService from "./ApiService"
 
-export default class severConnection {
+export default class serverConnection {
 	static async addUser(Name, userType, Email, Password, Phone) {
 		const newUser = {
 			Name,
@@ -30,7 +30,7 @@ export default class severConnection {
     }
 
 	static async getAllSubjects() {
-        return await ApiService.GetResourceRequest(`/subjects`);
+        return await ApiService.GetResourceRequest(`subjects`);
         //TODO: error
     }
 

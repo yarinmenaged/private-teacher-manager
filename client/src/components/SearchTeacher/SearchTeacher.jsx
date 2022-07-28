@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useCallback } from "react";
 
 function SearchTeacher({
+    getAllSubjectsAction,
     areTeachersFetched,
     fetchTeachersAction,
     chooseTeacherAction,
@@ -15,6 +16,7 @@ function SearchTeacher({
     useEffect(() => {
         if (!areTeachersFetched) {
             fetchTeachersAction();
+            getAllSubjectsAction();
         }
     }, []);
 

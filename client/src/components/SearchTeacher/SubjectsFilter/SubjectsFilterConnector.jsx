@@ -6,13 +6,13 @@ import {
     deselectSubjectAction,
     onlyOneOptionAction
 } from "../../../redux/actions/subjectsAction";
-import { getSelectedSubjects } from '../../../redux/selectors/subjectsSelector';
+import { getSelectedSubjects, getSubjects } from '../../../redux/selectors/subjectsSelector';
 import { unchooseTeacherAction } from '../../../redux/actions/teachersActions'
 
 const mapStateToProps = state => {
     const selectedSubjects = getSelectedSubjects(state);
-    console.log(selectedSubjects);
-    return { selectedSubjects };
+    const subjectsList = getSubjects(state);
+    return { selectedSubjects, subjectsList };
 };
 
 const mapDispatchToProps = dispatch => {
