@@ -34,7 +34,7 @@ function SearchProfile({ chosenTeacher, SetCalendarToUserAction }) {
                             <div className={style.flex}>
                                 {
                                     chosenTeacher.subjects.map((subject, index) =>
-                                        <div key={index} style={{marginRight: "20px"}}>{subject}</div>
+                                        <option key={index} style={{marginRight: "20px"}}>{subject}</option>
                                     )
                                 }
                             </div><br />
