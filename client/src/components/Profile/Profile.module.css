@@ -18,6 +18,7 @@
 .textbox {
     border-radius: 10px;
     border-width: 0;
+    background-color: rgba(78, 98, 165, 0.274);;
 }
 
 .button {

@@ -16,7 +16,7 @@ function SearchTeacher({
         if (!areTeachersFetched) {
             fetchTeachersAction();
         }
-    }, []);
+    }, [areTeachersFetched]);
 
     const chooseTeacher = useCallback((event) => {
         chooseTeacherAction(event.target.value)

@@ -6,6 +6,10 @@ export const getUserType = (state) => {
     return state.userReducer.Type;
 }
 
+export const getUserName = (state) => {
+    return state.userReducer.Name;
+}
+
 export const getLoginStatus = (state) => {
 	return state.userReducer.loginStatus;
 };

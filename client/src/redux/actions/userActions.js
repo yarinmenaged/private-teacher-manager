@@ -9,7 +9,7 @@ const editAbout = (newAbout) => ({
 export const editAboutAction = (newAbout) => {
 	return async (dispatch, getState) => {
 		const state = getState();
-		const id = state.userReducer.user.id;
+		const id = state.userReducer.id;
 		await serverConnection.editAbout(id, newAbout);
 		dispatch(editAbout(newAbout));
 	};
@@ -24,14 +24,11 @@ export const getUserInfoAction = (email, password) => {
 
     return async(dispatch) => {
         const userInfo = await serverConnection.getUserInfo(email, password);
-        if (userInfo.Type === "Teacher") {
-            userInfo.subjects = ["history", "english", "math", "physics"];
-        }
         dispatch(getUserInfo(userInfo));
     };
 }
 
-const getUserInfoByToken = async (userInfo) => ({
+const getUserInfoByToken = (userInfo) => ({
 	type: ACTIONS.GET_USER_BY_TOKEN,
 	payload: userInfo,
 });
@@ -39,7 +36,10 @@ const getUserInfoByToken = async (userInfo) => ({
 export const getUserInfoByTokenAction = () => {
 	return async (dispatch) => {
 		const userInfo = await serverConnection.getUserInfoByToken();
-		dispatch(await getUserInfoByToken(userInfo));
+		if (userInfo.Type === "Teacher") {
+            userInfo.subjects = ["history", "english", "math", "physics"];
+        }
+		dispatch(getUserInfoByToken(userInfo));
 	};
 };
 

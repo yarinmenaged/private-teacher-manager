@@ -18,7 +18,7 @@ function SubjectsFilter({
             deselectSubjectAction(event.target.name);
         }
 
-    }, [selectSubjectAction]);
+    }, [selectSubjectAction, unchooseTeacherAction, deselectSubjectAction]);
 
     return (
         <div className={style.flex}>

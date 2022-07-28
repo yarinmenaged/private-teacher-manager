@@ -1,3 +1,5 @@
+import ApiService from "./ApiService"
+
 export default class severConnection {
 	static async addUser(Name, userType, Email, Password, Phone) {
 		const newUser = {
@@ -16,18 +18,16 @@ export default class severConnection {
 		});
 	}
 
-	static async editAbout(id, newAbout) {
-		await fetch(`http://localhost:2000/users/about/${id}`, {
-			method: "PUT",
-			credentials: "include",
-			SameSite: "None",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ newAbout }),
-		});
-	}
+    static async getTeacherList() {
+        const teacherList = await ApiService.GetResourceRequest(`users/teachers`);
+        teacherList.sort((a, b) => (a.Name > b.Name) ? 1 : ((b.Name > a.Name) ? -1 : 0));
+        return { ...teacherList }
+    }
+
+    static async editAbout(id, newAbout) {
+        return await ApiService.PutResourceRequest(`users/about/${id}`, { newAbout });
+        //TODO: error
+    }
 
 	static async getUserInfo(email, password) {
 		try {

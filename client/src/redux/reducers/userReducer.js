@@ -36,9 +36,29 @@ const reducer = (state = initState, action) => {
 				};
 			}
 
+		case ACTIONS.GET_USER_BY_TOKEN:
+			if (!payload) {
+				return {
+					...state,
+					loginStatus: false,
+				};
+			}
+			return {
+				loginStatus: true,
+				incorrectPassword: false,
+				id: payload.id,
+				Name: payload.Name,
+				Email: payload.Email,
+				Phone: payload.Phone,
+				Type: payload.Type,
+				About: payload.About,
+				subjects: payload.subjects
+			};
+
 		case ACTIONS.LOG_OUT:
 			return {
 				loginStatus: false,
+				incorrectPassword: false,
 				id: undefined,
 				Name: "",
 				Email: "",
