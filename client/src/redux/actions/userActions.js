@@ -36,9 +36,6 @@ const getUserInfoByToken = (userInfo) => ({
 export const getUserInfoByTokenAction = () => {
 	return async (dispatch) => {
 		const userInfo = await serverConnection.getUserInfoByToken();
-		if (userInfo.Type === "Teacher") {
-            userInfo.subjects = ["history", "english", "math", "physics"];
-        }
 		dispatch(getUserInfoByToken(userInfo));
 	};
 };

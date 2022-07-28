@@ -1,5 +1,5 @@
 const SUBJECTS_LIST = [
-    "history",
+    "History",
     "english",
     "math",
     "physics",
