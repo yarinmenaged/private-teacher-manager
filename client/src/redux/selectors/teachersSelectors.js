@@ -1,9 +1,12 @@
 import filter from "lodash/filter";
 import find from "lodash/find";
 
-export const getSelectedTeachers = (state, subjects) => {
+export const getSelectedTeachers = (state, selectedSubjects) => {
     const teachers = state.teachersReducer.teachers;
-    return filter(teachers, teacher => teacher.subjects.some(sub => subjects.indexOf(sub) >= 0));
+    return filter(teachers, teacher => {
+        const subjects = teacher.subjects.map(subject => subject.Name)
+        return subjects.some(sub => selectedSubjects.indexOf(sub) >= 0)
+    });
 }
 
 export const getChosenTeacher = (state) => {
