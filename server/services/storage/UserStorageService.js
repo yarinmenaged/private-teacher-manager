@@ -1,4 +1,4 @@
-const { Student, Teacher, UserInfo, sequelize } = require("../../db/models");
+const { Student, Teacher, UserInfo, Subjects, TeachingSubjects, sequelize } = require("../../db/models");
 const { UserType } = require("./Constants");
 
 async function AddNewTeacher(user_info) {
@@ -86,6 +86,7 @@ const getUserType = async (user) => {
 	const teacher = await GetTeacherById(user.id);
 	if (teacher) {
 		user.dataValues.About = teacher.About;
+		user.dataValues.subject = await getSubjectsById(teacher.dataValues.id);
 		user.dataValues.Type = UserType.TEACHER;
 	} else {
 		user.dataValues.Type = UserType.STUDENT;
@@ -131,9 +132,27 @@ async function setAboutTeacher(userId, newAbout) {
 	});
 }
 
+async function getSubjectsById(teacherId) {
+	const subjectIds = await TeachingSubjects.findAll({
+		where: { TeacherId: teacherId },
+		attributes: ["subjectId"],
+	});
+
+	return await Promise.all(
+		subjectIds.map(async (subjectId) => {
+			const subject = await Subjects.findOne({
+				where: { id: subjectId.dataValues.subjectId },
+				attributes: ["Name"],
+			});
+			return subject.dataValues.Name;
+		})
+	);
+}
+
 async function getAllTeachers() {
+
 	const teacherIds = await Teacher.findAll({
-		attributes: ["User_info_id", "About"],
+		attributes: ["id", "User_info_id", "About"],
 	});
 
 	return await Promise.all(
@@ -143,6 +162,7 @@ async function getAllTeachers() {
 				attributes: ["id", "Name", "Email", "Phone"],
 			});
 			info.dataValues.About = teacher.About;
+			info.dataValues.subjects = await getSubjectsById(teacher.dataValues.id);
 			return info;
 		})
 	);

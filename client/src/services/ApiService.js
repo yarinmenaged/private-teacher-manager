@@ -1,4 +1,5 @@
 import axios from "axios";
+import { logOutAction } from '../redux/actions/userActions'
 
 export default class ApiService {
 	static async GetResourceRequest(url, withCredentials = true) {

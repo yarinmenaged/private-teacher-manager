@@ -1,10 +1,10 @@
 import Home from "./Home";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { getUserInfo } from "../../redux/selectors/userSelectors";
+import { getUserName } from "../../redux/selectors/userSelectors";
 
 const mapStateToProps = (state) => {
-	const name = getUserInfo(state).Name;
+const name = getUserName(state);
 	return { name };
 };
 
