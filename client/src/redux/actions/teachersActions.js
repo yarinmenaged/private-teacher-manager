@@ -13,13 +13,23 @@ export const fetchTeachersAction = () => {
     };
 }
 
-const chooseTeacher = (index) => ({
+const chooseTeacher = (id) => ({
     type: ACTIONS.CHOOSE_TEACHER,
-    payload: index
+    payload: id
 });
 
-export const chooseTeacherAction = (index) => {
+export const chooseTeacherAction = (id) => {
     return async(dispatch) => {
-        dispatch(chooseTeacher(index));
+        dispatch(chooseTeacher(id));
+    };
+}
+
+const unchooseTeacher = () => ({
+    type: ACTIONS.UNCHOOSE_TEACHER,
+});
+
+export const unchooseTeacherAction = () => {
+    return async(dispatch) => {
+        dispatch(unchooseTeacher());
     };
 }

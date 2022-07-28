@@ -27,6 +27,9 @@ module.exports = (sequelize, DataTypes) => {
         through: models.Event
       });
       Teacher.hasMany(models.Event);
+      Teacher.belongsToMany(models.Subjects, {
+        through: models.TeachingSubjects
+      });
     }
   }  
   Teacher.init({

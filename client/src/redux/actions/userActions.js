@@ -1,5 +1,5 @@
 import ACTIONS from "./actionConstants";
-import severConnection from "../../services/dbServices";
+import serverConnection from "../../services/dbServices";
 
 const editAbout = (newAbout) => ({
 	type: ACTIONS.EDIT_ABOUT,
@@ -9,8 +9,8 @@ const editAbout = (newAbout) => ({
 export const editAboutAction = (newAbout) => {
 	return async (dispatch, getState) => {
 		const state = getState();
-		const id = state.userReducer.user.id;
-		await severConnection.editAbout(id, newAbout);
+		const id = state.userReducer.id;
+		await serverConnection.editAbout(id, newAbout);
 		dispatch(editAbout(newAbout));
 	};
 };
@@ -21,21 +21,22 @@ const getUserInfo = (userInfo) => ({
 });
 
 export const getUserInfoAction = (email, password) => {
-	return async (dispatch) => {
-		const userInfo = await severConnection.getUserInfo(email, password);
-		dispatch(getUserInfo(userInfo.data));
-	};
-};
 
-const getUserInfoByToken = async (userInfo) => ({
+    return async(dispatch) => {
+        const userInfo = await serverConnection.getUserInfo(email, password);
+        dispatch(getUserInfo(userInfo));
+    };
+}
+
+const getUserInfoByToken = (userInfo) => ({
 	type: ACTIONS.GET_USER_BY_TOKEN,
 	payload: userInfo,
 });
 
 export const getUserInfoByTokenAction = () => {
 	return async (dispatch) => {
-		const userInfo = await severConnection.getUserInfoByToken();
-		dispatch(await getUserInfoByToken(userInfo));
+		const userInfo = await serverConnection.getUserInfoByToken();
+		dispatch(getUserInfoByToken(userInfo));
 	};
 };
 
