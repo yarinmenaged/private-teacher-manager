@@ -1,50 +1,64 @@
-import axios from 'axios';
+import axios from "axios";
+import { logOutAction } from '../redux/actions/userActions'
 
 export default class ApiService {
-  
-  static async GetResourceRequest(url) {    
-    return await axios.get(`http://localhost:2000/${url}`).then((response) => {
-      return response.data;
-    }).catch((error) => {
-      throw this.CreateError(error.code, error.message);
-    });
-  }
+	static async GetResourceRequest(url, withCredentials = true) {
+		try {
+			const res = await axios.get(`http://localhost:2000/${url}`, {
+				withCredentials,
+			});
+			return res.data;
+		} catch (err) {
+			throw err;
+		}
+	}
 
-  static async AddNewResourceRequest(url, data) {
-    return await axios.post(`http://localhost:2000/${url}`, data).then((response) => {
-      return response.data;
-    }).catch((error) => {
-      throw this.CreateError(error.code, error.message);
-    });
-  }
+	static async AddNewResourceRequest(url, data, withCredentials = true) {
+		try {
+			const res = await axios.post(`http://localhost:2000/${url}`, data, {
+				withCredentials,
+			});
+			return res.data;
+		} catch (err) {
+			throw err;
+		}
+	}
 
-  static async DeleteResourceRequest(url) {
-    return await axios.delete(`http://localhost:2000/${url}`).then((response) => {
-      return response.data;
-    }).catch((error) => {
-      throw this.CreateError(error.code, error.message);
-    });
-  }
+	static async DeleteResourceRequest(url, withCredentials = true) {
+		try {
+			const res = await axios.delete(`http://localhost:2000/${url}`, {
+				withCredentials,
+			});
+			return res.data;
+		} catch (err) {
+			throw err;
+		}
+	}
 
-  static async PatchResourceRequest(url) {
-    return await axios.patch(`http://localhost:2000/${url}`).then((response) => {
-      return response.data;
-    }).catch((error) => {
-      throw this.CreateError(error.code, error.message);
-    });
-  }
+	static async PatchResourceRequest(url, withCredentials = true) {
+		try {
+			const res = await axios.patch(`http://localhost:2000/${url}`, {
+				withCredentials,
+			});
+			return res.data;
+		} catch (err) {
+			throw err;
+		}
+	}
+	static async PutResourceRequest(url, data, withCredentials = true) {
+		try {
+			const res = await axios.put(`http://localhost:2000/${url}`, data, {
+				withCredentials,
+			});
+			return res.data;
+		} catch (err) {
+			throw err;
+		}
+	}
 
-  static async PutResourceRequest(url, data) {
-    return await axios.put(`http://localhost:2000/${url}`, data).then((response) => {
-      return response.data;
-    }).catch((error) => {
-      throw this.CreateError(error.code, error.message);
-    });
-  }
-
-  static CreateError(code, message) {
-    const error = new Error(message);
-    error.statusCode = code;
-    return error;
-  }
+	static CreateError(code, message) {
+		const error = new Error(message);
+		error.statusCode = code;
+		return error;
+	}
 }
