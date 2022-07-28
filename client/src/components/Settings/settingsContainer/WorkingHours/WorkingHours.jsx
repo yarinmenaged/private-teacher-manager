@@ -1,6 +1,6 @@
 import React from "react";
 import { DailyWorkingHours } from "./DailyWorkingHours/DailyWorkingHours";
-import ConstantsCalendarContainer from "../../Schedule/CalendarContainer/Constants";
+import ConstantsCalendarContainer from "../../../Schedule/CalendarContainer/Constants";
 import style from "./WorkingHours.module.css";
 
 function WorkingHours() {

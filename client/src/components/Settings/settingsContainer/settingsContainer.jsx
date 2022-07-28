@@ -1,7 +1,6 @@
 //import style from "./Settings.module.css";
-import WorkingHours from "../WorkingHours/WorkingHours";
+import WorkingHours from "./WorkingHours/WorkingHours";
 import style from "../Settings.module.css";
-import SettingsConnector from "../SettingsConnector";
 
 function SettingsContainer({ type }) {
   return (
