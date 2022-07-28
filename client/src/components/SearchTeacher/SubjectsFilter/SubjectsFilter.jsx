@@ -70,6 +70,7 @@ function OneSubjectOption({ onlyOneOptionAction, selectSubjectAction }) {
     }, []);
 
     const selectSubject = useCallback((event) => {
+        onlyOneOptionAction();
         selectSubjectAction(event.target.value);
     }, [selectSubjectAction]);
 
