@@ -5,7 +5,7 @@ import ConstantsHourBlock from './Constants';
 import { Tooltip } from 'monday-ui-react-core';
 import EventConnector from '../Event/EventConnector';
 
-const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction }) => {
+const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, calender_user_id, subject_id }) => {
   const [render_event, setRenderEvent] = useState(false);
   const event_obj = useRef(null);
   const event_filtered = useCallback((blocks_date_in_utc)  => {
@@ -33,10 +33,10 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
 
   const hour_block_click_call__back = useCallback((event) => {
     if(!event_obj.current)
-      AddEventAction(user_id, date, hour, user_type);
+      AddEventAction(user_id, date, hour, user_type, calender_user_id, subject_id);
     else
       event.preventDefault();    
-  }, [AddEventAction, user_id, date, hour, user_type]);
+  }, [AddEventAction, user_id, date, hour, user_type, calender_user_id, subject_id]);
 
   if (type === ConstantsHourBlock.BLOCK_TYPES.TIME) {
     return (
