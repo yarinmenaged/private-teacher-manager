@@ -8,7 +8,7 @@ import { useCallback } from 'react';
 function MyProfile({ userInfo, editAboutAction }) {
 
     const [showTextbox, setShowTextbox] = useState(false);
-
+    
     const editAbout = useCallback((newAbout) => {
         editAboutAction(newAbout);
         setShowTextbox(false);

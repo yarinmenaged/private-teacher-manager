@@ -30,7 +30,7 @@ export const getUserInfoAction = (email, password) => {
 
 const getUserInfoByToken = (userInfo) => ({
 	type: ACTIONS.GET_USER_BY_TOKEN,
-	payload: userInfo,
+	payload: userInfo
 });
 
 export const getUserInfoByTokenAction = () => {
