@@ -1,8 +1,10 @@
-const { Subject } = require('../../db/models');
+const { Subjects } = require('../../db/models');
 
 async function GetAllSubjects(){
     try{
-        return await Subject.findAll();
+        return await Subjects.findAll({
+            attributes: ["Name"],
+        });
     }catch(error){
         throw error;
     }

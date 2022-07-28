@@ -20,7 +20,10 @@ const reducer = (state = initState, action) => {
             return { selectedSubjects: newSubjects };
 
         case ACTIONS.LOG_OUT:
-            return { selectedSubjects: [] }
+            return { selectedSubjects: [] };
+
+        case ACTIONS.ONLY_ONE:
+            return { selectedSubjects: [] };
 
         default:
             return state;

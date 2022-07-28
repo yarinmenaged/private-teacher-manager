@@ -21,3 +21,13 @@ export const deselectSubjectAction = (subject) => {
         dispatch(deselectSubject(subject));
     };
 }
+
+const onlyOneOption = () => ({
+    type: ACTIONS.ONLY_ONE,
+});
+
+export const onlyOneOptionAction = () => {
+    return async(dispatch) => {
+        dispatch(onlyOneOption());
+    };
+}

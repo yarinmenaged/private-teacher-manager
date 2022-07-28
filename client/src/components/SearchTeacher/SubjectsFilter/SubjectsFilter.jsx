@@ -1,9 +1,29 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useCallback } from 'react';
 import style from './SubjectsFilter.module.css';
 import SUBJECTS_LIST from './subjectsConstant';
 
 function SubjectsFilter({
+    selectSubjectAction,
+    deselectSubjectAction,
+    selectedSubjects,
+    unchooseTeacherAction,
+    onlyOneOptionAction
+}) {
+    return (
+        window.location.href.includes("search-profile")
+            ? <MultipleSubjectsOptions
+                selectSubjectAction={selectSubjectAction}
+                unchooseTeacherAction={unchooseTeacherAction}
+                deselectSubjectAction={deselectSubjectAction}
+                selectedSubjects={selectedSubjects} />
+            : <OneSubjectOption
+                onlyOneOptionAction={onlyOneOptionAction}
+                selectSubjectAction={selectSubjectAction} />
+    );
+}
+
+function MultipleSubjectsOptions({
     selectSubjectAction,
     deselectSubjectAction,
     selectedSubjects,
@@ -40,6 +60,28 @@ function SubjectsFilter({
                 })
             }
         </div>
+    );
+}
+
+function OneSubjectOption({ onlyOneOptionAction, selectSubjectAction }) {
+
+    useEffect(() => {
+        onlyOneOptionAction();
+    }, []);
+
+    const selectSubject = useCallback((event) => {
+        selectSubjectAction(event.target.value);
+    }, [selectSubjectAction]);
+
+    return (
+        <select defaultValue="deafult" type="select" onChange={(event) => selectSubject(event)}>
+            <option value="deafult" disabled>select subject</option>
+            {
+                SUBJECTS_LIST.map(subject => {
+                    return <option key={subject}> {subject}</option>
+                })
+            }
+        </select>
     );
 }
 

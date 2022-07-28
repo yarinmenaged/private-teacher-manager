@@ -29,6 +29,11 @@ export default class severConnection {
         //TODO: error
     }
 
+	static async getAllSubjects() {
+        return await ApiService.GetResourceRequest(`/subjects`);
+        //TODO: error
+    }
+
 	static async getUserInfo(email, password) {
 		try {
 			const response = await fetch(`http://localhost:2000/users/login`, {
