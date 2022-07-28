@@ -11,6 +11,7 @@ import { unchooseTeacherAction } from '../../../redux/actions/teachersActions'
 
 const mapStateToProps = state => {
     const selectedSubjects = getSelectedSubjects(state);
+    console.log(selectedSubjects);
     return { selectedSubjects };
 };
 

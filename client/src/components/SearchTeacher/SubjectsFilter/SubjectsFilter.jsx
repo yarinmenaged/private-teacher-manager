@@ -11,15 +11,19 @@ function SubjectsFilter({
     onlyOneOptionAction
 }) {
     return (
-        window.location.href.includes("search-profile")
-            ? <MultipleSubjectsOptions
-                selectSubjectAction={selectSubjectAction}
-                unchooseTeacherAction={unchooseTeacherAction}
-                deselectSubjectAction={deselectSubjectAction}
-                selectedSubjects={selectedSubjects} />
-            : <OneSubjectOption
-                onlyOneOptionAction={onlyOneOptionAction}
-                selectSubjectAction={selectSubjectAction} />
+        <div>
+            {
+                window.location.href.includes("search-profile")
+                    ? <MultipleSubjectsOptions
+                        selectSubjectAction={selectSubjectAction}
+                        unchooseTeacherAction={unchooseTeacherAction}
+                        deselectSubjectAction={deselectSubjectAction}
+                        selectedSubjects={selectedSubjects} />
+                    : <OneSubjectOption
+                        onlyOneOptionAction={onlyOneOptionAction}
+                        selectSubjectAction={selectSubjectAction} />
+            }
+        </div>
     );
 }
 

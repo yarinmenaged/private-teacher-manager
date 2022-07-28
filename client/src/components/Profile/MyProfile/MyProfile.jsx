@@ -41,8 +41,9 @@ function MyProfile({ userInfo, editAboutAction }) {
                     <h3>I'm teaching:</h3>
                     <div className={style.flex}>
                         {
+                            
                             userInfo.subjects.map((subject, index) =>
-                                <div key={index} style={{ marginRight: "20px" }}>{subject}</div>
+                                <div key={index} style={{ marginRight: "20px" }}>{subject.Name}</div>
                             )
                         }
                     </div>
