@@ -52,7 +52,7 @@ const reducer = (state = initState, action) => {
 				Phone: payload.Phone,
 				Type: payload.Type,
 				About: payload.About,
-				subjects: payload.subjects
+				subjects: payload.subject
 			};
 
 		case ACTIONS.LOG_OUT:
