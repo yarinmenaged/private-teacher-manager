@@ -4,24 +4,30 @@ import EventConstants from './Constants';
 import style from './Event.module.css';
 import { FaTrashAlt } from 'react-icons/fa';
 import { BsInfoLg } from 'react-icons/bs';
+import EventInfo from './EventInfo/EventInfo';
 
 const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventAction }) => {
   const time = moment(event.date).format(EventConstants.TimeFormat);
   const actions_flag = useRef(true);
   const [event_text, setEventText] = useState("");
   const [style_for_event, setStyleForEvent] = useState("");
+  const [info_show, setInfoShow] = useState(false);
   const blocked_flag = useRef(false);
 
   const delete_call_back = useCallback(() => {
-    if (actions_flag)
+    if (actions_flag.current)
       DeleteEventAction(event.id)
   }, [DeleteEventAction, event, actions_flag]);
+
+  const info_button_click = useCallback(() => {
+    setInfoShow((value) => !value);
+  }, [setInfoShow]);
 
   const action_section = () => (<div className={style.actions}>
     <div className={style.delete} onClick={delete_call_back}>
       <FaTrashAlt></FaTrashAlt>
     </div>
-    <div className={style.info}>
+    <div className={style.info} onClick={info_button_click}>
       <BsInfoLg></BsInfoLg>
     </div>
   </div>);
@@ -53,6 +59,7 @@ const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventActi
       <p className={style.text}>{time}</p>
     </div>
     {actions_flag.current && action_section()}
+    { info_show && <EventInfo event={event} close_call_back={info_button_click}></EventInfo> }
   </>);
 }
 
