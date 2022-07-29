@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Settings.init(
     {
-      teacherId: DataTypes.INTEGER,
       Sunday: DataTypes.STRING,
       Monday: DataTypes.STRING,
       Tuesday: DataTypes.STRING,

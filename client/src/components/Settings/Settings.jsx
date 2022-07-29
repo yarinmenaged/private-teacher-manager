@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import SettingsContainerConnector from "./settingsContainer/settingsContainerConnector";
 
-function Settings({ type }) {
-  console.log({ type });
+function Settings() {
   return (
     <div className={style.container}>
       <NavBar />

@@ -7,7 +7,6 @@ function SettingsContainer({ type }) {
     <div className={style.container}>
       {type === "Teacher" ? (
         <div>
-          <p>Please choose the hours in which you are free to teach</p>
           <WorkingHours />
         </div>
       ) : (
