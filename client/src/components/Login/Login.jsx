@@ -4,20 +4,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useCallback } from "react";
 
-function Login({ getUserInfoAction, loginStatus, incorrectPassword, getAllSubjectsAction }) {
+function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (loginStatus) navigate("/home");
 	}, [loginStatus, navigate]);
 
-	const handleSubmit = useCallback(
-		async (event) => {
+	const handleSubmit = useCallback((event) => {
 			event.preventDefault();
 			const email = event.target.elements.email.value;
 			const password = event.target.elements.password.value;
-			await getUserInfoAction(email, password);
-			getAllSubjectsAction();
+			getUserInfoAction(email, password);
 		},
 		[getUserInfoAction]
 	);

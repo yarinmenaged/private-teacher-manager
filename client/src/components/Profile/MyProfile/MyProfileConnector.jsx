@@ -1,20 +1,22 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getUserInfo } from '../../../redux/selectors/userSelectors';
+import { getUserInfo, getTeacherSubjects } from '../../../redux/selectors/userSelector';
 import MyProfile from './MyProfile';
 import { editAboutAction } from '../../../redux/actions/userActions';
-import { getSubjects } from '../../../redux/selectors/subjectsSelector'
+import { getSubjects } from '../../../redux/selectors/subjectsSelector';
+import { getAllSubjectsAction } from '../../../redux/actions/subjectsAction';
 
 const mapStateToProps = state => {
     const userInfo = getUserInfo(state);
     const allSubjects = getSubjects(state);
-    return { userInfo, allSubjects } ;
+    const teacheSubjects = getTeacherSubjects(state);
+    return { userInfo, allSubjects, teacheSubjects } ;
 };
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            editAboutAction, 
+            editAboutAction, getAllSubjectsAction
         },
         dispatch
     );

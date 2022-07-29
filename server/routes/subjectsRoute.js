@@ -5,7 +5,7 @@ const { authVerify } = require("../services/auth/auth");
 const router = express.Router();
 
 router.get("/", authVerify, SubjectsController.GetAllSubjects);
-router.post("/:id", SubjectsController.addSubjects);
+router.post("/:id", SubjectsController.addSubject);
 
 
 

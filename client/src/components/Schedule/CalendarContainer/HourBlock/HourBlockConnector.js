@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import HourBlock from './HourBlock';
 import { getEvents } from '../../../../redux/selectors/eventSelector';
-import { getUserInfo } from '../../../../redux/selectors/userSelectors';
+import { getUserInfo } from '../../../../redux/selectors/userSelector';
 import { AddEventAction } from '../../../../redux/actions/eventActions';
 
 const mapStateToProps = (state, ownProps) => {

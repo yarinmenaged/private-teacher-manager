@@ -9,17 +9,17 @@ async function GetAllSubjects(req, res, next){
     }
 }
 
-async function addSubjects(req, res, next){
+async function addSubject(req, res, next){
     try{
-        await SubjectsService.addSubjects(req.params.id, req.body.subjectsList);
-        return res.status(200).json({health: "ok"});
+        const newSubject = await SubjectsService.addSubject(req.params.id, req.body.subject);
+        return res.status(200).json(newSubject);
     }catch(error){
         next(error);
     }
 }
 
 const SubjectsController = {
-    addSubjects,
+    addSubject,
     GetAllSubjects,
 };
 

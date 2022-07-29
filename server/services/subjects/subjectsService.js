@@ -1,48 +1,43 @@
 const { Subjects, TeachingSubjects } = require('../../db/models');
 const { GetTeacherById } = require('../storage/UserStorageService')
 
-async function GetAllSubjects(){
-    try{
+async function GetAllSubjects() {
+    try {
         return await Subjects.findAll({
             attributes: ["id", "Name"],
         });
 
-    }catch(error){
+    } catch (error) {
         throw error;
     }
 }
 
-async function insertSubject(teacherId, subjectsList){
-    try{
+async function insertSubject(teacherId, subject) {
+    try {
         return await TeachingSubjects.create(
             {
                 TeacherId: teacherId,
-                SubjectId: subjectsList
+                SubjectId: subject
             },
         );
 
-    }catch(error){
+    } catch (error) {
         throw error;
     }
 }
 
-async function addSubjects(id, subjectsList){
-    try{
+async function addSubject(id, subject) {
+    try {
         const teacher = await GetTeacherById(id);
+        return await insertSubject(teacher.id, subject);
 
-        await Promise.all(
-            subjectsList.map(async (subject) => {
-                return await insertSubject(teacher.id, subject);
-            })
-        )
-
-    }catch(error){
+    } catch (error) {
         throw error;
     }
 }
 
 const SubjectsService = {
-    addSubjects,
+    addSubject,
     GetAllSubjects
 };
 

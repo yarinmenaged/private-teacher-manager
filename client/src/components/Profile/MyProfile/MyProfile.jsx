@@ -3,14 +3,35 @@ import { Link } from "react-router-dom";
 import NavBar from '../../NavBar/NavBarConnector';
 import { useState } from 'react'
 import cx from 'classnames';
-import { useCallback } from 'react';
-import { Dropdown } from 'monday-ui-react-core'
+import { useCallback, useEffect } from 'react';
+import { Dropdown } from 'monday-ui-react-core';
+import serverConnection from '../../../services/dbServices';
 
-function MyProfile({ userInfo, editAboutAction, allSubjects }) {
+function MyProfile({ userInfo,
+    editAboutAction,
+    allSubjects,
+    teacheSubjects,
+    getAllSubjectsAction,
+}) {
 
     const [showTextbox, setShowTextbox] = useState(false);
 
-    const options = allSubjects.map(subject => ({ value: subject.Name, label: subject.Name }));
+    useEffect(() => {
+        getAllSubjectsAction();
+    }, []);
+
+    const allOptions = allSubjects.map(subject =>
+    ({
+        value: subject.Name,
+        label: subject.Name,
+        id: subject.id
+    })
+    );
+    const teacherOptions = teacheSubjects.map(({
+        value: subject.Name,
+        label: subject.Name,
+        id: subject.id
+    }));
 
     const editAbout = useCallback((newAbout) => {
         editAboutAction(newAbout);
@@ -21,6 +42,11 @@ function MyProfile({ userInfo, editAboutAction, allSubjects }) {
         setShowTextbox(showTextbox => !showTextbox);
     }, [setShowTextbox]);
 
+
+    const addSubject = useCallback(async (event) => {
+        await serverConnection.addSubject(userInfo.id, event[event.length - 1].id);
+    }, []);
+
     return (
         <div>
             <NavBar />
@@ -30,15 +56,6 @@ function MyProfile({ userInfo, editAboutAction, allSubjects }) {
                     <p>name: {userInfo.Name}</p>
                     <p>email: {userInfo.Email}</p>
                     <p>mobile number: {userInfo.Phone}</p>
-                    <h3>I'm teaching:</h3>
-                    <div className={style.flex}>
-                        {
-                            userInfo.subjects.map((subject, index) =>
-                                <div key={index} style={{ marginRight: "20px" }}>{subject.Name}</div>
-                            )
-                        }
-                    </div><br />
-                    <Dropdown options={options} multi placeholder="Add Subjects" className="dropdown-stories-styles_with-chips" />
                     <Link to="/home" >back</Link>
                 </div>
                 <div className={cx(style.column, style.aboutCont)}>
@@ -52,6 +69,11 @@ function MyProfile({ userInfo, editAboutAction, allSubjects }) {
                     }
                 </div>
             </div>
+            <h3>I'm teaching:</h3>
+            <Dropdown options={allOptions} multi placeholder={"Add Subjects"}
+                onChange={(event) => addSubject(event)}
+                defaultValue={teacherOptions}
+                className={cx(style.dropDown, "dropdown-stories-styles_with-chips")} />
         </div>
     );
 }
