@@ -3,7 +3,7 @@ const SubjectsService = require("../services/subjects/subjectsService");
 async function GetAllSubjects(req, res, next){
     try{
         const subjects = await SubjectsService.GetAllSubjects();
-        return res.status(200).json(subjects.map(subject => subject.Name));
+        return res.status(200).json(subjects);
     }catch(error){
         next(error);
     }

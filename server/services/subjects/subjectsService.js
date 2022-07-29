@@ -4,7 +4,7 @@ const { GetTeacherById } = require('../storage/UserStorageService')
 async function GetAllSubjects(){
     try{
         return await Subjects.findAll({
-            attributes: ["Name"],
+            attributes: ["id", "Name"],
         });
 
     }catch(error){
