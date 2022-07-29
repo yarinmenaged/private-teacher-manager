@@ -1,22 +1,26 @@
-import Login from './Login'
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { getUserInfoAction } from '../../redux/actions/userActions';
-import { getLoginStatus } from '../../redux/selectors/userSelectors'
+import Login from "./Login";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { getUserInfoAction } from "../../redux/actions/userActions";
+import {
+  getLoginStatus,
+  getIfIncorrectPassword,
+} from "../../redux/selectors/userSelectors";
 
-const mapStateToProps = state => {
-    return {
-         loginStatus: getLoginStatus(state) 
-    };
+const mapStateToProps = (state) => {
+  return {
+    loginStatus: getLoginStatus(state),
+    incorrectPassword: getIfIncorrectPassword(state),
+  };
 };
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(
-        {
-            getUserInfoAction
-        },
-        dispatch
-    );
-}
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      getUserInfoAction,
+    },
+    dispatch
+  );
+};
 
-  export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

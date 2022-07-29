@@ -1,14 +1,11 @@
-import style from "./Settings.module.css";
 import { Link } from "react-router-dom";
-import NavBar from "../../components/NavBar/NavBar";
-import SettingsContainerConnector from "./settingsContainer/settingsContainerConnector";
+import NavBar from "../NavBar/NavBarConnector";
 
 function Settings() {
   return (
-    <div className={style.container}>
+    <div>
       <NavBar />
-      <h1>settings</h1>
-      <SettingsContainerConnector />
+      <p>settings</p>
       <Link to="/home">back</Link>
     </div>
   );

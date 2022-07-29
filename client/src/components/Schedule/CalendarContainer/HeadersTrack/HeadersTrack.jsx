@@ -1,33 +1,45 @@
-import _ from 'lodash';
-import moment from 'moment';
-import React, { useCallback, useState , useEffect } from 'react';
-import component_style from './HeadersTrack.module.css';
-import global_style from '../CalendarContainer.module.css';
-import ConstantsCalendarContainer from '../Constants';
+import _ from "lodash";
+import moment from "moment";
+import React, { useCallback, useState, useEffect } from "react";
+import component_style from "./HeadersTrack.module.css";
+import global_style from "../CalendarContainer.module.css";
+import ConstantsCalendarContainer from "../Constants";
 
-const HeadersTrack = ({ type = ConstantsCalendarContainer.HEADERS_TYPES.DAYS, week }) => {
-  const [array_to_map, setArrayToMap] = useState(ConstantsCalendarContainer.DAYS_IN_WEEK);
-  const getDatesInWeek = useCallback(
-    () => {
-      if (week) {
-        const start_of_week = moment().week(week).startOf('week');
-        const start_of_week_formatted = start_of_week.format(ConstantsCalendarContainer.DAY_MONTH_FORMAT);
-        const end_of_week_formatted = moment().week(week).endOf('week').format(ConstantsCalendarContainer.DAY_MONTH_FORMAT);
-        const dates = _.range(1, 6).map((value) => {
-          return moment().week(week).startOf('week').add(value, 'd').format(ConstantsCalendarContainer.DAY_MONTH_FORMAT);
-        });
-        return [start_of_week_formatted, ...dates, end_of_week_formatted];
-      }
-      return [];
-    },
-    [week],
+const HeadersTrack = ({
+  type = ConstantsCalendarContainer.HEADERS_TYPES.DAYS,
+  week,
+}) => {
+  const [array_to_map, setArrayToMap] = useState(
+    ConstantsCalendarContainer.DAYS_IN_WEEK
   );
+  const getDatesInWeek = useCallback(() => {
+    if (week) {
+      const start_of_week = moment().week(week).startOf("week");
+      const start_of_week_formatted = start_of_week.format(
+        ConstantsCalendarContainer.DAY_MONTH_FORMAT
+      );
+      const end_of_week_formatted = moment()
+        .week(week)
+        .endOf("week")
+        .format(ConstantsCalendarContainer.DAY_MONTH_FORMAT);
+      const dates = _.range(1, 6).map((value) => {
+        return moment()
+          .week(week)
+          .startOf("week")
+          .add(value, "d")
+          .format(ConstantsCalendarContainer.DAY_MONTH_FORMAT);
+      });
+      return [start_of_week_formatted, ...dates, end_of_week_formatted];
+    }
+    return [];
+  }, [week]);
 
   useEffect(() => {
     const is_days = type === ConstantsCalendarContainer.HEADERS_TYPES.DAYS;
-    is_days ? setArrayToMap(ConstantsCalendarContainer.DAYS_IN_WEEK) : setArrayToMap(getDatesInWeek());
-  }, [week])
-
+    is_days
+      ? setArrayToMap(ConstantsCalendarContainer.DAYS_IN_WEEK)
+      : setArrayToMap(getDatesInWeek());
+  }, [getDatesInWeek, type, week]);
 
   return (
     <div className={component_style.headers}>
@@ -36,13 +48,15 @@ const HeadersTrack = ({ type = ConstantsCalendarContainer.HEADERS_TYPES.DAYS, we
           <div className={component_style.heading}>{type.label}</div>
         </div>
         {array_to_map.map((value, index) => {
-          return <div key={`track-${value}`} className={global_style.track}>
-            <div className={component_style.heading}>{value}</div>
-          </div>
+          return (
+            <div key={`track-${value}`} className={global_style.track}>
+              <div className={component_style.heading}>{value}</div>
+            </div>
+          );
         })}
       </div>
     </div>
   );
-}
+};
 
 export default HeadersTrack;
