@@ -4,11 +4,14 @@ import NavBar from '../../NavBar/NavBarConnector';
 import { useState } from 'react'
 import cx from 'classnames';
 import { useCallback } from 'react';
+import { Dropdown } from 'monday-ui-react-core'
 
-function MyProfile({ userInfo, editAboutAction }) {
+function MyProfile({ userInfo, editAboutAction, allSubjects }) {
 
     const [showTextbox, setShowTextbox] = useState(false);
-    
+
+    const options = allSubjects.map(subject => ({ value: subject.Name, label: subject.Name }));
+
     const editAbout = useCallback((newAbout) => {
         editAboutAction(newAbout);
         setShowTextbox(false);
@@ -34,8 +37,8 @@ function MyProfile({ userInfo, editAboutAction }) {
                                 <div key={index} style={{ marginRight: "20px" }}>{subject.Name}</div>
                             )
                         }
-                    </div>
-                    
+                    </div><br />
+                    <Dropdown options={options} multi placeholder="Add Subjects" className="dropdown-stories-styles_with-chips" />
                     <Link to="/home" >back</Link>
                 </div>
                 <div className={cx(style.column, style.aboutCont)}>

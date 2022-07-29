@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { getUserInfo } from '../../../redux/selectors/userSelectors';
 import MyProfile from './MyProfile';
 import { editAboutAction } from '../../../redux/actions/userActions';
+import { getSubjects } from '../../../redux/selectors/subjectsSelector'
 
 const mapStateToProps = state => {
     const userInfo = getUserInfo(state);
-    return { userInfo } ;
+    const allSubjects = getSubjects(state);
+    return { userInfo, allSubjects } ;
 };
 
 const mapDispatchToProps = dispatch => {

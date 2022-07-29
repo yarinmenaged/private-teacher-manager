@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useCallback } from "react";
 
-function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
+function Login({ getUserInfoAction, loginStatus, incorrectPassword, getAllSubjectsAction }) {
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -16,7 +16,8 @@ function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
 			event.preventDefault();
 			const email = event.target.elements.email.value;
 			const password = event.target.elements.password.value;
-			getUserInfoAction(email, password);
+			await getUserInfoAction(email, password);
+			getAllSubjectsAction();
 		},
 		[getUserInfoAction]
 	);
