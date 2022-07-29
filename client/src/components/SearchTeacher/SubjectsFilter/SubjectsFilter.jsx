@@ -1,13 +1,40 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useCallback } from 'react';
 import style from './SubjectsFilter.module.css';
-import SUBJECTS_LIST from './subjectsConstant';
 
 function SubjectsFilter({
     selectSubjectAction,
     deselectSubjectAction,
     selectedSubjects,
     unchooseTeacherAction,
+    onlyOneOptionAction,
+    subjectsList,
+}) {
+    return (
+        <div>
+            {
+                window.location.href.includes("search-profile")
+                    ? <MultipleSubjectsOptions
+                        selectSubjectAction={selectSubjectAction}
+                        unchooseTeacherAction={unchooseTeacherAction}
+                        deselectSubjectAction={deselectSubjectAction}
+                        selectedSubjects={selectedSubjects}
+                        subjectsList={subjectsList} />
+                    : <OneSubjectOption
+                        onlyOneOptionAction={onlyOneOptionAction}
+                        selectSubjectAction={selectSubjectAction}
+                        subjectsList={subjectsList} />
+            }
+        </div>
+    );
+}
+
+function MultipleSubjectsOptions({
+    selectSubjectAction,
+    deselectSubjectAction,
+    selectedSubjects,
+    unchooseTeacherAction,
+    subjectsList
 }) {
 
     const selectSubject = useCallback((event) => {
@@ -23,7 +50,7 @@ function SubjectsFilter({
     return (
         <div className={style.flex}>
             {
-                SUBJECTS_LIST.map((subject, index) => {
+                subjectsList.map((subject, index) => {
                     return (
                         <div key={index} className={style.flex}>
                             <p>{subject}</p>
@@ -40,6 +67,29 @@ function SubjectsFilter({
                 })
             }
         </div>
+    );
+}
+
+function OneSubjectOption({ onlyOneOptionAction, selectSubjectAction, subjectsList }) {
+
+    useEffect(() => {
+        onlyOneOptionAction();
+    }, []);
+
+    const selectSubject = useCallback((event) => {
+        onlyOneOptionAction();
+        selectSubjectAction(event.target.value);
+    }, [selectSubjectAction]);
+
+    return (
+        <select defaultValue="deafult" type="select" onChange={(event) => selectSubject(event)}>
+            <option value="deafult" disabled>select subject</option>
+            {
+                subjectsList.map((subject, index) => {
+                    return <option key={index}> {subject}</option>
+                })
+            }
+        </select>
     );
 }
 
