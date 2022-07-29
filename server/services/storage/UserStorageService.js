@@ -142,9 +142,9 @@ async function getSubjectsById(teacherId) {
 		subjectIds.map(async (subjectId) => {
 			const subject = await Subjects.findOne({
 				where: { id: subjectId.dataValues.subjectId },
-				attributes: ["Name"],
+				attributes: ["id", "Name"],
 			});
-			return subject.dataValues.Name;
+			return subject.dataValues;
 		})
 	);
 }

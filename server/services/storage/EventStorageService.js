@@ -3,57 +3,43 @@ const { Event, Sequelize, Subjects, Teacher, Student, UserInfo } = require('../.
 const moment = require('moment');
 const SubjectsController = require("../../controllers/subjectController");
 const { all } = require("../../routes/routes");
-const { GetTeacherById } = require("./UserStorageService");
+const { GetTeacherById, GetStudentById } = require("./UserStorageService");
 const Op = Sequelize.Op;
 
 async function GetEventsByUserIdFilterByWeek(user_id, week, user_type) {
     const start_of_week = moment().week(week).startOf('week').format(TimeStampFormat);
     const end_of_week = moment().week(week).endOf('week').format(TimeStampFormat);
     let events_in_week = [];
-    if (user_type === UserType.STUDENT) {
-        events_in_week = await Event.findAll({
+    const were_obj = user_type === UserType.STUDENT ? { StudentId: user_id } : { TeacherId: user_id };
+    events_in_week = await Event.findAll({
+        include: [{
+            model: Subjects,
+            attributes: ["id", "Name"]
+        }, {
+            model: Teacher,
             include: [{
-                model: Subjects,
-                attributes: ["id", "Name"]
-            },{
-                model: Teacher,
-                include: [{
-                    model: UserInfo,
-                    attributes: ["Name", "Email", "Phone"]
-                }]
-            }],
-            where: {
-                StudentId: user_id,
-                date: {
-                    [Op.between]: [start_of_week, end_of_week]
-                }
-            }
-        });
-    } else {
-        events_in_week = await Event.findAll({
+                model: UserInfo,
+                attributes: ["Name", "Email", "Phone"]
+            }]
+        }, {
+            model: Student,
             include: [{
-                model: Subjects,
-                attributes: ["id", "Name"]
-            },{
-                model: Student,
-                include: [{
-                    model: UserInfo,
-                    attributes: ["Name", "Email", "Phone"]
-                }]
-            }],
-            where: {
-                TeacherId: user_id,
-                date: {
-                    [Op.between]: [start_of_week, end_of_week]
-                }
+                model: UserInfo,
+                attributes: ["Name", "Email", "Phone"]
+            }]
+        }],
+        where: {
+            ...were_obj,
+            date: {
+                [Op.between]: [start_of_week, end_of_week]
             }
-        });
-    }
+        }
+    });
     return events_in_week;
 }
 
-async function AddBlockedEventToTeacher(user_id, date){
-    const teacher = await GetTeacherById(user_id);
+async function AddBlockedEventToTeacher(user, date) {
+    const teacher = await GetTeacherById(user.id);
     await Event.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null);
     const add_blocked = await Event.create({
         "date": date,
@@ -65,9 +51,38 @@ async function AddBlockedEventToTeacher(user_id, date){
     return add_blocked;
 }
 
+async function AddEventFromStudent(student, teacher_id, date, subject_id) {
+    const teacher = await GetTeacherById(teacher_id);
+    const student_info = await GetStudentById(student.id);
+    const add_event = await Event.create({
+        "date": date,
+        "StudentId": student_info.id,
+        "SubjectId": subject_id,
+        "TeacherId": teacher.id
+    });
+    return add_event;
+}
+
+async function DeleteEvent(user_id, event_id){
+    const student = await GetStudentById(user_id)
+    const user = student ? student : await GetTeacherById(user_id);
+    const event = await Event.findOne({
+        where: {
+            "id": event_id
+        }
+    });
+
+    if(event && (event.StudentId === user.id || event.TeacherId === user.id)){
+        return await event.destroy();
+    }
+    throw Error(`Cant delete event`);
+}
+
 const EventStorageService = {
     GetEventsByUserIdFilterByWeek,
-    AddBlockedEventToTeacher
+    AddBlockedEventToTeacher,
+    AddEventFromStudent,
+    DeleteEvent
 };
 
 module.exports = EventStorageService;
