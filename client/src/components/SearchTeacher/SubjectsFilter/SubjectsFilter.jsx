@@ -40,7 +40,7 @@ function MultipleSubjectsOptions({
     const selectSubject = useCallback((event) => {
         unchooseTeacherAction();
         if (event.target.checked) {
-            selectSubjectAction(event.target.name);
+            selectSubjectAction({ Name: event.target.name, id: event.target.id });
         } else {
             deselectSubjectAction(event.target.name);
         }
@@ -50,15 +50,15 @@ function MultipleSubjectsOptions({
     return (
         <div className={style.flex}>
             {
-                subjectsList.map((subject, index) => {
+                subjectsList.map(subject => {
                     return (
-                        <div key={index} className={style.flex}>
-                            <p>{subject}</p>
+                        <div key={subject.id} className={style.flex}>
+                            <p>{subject.Name}</p>
                             <input type="checkbox" onChange={(event) => selectSubject(event)}
-                                name={subject} className={style.checkbox}
+                                name={subject.Name} id={subject.id} className={style.checkbox}
                                 defaultChecked=
                                 {
-                                    selectedSubjects.includes(subject)
+                                    selectedSubjects.includes(subject.Name)
                                         ? true
                                         : false
                                 } />
@@ -78,15 +78,16 @@ function OneSubjectOption({ onlyOneOptionAction, selectSubjectAction, subjectsLi
 
     const selectSubject = useCallback((event) => {
         onlyOneOptionAction();
-        selectSubjectAction(event.target.value);
+        const subject = subjectsList.find(subject => subject.Name === event.target.value)
+        selectSubjectAction(subject);
     }, [selectSubjectAction]);
 
     return (
         <select defaultValue="deafult" type="select" onChange={(event) => selectSubject(event)}>
             <option value="deafult" disabled>select subject</option>
             {
-                subjectsList.map((subject, index) => {
-                    return <option key={index}> {subject}</option>
+                subjectsList.map(subject => {
+                    return <option name={subject.id} key={subject.id}>{subject.Name}</option>
                 })
             }
         </select>
