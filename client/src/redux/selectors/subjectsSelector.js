@@ -1,7 +1,7 @@
 export const getSelectedSubjects = (state) => {
-    return state.sabjectsReducer.selectedSubjects.map(subject => subject.Name);
+    return state.subjectsReducer.selectedSubjects.map(subject => subject.Name);
 }
 
 export const getSubjects = (state) => {
-    return state.sabjectsReducer.allSubjects;
+    return state.subjectsReducer.allSubjects;
 }
