@@ -24,7 +24,7 @@ export const getUserInfoAction = (email, password) => {
 
     return async(dispatch) => {
         const userInfo = await serverConnection.getUserInfo(email, password);
-        dispatch(getUserInfo(userInfo));
+        await dispatch(getUserInfo(userInfo));
     };
 }
 

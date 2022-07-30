@@ -3,9 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../NavBar/NavBarConnector";
 import cx from "classnames";
 import SearchTeacher from "../../SearchTeacher/SearchTeacherConnector";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
-function SearchProfile({ chosenTeacher, SetCalendarToUserAction }) {
+function SearchProfile({ chosenTeacher, SetCalendarToUserAction, getAllSubjectsAction }) {
+    
+    useEffect(() => {
+        getAllSubjectsAction();
+    }, []);
+
 	const navigate = useNavigate();
 
     const goToCalender = useCallback(() => {

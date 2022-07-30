@@ -1,11 +1,8 @@
-import SubjectsFilter from './SubjectsFilter';
+import OneSubjectOption from './OneSubjectOption';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {
-    selectSubjectAction,
-    onlyOneOptionAction
-} from "../../../redux/actions/subjectsAction";
-import { getSubjects } from '../../../redux/selectors/subjectsSelector';
+import { selectSubjectAction, onlyOneOptionAction } from "../../../../redux/actions/subjectsAction";
+import { getSubjects } from '../../../../redux/selectors/subjectsSelector';
 
 const mapStateToProps = state => {
     const subjectsList = getSubjects(state);
@@ -20,4 +17,4 @@ const mapDispatchToProps = dispatch => {
         dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubjectsFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(OneSubjectOption);

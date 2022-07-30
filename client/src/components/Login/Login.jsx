@@ -11,8 +11,7 @@ function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
 		if (loginStatus) navigate("/home");
 	}, [loginStatus, navigate]);
 
-	const handleSubmit = useCallback(
-		async (event) => {
+	const handleSubmit = useCallback((event) => {
 			event.preventDefault();
 			const email = event.target.elements.email.value;
 			const password = event.target.elements.password.value;
