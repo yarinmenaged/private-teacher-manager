@@ -21,7 +21,7 @@ const AddEvent = (user_id, date, hour, user_type, teacher_id, subject_id) => {
                 await EventService.AddBlockedEvent(date, hour);
             } else if(user_type === ReduxContents.USER_TYPE.Student){
                 dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour, teacher_id, subject_id }});
-                await EventService.AddEvent(date, hour, teacher_id, 1);
+                await EventService.AddEvent(date, hour, teacher_id, subject_id);
             }
         }catch(error){
             //dispatch({ type: ACTIONS.DELETE_EVENT });

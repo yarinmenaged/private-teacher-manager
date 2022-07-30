@@ -5,3 +5,5 @@ export const getSelectedSubjects = (state) => {
 export const getSubjects = (state) => {
     return state.subjectsReducer.allSubjects;
 }
+
+export const getSelectedSubjectId = state => state.subjectsReducer.selectedSubjects[0].id;
