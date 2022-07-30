@@ -5,12 +5,13 @@ import { useState } from 'react'
 import cx from 'classnames';
 import { useCallback, useEffect } from 'react';
 import { Dropdown } from 'monday-ui-react-core';
-import serverConnection from '../../../services/dbServices';
 
 function MyProfile({ userInfo,
     editAboutAction,
     allSubjects,
     teacheSubjects,
+    addSubjectAction,
+    removeSubjectAction,
 }) {
 
     const [showTextbox, setShowTextbox] = useState(false);
@@ -22,13 +23,12 @@ function MyProfile({ userInfo,
         id: subject.id,
     })
     );
-    const [teacherOptions, setTeacherOptions] = useState(teacheSubjects.map(subject =>
+    const teacherOptions = teacheSubjects.map(subject =>
     ({
         value: subject.Name,
         label: subject.Name,
         id: subject.id,
-    }))
-    );
+    }));
 
     const editAbout = useCallback((newAbout) => {
         editAboutAction(newAbout);
@@ -41,14 +41,11 @@ function MyProfile({ userInfo,
 
 
     const addSubject = useCallback(async (event) => {
-        await serverConnection.addSubject(userInfo.id, event[event.length - 1].id);
+        addSubjectAction(event[event.length - 1]);
     }, []);
 
     const removeSubject = useCallback(async (event) => {
-        //console.log(event);
-        setTeacherOptions((value) => value.filter((value) => value.id !== event.id));
-        await serverConnection.removeSubject(userInfo.id, event.id);
-        return true;
+        removeSubjectAction(event)
     }, []);
 
     return (
@@ -77,7 +74,7 @@ function MyProfile({ userInfo,
             <Dropdown options={allOptions} multi placeholder={"Add Subjects"}
                 onChange={(event) => addSubject(event)}
                 multiline
-               // onOptionRemove={(event) => removeSubject(event)}
+                onOptionRemove={(event) => removeSubject(event)}
                 defaultValue={teacherOptions}
                 className={cx(style.dropDown, "dropdown-stories-styles_with-chips")} />
         </div>
