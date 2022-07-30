@@ -17,9 +17,8 @@ function Schedule({ chosenTeacher, SetCalendarToUserAction, userInfo }) {
         <div>
             <NavBar />
             {
-                userInfo.Type === USER_TYPE.Student
-                    ? <SearchTeacher />
-                    : <div />
+                userInfo.Type === USER_TYPE.Student &&
+                     <SearchTeacher mySchedule={true} />
             }
             <h2>
                 {

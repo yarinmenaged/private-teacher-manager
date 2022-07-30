@@ -1,5 +1,5 @@
 export const getSelectedSubjects = (state) => {
-    return state.subjectsReducer.selectedSubjects.map(subject => subject.Name);
+    return state.subjectsReducer.selectedSubjects;
 }
 
 export const getSubjects = (state) => {

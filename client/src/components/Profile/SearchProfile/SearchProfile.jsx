@@ -16,7 +16,7 @@ function SearchProfile({ chosenTeacher, SetCalendarToUserAction }) {
     return (
         <div>
             <NavBar />
-            <SearchTeacher />
+            <SearchTeacher multipleOptions={true} />
             {
                 chosenTeacher ?
                     <div className={style.flex}>

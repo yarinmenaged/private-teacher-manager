@@ -2,15 +2,22 @@ import map from "lodash/map";
 import SubjectsFilter from "./SubjectsFilter/SubjectsFilterConnector";
 import { useEffect } from 'react'
 import { useCallback } from "react";
+import { Dropdown } from 'monday-ui-react-core';
 
 function SearchTeacher({
     areTeachersFetched,
     fetchTeachersAction,
     chooseTeacherAction,
     selectedTeachers,
+    mySchedule,
+    multipleOptions,
 }) {
 
-    const DEFAULT = "default";
+    const allOptions = selectedTeachers.map(teacher => ({
+        value: teacher.Name,
+        label: teacher.Name,
+        id: teacher.id,
+    }));
 
     useEffect(() => {
         if (!areTeachersFetched) {
@@ -19,24 +26,21 @@ function SearchTeacher({
     }, []);
 
     const chooseTeacher = useCallback((event) => {
-        chooseTeacherAction(event.target.value)
+        chooseTeacherAction(event.id)
     }, [chooseTeacherAction]);
 
     return (
         <div>
-            <SubjectsFilter />
-            <select type="select" onChange={(event) => chooseTeacher(event)} value={DEFAULT}>
-                <option value={DEFAULT} disabled>select teacher</option>
-                {
-                    !window.location.href.includes("search-profile") &&
-                    < option style={{ fontWeight: "bolder" }}>my own schedule</option>
-                }
+            <SubjectsFilter multipleOptions={multipleOptions} />
+            <Dropdown
+                options={allOptions}
+                value={{ value: "Select Teacher", label: "Select Teacher" }}
+                onChange={(event) => chooseTeacher(event)}
+                clearable={false}
+                className="dropdown-stories-styles_big-spacing" />
             {
-                map(selectedTeachers, teacher => {
-                    return <option value={teacher.id} key={teacher.id}>{teacher.Name}</option>
-                })
+                mySchedule && <button onClick={(event) => chooseTeacherAction(event)}>My Own Schedule</button>
             }
-        </select>
         </div >
     );
 }

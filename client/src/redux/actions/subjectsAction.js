@@ -1,14 +1,15 @@
 import serverConnection from '../../services/dbServices'
 import ACTIONS from './actionConstants';
 
-const selectSubject = (subject) => ({
+const selectSubject = (newSubject) => ({
     type: ACTIONS.SELECT_SUBJECT,
-    payload: subject
+    payload: newSubject
 });
 
 export const selectSubjectAction = (subject) => {
     return (dispatch) => {
-        dispatch(selectSubject(subject));
+        const newSubject = { id: subject.id, Name: subject.value }
+        dispatch(selectSubject(newSubject));
     };
 }
 
@@ -23,13 +24,13 @@ export const deselectSubjectAction = (subject) => {
     };
 }
 
-const onlyOneOption = () => ({
-    type: ACTIONS.ONLY_ONE,
+const resetSubjects = () => ({
+    type: ACTIONS.RESET_SUBJECTS,
 });
 
-export const onlyOneOptionAction = () => {
+export const resetSubjectsAction = () => {
     return (dispatch) => {
-        dispatch(onlyOneOption());
+        dispatch(resetSubjects());
     };
 }
 

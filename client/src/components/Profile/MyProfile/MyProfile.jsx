@@ -16,15 +16,12 @@ function MyProfile({ userInfo,
 
     const [showTextbox, setShowTextbox] = useState(false);
 
-    const allOptions = allSubjects.map(subject =>
-    ({
+    const allOptions = allSubjects.map(subject => ({
         value: subject.Name,
         label: subject.Name,
         id: subject.id,
-    })
-    );
-    const teacherOptions = teacheSubjects.map(subject =>
-    ({
+    }));
+    const teacherOptions = teacheSubjects.map(subject => ({
         value: subject.Name,
         label: subject.Name,
         id: subject.id,
@@ -71,11 +68,14 @@ function MyProfile({ userInfo,
                 </div>
             </div>
             <h3>I'm teaching:</h3>
-            <Dropdown options={allOptions} multi placeholder={"Add Subjects"}
-                onChange={(event) => addSubject(event)}
-                multiline
-                onOptionRemove={(event) => removeSubject(event)}
+            <Dropdown
+                multiline multi
+                options={allOptions}
                 defaultValue={teacherOptions}
+                onChange={(event) => addSubject(event)}
+                onOptionRemove={(event) => removeSubject(event)}
+                clearable={false}
+                placeholder={"Add Subjects"}
                 className={cx(style.dropDown, "dropdown-stories-styles_with-chips")} />
         </div>
     );
