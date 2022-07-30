@@ -4,7 +4,6 @@ import { getUserInfo, getTeacherSubjects } from '../../../redux/selectors/userSe
 import MyProfile from './MyProfile';
 import { editAboutAction } from '../../../redux/actions/userActions';
 import { getSubjects } from '../../../redux/selectors/subjectsSelector';
-import { getAllSubjectsAction } from '../../../redux/actions/subjectsAction';
 
 const mapStateToProps = state => {
     const userInfo = getUserInfo(state);
@@ -16,7 +15,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            editAboutAction, getAllSubjectsAction
+            editAboutAction
         },
         dispatch
     );

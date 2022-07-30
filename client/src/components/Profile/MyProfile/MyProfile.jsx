@@ -11,14 +11,9 @@ function MyProfile({ userInfo,
     editAboutAction,
     allSubjects,
     teacheSubjects,
-    getAllSubjectsAction,
 }) {
 
     const [showTextbox, setShowTextbox] = useState(false);
-
-    useEffect(() => {
-        getAllSubjectsAction();
-    }, []);
 
     const allOptions = allSubjects.map(subject =>
     ({
@@ -27,12 +22,13 @@ function MyProfile({ userInfo,
         id: subject.id,
     })
     );
-    const teacherOptions = teacheSubjects.map(subject =>
+    const [teacherOptions, setTeacherOptions] = useState(teacheSubjects.map(subject =>
     ({
         value: subject.Name,
         label: subject.Name,
         id: subject.id,
-    }));
+    }))
+    );
 
     const editAbout = useCallback((newAbout) => {
         editAboutAction(newAbout);
@@ -50,7 +46,9 @@ function MyProfile({ userInfo,
 
     const removeSubject = useCallback(async (event) => {
         //console.log(event);
+        setTeacherOptions((value) => value.filter((value) => value.id !== event.id));
         await serverConnection.removeSubject(userInfo.id, event.id);
+        return true;
     }, []);
 
     return (
@@ -79,7 +77,7 @@ function MyProfile({ userInfo,
             <Dropdown options={allOptions} multi placeholder={"Add Subjects"}
                 onChange={(event) => addSubject(event)}
                 multiline
-                onOptionRemove={(event) => removeSubject(event)}
+               // onOptionRemove={(event) => removeSubject(event)}
                 defaultValue={teacherOptions}
                 className={cx(style.dropDown, "dropdown-stories-styles_with-chips")} />
         </div>

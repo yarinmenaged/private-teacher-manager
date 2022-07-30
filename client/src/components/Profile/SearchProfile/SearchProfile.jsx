@@ -1,15 +1,10 @@
 import style from "../Profile.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../NavBar/NavBarConnector";
-import cx from "classnames";
 import SearchTeacher from "../../SearchTeacher/SearchTeacherConnector";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 
-function SearchProfile({ chosenTeacher, SetCalendarToUserAction, getAllSubjectsAction }) {
-    
-    useEffect(() => {
-        getAllSubjectsAction();
-    }, []);
+function SearchProfile({ chosenTeacher, SetCalendarToUserAction }) {
 
 	const navigate = useNavigate();
 
