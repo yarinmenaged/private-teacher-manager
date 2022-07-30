@@ -26,6 +26,19 @@ async function insertSubject(teacherId, subject) {
     }
 }
 
+async function removeSubject(teacherId, subject) {
+    try {
+        return await TeachingSubjects.destroy(
+            {
+                where: { TeacherId: teacherId, SubjectId: subject }
+            },
+        );
+
+    } catch (error) {
+        throw error;
+    }
+}
+
 async function addSubject(id, subject) {
     try {
         const teacher = await GetTeacherById(id);
@@ -36,9 +49,20 @@ async function addSubject(id, subject) {
     }
 }
 
+async function deleteSubject(id, subject) {
+    try {
+        const teacher = await GetTeacherById(id);
+        return await removeSubject(teacher.id, subject);
+
+    } catch (error) {
+        throw error;
+    }
+}
+
 const SubjectsService = {
     addSubject,
-    GetAllSubjects
+    deleteSubject,
+    GetAllSubjects,
 };
 
 module.exports = SubjectsService;

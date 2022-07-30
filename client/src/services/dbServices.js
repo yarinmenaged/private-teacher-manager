@@ -39,6 +39,11 @@ export default class serverConnection {
         //TODO: error
     }
 
+	static async removeSubject(id, subject) {
+        return await ApiService.AddNewResourceRequest (`subjects/remove/${id}`, { subject });
+        //TODO: error
+    }
+
 	static async getUserInfo(email, password) {
 		try {
 			const response = await fetch(`http://localhost:2000/users/login`, {

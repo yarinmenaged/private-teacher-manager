@@ -18,9 +18,19 @@ async function addSubject(req, res, next){
     }
 }
 
+async function deleteSubject(req, res, next){
+    try{
+        const removedSubject = await SubjectsService.deleteSubject(req.params.id, req.body.subject);
+        return res.status(200).json(removedSubject);
+    }catch(error){
+        next(error);
+    }
+}
+
 const SubjectsController = {
     addSubject,
     GetAllSubjects,
+    deleteSubject,
 };
 
 module.exports = SubjectsController;

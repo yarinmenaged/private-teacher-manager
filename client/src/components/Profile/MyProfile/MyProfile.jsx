@@ -24,13 +24,14 @@ function MyProfile({ userInfo,
     ({
         value: subject.Name,
         label: subject.Name,
-        id: subject.id
+        id: subject.id,
     })
     );
-    const teacherOptions = teacheSubjects.map(({
+    const teacherOptions = teacheSubjects.map(subject =>
+    ({
         value: subject.Name,
         label: subject.Name,
-        id: subject.id
+        id: subject.id,
     }));
 
     const editAbout = useCallback((newAbout) => {
@@ -45,6 +46,11 @@ function MyProfile({ userInfo,
 
     const addSubject = useCallback(async (event) => {
         await serverConnection.addSubject(userInfo.id, event[event.length - 1].id);
+    }, []);
+
+    const removeSubject = useCallback(async (event) => {
+        //console.log(event);
+        await serverConnection.removeSubject(userInfo.id, event.id);
     }, []);
 
     return (
@@ -72,6 +78,8 @@ function MyProfile({ userInfo,
             <h3>I'm teaching:</h3>
             <Dropdown options={allOptions} multi placeholder={"Add Subjects"}
                 onChange={(event) => addSubject(event)}
+                multiline
+                onOptionRemove={(event) => removeSubject(event)}
                 defaultValue={teacherOptions}
                 className={cx(style.dropDown, "dropdown-stories-styles_with-chips")} />
         </div>
