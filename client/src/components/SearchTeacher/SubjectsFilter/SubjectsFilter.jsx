@@ -72,10 +72,6 @@ function MultipleSubjectsOptions({
 
 function OneSubjectOption({ onlyOneOptionAction, selectSubjectAction, subjectsList }) {
 
-    useEffect(() => {
-        onlyOneOptionAction();
-    }, []);
-
     const selectSubject = useCallback((event) => {
         onlyOneOptionAction();
         const subject = subjectsList.find(subject => subject.Name === event.target.value)

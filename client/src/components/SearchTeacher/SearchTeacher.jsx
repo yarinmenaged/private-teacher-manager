@@ -21,7 +21,8 @@ function SearchTeacher({
     }, []);
 
     const chooseTeacher = useCallback((event) => {
-        chooseTeacherAction(event.target.value)
+        chooseTeacherAction(event.target.value);
+
     }, [chooseTeacherAction]);
 
     return (
@@ -31,7 +32,7 @@ function SearchTeacher({
                 <option value={DEFAULT} disabled>select teacher</option>
                 {
                     !window.location.href.includes("search-profile") &&
-                    < option style={{ fontWeight: "bolder" }}>my own schedule</option>
+                    < option style={{ fontWeight: "bolder" }} value="">my own schedule</option>
                 }
             {
                 map(selectedTeachers, teacher => {
