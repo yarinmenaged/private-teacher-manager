@@ -4,8 +4,9 @@ import Event from '../Event/Event';
 import ConstantsHourBlock from './Constants';
 import { Tooltip } from 'monday-ui-react-core';
 import EventConnector from '../Event/EventConnector';
+import TeacherPreferencesBlock from '../TeacherPreferences/TeacherPreferencesBlock';
 
-const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, calender_user_id, subject_id }) => {
+const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, calender_user_id, subject_id, blocked_size }) => {
   const [render_event, setRenderEvent] = useState(false);
   const event_obj = useRef(null);
   const event_filtered = useCallback((blocks_date_in_utc)  => {
@@ -46,14 +47,21 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
     );
   }
 
-  const content_tool_tip = render_event ? ConstantsHourBlock.SHOW_MORE_INFO_ON_EVENT : ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP;
+  const content_tool_tip = render_event ? 
+                            ConstantsHourBlock.SHOW_MORE_INFO_ON_EVENT 
+                            : 
+                            blocked_size ?
+                            ConstantsHourBlock.blocked_size
+                            :
+                            ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP;
 
   return (<Tooltip 
             immediateShowDelay={0} 
             position={Tooltip.positions.BOTTOM}
             content={content_tool_tip} >
-            <div className={`${style.entry}`} onClick={(event) => {hour_block_click_call__back(event)}}>
+            <div className={`${style.entry}`} onClick={(event) => {hour_block_click_call__back(event)}} style={{height: `${blocked_size}em`}}>
               {render_event && <EventConnector event={event_obj.current} user_type={user_type}></EventConnector>}
+              { blocked_size && <TeacherPreferencesBlock blocked_size={blocked_size} start={hour}></TeacherPreferencesBlock>}
             </div>
         </Tooltip>);
 };

@@ -34,7 +34,7 @@ const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventActi
   useEffect(() => {
     if (event.StudentId && event.Student.User_info_id === my_user_id && user_type !== EventConstants.USER_TYPE.Teacher) {
       blocked_flag.current = false;
-      if (calender_user_id === my_user_id)
+      if (calender_user_id === '')
         setEventText(`You have a class with teacher: ${event.Teacher.UserInfo.Name}`);
       else if (calender_user_id === event.Teacher.User_info_id)
         setEventText(`You have a class with this teacher`);
@@ -51,7 +51,7 @@ const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventActi
       }      
     }
     setStyleForEvent(blocked_flag.current ? style.blocked : style[`color_${event.SubjectId}`]);
-  }, [event, user_type, calender_user_id, my_user_id]);
+  }, []);
 
   return (<>
     <div className={`${style.event} ${style_for_event}`}>

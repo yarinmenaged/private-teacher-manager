@@ -8,10 +8,10 @@ import USER_TYPE from "../NavBar/Constants";
 function Schedule({ chosenTeacher, SetCalendarToUserAction, userInfo }) {
 
     useEffect(() => {
-        chosenTeacher
-            ? SetCalendarToUserAction(chosenTeacher.id)
-            : SetCalendarToUserAction(userInfo.id);
-    }, [chosenTeacher]);
+        if(chosenTeacher)
+            SetCalendarToUserAction(chosenTeacher.id);
+    }, [chosenTeacher, SetCalendarToUserAction]);
+
 
     return (
         <div>

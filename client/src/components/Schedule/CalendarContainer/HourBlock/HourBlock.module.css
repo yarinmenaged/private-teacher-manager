@@ -18,6 +18,7 @@
     justify-content: space-between;
     cursor: pointer;
     position: relative;
+    box-sizing: border-box;
 }
 
 .entry:not(:last-of-type) {
