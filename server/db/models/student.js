@@ -21,7 +21,10 @@ module.exports = (sequelize, DataTypes) => {
         through: models.TeacherStudentRelationship
       });
       Student.belongsToMany(models.Subjects, {
-        through: models.Event
+        through: {
+          model: models.Event,
+          unique: false 
+        }
       });      
       Student.hasMany(models.Event);
     }

@@ -27,7 +27,7 @@ const AddEvent = (user_id, date, hour, user_type, teacher_id, subject_id) => {
                 dispatch({ type: ACTIONS.UPDATE_EVENT, payload: { event, hash_id } });
             }   
         }catch(error){
-            dispatch({ type: ACTIONS.DELETE_EVENT });
+            //dispatch({ type: ACTIONS.DELETE_EVENT });
             // TODO ADD error action
         }
     }

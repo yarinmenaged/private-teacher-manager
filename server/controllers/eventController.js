@@ -17,11 +17,13 @@ async function GetAllEventsOfUserInWeek(req, res, next){
 
 async function AddEventBlocked(req, res, next){
     try{
-        const { user_id, date, hour } = req.body;
+        const { date, hour } = req.body;
+        const user_id = await getUserInfoByToken(req.cookies.token);
         const add_blocked_event = await EventService.AddEventBlockedToTeacher(user_id, date, hour);
         return res.status(200).json({
             status: 200,
-            add_event_status: true
+            add_event_status: true,
+            event: add_blocked_event
         });
     }catch(error){
         next(error);

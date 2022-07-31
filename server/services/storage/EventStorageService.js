@@ -1,8 +1,7 @@
 const { UserType, TimeStampFormat } = require("./Constants");
 const { Event, Sequelize, Subjects, Teacher, Student, UserInfo } = require('../../db/models');
 const moment = require('moment');
-const SubjectsController = require("../../controllers/subjectController");
-const { GetTeacherById } = require("./UserStorageService");
+const { GetTeacherById, GetStudentById } = require("./UserStorageService");
 const Op = Sequelize.Op;
 
 async function GetEventsByUserIdFilterByWeek(user_id, week, user_type) {
