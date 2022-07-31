@@ -27,9 +27,29 @@ async function AddEventBlockedToTeacher(user_id, date, hour){
     }
 }
 
+async function AddEventFromStudent(student, teacher_id, date, hour, subject_id){
+    try{
+        const format_date = moment(date).format('MM-DD-YYYY');
+        const formatted_date = new Date(`${format_date} ${hour}`);
+        return await EventStorageService.AddEventFromStudent(student, teacher_id, formatted_date, subject_id);
+    }catch(error){
+        throw error;
+    }
+}
+
+async function DeleteEvent(user_id, event_id){
+    try{
+        return await EventStorageService.DeleteEvent(user_id, event_id);
+    }catch(error){
+        throw error;
+    }
+}
+
 const EventService = {
     GetAllEventsOfUserInWeek,
-    AddEventBlockedToTeacher
+    AddEventBlockedToTeacher,
+    AddEventFromStudent,
+    DeleteEvent
 };
 
 module.exports = EventService;

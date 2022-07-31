@@ -1,3 +1,3 @@
 export const getSelectedSubjects = (state) => {
-    return state.sabjectsReducer.selectedSubjects;
+    return state.subjectsReducer.selectedSubjects;
 }

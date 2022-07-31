@@ -5,7 +5,7 @@ import ConstantsHourBlock from './Constants';
 import { Tooltip } from 'monday-ui-react-core';
 import EventConnector from '../Event/EventConnector';
 
-const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction }) => {
+const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, calender_user_id, subject_id }) => {
   const [render_event, setRenderEvent] = useState(false);
   const event_obj = useRef(null);
   const event_filtered = useCallback((blocks_date_in_utc)  => {
@@ -31,9 +31,12 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
     event_obj.current ? setRenderEvent(true) : setRenderEvent(false);
   }, [date, event, events]);
 
-  const add_event_call__back = useCallback(() => {
-    AddEventAction(user_id, date, hour, user_type);
-  }, [AddEventAction, user_id, date, hour, user_type]);
+  const hour_block_click_call__back = useCallback((event) => {
+    if(!event_obj.current)
+      AddEventAction(user_id, date, hour, user_type, calender_user_id, subject_id);
+    else
+      event.preventDefault();    
+  }, [AddEventAction, user_id, date, hour, user_type, calender_user_id, subject_id]);
 
   if (type === ConstantsHourBlock.BLOCK_TYPES.TIME) {
     return (
@@ -43,14 +46,16 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
     );
   }
 
+  const content_tool_tip = render_event ? ConstantsHourBlock.SHOW_MORE_INFO_ON_EVENT : ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP;
+
   return (<Tooltip 
             immediateShowDelay={0} 
             position={Tooltip.positions.BOTTOM}
-            content={ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP}>
-            <div className={`${style.entry}`} onClick={() => {add_event_call__back()}}>
+            content={content_tool_tip} >
+            <div className={`${style.entry}`} onClick={(event) => {hour_block_click_call__back(event)}}>
               {render_event && <EventConnector event={event_obj.current} user_type={user_type}></EventConnector>}
             </div>
-         </Tooltip>);
+        </Tooltip>);
 };
 
 export default HourBlock;
