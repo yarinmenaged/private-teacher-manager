@@ -1,5 +1,5 @@
 const EventService = require("../services/event/eventService");
-
+const { getUserInfoByToken } = require("../services/auth/auth");
 
 async function GetAllEventsOfUserInWeek(req, res, next){
     try{

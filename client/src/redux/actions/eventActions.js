@@ -10,7 +10,7 @@ const GetEvents = (id, week) => {
     };
 }
 
-const AddEvent = (user_id, date, hour, user_type) => {
+const AddEvent = (user_id, date, hour, user_type, teacher_id, subject_id) => {
     return async(dispatch) => {
         try{
             const hash_id = crypto.SHA512(`${date} ${hour} ${user_type} ${teacher_id} ${subject_id} ${user_id}`).toString();
@@ -44,6 +44,16 @@ const UpdateDescription = (event_id, description) => {
     }
 };
 
+const DeleteEvent = (event_id) => {
+    return async(dispatch) => {
+        try{
+            dispatch({ type: ACTIONS.DELETE_EVENT, payload: event_id });
+            await EventService.DeleteEvent(event_id);
+        }catch(error){
+            dispatch({ type: ACTIONS.RESTORE_EVENT });
+        }
+    }
+};
 
 export const GetEventsAction = (id, week) => {
     return (dispatch) => {

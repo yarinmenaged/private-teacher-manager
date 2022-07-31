@@ -31,11 +31,13 @@ function SearchTeacher({
     }, []);
 
     const chooseTeacher = useCallback((event) => {
+        chooseTeacherAction(event.id);
+    }, [chooseTeacherAction]);
 
-        if(event.target.value === "")
-            UnsetCalendarToUserAction();
-        chooseTeacherAction(event.target.value);
-    }, [chooseTeacherAction, UnsetCalendarToUserAction]);
+    const my_schedule_click = useCallback(() => {
+        UnsetCalendarToUserAction();
+        chooseTeacherAction("");
+    }, [UnsetCalendarToUserAction]);
 
     return (
         <div>
@@ -50,7 +52,7 @@ function SearchTeacher({
                 {
                     mySchedule &&
                     <Button
-                        onClick={(event) => chooseTeacherAction(event)}
+                        onClick={my_schedule_click}
                         size={Button.sizes.MEDIUM}
                         rightIcon={Calendar}
                         className={style.button}>
