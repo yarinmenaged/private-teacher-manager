@@ -4,7 +4,7 @@ import weekReducer from './weekReducer';
 import eventReducer from './eventReducer';
 import calendarReducer from './calendarReducer';
 import teachersReducer from './teachersReducer';
-import subjectsReducer from './subjectsReducer';
+import sabjectsReducer from './subjectsReducer';
 
 const allReducers = combineReducers({
   userReducer,
@@ -12,7 +12,7 @@ const allReducers = combineReducers({
   eventReducer,
   calendarReducer,
   teachersReducer,
-  subjectsReducer,
+  sabjectsReducer,
 });
 
 export default allReducers;
