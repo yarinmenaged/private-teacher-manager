@@ -1,7 +1,7 @@
 import Home from "./Home";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { getUserName } from "../../redux/selectors/userSelectors";
+import { getUserName } from "../../redux/selectors/userSelector";
 
 const mapStateToProps = (state) => {
 const name = getUserName(state);

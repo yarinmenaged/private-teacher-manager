@@ -1,8 +1,9 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import SearchProfile from './SearchProfile';
-import { getChosenTeacher } from '../../../redux/selectors/teachersSelectors';
+import { getChosenTeacher } from '../../../redux/selectors/teachersSelector';
 import { SetCalendarToUserAction } from '../../../redux/actions/calendarActions';
+import { getAllSubjectsAction } from '../../../redux/actions/subjectsAction';
 
 const mapStateToProps = state => {
     const chosenTeacher = getChosenTeacher(state);
@@ -12,7 +13,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            SetCalendarToUserAction,
+            SetCalendarToUserAction, getAllSubjectsAction
         },
         dispatch
     );

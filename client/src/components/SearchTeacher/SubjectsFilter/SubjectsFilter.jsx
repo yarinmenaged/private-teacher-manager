@@ -1,43 +1,16 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useCallback } from 'react';
 import style from './SubjectsFilter.module.css';
-import SUBJECTS_LIST from './subjectsConstant';
+import MultipleSubjectsOptions from './MultipleSubjectsOptions/MultipleSubjectsOptionsConnector';
+import OneSubjectOption from './OneSubjectOption/OneSubjectOptionConnector';
 
-function SubjectsFilter({
-    selectSubjectAction,
-    deselectSubjectAction,
-    selectedSubjects,
-    unchooseTeacherAction,
-}) {
-
-    const selectSubject = useCallback((event) => {
-        unchooseTeacherAction();
-        if (event.target.checked) {
-            selectSubjectAction(event.target.name);
-        } else {
-            deselectSubjectAction(event.target.name);
-        }
-
-    }, [selectSubjectAction, unchooseTeacherAction, deselectSubjectAction]);
-
+function SubjectsFilter() {
     return (
-        <div className={style.flex}>
+        <div>
             {
-                SUBJECTS_LIST.map((subject, index) => {
-                    return (
-                        <div key={index} className={style.flex}>
-                            <p>{subject}</p>
-                            <input type="checkbox" onChange={(event) => selectSubject(event)}
-                                name={subject} className={style.checkbox}
-                                defaultChecked=
-                                {
-                                    selectedSubjects.includes(subject)
-                                        ? true
-                                        : false
-                                } />
-                        </div>
-                    );
-                })
+                window.location.href.includes("search-profile")
+                    ? <MultipleSubjectsOptions />
+                    : < OneSubjectOption />
             }
         </div>
     );

@@ -3,12 +3,37 @@ import { Link } from "react-router-dom";
 import NavBar from '../../NavBar/NavBarConnector';
 import { useState } from 'react'
 import cx from 'classnames';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
+import { Dropdown } from 'monday-ui-react-core';
+import serverConnection from '../../../services/dbServices';
 
-function MyProfile({ userInfo, editAboutAction }) {
+function MyProfile({ userInfo,
+    editAboutAction,
+    allSubjects,
+    teacheSubjects,
+    getAllSubjectsAction,
+}) {
 
     const [showTextbox, setShowTextbox] = useState(false);
-    
+
+    useEffect(() => {
+        getAllSubjectsAction();
+    }, []);
+
+    const allOptions = allSubjects.map(subject =>
+    ({
+        value: subject.Name,
+        label: subject.Name,
+        id: subject.id,
+    })
+    );
+    const teacherOptions = teacheSubjects.map(subject =>
+    ({
+        value: subject.Name,
+        label: subject.Name,
+        id: subject.id,
+    }));
+
     const editAbout = useCallback((newAbout) => {
         editAboutAction(newAbout);
         setShowTextbox(false);
@@ -17,6 +42,16 @@ function MyProfile({ userInfo, editAboutAction }) {
     const setTextboxDisplay = useCallback(() => {
         setShowTextbox(showTextbox => !showTextbox);
     }, [setShowTextbox]);
+
+
+    const addSubject = useCallback(async (event) => {
+        await serverConnection.addSubject(userInfo.id, event[event.length - 1].id);
+    }, []);
+
+    const removeSubject = useCallback(async (event) => {
+        //console.log(event);
+        await serverConnection.removeSubject(userInfo.id, event.id);
+    }, []);
 
     return (
         <div>
@@ -38,16 +73,15 @@ function MyProfile({ userInfo, editAboutAction }) {
                             ? <EditAboutComponent editAbout={editAbout} About={userInfo.About} />
                             : <div />
                     }
-                    <h3>I'm teaching:</h3>
-                    <div className={style.flex}>
-                        {
-                            userInfo.subjects.map((subject, index) =>
-                                <div key={index} style={{ marginRight: "20px" }}>{subject}</div>
-                            )
-                        }
-                    </div>
                 </div>
             </div>
+            <h3>I'm teaching:</h3>
+            <Dropdown options={allOptions} multi placeholder={"Add Subjects"}
+                onChange={(event) => addSubject(event)}
+                multiline
+                onOptionRemove={(event) => removeSubject(event)}
+                defaultValue={teacherOptions}
+                className={cx(style.dropDown, "dropdown-stories-styles_with-chips")} />
         </div>
     );
 }

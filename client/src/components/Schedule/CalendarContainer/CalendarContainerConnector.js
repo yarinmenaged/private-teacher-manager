@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { getWeek } from "../../../redux/selectors/weekSelectors";
 import CalendarContainer from "./CalendarContainer";
 import { GetEventsAction } from '../../../redux/actions/eventActions';
-import { getUserInfo } from "../../../redux/selectors/userSelectors";
+import { getUserInfo } from "../../../redux/selectors/userSelector";
 import { getShowCalenderOfOtherUser, getUserId } from "../../../redux/selectors/calendarSelector";
 
 const mapStateToProps = (state, ownProps) => {

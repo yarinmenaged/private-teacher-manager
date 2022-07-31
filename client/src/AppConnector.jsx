@@ -1,7 +1,7 @@
 import App from "./App";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { getLoginStatus } from "./redux/selectors/userSelectors";
+import { getLoginStatus } from "./redux/selectors/userSelector";
 import { getUserInfoByTokenAction } from "./redux/actions/userActions";
 
 const mapStateToProps = (state) => {

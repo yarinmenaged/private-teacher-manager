@@ -27,9 +27,45 @@ async function AddEventBlockedToTeacher(user_id, date, hour){
     }
 }
 
+async function AddEventFromStudent(student, teacher_id, date, hour, subject_id){
+    try{
+        const format_date = moment(date).format('MM-DD-YYYY');
+        const formatted_date = new Date(`${format_date} ${hour}`);
+        return await EventStorageService.AddEventFromStudent(student, teacher_id, formatted_date, subject_id);
+    }catch(error){
+        throw error;
+    }
+}
+
+async function DeleteEvent(user_id, event_id){
+    try{
+        return await EventStorageService.DeleteEvent(user_id, event_id);
+    }catch(error){
+        throw error;
+    }
+}
+
+async function ChangeDescription(event_id, user_id, description) {
+    try{
+        const teacher = await UserStorageService.GetTeacherById(user_id);
+        if(teacher) 
+            return await EventStorageService.ChangeDescription(event_id, description);
+        else{
+            const error = new Error(`Only teacher can change description of event`);
+            error.statusCode = 401;
+            throw error;
+        }
+    }catch(error){
+        throw error;
+    }
+}
+
 const EventService = {
     GetAllEventsOfUserInWeek,
-    AddEventBlockedToTeacher
+    AddEventBlockedToTeacher,
+    AddEventFromStudent,
+    DeleteEvent,
+    ChangeDescription
 };
 
 module.exports = EventService;

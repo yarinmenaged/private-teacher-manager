@@ -30,3 +30,8 @@
     cursor: pointer;
     border-width: 0px;
 }
+
+.dropDown {
+    width: 95%;
+    margin-left: 10px;
+}
