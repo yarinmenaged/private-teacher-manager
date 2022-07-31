@@ -4,7 +4,7 @@ import { logOutAction } from '../redux/actions/userActions'
 export default class ApiService {
 	static async GetResourceRequest(url, withCredentials = true) {
 		try {
-			const res = await axios.get(`http://localhost:2000/${url}`, {
+			const res = await axios.get(`/${url}`, {
 				withCredentials,
 			});
 			return res.data;
@@ -15,7 +15,7 @@ export default class ApiService {
 
 	static async AddNewResourceRequest(url, data, withCredentials = true) {
 		try {
-			const res = await axios.post(`http://localhost:2000/${url}`, data, {
+			const res = await axios.post(`/${url}`, data, {
 				withCredentials,
 			});
 			return res.data;
@@ -26,7 +26,7 @@ export default class ApiService {
 
 	static async DeleteResourceRequest(url, withCredentials = true) {
 		try {
-			const res = await axios.delete(`http://localhost:2000/${url}`, {
+			const res = await axios.delete(`/${url}`, {
 				withCredentials,
 			});
 			return res.data;
@@ -37,7 +37,7 @@ export default class ApiService {
 
 	static async PatchResourceRequest(url, withCredentials = true) {
 		try {
-			const res = await axios.patch(`http://localhost:2000/${url}`, {
+			const res = await axios.patch(`/${url}`, {
 				withCredentials,
 			});
 			return res.data;
@@ -47,7 +47,7 @@ export default class ApiService {
 	}
 	static async PutResourceRequest(url, data, withCredentials = true) {
 		try {
-			const res = await axios.put(`http://localhost:2000/${url}`, data, {
+			const res = await axios.put(`/${url}`, data, {
 				withCredentials,
 			});
 			return res.data;
