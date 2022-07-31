@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import NavBar from '../../NavBar/NavBarConnector';
 import { useState } from 'react'
 import cx from 'classnames';
-import { useCallback, useEffect } from 'react';
-import { Dropdown } from 'monday-ui-react-core';
+import { useCallback } from 'react';
+import { Dropdown, Icon, Flex } from 'monday-ui-react-core';
+import {
+    Email, PersonRound, Mobile, Description, Academy, Edit, Add
+} from "monday-ui-react-core/dist/allIcons";
 
 function MyProfile({ userInfo,
     editAboutAction,
@@ -50,44 +53,49 @@ function MyProfile({ userInfo,
             <NavBar />
             <div className={style.flex}>
                 <div className={style.column}>
-                    <h3>Teacher Profile</h3>
-                    <p>name: {userInfo.Name}</p>
-                    <p>email: {userInfo.Email}</p>
-                    <p>mobile number: {userInfo.Phone}</p>
-                    <Link to="/home" >back</Link>
+                    <h3><Icon iconSize={30} icon={Academy} /> Teacher Profile</h3>
+                    <p><Icon iconSize={20} icon={PersonRound} /> {userInfo.Name}</p>
+                    <p><Icon iconSize={20} icon={Email} /> {userInfo.Email}</p>
+                    <p><Icon iconSize={20} icon={Mobile} /> {userInfo.Phone}</p>
                 </div>
-                <div className={cx(style.column, style.aboutCont)}>
-                    <h3>About</h3>
-                    <p>{userInfo.About}</p>
-                    <p className={style.edit} onClick={setTextboxDisplay}>edit</p>
+
+                <div className={style.column}>
+                    <h3><Icon icon={Description} /> About
+                        <label className={style.edit} onClick={setTextboxDisplay}>
+                            <Icon icon={Edit} />
+                        </label></h3>
                     {
                         showTextbox
                             ? <EditAboutComponent editAbout={editAbout} About={userInfo.About} />
-                            : <div />
+                            : <p>{userInfo.About}</p>
                     }
                 </div>
             </div>
-            <h3>I'm teaching:</h3>
-            <Dropdown
-                multiline multi
-                options={allOptions}
-                defaultValue={teacherOptions}
-                onChange={(event) => addSubject(event)}
-                onOptionRemove={(event) => removeSubject(event)}
-                clearable={false}
-                placeholder={"Add Subjects"}
-                className={cx(style.dropDown, "dropdown-stories-styles_with-chips")} />
+            <Flex justify={Flex.justify.CENTER}>
+                <h3>I'm teaching:</h3>
+                <Dropdown
+                    multiline multi
+                    options={allOptions}
+                    defaultValue={teacherOptions}
+                    onChange={(event) => addSubject(event)}
+                    onOptionRemove={(event) => removeSubject(event)}
+                    clearable={false}
+                    placeholder={"Add Subjects"}
+                    className={cx(style.dropDown, "dropdown-stories-styles_with-chips")} />
+            </Flex>
         </div>
     );
 }
 
 function EditAboutComponent({ editAbout, About }) {
-    const [inputValue, setInputValue] = useState("");
+    const [inputValue, setInputValue] = useState(About);
     return (
         <div>
-            <textarea rows="6" cols="50" defaultValue={About} className={style.textbox}
-                onChange={(event) => setInputValue(event.target.value)} type="text" /><br />
-            <button className={style.button} onClick={() => editAbout(inputValue)}>submit</button>
+            <textarea type="text" defaultValue={About} className={style.textbox}
+                onChange={(event) => setInputValue(event.target.value)} /><br />
+            <button className={style.button} onClick={() => editAbout(inputValue)}>
+                <Icon iconSize={15} icon={Add} />
+            </button>
         </div>
     );
 }

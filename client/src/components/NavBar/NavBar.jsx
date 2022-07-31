@@ -10,7 +10,7 @@ function NavBar({ Type, logOutAction, UnsetCalendarToUserAction }) {
 	const navigate = useNavigate();
 
 	const logOut = useCallback((event) => {
-		//event.preventDefault();
+		event.preventDefault();
 		if (window.confirm("Are you sure you want to log out?")) {
 			removeCookie("token");
 			logOutAction();

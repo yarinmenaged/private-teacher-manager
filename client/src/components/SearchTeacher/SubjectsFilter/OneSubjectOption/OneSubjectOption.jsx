@@ -1,6 +1,8 @@
 import { useEffect, useCallback } from 'react';
 import style from '../SubjectsFilter.module.css';
 import { Dropdown } from 'monday-ui-react-core';
+import cx from 'classnames'
+import { Flex } from 'monday-ui-react-core';
 
 function OneSubjectOption({ resetSubjectsAction, selectSubjectAction, subjectsList }) {
 
@@ -20,12 +22,14 @@ function OneSubjectOption({ resetSubjectsAction, selectSubjectAction, subjectsLi
     }, [selectSubjectAction]);
 
     return (
-        <Dropdown
-            options={allOptions}
-            onChange={(event) => selectSubject(event)}
-            clearable={false}
-            placeholder="Select Subject"
-            className="dropdown-stories-styles_big-spacing" />
+        <Flex justify={Flex.justify.CENTER}>
+            <Dropdown
+                options={allOptions}
+                onChange={(event) => selectSubject(event)}
+                clearable={false}
+                placeholder="Select Subject"
+                className={cx("dropdown-stories-styles_big-spacing", style.width)} />
+        </Flex>
     );
 }
 

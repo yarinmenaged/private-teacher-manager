@@ -2,7 +2,10 @@ import map from "lodash/map";
 import SubjectsFilter from "./SubjectsFilter/SubjectsFilterConnector";
 import { useEffect } from 'react'
 import { useCallback } from "react";
-import { Dropdown } from 'monday-ui-react-core';
+import { Dropdown, Button, Flex } from 'monday-ui-react-core';
+import Calendar from "monday-ui-react-core/dist/icons/Calendar";
+import style from './SearchTeacher.module.css';
+import cx from 'classnames'
 
 function SearchTeacher({
     areTeachersFetched,
@@ -32,15 +35,24 @@ function SearchTeacher({
     return (
         <div>
             <SubjectsFilter multipleOptions={multipleOptions} />
-            <Dropdown
-                options={allOptions}
-                value={{ value: "Select Teacher", label: "Select Teacher" }}
-                onChange={(event) => chooseTeacher(event)}
-                clearable={false}
-                className="dropdown-stories-styles_big-spacing" />
-            {
-                mySchedule && <button onClick={(event) => chooseTeacherAction(event)}>My Own Schedule</button>
-            }
+            <Flex align={Flex.align.END} justify={Flex.justify.CENTER}>
+                <Dropdown
+                    options={allOptions}
+                    value={{ value: "Select Teacher", label: "Select Teacher" }}
+                    onChange={(event) => chooseTeacher(event)}
+                    clearable={false}
+                    className={cx("dropdown-stories-styles_big-spacing", style.width)} />
+                {
+                    mySchedule &&
+                    <Button
+                        onClick={(event) => chooseTeacherAction(event)}
+                        size={Button.sizes.MEDIUM}
+                        rightIcon={Calendar}
+                        className={style.button}>
+                        My Schedule
+                    </Button>
+                }
+            </Flex>
         </div >
     );
 }

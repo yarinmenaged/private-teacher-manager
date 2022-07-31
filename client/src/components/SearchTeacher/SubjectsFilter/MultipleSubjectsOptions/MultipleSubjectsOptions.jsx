@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
 import style from '../SubjectsFilter.module.css';
 import { Dropdown } from 'monday-ui-react-core';
+import { Flex } from 'monday-ui-react-core';
+import cx from 'classnames'
 
 function MultipleSubjectsOptions({
     selectSubjectAction,
@@ -35,14 +37,16 @@ function MultipleSubjectsOptions({
     }, [deselectSubjectAction, unchooseTeacherAction]);
 
     return (
-        <Dropdown
-            multiline multi
-            options={allOptions}
-            defaultValue={selectedOptions}
-            onChange={(event) => selectSubject(event)}
-            onOptionRemove={(event) => removeSubject(event)}
-            placeholder="Select Subjects"
-            className="dropdown-stories-styles_with-chips" />
+        <Flex justify={Flex.justify.CENTER}>
+            <Dropdown
+                multiline multi
+                options={allOptions}
+                defaultValue={selectedOptions}
+                onChange={(event) => selectSubject(event)}
+                onOptionRemove={(event) => removeSubject(event)}
+                placeholder="Select Subjects"
+                className={cx("dropdown-stories-styles_with-chips", style.width)} />
+        </Flex>
     );
 }
 
