@@ -1,9 +1,9 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Schedule from './Schedule';
-import { SetCalendarToUserAction, UnsetCalendarToUserAction } from "../../redux/actions/calendarActions";
-import { getChosenTeacher } from "../../redux/selectors/teachersSelector";
-import { getUserInfo } from '../../redux/selectors/userSelector';
+import { SetCalendarToUserAction } from "../../redux/actions/calendarActions";
+import { getChosenTeacher } from "../../redux/selectors/teachersSelectors";
+import { getUserInfo } from '../../redux/selectors/userSelectors';
 
 const mapStateToProps =  (state, ownProps) => {
     const userInfo = getUserInfo(state);
@@ -12,7 +12,7 @@ const mapStateToProps =  (state, ownProps) => {
 };
 
 const mapDispatchToProps =  (dispatch, ownProps) => {
-    return bindActionCreators({ SetCalendarToUserAction, UnsetCalendarToUserAction }, dispatch);
+    return bindActionCreators({ SetCalendarToUserAction, }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Schedule);

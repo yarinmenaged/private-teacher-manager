@@ -2,10 +2,6 @@ export const getUserInfo = (state) => {
     return state.userReducer;
 }
 
-export const getTeacherSubjects = (state) => {
-    return state.userReducer.subjects;
-}
-
 export const getUserType = (state) => {
     return state.userReducer.Type;
 }

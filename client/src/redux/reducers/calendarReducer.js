@@ -18,8 +18,8 @@ const reducer = (state = initState, action) => {
 		case ACTIONS.UNSET_SHOW_CALENDER_OF_OTHER_USER:
 			return initState;
 
-        case ACTIONS.LOG_OUT:
-            return initState;
+		case ACTIONS.LOG_OUT:
+			return { user_id: "", show_calender_of_other_user: false };
 
 		default:
 			return state;

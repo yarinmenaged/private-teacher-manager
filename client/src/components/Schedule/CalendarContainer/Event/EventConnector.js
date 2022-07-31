@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Event from "./Event";
+import { getUserInfo } from "../../../../redux/selectors/userSelectors";
 import { getUserId } from "../../../../redux/selectors/calendarSelector";
 import { DeleteEventAction } from "../../../../redux/actions/eventActions";
-import { getUserInfo } from "../../../../redux/selectors/userSelector";
 
 const mapStateToProps = (state, ownProps) => {
     const my_user_id = getUserInfo(state).id;
