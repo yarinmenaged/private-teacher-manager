@@ -47,13 +47,11 @@ const getUserByTokenRouter = async (req, res) => {
 };
 
 async function setAbout(req, res) {
-	console.log("set about");
 	await setAboutTeacher(req.params.id, req.body.newAbout);
 	res.status(200).json({ health: "ok" });
 }
 
 async function getTeachers(req, res) {
-	console.log("get teachers");
 	const teachers = await getAllTeachers();
 	res.status(200).json(teachers);
 }
