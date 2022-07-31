@@ -18,4 +18,6 @@ WORKDIR /app/db
 
 RUN npx sequelize-cli db:seed:all
 
+WORKDIR /app
+
 CMD ["node", "./server.js"]
