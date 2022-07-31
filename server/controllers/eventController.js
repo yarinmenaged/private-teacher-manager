@@ -1,69 +1,79 @@
 const EventService = require("../services/event/eventService");
 const { getUserInfoByToken } = require("../services/auth/auth");
+const Mail = require("nodemailer/lib/mailer");
 
-async function GetAllEventsOfUserInWeek(req, res, next){
-    try{
-        const user_id = req.params.id;
-        const week = req.params.week;
-        const events = await EventService.GetAllEventsOfUserInWeek(user_id, week);
-        return res.status(200).json({
-            status: 200,
-            events: events
-        })
-    }catch(error){
-        next(error);
-    }
+async function GetAllEventsOfUserInWeek(req, res, next) {
+	try {
+		const user_id = req.params.id;
+		const week = req.params.week;
+		const events = await EventService.GetAllEventsOfUserInWeek(user_id, week);
+		return res.status(200).json({
+			status: 200,
+			events: events,
+		});
+	} catch (error) {
+		next(error);
+	}
 }
 
-async function AddEventBlocked(req, res, next){
-    try{
-        const { date, hour } = req.body;
-        const user_id = await getUserInfoByToken(req.cookies.token);
-        const add_blocked_event = await EventService.AddEventBlockedToTeacher(user_id, date, hour);
-        return res.status(200).json({
-            status: 200,
-            add_event_status: true
-        });
-    }catch(error){
-        next(error);
-    }
+async function AddEventBlocked(req, res, next) {
+	try {
+		const { date, hour } = req.body;
+		const user_id = await getUserInfoByToken(req.cookies.token);
+		const add_blocked_event = await EventService.AddEventBlockedToTeacher(
+			user_id,
+			date,
+			hour
+		);
+		return res.status(200).json({
+			status: 200,
+			add_event_status: true,
+		});
+	} catch (error) {
+		next(error);
+	}
 }
 
-async function AddEventFromStudent(req, res, next){
-    try{
-        const { teacher_id, subject_id, date, hour } = req.body;
-        const student = await getUserInfoByToken(req.cookies.token);
-        const add_event = await EventService.AddEventFromStudent(student, teacher_id, date, hour, subject_id);
-        return res.status(200).json({
-            status: 200,
-            add_event_status: true
-        });
-    }catch(error){
-        next(error);
-    }
+async function AddEventFromStudent(req, res, next) {
+	try {
+		const { teacher_id, subject_id, date, hour } = req.body;
+		const student = await getUserInfoByToken(req.cookies.token);
+		const add_event = await EventService.AddEventFromStudent(
+			student,
+			teacher_id,
+			date,
+			hour,
+			subject_id
+		);
+		console.log(add_event.massegeInfo, date, hour);
+		return res.status(200).json({
+			status: 200,
+			add_event_status: true,
+		});
+	} catch (error) {
+		next(error);
+	}
 }
 
-
-async function DeleteEvent(req, res, next){
-    try{
-        const event_id = req.params.id;
-        const user = await getUserInfoByToken(req.cookies.token);
-        const add_event = await EventService.DeleteEvent(user.id, event_id);
-        return res.status(200).json({
-            status: 200,
-            delete_event_status: true
-        });
-    }catch(error){
-        next(error);
-    }
+async function DeleteEvent(req, res, next) {
+	try {
+		const event_id = req.params.id;
+		const user = await getUserInfoByToken(req.cookies.token);
+		const add_event = await EventService.DeleteEvent(user.id, event_id);
+		return res.status(200).json({
+			status: 200,
+			delete_event_status: true,
+		});
+	} catch (error) {
+		next(error);
+	}
 }
-
 
 const EventsController = {
-    GetAllEventsOfUserInWeek,
-    AddEventBlocked,
-    AddEventFromStudent,
-    DeleteEvent
+	GetAllEventsOfUserInWeek,
+	AddEventBlocked,
+	AddEventFromStudent,
+	DeleteEvent,
 };
 
 module.exports = EventsController;
