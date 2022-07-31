@@ -12,7 +12,7 @@ import {
 function MyProfile({ userInfo,
     editAboutAction,
     allSubjects,
-    teacheSubjects,
+    teacherSubjects,
     addSubjectAction,
     removeSubjectAction,
 }) {
@@ -24,7 +24,7 @@ function MyProfile({ userInfo,
         label: subject.Name,
         id: subject.id,
     }));
-    const teacherOptions = teacheSubjects.map(subject => ({
+    const teacherOptions = teacherSubjects.map(subject => ({
         value: subject.Name,
         label: subject.Name,
         id: subject.id,
@@ -76,7 +76,7 @@ function MyProfile({ userInfo,
                 <Dropdown
                     multiline multi
                     options={allOptions}
-                    defaultValue={teacherOptions}
+                    value={teacherOptions}
                     onChange={(event) => addSubject(event)}
                     onOptionRemove={(event) => removeSubject(event)}
                     clearable={false}
