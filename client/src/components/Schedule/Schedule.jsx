@@ -4,6 +4,8 @@ import NavBar from '../NavBar/NavBarConnector';
 import CalendarContainerConnector from './CalendarContainer/CalendarContainerConnector';
 import { useEffect } from "react";
 import USER_TYPE from "../NavBar/Constants";
+import { Flex, Icon } from 'monday-ui-react-core';
+import { Calendar } from "monday-ui-react-core/dist/allIcons";
 
 function Schedule({ chosenTeacher, SetCalendarToUserAction, userInfo }) {
 
@@ -17,17 +19,19 @@ function Schedule({ chosenTeacher, SetCalendarToUserAction, userInfo }) {
         <div>
             <NavBar />
             {
-                userInfo.Type === USER_TYPE.Student
-                    ? <SearchTeacher />
-                    : <div />
+                userInfo.Type === USER_TYPE.Student &&
+                <SearchTeacher mySchedule={true} />
             }
-            <h2>
-                {
-                    chosenTeacher
-                    ? `Schedule of ${chosenTeacher.Name}`
-                    : "My Schedule"
-                }
-            </h2>
+            <Flex justify={Flex.justify.CENTER} >
+                <Icon iconSize={25} icon={Calendar} />
+                <h2>
+                    {
+                        chosenTeacher
+                            ? `Schedule of ${chosenTeacher.Name}`
+                            : "My Schedule"
+                    }
+                </h2>
+            </Flex>
             <CalendarContainerConnector></CalendarContainerConnector>
             <Link to="/home" >back</Link>
         </div>

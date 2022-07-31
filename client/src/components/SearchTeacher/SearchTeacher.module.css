@@ -1,7 +1,9 @@
-.flex {
-    display: flex;
+.button{
+    margin-top: 20px;
+    margin-left: 10px;
 }
 
-.checkbox {
-    margin-right: 20px;
+.width {
+    margin-top: 10px;
+    width: 60%;
 }
