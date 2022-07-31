@@ -41,6 +41,17 @@ const DeleteEvent = (event_id) => {
     }
 };
 
+const UpdateDescription = (event_id, description) => {
+    return async(dispatch) =>{
+        try{
+            dispatch({ type: ACTIONS.UPDATE_DESCRIPTION, payload: { event_id, description }});
+            await EventService.ChangeDescription(event_id, description);
+        }catch(error){
+            // show error
+        }
+    }
+};
+
 
 export const GetEventsAction = (id, week) => {
     return (dispatch) => {
@@ -49,13 +60,19 @@ export const GetEventsAction = (id, week) => {
 };
 
 export const AddEventAction = (user_id, date, hour, user_type, teacher_id, subject_id) => {
-    return async(dispatch) => {
+    return (dispatch) => {
         dispatch(AddEvent(user_id, date, hour, user_type, teacher_id, subject_id));
     };
 };
 
 export const DeleteEventAction = (event_id) => {
-    return async(dispatch) => {
+    return (dispatch) => {
         dispatch(DeleteEvent(event_id));
+    };
+};
+
+export const UpdateDescriptionAction = (event_id, description) => {
+    return dispatch => {
+        dispatch(UpdateDescription(event_id, description));
     };
 };

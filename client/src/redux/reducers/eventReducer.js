@@ -58,6 +58,10 @@ const reducer = (state = initState, action) => {
             }
         case ACTIONS.RESTORE_EVENT:
             return { events: [ ...state.events, state.deleted_event ], deleted_event: {} };
+        case ACTIONS.UPDATE_DESCRIPTION: 
+            const event = state.events.find((value) => value.id === payload.event_id);            
+            event.description = payload.description;
+            return { ...state, events: [...state.events.filter(value => value.id !== payload.event_id), event] };
         default:
             return state;
     }
