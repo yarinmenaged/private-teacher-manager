@@ -6,7 +6,5 @@ const router = express.Router();
 
 router.get("/:id/:week", authVerify, EventsController.GetAllEventsOfUserInWeek);
 router.post("/blocked", authVerify, EventsController.AddEventBlocked);
-router.post("/", authVerify, EventsController.AddEventFromStudent);
-router.delete("/:id", authVerify, EventsController.DeleteEvent);
 
 module.exports = router;
