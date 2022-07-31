@@ -3,8 +3,7 @@ import ACTIONS from '../actions/actionConstants';
 import ReduxContents from '../Constants';
 
 const initState = {
-    events: [],
-    deleted_event: {}
+    events: []
 };
 
 const reducer = (state = initState, action) => {
@@ -12,7 +11,7 @@ const reducer = (state = initState, action) => {
 
     switch(type){
         case ACTIONS.GET_EVENTS:
-            return { ...state, events: payload };
+            return { events: payload };
         case ACTIONS.ADD_EVENT:
             const format_date = payload.date.format(ReduxContents.DATE_FORMAT);
             const format_date_with_hour = moment(`${format_date} ${payload.hour}`).format(ReduxContents.DATE_TIME_FORMAT);
@@ -50,13 +49,9 @@ const reducer = (state = initState, action) => {
                 state.events.pop();
                 return { events: state.events };
             }else{
-                return { 
-                    deleted_event: state.events.find((value) => {
-                        return value.id === payload;
-                    }), 
-                    events: state.events.filter((value) => {
-                        return value.id !== payload;
-                    })};
+                return { events: state.events.filter((value) => {
+                    return value.id !== payload.id;
+                })};
             }
         case ACTIONS.UPDATE_EVENT:
             return {...state, events: [...state.events.filter(value => value.id !== payload.hash_id), payload.event]};

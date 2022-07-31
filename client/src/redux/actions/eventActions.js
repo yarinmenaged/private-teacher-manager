@@ -10,7 +10,7 @@ const GetEvents = (id, week) => {
     };
 }
 
-const AddEvent = (user_id, date, hour, user_type, teacher_id, subject_id) => {
+const AddEvent = (user_id, date, hour, user_type) => {
     return async(dispatch) => {
         try{
             const hash_id = crypto.SHA512(`${date} ${hour} ${user_type} ${teacher_id} ${subject_id} ${user_id}`).toString();
@@ -25,24 +25,13 @@ const AddEvent = (user_id, date, hour, user_type, teacher_id, subject_id) => {
                 dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour, teacher_id, subject_id, hash_id }});
                 const event = await EventService.AddEvent(date, hour, teacher_id, subject_id);
                 dispatch({ type: ACTIONS.UPDATE_EVENT, payload: { event, hash_id } });
-            }            
+            }   
         }catch(error){
-            //dispatch({ type: ACTIONS.DELETE_EVENT });
+            dispatch({ type: ACTIONS.DELETE_EVENT });
             // TODO ADD error action
         }
     }
-};
-
-const DeleteEvent = (event_id) => {
-    return async(dispatch) => {
-        try{
-            dispatch({ type: ACTIONS.DELETE_EVENT, payload: event_id });
-            await EventService.DeleteEvent(event_id);
-        }catch(error){
-            dispatch({ type: ACTIONS.RESTORE_EVENT });
-        }
-    }
-};
+}
 
 const UpdateDescription = (event_id, description) => {
     return async(dispatch) =>{

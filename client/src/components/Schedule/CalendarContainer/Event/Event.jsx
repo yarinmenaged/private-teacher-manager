@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React from 'react';
 import moment from 'moment';
 import EventConstants from './Constants';
 import style from './Event.module.css';

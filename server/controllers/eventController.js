@@ -1,5 +1,5 @@
 const EventService = require("../services/event/eventService");
-const { getUserInfoByToken } = require("../services/auth/auth");
+
 
 async function GetAllEventsOfUserInWeek(req, res, next){
     try{
@@ -17,8 +17,7 @@ async function GetAllEventsOfUserInWeek(req, res, next){
 
 async function AddEventBlocked(req, res, next){
     try{
-        const { date, hour } = req.body;
-        const user_id = await getUserInfoByToken(req.cookies.token);
+        const { user_id, date, hour } = req.body;
         const add_blocked_event = await EventService.AddEventBlockedToTeacher(user_id, date, hour);
         return res.status(200).json({
             status: 200,

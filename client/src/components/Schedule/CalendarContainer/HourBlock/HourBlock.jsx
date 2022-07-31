@@ -7,6 +7,7 @@ import EventConnector from '../Event/EventConnector';
 import TeacherPreferencesBlock from '../TeacherPreferences/TeacherPreferencesBlock';
 
 const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, calender_user_id, show_other_user_calendar, subject_id, blocked_size }) => {
+
   const [render_event, setRenderEvent] = useState(false);
   const [event_obj, setEventObj] = useState(null);
 
@@ -66,8 +67,9 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
             <div className={`${style.entry}`} onClick={(event) => {hour_block_click_call__back(event)}} style={{height: `${blocked_size}em`}}>
               { render_event && <EventConnector event={event_obj} user_type={user_type}></EventConnector>}
               { blocked_size && <TeacherPreferencesBlock blocked_size={blocked_size} start={hour}></TeacherPreferencesBlock>}
+
             </div>
-        </Tooltip>);
+         </Tooltip>);
 };
 
 export default HourBlock;
