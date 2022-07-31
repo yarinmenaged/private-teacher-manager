@@ -14,4 +14,8 @@ RUN npm install
 RUN npm install -g sequelize-cli
 RUN npm install --save mysql2
 
+WORKDIR /app/db
+
+RUN npx sequelize-cli db:sedd:all
+
 CMD ["node", "./server.js"]
