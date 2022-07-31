@@ -10,10 +10,10 @@ import { Calendar } from "monday-ui-react-core/dist/allIcons";
 function Schedule({ chosenTeacher, SetCalendarToUserAction, userInfo }) {
 
     useEffect(() => {
-        chosenTeacher
-            ? SetCalendarToUserAction(chosenTeacher.id)
-            : SetCalendarToUserAction(userInfo.id);
-    }, [chosenTeacher]);
+        if(chosenTeacher)
+            SetCalendarToUserAction(chosenTeacher.id);
+    }, [chosenTeacher, SetCalendarToUserAction]);
+
 
     return (
         <div>

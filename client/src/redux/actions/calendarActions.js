@@ -15,7 +15,6 @@ export const SetCalendarToUserAction = (user_id) => {
 
 const UnsetCalendarToUser = () => {
     return (dispatch) => {
-        dispatch({ type: ACTIONS.SET_USER_ID_OF_CALENDAR, payload: "" });
         dispatch({ type: ACTIONS.UNSET_SHOW_CALENDER_OF_OTHER_USER });
     };
 };

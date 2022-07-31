@@ -14,6 +14,8 @@ function SearchTeacher({
     selectedTeachers,
     mySchedule,
     multipleOptions,
+    UnsetCalendarToUserAction
+
 }) {
 
     const allOptions = selectedTeachers.map(teacher => ({
@@ -29,8 +31,11 @@ function SearchTeacher({
     }, []);
 
     const chooseTeacher = useCallback((event) => {
-        chooseTeacherAction(event.id)
-    }, [chooseTeacherAction]);
+
+        if(event.target.value === "")
+            UnsetCalendarToUserAction();
+        chooseTeacherAction(event.target.value);
+    }, [chooseTeacherAction, UnsetCalendarToUserAction]);
 
     return (
         <div>
