@@ -11,11 +11,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      
+      Event.belongsTo(models.Student);
+      Event.belongsTo(models.Teacher);
+      Event.belongsTo(models.Subjects);
     }
   }
   Event.init({
-    date: DataTypes.DATE
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+      unique: true
+    },
+    date: DataTypes.DATE,
+    description: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Event',

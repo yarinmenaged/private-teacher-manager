@@ -3,29 +3,41 @@ import style from './HourBlock.module.css';
 import Event from '../Event/Event';
 import ConstantsHourBlock from './Constants';
 import { Tooltip } from 'monday-ui-react-core';
+import EventConnector from '../Event/EventConnector';
+import TeacherPreferencesBlock from '../TeacherPreferences/TeacherPreferencesBlock';
 
-const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events }) => {
+const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, calender_user_id, subject_id, blocked_size }) => {
   const [render_event, setRenderEvent] = useState(false);
   const event_obj = useRef(null);
+  const event_filtered = useCallback((blocks_date_in_utc)  => {
+    return events.find((event) => {
+      const event_date_in_utc = new Date(event.date).getTime();
+      return event_date_in_utc === blocks_date_in_utc;
+    });
+  }, [events]);
+
   const event = useCallback(
     () => {
       if(date){
-        const blocks_date_in_utc = new Date(`${date.format('MM-DD-YYYY')} ${hour}`).getTime();
-        const event_filtered = events.find((event) => {
-          const event_date_in_utc = new Date(event.date).getTime();
-          return event_date_in_utc === blocks_date_in_utc;
-        });
-        return event_filtered || null;
+        const blocks_date_in_utc = new Date(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`).getTime();        
+        return event_filtered(blocks_date_in_utc) || null;
       }
       return null;
     },
-    [events, date, hour],
+    [date, hour, event_filtered],
   );
 
   useEffect(() => {
     event_obj.current = event();
     event_obj.current ? setRenderEvent(true) : setRenderEvent(false);
-  }, [date, event]);
+  }, [date, event, events]);
+
+  const hour_block_click_call__back = useCallback((event) => {
+    if(!event_obj.current)
+      AddEventAction(user_id, date, hour, user_type, calender_user_id, subject_id);
+    else
+      event.preventDefault();    
+  }, [AddEventAction, user_id, date, hour, user_type, calender_user_id, subject_id]);
 
   if (type === ConstantsHourBlock.BLOCK_TYPES.TIME) {
     return (
@@ -35,14 +47,23 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
     );
   }
 
+  const content_tool_tip = render_event ? 
+                            ConstantsHourBlock.SHOW_MORE_INFO_ON_EVENT 
+                            : 
+                            blocked_size ?
+                            ConstantsHourBlock.blocked_size
+                            :
+                            ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP;
+
   return (<Tooltip 
             immediateShowDelay={0} 
             position={Tooltip.positions.BOTTOM}
-            content={ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP}>
-            <div className={style.entry} onClick={() => {alert(`you clicked at block hour: ${hour} on date: ${date.format('DD/MM/YYYY')}`)}}>
-              {render_event && <Event event={event_obj.current}></Event>}
+            content={content_tool_tip} >
+            <div className={`${style.entry}`} onClick={(event) => {hour_block_click_call__back(event)}} style={{height: `${blocked_size}em`}}>
+              {render_event && <EventConnector event={event_obj.current} user_type={user_type}></EventConnector>}
+              { blocked_size && <TeacherPreferencesBlock blocked_size={blocked_size} start={hour}></TeacherPreferencesBlock>}
             </div>
-         </Tooltip>);
+        </Tooltip>);
 };
 
 export default HourBlock;

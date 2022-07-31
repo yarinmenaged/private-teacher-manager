@@ -17,8 +17,19 @@
     flex-direction: column;
     justify-content: space-between;
     cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
 }
 
 .entry:not(:last-of-type) {
     border-bottom-style: dashed;
+}
+
+
+.double {
+    height: 18em;
+}
+
+.treble {
+    height: 27em;
 }

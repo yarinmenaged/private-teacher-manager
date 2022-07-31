@@ -1,13 +1,14 @@
 import style from './RegisterForm.module.css';
 import cx from 'classnames';
 import { Link, useNavigate } from 'react-router-dom';
-import severConnection from '../../services/dbServices';
+import serverConnection from '../../services/dbServices';
+import { useCallback } from 'react';
 
 function RegisterForm() {
 
     const navigate = useNavigate();
-
-    const handleSubmit = (event) => {
+    
+    const handleSubmit = useCallback((event) => {
         event.preventDefault();
         const firstName = event.target.elements.firstName.value;
         const lastName = event.target.elements.lastName.value;
@@ -16,9 +17,9 @@ function RegisterForm() {
         const Email = event.target.elements.email.value;
         const Password = event.target.elements.password.value;
         const Phone = event.target.elements.phone.value;
-        severConnection.addUser(Name, userType, Email, Password, Phone);
+        serverConnection.addUser(Name, userType, Email, Password, Phone);
         navigate('/login');
-    }
+    }, [navigate]);
 
     return (
         <div className={style.formContainer}>

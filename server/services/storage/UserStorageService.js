@@ -1,4 +1,5 @@
-const { Student, Teacher, UserInfo, sequelize } = require("../../db/models");
+const { Student, Teacher, UserInfo, Subjects, TeachingSubjects, sequelize } = require("../../db/models");
+const { UserType } = require("./Constants");
 
 async function AddNewTeacher(user_info) {
 	const transaction = await sequelize.transaction();
@@ -72,25 +73,40 @@ async function getUserInfoByEmail(email) {
 			where: {
 				Email: email,
 			},
-			attributes: ['id', 'Name', 'Email', 'Password', 'Phone']
+			attributes: ["id", "Name", "Email", "Password", "Phone"],
 		});
 
 		return await getUserType(user);
-
 	} catch (err) {
 		console.error(err);
 	}
+}
+
+const getUserType = async (user) => {
+	const teacher = await GetTeacherById(user.id);
+	if (teacher) {
+		user.dataValues.About = teacher.About;
+		user.dataValues.subject = await getSubjectsById(teacher.dataValues.id);
+		user.dataValues.Type = UserType.TEACHER;
+	} else {
+		user.dataValues.Type = UserType.STUDENT;
+	}
+	return user;
 };
 
-const getUserType = async(user) => {
-	const teacher = await GetTeacherById(user.id);
-		if (teacher) {
-			user.dataValues.About = teacher.About
-			user.dataValues.Type = "Teacher";
-		} else {
-			user.dataValues.Type = "Student";
-		}
-		return user;
+async function getUserInfoById(userId) {
+	try {
+		const user = await UserInfo.findOne({
+			where: {
+				id: userId,
+			},
+			attributes: ["id", "Name", "Email", "Password", "Phone"],
+		});
+
+		return await getUserType(user);
+	} catch (err) {
+		console.error(err);
+	}
 }
 
 async function GetTeacherById(userId) {
@@ -112,8 +128,44 @@ async function GetStudentById(userId) {
 async function setAboutTeacher(userId, newAbout) {
 	const teacher = await GetTeacherById(userId);
 	teacher.update({
-		About: newAbout
-	})
+		About: newAbout,
+	});
+}
+
+async function getSubjectsById(teacherId) {
+	const subjectIds = await TeachingSubjects.findAll({
+		where: { TeacherId: teacherId },
+		attributes: ["subjectId"],
+	});
+
+	return await Promise.all(
+		subjectIds.map(async (subjectId) => {
+			const subject = await Subjects.findOne({
+				where: { id: subjectId.dataValues.subjectId },
+				attributes: ["id", "Name"],
+			});
+			return subject.dataValues;
+		})
+	);
+}
+
+async function getAllTeachers() {
+
+	const teacherIds = await Teacher.findAll({
+		attributes: ["id", "User_info_id", "About"],
+	});
+
+	return await Promise.all(
+		teacherIds.map(async (teacher) => {
+			const info = await UserInfo.findOne({
+				where: { id: teacher.User_info_id },
+				attributes: ["id", "Name", "Email", "Phone"],
+			});
+			info.dataValues.About = teacher.About;
+			info.dataValues.subjects = await getSubjectsById(teacher.dataValues.id);
+			return info;
+		})
+	);
 }
 
 const UserStorageService = {
@@ -123,7 +175,9 @@ const UserStorageService = {
 	GetTeacherById,
 	GetUserInfo,
 	setAboutTeacher,
-	getUserInfoByEmail
+	getUserInfoByEmail,
+	getUserInfoById,
+	getAllTeachers,
 };
 
 module.exports = UserStorageService;
