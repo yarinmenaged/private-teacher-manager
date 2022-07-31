@@ -58,12 +58,28 @@ async function DeleteEvent(req, res, next){
     }
 }
 
+async function ChangeDescription(req, res, next){
+    try{
+        const event_id = req.params.id;
+        const user = await getUserInfoByToken(req.cookies.token);
+        const description = req.params.description;
+        const change_description = await EventService.ChangeDescription(event_id, user.id, description);
+        return res.status(200).json({
+            status: 200,
+            change_event_description: true
+        });
+    }catch(error){
+        next(error);
+    }
+}
+
 
 const EventsController = {
     GetAllEventsOfUserInWeek,
     AddEventBlocked,
     AddEventFromStudent,
-    DeleteEvent
+    DeleteEvent,
+    ChangeDescription
 };
 
 module.exports = EventsController;

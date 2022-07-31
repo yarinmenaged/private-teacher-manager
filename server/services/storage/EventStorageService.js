@@ -78,11 +78,22 @@ async function DeleteEvent(user_id, event_id){
     throw Error(`Cant delete event`);
 }
 
+async function ChangeDescription(event_id, description) {
+    return await Event.update({
+        "description": description
+    }, {
+        where: {
+            "id": event_id
+        }
+    });
+}
+
 const EventStorageService = {
     GetEventsByUserIdFilterByWeek,
     AddBlockedEventToTeacher,
     AddEventFromStudent,
-    DeleteEvent
+    DeleteEvent,
+    ChangeDescription
 };
 
 module.exports = EventStorageService;
