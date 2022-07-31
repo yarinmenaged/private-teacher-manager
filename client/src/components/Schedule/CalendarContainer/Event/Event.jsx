@@ -33,11 +33,11 @@ const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventActi
     <div className={style.delete} onClick={delete_call_back}>
       <FaTrashAlt></FaTrashAlt>
     </div>
-    { event.StudentId &&
+    { event && event.StudentId &&
     <div className={style.info} onClick={info_button_click}>
       <BsInfoLg></BsInfoLg>
     </div> }
-    {event.StudentId && user_type === EventConstants.USER_TYPE.Teacher &&
+    { event && event.StudentId && user_type === EventConstants.USER_TYPE.Teacher &&
       <div className={style.edit} onClick={edit_button_click}>
         <FaPencilAlt></FaPencilAlt>
       </div>}
