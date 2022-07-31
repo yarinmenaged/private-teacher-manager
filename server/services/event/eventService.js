@@ -45,27 +45,11 @@ async function DeleteEvent(user_id, event_id){
     }
 }
 
-async function ChangeDescription(event_id, user_id, description) {
-    try{
-        const teacher = await UserStorageService.GetTeacherById(user_id);
-        if(teacher) 
-            return await EventStorageService.ChangeDescription(event_id, description);
-        else{
-            const error = new Error(`Only teacher can change description of event`);
-            error.statusCode = 401;
-            throw error;
-        }
-    }catch(error){
-        throw error;
-    }
-}
-
 const EventService = {
     GetAllEventsOfUserInWeek,
     AddEventBlockedToTeacher,
     AddEventFromStudent,
-    DeleteEvent,
-    ChangeDescription
+    DeleteEvent
 };
 
 module.exports = EventService;

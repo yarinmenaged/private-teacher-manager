@@ -8,7 +8,14 @@ export default class serverConnection {
 			Password,
 			Phone,
 		};
-		await ApiService.AddNewResourceRequest(`users/${userType}s`, newUser);
+		await fetch(`http://localhost:2000/users/${userType}s`, {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(newUser),
+		});
 	}
 
     static async getTeacherList() {
@@ -27,25 +34,35 @@ export default class serverConnection {
         //TODO: error
     }
 
-	static async addSubject(id, subject) {
-        return await ApiService.AddNewResourceRequest (`subjects/${id}`, { subject });
-        //TODO: error
-    }
-
-	static async removeSubject(id, subject) {
-        return await ApiService.AddNewResourceRequest (`subjects/remove/${id}`, { subject });
-        //TODO: error
-    }
-
 	static async getUserInfo(email, password) {
 		try {
-			return await ApiService.AddNewResourceRequest (`users/login`, { email, password });
+			const response = await fetch(`http://localhost:2000/users/login`, {
+				method: "POST",
+				credentials: "include",
+				SameSite: "None",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ email, password }),
+			});
+
+			return await response.json();
 		} catch (err) {
 			console.error(err);
 		}
 	}
 
 	static async getUserInfoByToken() {
-		return await ApiService.GetResourceRequest(`users/verifies`);
+		const response = await fetch(`http://localhost:2000/users/verifies`, {
+			method: "GET",
+			credentials: "include",
+			SameSite: "None",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+		});
+		return await response.json();
 	}
 }

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { logOutAction } from "../../redux/actions/userActions";
 import { UnsetCalendarToUserAction } from '../../redux/actions/calendarActions'
-import { getUserType } from "../../redux/selectors/userSelector"
+import { getUserType } from "../../redux/selectors/userSelectors"
 
 const mapStateToProps = state => {
     const Type = getUserType(state);

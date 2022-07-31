@@ -1,18 +1,12 @@
 import style from './Home.module.css';
 import NavBar from '../NavBar/NavBarConnector';
-import { useEffect } from 'react';
 
 
-function Home ({Name, getAllSubjectsAction}) {
-
-    useEffect(() => {
-        getAllSubjectsAction();
-    }, []);
-
+function Home ({name}) {
     return (
         <div>
             <NavBar />
-            <h1 className={style.screenContainer}>Welcome {Name}</h1>
+            <h1 className={style.screenContainer}>Welcome {name}</h1>
         </div>
     );
 }
