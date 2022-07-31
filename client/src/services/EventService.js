@@ -37,11 +37,21 @@ async function DeleteEvent(event_id) {
     }
 }
 
+async function ChangeDescription(event_id, description) {
+    try{
+        const update_description = await ApiService.PutResourceRequest(`event/${event_id}`, { description: description });
+        return update_description.status;
+    }catch(error){
+        throw error;
+    }
+}
+
 const EventService = {
     GetEvents, 
     AddBlockedEvent,
     DeleteEvent,
-    AddEvent
+    AddEvent,
+    ChangeDescription
 };
 
 export default EventService;
