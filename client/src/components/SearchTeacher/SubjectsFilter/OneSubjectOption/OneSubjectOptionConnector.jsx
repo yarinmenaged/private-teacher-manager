@@ -6,8 +6,8 @@ import { getSubjects, getSelectedSubjects } from '../../../../redux/selectors/su
 
 const mapStateToProps = state => {
     const subjectsList = getSubjects(state);
-    const selctedSubject = getSelectedSubjects(state);
-    return { subjectsList, selctedSubject };
+    const selctedSubjects = getSelectedSubjects(state);
+    return { subjectsList, selctedSubjects };
 };
 
 const mapDispatchToProps = dispatch => {
