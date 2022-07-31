@@ -2,9 +2,10 @@ import React, { useCallback, useEffect, useState, useRef } from 'react';
 import moment from 'moment';
 import EventConstants from './Constants';
 import style from './Event.module.css';
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
 import { BsInfoLg } from 'react-icons/bs';
 import EventInfo from './EventInfo/EventInfo';
+import EditDescriptionContainerConnector from './EditDescriptionContainer/EditDescriptionContainerConnector';
 
 const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventAction }) => {
   const time = moment(event.date).format(EventConstants.TimeFormat);
@@ -12,6 +13,7 @@ const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventActi
   const [event_text, setEventText] = useState("");
   const [style_for_event, setStyleForEvent] = useState("");
   const [info_show, setInfoShow] = useState(false);
+  const [edit_description_container, setEditDescriptionContainer] = useState(false);
   const blocked_flag = useRef(false);
 
   const delete_call_back = useCallback(() => {
@@ -23,6 +25,10 @@ const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventActi
     setInfoShow((value) => !value);
   }, [setInfoShow]);
 
+  const edit_button_click = useCallback(() => {
+    setEditDescriptionContainer((value) => !value);
+  }, [setEditDescriptionContainer]);
+
   const action_section = () => (<div className={style.actions}>
     <div className={style.delete} onClick={delete_call_back}>
       <FaTrashAlt></FaTrashAlt>
@@ -30,6 +36,10 @@ const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventActi
     <div className={style.info} onClick={info_button_click}>
       <BsInfoLg></BsInfoLg>
     </div>
+    { user_type === EventConstants.USER_TYPE.Teacher &&
+    <div className={style.edit} onClick={edit_button_click}>
+      <FaPencilAlt></FaPencilAlt>
+    </div> }
   </div>);
   useEffect(() => {
     if (event.StudentId && event.Student.User_info_id === my_user_id && user_type !== EventConstants.USER_TYPE.Teacher) {
@@ -60,6 +70,7 @@ const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventActi
     </div>
     {actions_flag.current && action_section()}
     { info_show && <EventInfo event={event} close_call_back={info_button_click}></EventInfo> }
+    { edit_description_container && <EditDescriptionContainerConnector event_id={event.id} description={event.description} close_call_back={edit_button_click}></EditDescriptionContainerConnector> }
   </>);
 }
 
