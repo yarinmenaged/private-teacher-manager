@@ -24,7 +24,7 @@ export const getUserInfoAction = (email, password) => {
 
     return async(dispatch) => {
         const userInfo = await serverConnection.getUserInfo(email, password);
-        dispatch(getUserInfo(userInfo));
+        await dispatch(getUserInfo(userInfo));
     };
 }
 
@@ -47,5 +47,35 @@ const logOut = () => ({
 export const logOutAction = () => {
 	return (dispatch) => {
 		dispatch(logOut());
+	};
+};
+
+const addSubject = (newSubject) => ({
+	type: ACTIONS.ADD_SUBJECT,
+	payload: newSubject
+});
+
+export const addSubjectAction = (subject) => {
+	return async (dispatch, getState) => {
+		const state = getState();
+		const userId = state.userReducer.id;
+		await serverConnection.addSubject(userId, subject.id);
+		const newSubject = { id: subject.id, Name: subject.value }
+		dispatch(addSubject(newSubject));
+	};
+};
+
+const removeSubject = (removedSubject) => ({
+	type: ACTIONS.REMOVE_SUBJECT,
+	payload: removedSubject
+});
+
+export const removeSubjectAction = (subject) => {
+	return async (dispatch, getState) => {
+		const state = getState();
+		const userId = state.userReducer.id;
+		await serverConnection.removeSubject(userId, subject.id);
+		const removedSubject = { id: subject.id, Name: subject.value }
+		dispatch(removeSubject(removedSubject));
 	};
 };

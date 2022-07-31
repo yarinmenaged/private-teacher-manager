@@ -69,7 +69,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    font-size: 33pt;
+    font-size: 16pt;
     background: #b7b7b76e;
     top: 0;
     left: 0;
@@ -86,7 +86,7 @@
     border: 1px solid;
     border-radius: 50%;
     display: flex;
-    margin: 0 10px;
+    margin: 0 5px;
 }
 
 .delete {
@@ -105,4 +105,14 @@
 .info:hover {
     color: #3699ff;
     background: #fff;
+}
+
+.edit {
+    background: #b2ff36;
+}
+
+.edit:hover {
+    color: #b2ff36;
+    background: #fff;
+
 }

@@ -1,4 +1,6 @@
 const { UserType, TimeStampFormat } = require("./Constants");
+const { Event, Sequelize, Subjects, Teacher, Student, UserInfo } = require('../../db/models');
+const moment = require('moment');
 const {
 	Event,
 	Sequelize,
@@ -59,30 +61,57 @@ async function GetEventsByUserIdFilterByWeek(user_id, week, user_type) {
 	return events_in_week;
 }
 
+async function GetEventsByEventId(event_id) {
+    const event = await Event.findOne({
+        include: [{
+            model: Subjects,
+            attributes: ["id", "Name"]
+        }, {
+            model: Teacher,
+            include: [{
+                model: UserInfo,
+                attributes: ["Name", "Email", "Phone"]
+            }]
+        }, {
+            model: Student,
+            include: [{
+                model: UserInfo,
+                attributes: ["Name", "Email", "Phone"]
+            }]
+        }],
+        where: {
+            "id": event_id
+        }
+    });
+    return event;
+}
+
 async function AddBlockedEventToTeacher(user, date) {
-	const teacher = await GetTeacherById(user.id);
-	await Event.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null);
-	const add_blocked = await Event.create({
-		date: date,
-		StudentId: null,
-		SubjectId: null,
-		TeacherId: teacher.id,
-	});
-	await Event.sequelize.query("SET FOREIGN_KEY_CHECKS = 1", null);
-	return add_blocked;
+    const teacher = await GetTeacherById(user.id);
+    await Event.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null);
+    const add_blocked = await Event.create({
+        "date": date,
+        "StudentId": null,
+        "SubjectId": null,
+        "TeacherId": teacher.id
+    });
+    await Event.sequelize.query("SET FOREIGN_KEY_CHECKS = 1", null);
+    const event = GetEventsByEventId(add_blocked.id);
+    return event;
 }
 
 async function AddEventFromStudent(student, teacher_id, date, subject_id) {
-	const teacher = await GetTeacherById(teacher_id);
-	const student_info = await GetStudentById(student.id);
-	const add_event = await Event.create({
-		date: date,
-		StudentId: student_info.id,
-		SubjectId: subject_id,
-		TeacherId: teacher.id,
-	});
-	const massegeInfo = { teacher, student_info };
-	return { add_event, massegeInfo };
+    const teacher = await GetTeacherById(teacher_id);
+    const student_info = await GetStudentById(student.id);
+    const add_event = await Event.create({
+        "date": date,
+        "StudentId": student_info.id,
+        "SubjectId": subject_id,
+        "TeacherId": teacher.id
+    });
+    const event = GetEventsByEventId(add_event.id);
+    return event;
+
 }
 
 async function DeleteEvent(user_id, event_id) {
@@ -100,11 +129,23 @@ async function DeleteEvent(user_id, event_id) {
 	throw Error(`Cant delete event`);
 }
 
+async function ChangeDescription(event_id, description) {
+    return await Event.update({
+        "description": description
+    }, {
+        where: {
+            "id": event_id
+        }
+    });
+}
+
 const EventStorageService = {
-	GetEventsByUserIdFilterByWeek,
-	AddBlockedEventToTeacher,
-	AddEventFromStudent,
-	DeleteEvent,
+    GetEventsByUserIdFilterByWeek,
+    AddBlockedEventToTeacher,
+    AddEventFromStudent,
+    DeleteEvent,
+    ChangeDescription
+
 };
 
 module.exports = EventStorageService;

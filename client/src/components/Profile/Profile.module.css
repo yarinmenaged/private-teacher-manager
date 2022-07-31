@@ -10,23 +10,36 @@
 }
 
 .edit {
-    color: blueviolet;
-    cursor: pointer;
     text-decoration: underline;
+    color: rgba(78, 98, 165);
+     margin-left: 200px;
 }
 
 .textbox {
     border-radius: 10px;
     border-width: 0;
-    background-color: rgba(78, 98, 165, 0.274);;
+    background-color: rgba(78, 98, 165, 0.274);
+    word-break: break-word;
+    height: 50px;
 }
 
 .button {
     margin-top: 8px;
     background-color: rgb(78, 99, 165);
     color: white;
-    padding: 8px 20px 8px 20px;
+    padding: 8px 10px 8px 10px;
     border-radius: 20px;
     cursor: pointer;
     border-width: 0px;
 }
+
+.dropDown {
+    width: 70%;
+    margin-left: 20px;
+}
+
+textarea {
+    resize: none;
+    height: 300px;
+    width: 300px;
+  }

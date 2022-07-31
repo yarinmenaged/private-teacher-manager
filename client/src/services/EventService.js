@@ -13,16 +13,15 @@ async function GetEvents(id, week) {
 async function AddBlockedEvent(date, hour){
     try{
         const add_blocked_event = await ApiService.AddNewResourceRequest(`event/blocked`, { date, hour });
-        return add_blocked_event.status;
+        return add_blocked_event.event;
     }catch(error){
         throw error;
     }
 }
-
 async function AddEvent(date, hour, teacher_id, subject_id){
     try{
         const add_blocked_event = await ApiService.AddNewResourceRequest(`event`, { date, hour, teacher_id, subject_id });
-        return add_blocked_event.status;
+        return add_blocked_event.event;
     }catch(error){
         throw error;
     }
@@ -37,11 +36,21 @@ async function DeleteEvent(event_id) {
     }
 }
 
+async function ChangeDescription(event_id, description) {
+    try{
+        const update_description = await ApiService.PutResourceRequest(`event/${event_id}`, { description: description });
+        return update_description.status;
+    }catch(error){
+        throw error;
+    }
+}
+
 const EventService = {
     GetEvents, 
     AddBlockedEvent,
     DeleteEvent,
-    AddEvent
+    AddEvent,
+    ChangeDescription
 };
 
 export default EventService;
