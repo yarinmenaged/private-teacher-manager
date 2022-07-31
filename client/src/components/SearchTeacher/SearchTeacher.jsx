@@ -8,6 +8,7 @@ function SearchTeacher({
     fetchTeachersAction,
     chooseTeacherAction,
     selectedTeachers,
+    UnsetCalendarToUserAction
 }) {
 
     const DEFAULT = "default";
@@ -19,9 +20,10 @@ function SearchTeacher({
     }, []);
 
     const chooseTeacher = useCallback((event) => {
+        if(event.target.value === "")
+            UnsetCalendarToUserAction();
         chooseTeacherAction(event.target.value);
-
-    }, [chooseTeacherAction]);
+    }, [chooseTeacherAction, UnsetCalendarToUserAction]);
 
     return (
         <div>

@@ -23,7 +23,8 @@ const reducer = (state = initState, action) => {
                         date: format_date_with_hour,
                         StudentId: null,
                         SubjectId: null,
-                        Student: null
+                        Student: null,
+                        id: payload.hash_id
                     }] };
             else 
                 return { ...state, 
@@ -41,7 +42,8 @@ const reducer = (state = initState, action) => {
                         },
                         Subject: {
                             id: 1
-                        }
+                        },
+                        id: payload.hash_id
                     }]};
         case ACTIONS.DELETE_EVENT:
             if(!payload){
@@ -56,6 +58,8 @@ const reducer = (state = initState, action) => {
                         return value.id !== payload;
                     })};
             }
+        case ACTIONS.UPDATE_EVENT:
+            return {...state, events: [...state.events.filter(value => value.id !== payload.hash_id), payload.event]};
         case ACTIONS.RESTORE_EVENT:
             return { events: [ ...state.events, state.deleted_event ], deleted_event: {} };
         case ACTIONS.UPDATE_DESCRIPTION: 

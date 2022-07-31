@@ -38,6 +38,31 @@ async function GetEventsByUserIdFilterByWeek(user_id, week, user_type) {
     return events_in_week;
 }
 
+async function GetEventsByEventId(event_id) {
+    const event = await Event.findOne({
+        include: [{
+            model: Subjects,
+            attributes: ["id", "Name"]
+        }, {
+            model: Teacher,
+            include: [{
+                model: UserInfo,
+                attributes: ["Name", "Email", "Phone"]
+            }]
+        }, {
+            model: Student,
+            include: [{
+                model: UserInfo,
+                attributes: ["Name", "Email", "Phone"]
+            }]
+        }],
+        where: {
+            "id": event_id
+        }
+    });
+    return event;
+}
+
 async function AddBlockedEventToTeacher(user, date) {
     const teacher = await GetTeacherById(user.id);
     await Event.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null);
@@ -48,7 +73,8 @@ async function AddBlockedEventToTeacher(user, date) {
         "TeacherId": teacher.id
     });
     await Event.sequelize.query("SET FOREIGN_KEY_CHECKS = 1", null);
-    return add_blocked;
+    const event = GetEventsByEventId(add_blocked.id);
+    return event;
 }
 
 async function AddEventFromStudent(student, teacher_id, date, subject_id) {
@@ -60,7 +86,8 @@ async function AddEventFromStudent(student, teacher_id, date, subject_id) {
         "SubjectId": subject_id,
         "TeacherId": teacher.id
     });
-    return add_event;
+    const event = GetEventsByEventId(add_event.id);
+    return event;
 }
 
 async function DeleteEvent(user_id, event_id){

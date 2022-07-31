@@ -36,7 +36,8 @@ async function AddEventFromStudent(req, res, next){
         const add_event = await EventService.AddEventFromStudent(student, teacher_id, date, hour, subject_id);
         return res.status(200).json({
             status: 200,
-            add_event_status: true
+            add_event_status: true,
+            event: add_event
         });
     }catch(error){
         next(error);
@@ -48,7 +49,7 @@ async function DeleteEvent(req, res, next){
     try{
         const event_id = req.params.id;
         const user = await getUserInfoByToken(req.cookies.token);
-        const add_event = await EventService.DeleteEvent(user.id, event_id);
+        const delete_event = await EventService.DeleteEvent(user.id, event_id);
         return res.status(200).json({
             status: 200,
             delete_event_status: true

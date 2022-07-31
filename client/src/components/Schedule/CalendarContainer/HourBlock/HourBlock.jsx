@@ -6,9 +6,10 @@ import { Tooltip } from 'monday-ui-react-core';
 import EventConnector from '../Event/EventConnector';
 import TeacherPreferencesBlock from '../TeacherPreferences/TeacherPreferencesBlock';
 
-const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, calender_user_id, subject_id, blocked_size }) => {
+const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, calender_user_id, show_other_user_calendar, subject_id, blocked_size }) => {
   const [render_event, setRenderEvent] = useState(false);
-  const event_obj = useRef(null);
+  const [event_obj, setEventObj] = useState(null);
+
   const event_filtered = useCallback((blocks_date_in_utc)  => {
     return events.find((event) => {
       const event_date_in_utc = new Date(event.date).getTime();
@@ -28,16 +29,16 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
   );
 
   useEffect(() => {
-    event_obj.current = event();
-    event_obj.current ? setRenderEvent(true) : setRenderEvent(false);
-  }, [date, event, events]);
+    setEventObj(event());
+    event_obj ? setRenderEvent(true) : setRenderEvent(false);
+  }, [date, event, event_obj]);
 
   const hour_block_click_call__back = useCallback((event) => {
-    if(!event_obj.current)
+    if(!event_obj)
       AddEventAction(user_id, date, hour, user_type, calender_user_id, subject_id);
     else
       event.preventDefault();    
-  }, [AddEventAction, user_id, date, hour, user_type, calender_user_id, subject_id]);
+  }, [AddEventAction, user_id, date, hour, user_type, calender_user_id, subject_id, event_obj]);
 
   if (type === ConstantsHourBlock.BLOCK_TYPES.TIME) {
     return (
@@ -53,14 +54,17 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
                             blocked_size ?
                             ConstantsHourBlock.blocked_size
                             :
-                            ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP;
+                            show_other_user_calendar ?
+                            ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP 
+                            :
+                            ConstantsHourBlock.FREE_BLOCK;
 
   return (<Tooltip 
             immediateShowDelay={0} 
             position={Tooltip.positions.BOTTOM}
             content={content_tool_tip} >
             <div className={`${style.entry}`} onClick={(event) => {hour_block_click_call__back(event)}} style={{height: `${blocked_size}em`}}>
-              {render_event && <EventConnector event={event_obj.current} user_type={user_type}></EventConnector>}
+              { render_event && <EventConnector event={event_obj} user_type={user_type}></EventConnector>}
               { blocked_size && <TeacherPreferencesBlock blocked_size={blocked_size} start={hour}></TeacherPreferencesBlock>}
             </div>
         </Tooltip>);

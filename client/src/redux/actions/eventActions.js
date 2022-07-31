@@ -1,7 +1,7 @@
 import ACTIONS from './actionConstants';
 import EventService from '../../services/EventService';
 import ReduxContents from '../Constants';
-
+import crypto from 'crypto-js';
 
 const GetEvents = (id, week) => {
     return async(dispatch) => {
@@ -13,16 +13,19 @@ const GetEvents = (id, week) => {
 const AddEvent = (user_id, date, hour, user_type, teacher_id, subject_id) => {
     return async(dispatch) => {
         try{
+            const hash_id = crypto.SHA512(`${date} ${hour} ${user_type} ${teacher_id} ${subject_id} ${user_id}`).toString();
             if(user_type === ReduxContents.USER_TYPE.Teacher){         
                 if(teacher_id === user_id)                      
-                    dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour}});
+                    dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour, hash_id }});
                 else
-                    dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour, teacher_id }});
-                await EventService.AddBlockedEvent(date, hour);
-            } else if(user_type === ReduxContents.USER_TYPE.Student){
-                dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour, teacher_id, subject_id }});
-                await EventService.AddEvent(date, hour, teacher_id, subject_id);
-            }
+                    dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour, teacher_id, hash_id }});
+                const event = await EventService.AddBlockedEvent(date, hour);
+                dispatch({ type: ACTIONS.UPDATE_EVENT, payload: { event, hash_id } });
+            } else if(user_type === ReduxContents.USER_TYPE.Student && teacher_id){
+                dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour, teacher_id, subject_id, hash_id }});
+                const event = await EventService.AddEvent(date, hour, teacher_id, subject_id);
+                dispatch({ type: ACTIONS.UPDATE_EVENT, payload: { event, hash_id } });
+            }            
         }catch(error){
             //dispatch({ type: ACTIONS.DELETE_EVENT });
             // TODO ADD error action

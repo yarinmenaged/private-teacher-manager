@@ -10,11 +10,12 @@ import EventConstants from '../Constants';
 const EventInfo = ({ event, close_call_back }) => {
     const [starting_time, setStartingTime] = useState("");
     const [date, setDate] = useState("");
+    
     useEffect(() => {
         const date_obj = new Date(event.date);
         setStartingTime(moment(date_obj).format(EventConstants.TimeFormat));
         setDate(moment(date_obj).format(EventConstants.DATE_FORMAT));
-    }, [])
+    }, [event])
 
     return (
         <div className={style.info_container}>
