@@ -4,11 +4,7 @@ import { Dropdown } from 'monday-ui-react-core';
 import cx from 'classnames'
 import { Flex } from 'monday-ui-react-core';
 
-function OneSubjectOption({ resetSubjectsAction, selectSubjectAction, subjectsList }) {
-
-    useEffect(() => {
-        resetSubjectsAction();
-    }, []);
+function OneSubjectOption({ resetSubjectsAction, selectSubjectAction, subjectsList, selctedSubject }) {
 
     const allOptions = subjectsList.map(subject => ({
         value: subject.Name,
@@ -19,12 +15,13 @@ function OneSubjectOption({ resetSubjectsAction, selectSubjectAction, subjectsLi
     const selectSubject = useCallback((event) => {
         resetSubjectsAction();
         selectSubjectAction({ id: event.id, value: event.value });
-    }, [selectSubjectAction]);
+    }, [selectSubjectAction, resetSubjectsAction]);
 
     return (
         <Flex justify={Flex.justify.CENTER}>
             <Dropdown
                 options={allOptions}
+                defaultValue={[{value: selctedSubject[0].Name, label: selctedSubject[0].Name}]}
                 onChange={(event) => selectSubject(event)}
                 clearable={false}
                 placeholder="Select Subject"

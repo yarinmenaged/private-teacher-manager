@@ -38,6 +38,11 @@
     margin-left: 20px;
 }
 
+.smallDropDown {
+    width: 40%;
+    margin-left: 10px;
+}
+
 textarea {
     resize: none;
     height: 300px;
