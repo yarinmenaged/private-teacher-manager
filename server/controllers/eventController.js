@@ -62,7 +62,7 @@ async function ChangeDescription(req, res, next){
     try{
         const event_id = req.params.id;
         const user = await getUserInfoByToken(req.cookies.token);
-        const description = req.params.description;
+        const description = req.body.description;
         const change_description = await EventService.ChangeDescription(event_id, user.id, description);
         return res.status(200).json({
             status: 200,
