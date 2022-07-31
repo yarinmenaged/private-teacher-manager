@@ -16,14 +16,13 @@ const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventActi
   const [edit_description_container, setEditDescriptionContainer] = useState(false);
   const blocked_flag = useRef(false);
 
-  const delete_call_back = useCallback(() => {
-    if (actions_flag.current)
-      DeleteEventAction(event.id)
-  }, [DeleteEventAction, event, actions_flag]);
+	const delete_call_back = useCallback(() => {
+		if (actions_flag.current) DeleteEventAction(event.id);
+	}, [DeleteEventAction, event, actions_flag]);
 
-  const info_button_click = useCallback(() => {
-    setInfoShow((value) => !value);
-  }, [setInfoShow]);
+	const info_button_click = useCallback(() => {
+		setInfoShow((value) => !value);
+	}, [setInfoShow]);
 
   const edit_button_click = useCallback(() => {
     setEditDescriptionContainer((value) => !value);
