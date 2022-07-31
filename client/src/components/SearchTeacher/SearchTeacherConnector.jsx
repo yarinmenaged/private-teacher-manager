@@ -4,10 +4,11 @@ import { getSelectedTeachers, getAreTeachersFetched} from '../../redux/selectors
 import SearchTeacher from './SearchTeacher';
 import { fetchTeachersAction, chooseTeacherAction } from '../../redux/actions/teachersActions';
 import { getSelectedSubjects } from "../../redux/selectors/subjectsSelector";
+import { UnsetCalendarToUserAction } from '../../redux/actions/calendarActions';
 
 const mapStateToProps = state => {
     const areTeachersFetched = getAreTeachersFetched(state);
-    const selectedSubjects = getSelectedSubjects(state);
+    const selectedSubjects = getSelectedSubjects(state).map(subject => subject.Name);
     const selectedTeachers = getSelectedTeachers(state, selectedSubjects);
     return {areTeachersFetched, selectedTeachers } ;
 };
@@ -15,7 +16,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            fetchTeachersAction, chooseTeacherAction,
+            fetchTeachersAction, chooseTeacherAction, UnsetCalendarToUserAction
         },
         dispatch
     );

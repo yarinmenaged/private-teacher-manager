@@ -4,11 +4,11 @@ import style from './SubjectsFilter.module.css';
 import MultipleSubjectsOptions from './MultipleSubjectsOptions/MultipleSubjectsOptionsConnector';
 import OneSubjectOption from './OneSubjectOption/OneSubjectOptionConnector';
 
-function SubjectsFilter() {
+function SubjectsFilter({ multipleOptions }) {
     return (
         <div>
             {
-                window.location.href.includes("search-profile")
+                multipleOptions
                     ? <MultipleSubjectsOptions />
                     : < OneSubjectOption />
             }

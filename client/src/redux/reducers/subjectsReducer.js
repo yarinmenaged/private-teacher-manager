@@ -10,7 +10,7 @@ const reducer = (state = initState, action) => {
     switch (type) {
 
         case ACTIONS.GET_SUBJECTS_LIST:
-            return {...state, allSubjects: payload};
+            return { ...state, allSubjects: payload };
 
         case ACTIONS.SELECT_SUBJECT:
             const subjects = state.selectedSubjects;
@@ -19,15 +19,15 @@ const reducer = (state = initState, action) => {
 
         case ACTIONS.DESELECT_SUBJECT:
             const newSubjects = state.selectedSubjects;
-            const index = newSubjects.findIndex((value) => value === payload);
+            const index = newSubjects.findIndex((value) => value.Name === payload);
             newSubjects.splice(index, 1);
             return { ...state, selectedSubjects: newSubjects };
 
+        case ACTIONS.RESET_SUBJECTS:
+            return { ...state, selectedSubjects: [] };
+
         case ACTIONS.LOG_OUT:
             return { selectedSubjects: [], allSubjects: [] };
-
-        case ACTIONS.ONLY_ONE:
-            return { ...state, selectedSubjects: [] };
 
         default:
             return state;

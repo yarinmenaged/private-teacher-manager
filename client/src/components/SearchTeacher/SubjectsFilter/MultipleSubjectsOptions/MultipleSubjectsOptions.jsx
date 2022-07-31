@@ -1,44 +1,52 @@
 import { useCallback } from 'react';
 import style from '../SubjectsFilter.module.css';
+import { Dropdown } from 'monday-ui-react-core';
+import { Flex } from 'monday-ui-react-core';
+import cx from 'classnames'
 
 function MultipleSubjectsOptions({
     selectSubjectAction,
     deselectSubjectAction,
     selectedSubjects,
     unchooseTeacherAction,
-    subjectsList
+    subjectsList,
+    resetSubjectsAction,
 }) {
+
+    const allOptions = subjectsList.map(subject => ({
+        value: subject.Name,
+        label: subject.Name,
+        id: subject.id,
+    }));
+
+    const selectedOptions = selectedSubjects.map(subject => ({
+        value: subject.Name,
+        label: subject.Name,
+        id: subject.id,
+    }));
 
     const selectSubject = useCallback((event) => {
         unchooseTeacherAction();
-        if (event.target.checked) {
-            selectSubjectAction({ Name: event.target.name, id: event.target.id });
-        } else {
-            deselectSubjectAction(event.target.name);
-        }
+        if (!event) resetSubjectsAction();
+        else selectSubjectAction(event[event.length - 1]);
+    }, [selectSubjectAction, unchooseTeacherAction]);
 
-    }, [selectSubjectAction, unchooseTeacherAction, deselectSubjectAction]);
+    const removeSubject = useCallback((event) => {
+        unchooseTeacherAction();
+        deselectSubjectAction(event.value);
+    }, [deselectSubjectAction, unchooseTeacherAction]);
 
     return (
-        <div className={style.flex}>
-            {
-                subjectsList.map(subject => {
-                    return (
-                        <div key={subject.id} className={style.flex}>
-                            <p>{subject.Name}</p>
-                            <input type="checkbox" onChange={(event) => selectSubject(event)}
-                                name={subject.Name} id={subject.id} className={style.checkbox}
-                                defaultChecked=
-                                {
-                                    selectedSubjects.includes(subject.Name)
-                                        ? true
-                                        : false
-                                } />
-                        </div>
-                    );
-                })
-            }
-        </div>
+        <Flex justify={Flex.justify.CENTER}>
+            <Dropdown
+                multiline multi
+                options={allOptions}
+                defaultValue={selectedOptions}
+                onChange={(event) => selectSubject(event)}
+                onOptionRemove={(event) => removeSubject(event)}
+                placeholder="Select Subjects"
+                className={cx("dropdown-stories-styles_with-chips", style.width)} />
+        </Flex>
     );
 }
 
