@@ -19,8 +19,8 @@ async function GetAllEventsOfUserInWeek(user_id, week){
 
 async function AddEventBlockedToTeacher(user_id, date, hour){
     try{
-        const format_date = moment(date).format('MM-DD-YYYY');
-        const formatted_date = moment(`${format_date} ${hour}`).format('MM-DD-YYYY HH:mm:ss');
+        const format_date = moment.utc(date).format('MM-DD-YYYY');
+        const formatted_date = moment.utc(`${format_date} ${hour}`).format('MM-DD-YYYY HH:mm:ss');
         return await EventStorageService.AddBlockedEventToTeacher(user_id, formatted_date);
     }catch(error){
         throw error;
@@ -29,8 +29,8 @@ async function AddEventBlockedToTeacher(user_id, date, hour){
 
 async function AddEventFromStudent(student, teacher_id, date, hour, subject_id){
     try{
-        const format_date = moment(date).format('MM-DD-YYYY');
-        const formatted_date = moment(`${format_date} ${hour}`).format('MM-DD-YYYY HH:mm:ss');
+        const format_date = moment.utc(date).format('MM-DD-YYYY');
+        const formatted_date = moment.utc(`${format_date} ${hour}`).format('MM-DD-YYYY HH:mm:ss');
         return await EventStorageService.AddEventFromStudent(student, teacher_id, formatted_date, subject_id);
     }catch(error){
         throw error;
