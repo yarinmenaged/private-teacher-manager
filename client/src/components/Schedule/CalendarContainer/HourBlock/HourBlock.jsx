@@ -66,7 +66,6 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
             <div className={`${style.entry}`} onClick={(event) => {hour_block_click_call__back(event)}} style={{height: `${blocked_size}em`}}>
               { render_event && <EventConnector event={event_obj} user_type={user_type}></EventConnector>}
               { blocked_size && <TeacherPreferencesBlock blocked_size={blocked_size} start={hour}></TeacherPreferencesBlock>}
-
             </div>
          </Tooltip>);
 };
