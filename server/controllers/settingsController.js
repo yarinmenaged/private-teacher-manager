@@ -1,10 +1,5 @@
 const SettingsService = require("../services/settings/settingsService");
-
-async function addTeachersSettings(req, res) {
-  console.log("create settings");
-  const settings = await CreateTeacherSettings(req.body);
-  res.status(200).json(settings);
-}
+const { GetTeacherById } = require("../services/storage/UserStorageService");
 
 async function getTeacherSettings(req, res, next) {
   try {
@@ -20,7 +15,13 @@ async function getTeacherSettings(req, res, next) {
 
 async function setTeacherSettings(req, res, next) {
   try {
-    const workingHours = await SettingsService.GetTeachersSettings(teacherId);
+    const user = await getUserInfoByToken(req.cookies.token);
+    const teacher = await GetTeacherById(user.id);
+    const workingHoursData = req.body.workingHours;
+    const workingHours = await SettingsService.setTeacherSettings(
+      teacher.id,
+      workingHoursData
+    );
     return res.status(200).json({
       status: 200,
       workingHours,

@@ -1,18 +1,6 @@
 import ACTIONS from "./actionConstants";
 import SettingsService from "../../../../server/services/settings/settingsService";
-
-const getSettingsForTeacher = (teacherId) => {
-  return async (dispatch) => {
-    const workingHours = SettingsService.GetTeacherSettings(teacherId);
-    dispatch({ type: ACTIONS.GET_SETTINGS_FOR_TEACHER, payload: workingHours });
-  };
-};
-
-export const getSettingsForTeacherAction = (teacherId) => {
-  return async (dispatch) => {
-    dispatch(getSettingsForTeacher(teacherId));
-  };
-};
+import ConstantsCalendarContainer from "../../components/Schedule/CalendarContainer/Constants";
 
 const setSettingsForTeacher = (teacherId) => {
   return async (dispatch) => {
@@ -33,7 +21,7 @@ const setDailyWorkingHours = (day, workingHoursString) => {
       type: ACTIONS.SET_DAILY_WORKING_HOURS,
       payload: {
         workingHour: workingHoursString,
-        day: day,
+        day: ConstantsCalendarContainer.DAYS_IN_WEEK.indexOf(day),
       },
     });
   };
