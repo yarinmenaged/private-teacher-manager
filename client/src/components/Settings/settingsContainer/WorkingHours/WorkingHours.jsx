@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DailyWorkingHours } from "./DailyWorkingHours/DailyWorkingHours";
 import ConstantsCalendarContainer from "../../../Schedule/CalendarContainer/Constants";
 import style from "./WorkingHours.module.css";
@@ -6,13 +6,16 @@ import style from "./WorkingHours.module.css";
 function WorkingHours() {
   const handleSaveChanges = (event) => {
     event.preventDefault();
+    const length = document.getElementById("lesson-length").value;
+    // the func below needs to be written
+    //setLessonLength(length);
   };
 
   return (
     <div className={style.container}>
       <p> Select your preffered leson's length</p>
       <select name="lesson-length" id="lesson-length">
-        {[5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60].map((time) => {
+        {[15, 20, 25, 30, 35, 40, 45, 50, 55, 60].map((time) => {
           return <option value={time}>{time}</option>;
         })}
       </select>
