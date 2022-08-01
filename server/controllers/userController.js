@@ -24,11 +24,10 @@ const loginRouter = async (req, res, next) => {
 	try {
 		const { email, password } = req.body;
 		const authorizedUser = await login(email, password);
-		// delete authorizedUser.userData.Password; //shoud not send the password back!
 		res
 			.cookie("token", authorizedUser.token, {
 				maxAge: oneDayMilliseconds,
-				sameSite: "Lax",
+				SameSite: "None",
 			})
 			.status(200)
 			.send(authorizedUser);

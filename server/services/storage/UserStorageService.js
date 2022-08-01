@@ -1,4 +1,11 @@
-const { Student, Teacher, UserInfo, Subjects, TeachingSubjects, sequelize } = require("../../db/models");
+const {
+	Student,
+	Teacher,
+	UserInfo,
+	Subjects,
+	TeachingSubjects,
+	sequelize,
+} = require("../../db/models");
 const { UserType } = require("./Constants");
 
 async function AddNewTeacher(user_info) {
@@ -150,7 +157,6 @@ async function getSubjectsById(teacherId) {
 }
 
 async function getAllTeachers() {
-
 	const teacherIds = await Teacher.findAll({
 		attributes: ["id", "User_info_id", "About"],
 	});

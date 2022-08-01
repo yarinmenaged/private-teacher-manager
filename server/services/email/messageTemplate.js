@@ -11,11 +11,11 @@ const addingLessonTeacherMessage = (
 	lessonTime
 ) => {
 	return {
-		subject,
+		subject: "A new lesson is set now",
 		text: `Hi ${teacherName},<br/>
     a new lesson was scheduled for you by ${studentName}<br/><br/>
     Date: ${lessonDate}<br>
-    Time: ${lessonTime}<br>
+    Time: ${lessonTime}<br><br/>
     ${masseges.AppName}`,
 	};
 };
@@ -27,29 +27,29 @@ const canceledLessonTeacherMessage = (
 	lessonTime
 ) => {
 	return {
-		subject,
+		subject: `lesson was cancelled by ${studentName}`,
 		text: `Hi ${teacherName},<br/>
     Lesson was scheduled for you by ${studentName}<br/><br/>
     Date: ${lessonDate}<br>
     Time: ${lessonTime}<br>
-    ${masseges.canceledLesson}
+    ${masseges.canceledLesson}<br/><br/>
     ${masseges.AppName}`,
 	};
 };
 
-const canceledLessonStusentMessage = (
+const canceledLessonStudentMessage = (
 	teacherName,
 	studentName,
 	lessonDate,
 	lessonTime
 ) => {
 	return {
-		subject,
+		subject: `your lesson was cancelled by ${teacherName}`,
 		text: `Hi ${studentName},<br/>
     Lesson was scheduled to:<br/><br/>
     Date: ${lessonDate}<br>
     Time: ${lessonTime}<br>
-    with ${teacherName} ${masseges.canceledLesson} ${masseges.canceledLessonStudent}
+    with ${teacherName} ${masseges.canceledLesson} ${masseges.canceledLessonStudent}<br/><br/>
     ${masseges.AppName}`,
 	};
 };
@@ -57,5 +57,5 @@ const canceledLessonStusentMessage = (
 module.exports = {
 	addingLessonTeacherMessage,
 	canceledLessonTeacherMessage,
-	canceledLessonStusentMessage,
+	canceledLessonStudentMessage,
 };

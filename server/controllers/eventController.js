@@ -1,12 +1,11 @@
 const EventService = require("../services/event/eventService");
 const { getUserInfoByToken } = require("../services/auth/auth");
-const Mail = require("nodemailer/lib/mailer");
+const emailFactory = require("../services/email/emailFactory");
 
 async function GetAllEventsOfUserInWeek(req, res, next) {
 	try {
-		const user_id = req.params.id;
-		const week = req.params.week;
-		const events = await EventService.GetAllEventsOfUserInWeek(user_id, week);
+		const { id, week } = req.params;
+		const events = await EventService.GetAllEventsOfUserInWeek(id, week);
 		return res.status(200).json({
 			status: 200,
 			events: events,
@@ -28,6 +27,7 @@ async function AddEventBlocked(req, res, next) {
 		return res.status(200).json({
 			status: 200,
 			add_event_status: true,
+			event: add_blocked_event,
 		});
 	} catch (error) {
 		next(error);
@@ -45,10 +45,16 @@ async function AddEventFromStudent(req, res, next) {
 			hour,
 			subject_id
 		);
-		console.log(add_event.massegeInfo, date, hour);
+		emailFactory.generateAddingLessonEmailToTeacher(
+			add_event.studentId,
+			add_event.teacherId,
+			date,
+			hour
+		);
 		return res.status(200).json({
 			status: 200,
 			add_event_status: true,
+			event: add_event,
 		});
 	} catch (error) {
 		next(error);
@@ -59,10 +65,30 @@ async function DeleteEvent(req, res, next) {
 	try {
 		const event_id = req.params.id;
 		const user = await getUserInfoByToken(req.cookies.token);
-		const add_event = await EventService.DeleteEvent(user.id, event_id);
+		emailFactory.sendEmailDeleteEvent(event_id);
+		const delete_event = await EventService.DeleteEvent(user.id, event_id);
 		return res.status(200).json({
 			status: 200,
 			delete_event_status: true,
+		});
+	} catch (error) {
+		next(error);
+	}
+}
+
+async function ChangeDescription(req, res, next) {
+	try {
+		const event_id = req.params.id;
+		const user = await getUserInfoByToken(req.cookies.token);
+		const description = req.body.description;
+		const change_description = await EventService.ChangeDescription(
+			event_id,
+			user.id,
+			description
+		);
+		return res.status(200).json({
+			status: 200,
+			change_event_description: true,
 		});
 	} catch (error) {
 		next(error);
@@ -74,6 +100,7 @@ const EventsController = {
 	AddEventBlocked,
 	AddEventFromStudent,
 	DeleteEvent,
+	ChangeDescription,
 };
 
 module.exports = EventsController;

@@ -1,6 +1,7 @@
 import ACTIONS from "../actions/actionConstants";
 
-const initState = { // user info. shoud get it from server at the login!
+const initState = {
+	// user info. shoud get it from server at the login!
 	loginStatus: false,
 	incorrectPassword: false,
 	id: undefined,
@@ -15,7 +16,6 @@ const initState = { // user info. shoud get it from server at the login!
 const reducer = (state = initState, action) => {
 	const { type, payload } = action;
 	switch (type) {
-
 		case ACTIONS.EDIT_ABOUT:
 			return { ...state, About: payload };
 
@@ -32,7 +32,7 @@ const reducer = (state = initState, action) => {
 					Phone: payload.Phone,
 					Type: payload.Type,
 					About: payload.About,
-					subjects: payload.subjects
+					subjects: payload.subjects,
 				};
 			}
 
@@ -52,25 +52,27 @@ const reducer = (state = initState, action) => {
 				Phone: payload.Phone,
 				Type: payload.Type,
 				About: payload.About,
-				subjects: payload.subject
+				subjects: payload.subject,
+			};
+
+		case ACTIONS.ADD_SUBJECT:
+			const subjects = state.subjects;
+			subjects.push(payload);
+			return { ...state, subjects: subjects };
+
+		case ACTIONS.REMOVE_SUBJECT:
+			const Subjects = state.subjects;
+			return {
+				...state,
+				subjects: Subjects.filter((value) => value.id !== payload.id),
 			};
 
 		case ACTIONS.LOG_OUT:
-			return {
-				loginStatus: false,
-				incorrectPassword: false,
-				id: undefined,
-				Name: "",
-				Email: "",
-				Phone: "",
-				Type: "",
-				About: "",
-				subjects: []
-			};
+			return { ...initState };
 
 		default:
 			return state;
 	}
-}
+};
 
 export default reducer;

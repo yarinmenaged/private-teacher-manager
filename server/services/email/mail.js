@@ -13,15 +13,19 @@ const transporter = nodemailer.createTransport({
 	},
 });
 
-const mailOptions = {
-	from: PRIVARE_TEACHER_MAIL || "PrivateTeacher@outlook.co.il",
-	to: "aviranisa@gmail.com",
-	subject: "Sending Email using Node.js",
-	text: "That was easy!",
+const mailOptions = (sendMailTo, subject, text) => {
+	return {
+		from: PRIVARE_TEACHER_MAIL || "PrivateTeacher@outlook.co.il",
+		to: sendMailTo,
+		subject: subject,
+		// text: text,
+		html: text,
+	};
 };
 
-const emailSender = () => {
-	transporter.sendMail(mailOptions, function (error, info) {
+const emailSender = (sendMailTo, subject, text) => {
+	const mailOpt = mailOptions(sendMailTo, subject, text);
+	transporter.sendMail(mailOpt, function (error, info) {
 		if (error) {
 			console.log(error);
 		} else {
