@@ -3,6 +3,7 @@ const {
   Teacher,
   UserInfo,
   Subjects,
+  Settings,
   TeachingSubjects,
   sequelize,
 } = require("../../db/models");
@@ -13,8 +14,9 @@ async function AddNewTeacher(user_info) {
   try {
     const user_info_row = await InsertUserInfo(user_info, transaction);
     const teacher_row = await InsertTeacher(user_info_row.id, transaction);
+    const teacher_pref_row = await InsertTeacherPref(teacher_row.id, transaction);
     await transaction.commit();
-    return Promise.all([user_info_row, teacher_row]);
+    return Promise.all([user_info_row, teacher_row, teacher_pref_row]);
   } catch (error) {
     transaction.rollback();
     throw error;
@@ -54,6 +56,12 @@ async function InsertTeacher(user_info_id, transaction) {
     },
     { transaction: transaction }
   );
+}
+
+async function InsertTeacherPref(teacher_id, transaction){
+  return await Settings.create({
+    TeacherId: teacher_id
+  }, { transaction: transaction });
 }
 
 async function InsertStudent(user_info_id, transaction) {
