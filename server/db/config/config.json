@@ -1,16 +1,9 @@
 {
   "development": {
-<<<<<<< HEAD
     "username": "gjeg9ie91kaxc9hx",
     "password": "k8upggacj5lsla9m",
     "database": "vxh7p980bsq2i70w",
     "host": "xlf3ljx3beaucz9x.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-=======
-    "username": "root",
-    "password": "password",
-    "database": "private_teachers",
-    "host": "127.0.0.1",
->>>>>>> fix_time_for_release
     "dialect": "mysql",
     "timezone": "+03:00"
   },
