@@ -2,11 +2,12 @@ import OneSubjectOption from './OneSubjectOption';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { selectSubjectAction, resetSubjectsAction } from "../../../../redux/actions/subjectsAction";
-import { getSubjects } from '../../../../redux/selectors/subjectsSelector';
+import { getSubjects, getSelectedSubjects } from '../../../../redux/selectors/subjectsSelector';
 
 const mapStateToProps = state => {
     const subjectsList = getSubjects(state);
-    return { subjectsList };
+    const selctedSubjects = getSelectedSubjects(state);
+    return { subjectsList, selctedSubjects };
 };
 
 const mapDispatchToProps = dispatch => {

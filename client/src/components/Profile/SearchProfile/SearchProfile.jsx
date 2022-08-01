@@ -2,20 +2,34 @@ import style from "../Profile.module.css";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../../NavBar/NavBarConnector";
 import SearchTeacher from "../../SearchTeacher/SearchTeacherConnector";
-import { useCallback } from "react";
-import { Icon } from 'monday-ui-react-core';
+import { useCallback, useState, useEffect } from "react";
+import { Icon, Flex, Dropdown } from 'monday-ui-react-core';
 import {
     Email, PersonRound, Mobile, Description, Academy
 } from "monday-ui-react-core/dist/allIcons";
+import cx from 'classnames'
 
-function SearchProfile({ chosenTeacher, SetCalendarToUserAction }) {
+function SearchProfile({
+    chosenTeacher,
+    SetCalendarToUserAction,
+    selectSubjectAction,
+    resetSubjectsAction,
+    subjectsOptions,
+}) {
 
     const navigate = useNavigate();
+
+    const [displayDropdown, setDisplayDropdown] = useState(false);
 
     const goToCalender = useCallback(() => {
         SetCalendarToUserAction(chosenTeacher.id);
         navigate("/schedule");
     }, [chosenTeacher, SetCalendarToUserAction, navigate]);
+
+    const selectSubject = useCallback((event) => {
+        resetSubjectsAction();
+        selectSubjectAction({ id: event.id, value: event.value });
+    }, [selectSubjectAction, resetSubjectsAction]);
 
     return (
         <div>
@@ -42,8 +56,25 @@ function SearchProfile({ chosenTeacher, SetCalendarToUserAction }) {
                                 )
                             }
                         </div><br />
-                        <button className={style.button}
-                            onClick={goToCalender}>Schedule a lesson now!</button><br />
+                        <Flex>
+                            <button className={style.button}
+                                onClick={() => setDisplayDropdown(!displayDropdown)}>
+                                    Sounds interesting?
+                            </button><br />
+                            {
+                                displayDropdown &&
+                                <Dropdown
+                                    options={subjectsOptions}
+                                    onChange={(event) => {
+                                        selectSubject(event);
+                                        goToCalender();
+                                    }}
+                                    clearable={false}
+                                    size={Dropdown.size.SMALL}
+                                    placeholder="Select Subject"
+                                    className={cx("dropdown-stories-styles_big-spacing", style.smallDropDown)} />
+                            }
+                        </Flex>
                     </div>
                 </div>
             }
