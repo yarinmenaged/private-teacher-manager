@@ -16,13 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Settings.init(
     {
       lessonLength: DataTypes.INTEGER,
-      Sunday: DataTypes.STRING,
-      Monday: DataTypes.STRING,
-      Tuesday: DataTypes.STRING,
-      Wednesday: DataTypes.STRING,
-      Thursday: DataTypes.STRING,
-      Friday: DataTypes.STRING,
-      Saturday: DataTypes.STRING,
+      workingHours: DataTypes.STRING,
     },
     {
       sequelize,

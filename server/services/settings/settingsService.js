@@ -14,13 +14,7 @@ async function CreateTeacherSettings(teacherId, workingHours) {
   return await Teacher.create(
     {
       teacherId,
-      Sunday: workingHours[Sunday],
-      Monday: workingHours[Monday],
-      Tuesday: workingHours[Tuesday],
-      Wednesday: workingHours[Wednesday],
-      Thursday: workingHours[Thursday],
-      Friday: workingHours[Friday],
-      Saturday: workingHours[Saturday],
+      workingHours: JSON.parse(workingHours),
     },
     { transaction: transaction }
   );
@@ -29,13 +23,7 @@ async function CreateTeacherSettings(teacherId, workingHours) {
 async function SetTeacherSettings(teacherId, workingHours) {
   const settings = await GetTeacherSettings(teacherId);
   return await Settings.update({
-    Sunday: workingHours[Sunday],
-    Monday: workingHours[Monday],
-    Tuesday: workingHours[Tuesday],
-    Wednesday: workingHours[Wednesday],
-    Thursday: workingHours[Thursday],
-    Friday: workingHours[Friday],
-    Saturday: workingHours[Saturday],
+    workingHours: JSON.parse(workingHours),
   });
 }
 
