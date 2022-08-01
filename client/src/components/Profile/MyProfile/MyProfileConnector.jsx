@@ -8,8 +8,8 @@ import { getSubjects } from '../../../redux/selectors/subjectsSelector';
 const mapStateToProps = state => {
     const userInfo = getUserInfo(state);
     const allSubjects = getSubjects(state);
-    const teacheSubjects = getTeacherSubjects(state);
-    return { userInfo, allSubjects, teacheSubjects } ;
+    const teacherSubjects = getTeacherSubjects(state);
+    return { userInfo, allSubjects, teacherSubjects } ;
 };
 
 const mapDispatchToProps = dispatch => {

@@ -1,7 +1,8 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import style from './EditDescriptionContainer.module.css';
-import { Flex } from 'monday-ui-react-core';
+import { Flex, Button } from 'monday-ui-react-core';
 import { AiOutlineClose } from 'react-icons/ai';
+import AddIcon from "monday-ui-react-core/dist/icons/Add";
 
 const EditDescriptionContainer = ({ event_id, description, close_call_back, UpdateDescriptionAction }) => {
     const textarea_ref = useRef(null);
@@ -9,10 +10,6 @@ const EditDescriptionContainer = ({ event_id, description, close_call_back, Upda
     const submit_click = useCallback(() => {
         UpdateDescriptionAction(event_id, textarea_ref.current.value);
     }, [UpdateDescriptionAction, event_id]);
-
-    useEffect(() => {
-        
-    }, [])
 
     return (
         <div className={style.description_container}>
@@ -24,8 +21,14 @@ const EditDescriptionContainer = ({ event_id, description, close_call_back, Upda
                 </div>
                 <Flex direction={Flex.directions.COLUMN} justify={Flex.justify.CENTER} gap={10}>
                     <textarea className={style.textarea} placeholder={description} ref={textarea_ref} rows="10"></textarea>
-                    <button onClick={submit_click}>Submit</button>
-                </Flex>
+                    <Button
+                        onClick={submit_click}
+                        size={Button.sizes.MEDIUM}
+                        rightIcon={AddIcon}
+                        className={style.button}>
+                        Submit
+                    </Button>
+              </Flex>
             </div>
         </div>
     )
