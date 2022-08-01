@@ -4,7 +4,8 @@
     "password": "k8upggacj5lsla9m",
     "database": "vxh7p980bsq2i70w",
     "host": "xlf3ljx3beaucz9x.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "timezone": "+03:00"
   },
   "test": {
     "username": "root",
