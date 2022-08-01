@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     },
-    date: DataTypes.DATE,
+    date: DataTypes.STRING,
     description: DataTypes.STRING
   }, {
     sequelize,
