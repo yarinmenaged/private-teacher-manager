@@ -44,7 +44,8 @@ const reducer = (state = initState, action) => {
                             User_info_id: payload.teacher_id
                         },
                         Subject: {
-                            id: 1
+                            id: 1,
+                            Name: payload.subject_name
                         },
                         id: payload.hash_id
                     }]

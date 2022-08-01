@@ -6,13 +6,13 @@ import OneSubjectOption from './OneSubjectOption/OneSubjectOptionConnector';
 
 function SubjectsFilter({ multipleOptions }) {
     return (
-        <div>
+        <>
             {
                 multipleOptions
                     ? <MultipleSubjectsOptions />
                     : < OneSubjectOption />
             }
-        </div>
+        </>
     );
 }
 

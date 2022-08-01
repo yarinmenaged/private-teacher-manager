@@ -13,8 +13,9 @@ const mapStateToProps = (state, ownProps) => {
     const user_id = getUserInfo(state).id;
     const calender_user_id = getUserId(state) === "" ? null : getUserId(state);
     const subject_id = getSelectedSubjects(state).length ? getSelectedSubjectId(state) : null;
+    const subject_name = getSelectedSubjects(state).length ? getSelectedSubjects(state)[0].Name : null;
     const show_other_user_calendar = getShowCalenderOfOtherUser(state);
-    return { ...ownProps, events, user_type, user_id, calender_user_id, subject_id, show_other_user_calendar };
+    return { ...ownProps, events, user_type, user_id, calender_user_id, subject_id, show_other_user_calendar, subject_name };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {

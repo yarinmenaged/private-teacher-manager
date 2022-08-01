@@ -18,20 +18,20 @@ const CalendarContainer = ({ week, GetEventsAction, user_id }) => {
 			start: "07:00",
 			end: "14:00"
 		},{
-			start: "07:00",
-			end: "14:00"
+			start: "00:00",
+			end: "00:00"
 		},{
 			start: "07:00",
 			end: "14:00"
 		},{
-			start: "07:00",
+			start: "12:00",
 			end: "14:00"
 		},{
-			start: "10:00",
-			end: "14:00"
+			start: "11:00",
+			end: "17:00"
 		},{
-			start: "07:00",
-			end: "14:00"
+			start: "00:00",
+			end: "00:00"
 		}
 	];
 	useEffect(() => {

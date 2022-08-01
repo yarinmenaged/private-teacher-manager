@@ -39,7 +39,6 @@ function MultipleSubjectsOptions({
     }, [deselectSubjectAction, unchooseTeacherAction]);
 
     return (
-        <Flex justify={Flex.justify.CENTER}>
             <Dropdown
                 multiline multi
                 options={allOptions}
@@ -48,7 +47,6 @@ function MultipleSubjectsOptions({
                 onOptionRemove={(event) => removeSubject(event)}
                 placeholder="Select Subjects"
                 className={cx("dropdown-stories-styles_with-chips", style.width)} />
-        </Flex>
     );
 }
 
