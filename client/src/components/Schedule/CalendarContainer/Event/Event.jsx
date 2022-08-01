@@ -48,9 +48,9 @@ const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventActi
       if (event.StudentId && event.Student.User_info_id === my_user_id && user_type !== EventConstants.USER_TYPE.Teacher) {
         blocked_flag.current = false;
         if (calender_user_id === '')
-          setEventText(`Teacher: ${event.Teacher.UserInfo.Name}`);
+          setEventText(`${event.Subject.Name} Teacher ${event.Teacher.UserInfo.Name} `);
         else if (calender_user_id === event.Teacher.User_info_id)
-          setEventText(`You have a class with this teacher`);
+          setEventText(`Your class in ${event.Subject.Name}`);
       } else if (event.StudentId && user_type === EventConstants.USER_TYPE.Teacher) {
         blocked_flag.current = false;
         setEventText(`Student: ${event.Student.UserInfo.Name}`);

@@ -43,7 +43,6 @@ const HeadersTrack = ({ type = ConstantsCalendarContainer.HEADERS_TYPES.DAYS, we
 				setScroll(true);
 			else
 				setScroll(false);
-			console.log(window.scrollY)
 		};
 
 		window.addEventListener('scroll', handleScroll);

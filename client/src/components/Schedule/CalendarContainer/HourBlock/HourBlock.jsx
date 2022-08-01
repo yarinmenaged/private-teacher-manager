@@ -5,7 +5,7 @@ import { Tooltip } from 'monday-ui-react-core';
 import EventConnector from '../Event/EventConnector';
 import TeacherPreferencesBlock from '../TeacherPreferences/TeacherPreferencesBlock';
 
-const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, calender_user_id, show_other_user_calendar, subject_id, blocked_size }) => {
+const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, calender_user_id, show_other_user_calendar, subject_id, subject_name, blocked_size }) => {
 
   const [render_event, setRenderEvent] = useState(false);
   const [event_obj, setEventObj] = useState(null);
@@ -35,7 +35,7 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
 
   const hour_block_click_call__back = useCallback((event) => {
     if(!event_obj && !blocked_size)
-      AddEventAction(user_id, date, hour, user_type, calender_user_id, subject_id);
+      AddEventAction(user_id, date, hour, user_type, calender_user_id, subject_id, subject_name);
     else
       event.preventDefault();    
   }, [AddEventAction, user_id, date, hour, user_type, calender_user_id, subject_id, event_obj, blocked_size]);
