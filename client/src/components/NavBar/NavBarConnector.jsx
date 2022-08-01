@@ -2,12 +2,13 @@ import NavBar from './NavBar';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { logOutAction } from "../../redux/actions/userActions";
-import { UnsetCalendarToUserAction } from '../../redux/actions/calendarActions'
-import { getUserType } from "../../redux/selectors/userSelector"
+import { UnsetCalendarToUserAction } from '../../redux/actions/calendarActions';
+import { getUserType, getLoginStatus } from "../../redux/selectors/userSelector";
 
 const mapStateToProps = state => {
     const Type = getUserType(state);
-    return { Type };
+    const loginStatus = getLoginStatus(state);
+    return { Type, loginStatus };
 };
 
 const mapDispatchToProps = dispatch => {
