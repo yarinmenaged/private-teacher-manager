@@ -10,16 +10,16 @@ const HeadersTrack = ({ type = ConstantsCalendarContainer.HEADERS_TYPES.DAYS, we
 	const [scroll, setScroll] = useState(false);
 	const getDatesInWeek = useCallback(() => {
 		if (week) {
-			const start_of_week = moment().week(week).startOf("week");
+			const start_of_week = moment.utc().week(week).startOf("week");
 			const start_of_week_formatted = start_of_week.format(
 				ConstantsCalendarContainer.DAY_MONTH_FORMAT
 			);
-			const end_of_week_formatted = moment()
+			const end_of_week_formatted = moment.utc()
 				.week(week)
 				.endOf("week")
 				.format(ConstantsCalendarContainer.DAY_MONTH_FORMAT);
 			const dates = _.range(1, 6).map((value) => {
-				return moment()
+				return moment.utc()
 					.week(week)
 					.startOf("week")
 					.add(value, "d")

@@ -4,24 +4,25 @@ import ConstantsHourBlock from './Constants';
 import { Tooltip } from 'monday-ui-react-core';
 import EventConnector from '../Event/EventConnector';
 import TeacherPreferencesBlock from '../TeacherPreferences/TeacherPreferencesBlock';
+import moment from 'moment';
 
 const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, calender_user_id, show_other_user_calendar, subject_id, subject_name, blocked_size }) => {
 
   const [render_event, setRenderEvent] = useState(false);
   const [event_obj, setEventObj] = useState(null);
 
-  const event_filtered = useCallback((blocks_date_in_utc)  => {
+  const event_filtered = useCallback((blocks_date)  => {
     return events.find((event) => {
-      const event_date_in_utc = new Date(event.date).getTime();
-      return event_date_in_utc === blocks_date_in_utc;
+      const event_date = moment.utc(event.date).diff(blocks_date, 'milliseconds');
+      return event_date === 0;
     });
   }, [events]);
 
   const event = useCallback(
     () => {
       if(date){
-        const blocks_date_in_utc = new Date(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`).getTime();        
-        return event_filtered(blocks_date_in_utc) || null;
+        const blocks_date = moment.utc(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`);             
+        return event_filtered(blocks_date) || null;
       }
       return null;
     },
@@ -66,7 +67,6 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
             <div className={`${style.entry}`} onClick={(event) => {hour_block_click_call__back(event)}} style={{height: `${blocked_size}em`}}>
               { render_event && <EventConnector event={event_obj} user_type={user_type}></EventConnector>}
               { blocked_size && <TeacherPreferencesBlock blocked_size={blocked_size} start={hour}></TeacherPreferencesBlock>}
-
             </div>
          </Tooltip>);
 };

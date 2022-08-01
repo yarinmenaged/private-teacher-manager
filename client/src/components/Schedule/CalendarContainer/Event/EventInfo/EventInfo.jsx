@@ -13,8 +13,8 @@ const EventInfo = ({ event, close_call_back, user_type }) => {
     
     useEffect(() => {
         const date_obj = new Date(event.date);
-        setStartingTime(moment(date_obj).format(EventConstants.TimeFormat));
-        setDate(moment(date_obj).format(EventConstants.DATE_FORMAT));
+        setStartingTime(moment.utc(date_obj).format(EventConstants.TimeFormat));
+        setDate(moment.utc(date_obj).format(EventConstants.DATE_FORMAT));
     }, [event])
 
     return (

@@ -49,7 +49,7 @@ const CalendarContainer = ({ week, GetEventsAction, user_id }) => {
 				<div className={`${style.tracks} ${style.syncscroll}`}>
 					<TimeTrack></TimeTrack>
 					{_.range(0, 7).map((value, index) => {
-						const date = moment().week(week).startOf("week").add(value, "d");
+						const date = moment.utc().week(week).startOf("week").add(value, "d");
 						return <DayBlock date={date} key={`day-${index}`} teacher_preferences={null}></DayBlock>;
 					})}
 				</div>

@@ -11,7 +11,7 @@ const TimeTrack = () => {
 	return (
 		<div className={`${global_style.track} ${global_style.time}`}>
 			{_.range(start_hour, end_hour).map((value, index) => {
-				const formatted_time = moment(value.toString(), "LT").format("HH:mm");
+				const formatted_time = moment.utc().hour(value.toString()).minute(0).format("HH:mm");
 				return (
 					<HourBlock
 						type={ConstantsHourBlock.BLOCK_TYPES.TIME}
