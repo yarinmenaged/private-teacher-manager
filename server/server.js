@@ -7,8 +7,12 @@ const router = require("./routes/routes");
 const path = require('path');
 const subjects_router = require("./routes/subjectsRoute");
 const event_router = require("./routes/event");
+const { up } = require('./db/seeders/20220724075744-subjects');
 
-sequelize.sync({ force: true });
+Promise.resolve(sequelize.sync({ force: true })).then(() => {
+  const queryInterface = sequelize.getQueryInterface();
+  up(queryInterface, sequelize);
+});
 
 app.use(express.json());
 app.use(cookieParser());
