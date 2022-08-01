@@ -37,12 +37,11 @@ function SearchTeacher({
     const my_schedule_click = useCallback(() => {
         UnsetCalendarToUserAction();
         chooseTeacherAction("");
-    }, [UnsetCalendarToUserAction]);
+    }, [UnsetCalendarToUserAction, chooseTeacherAction]);
 
-    return (
-        <div>
+    return (        
+        <Flex align={Flex.align.END} justify={Flex.justify.CENTER} gap={15} style={{padding: "0 15px"}}>
             <SubjectsFilter multipleOptions={multipleOptions} />
-            <Flex align={Flex.align.END} justify={Flex.justify.CENTER}>
                 <Dropdown
                     options={allOptions}
                     value={{ value: "Select Teacher", label: "Select Teacher" }}
@@ -59,8 +58,7 @@ function SearchTeacher({
                         My Schedule
                     </Button>
                 }
-            </Flex>
-        </div >
+        </Flex>
     );
 }
 

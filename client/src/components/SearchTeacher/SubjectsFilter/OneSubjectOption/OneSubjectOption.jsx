@@ -1,8 +1,7 @@
 import { useEffect, useCallback, useState } from 'react';
 import style from '../SubjectsFilter.module.css';
 import { Dropdown } from 'monday-ui-react-core';
-import cx from 'classnames'
-import { Flex } from 'monday-ui-react-core';
+import cx from 'classnames';
 
 function OneSubjectOption({ resetSubjectsAction, selectSubjectAction, subjectsList, selctedSubjects }) {
 
@@ -25,7 +24,6 @@ function OneSubjectOption({ resetSubjectsAction, selectSubjectAction, subjectsLi
     }, [selectSubjectAction, resetSubjectsAction]);
 
     return (
-        <Flex justify={Flex.justify.CENTER}>
             <Dropdown
                 options={allOptions}
                 //defaultValue={defaultValue}
@@ -33,7 +31,6 @@ function OneSubjectOption({ resetSubjectsAction, selectSubjectAction, subjectsLi
                 clearable={false}
                 placeholder="Select Subject"
                 className={cx("dropdown-stories-styles_big-spacing", style.width)} />
-        </Flex>
     );
 }
 
