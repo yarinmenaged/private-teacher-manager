@@ -9,8 +9,8 @@ const WeekSelector = ({ week, IncrementWeekAction, DecrementWeekAction }) => {
   const [end_of_week, setEndOfWeek] = useState("");
 
   useEffect(() => {
-    setStartOfWeek(moment().week(week).startOf('week').format(ConstantsCalendarContainer.DAY_MONTH_FORMAT));
-    setEndOfWeek(moment().week(week).endOf('week').format(ConstantsCalendarContainer.DAY_MONTH_FORMAT));
+    setStartOfWeek(moment.utc().week(week).startOf('week').format(ConstantsCalendarContainer.DAY_MONTH_FORMAT));
+    setEndOfWeek(moment.utc().week(week).endOf('week').format(ConstantsCalendarContainer.DAY_MONTH_FORMAT));
   }, [week]);
 
   const increment = useCallback(() => {

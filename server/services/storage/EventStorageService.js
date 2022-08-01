@@ -5,8 +5,8 @@ const { GetTeacherById, GetStudentById } = require("./UserStorageService");
 const Op = Sequelize.Op;
 
 async function GetEventsByUserIdFilterByWeek(user_id, week, user_type) {
-    const start_of_week = moment().week(week).startOf('week').format(TimeStampFormat);
-    const end_of_week = moment().week(week).endOf('week').format(TimeStampFormat);
+    const start_of_week = moment.utc().week(week).startOf('week').format(TimeStampFormat);
+    const end_of_week = moment.utc().week(week).endOf('week').format(TimeStampFormat);
     let events_in_week = [];
     const were_obj = user_type === UserType.STUDENT ? { StudentId: user_id } : { TeacherId: user_id };
     events_in_week = await Event.findAll({
@@ -63,9 +63,10 @@ async function GetEventsByEventId(event_id) {
 
 async function AddBlockedEventToTeacher(user, date) {
     const teacher = await GetTeacherById(user.id);
+    const format_date = moment.utc(date);
     await Event.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null);
     const add_blocked = await Event.create({
-        "date": date,
+        "date": format_date,
         "StudentId": null,
         "SubjectId": null,
         "TeacherId": teacher.id

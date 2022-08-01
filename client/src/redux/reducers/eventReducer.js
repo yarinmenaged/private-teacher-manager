@@ -15,7 +15,7 @@ const reducer = (state = initState, action) => {
             return { ...state, events: payload };
         case ACTIONS.ADD_EVENT:
             const format_date = payload.date.format(ReduxContents.DATE_FORMAT);
-            const format_date_with_hour = moment(`${format_date} ${payload.hour}`).format(ReduxContents.DATE_TIME_FORMAT);
+            const format_date_with_hour = moment.utc(`${format_date} ${payload.hour}`).format(ReduxContents.DATE_TIME_FORMAT);
             if (!payload.teacher_id)
                 return {
                     ...state,

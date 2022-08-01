@@ -13,7 +13,7 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
 
   const event_filtered = useCallback((blocks_date)  => {
     return events.find((event) => {
-      const event_date = moment(event.date).diff(blocks_date, 'milliseconds');
+      const event_date = moment.utc(event.date).diff(blocks_date, 'milliseconds');
       return event_date === 0;
     });
   }, [events]);
@@ -21,7 +21,7 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
   const event = useCallback(
     () => {
       if(date){
-        const blocks_date = moment(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`);             
+        const blocks_date = moment.utc(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`);             
         return event_filtered(blocks_date) || null;
       }
       return null;

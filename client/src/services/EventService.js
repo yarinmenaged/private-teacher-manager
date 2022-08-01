@@ -13,7 +13,7 @@ async function GetEvents(id, week) {
 
 async function AddBlockedEvent(date, hour){
     try{
-        const add_blocked_event = await ApiService.AddNewResourceRequest(`event/blocked`, { date: date.format(ConstantsHourBlock.DATE_FORMAT), hour });
+        const add_blocked_event = await ApiService.AddNewResourceRequest(`event/blocked`, { date: date.utc().format(ConstantsHourBlock.DATE_FORMAT), hour });
         return add_blocked_event.event;
     }catch(error){
         throw error;
@@ -21,7 +21,7 @@ async function AddBlockedEvent(date, hour){
 }
 async function AddEvent(date, hour, teacher_id, subject_id){
     try{
-        const add_blocked_event = await ApiService.AddNewResourceRequest(`event`, { date: date.format(ConstantsHourBlock.DATE_FORMAT), hour, teacher_id, subject_id });
+        const add_blocked_event = await ApiService.AddNewResourceRequest(`event`, { date: date.utc().format(ConstantsHourBlock.DATE_FORMAT), hour, teacher_id, subject_id });
         return add_blocked_event.event;
     }catch(error){
         throw error;
