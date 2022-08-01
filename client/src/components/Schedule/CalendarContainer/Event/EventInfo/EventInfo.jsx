@@ -7,7 +7,7 @@ import { MdDateRange, MdSubject, MdOutlineNotes } from 'react-icons/md';
 import moment from 'moment';
 import EventConstants from '../Constants';
 
-const EventInfo = ({ event, close_call_back }) => {
+const EventInfo = ({ event, close_call_back, user_type }) => {
     const [starting_time, setStartingTime] = useState("");
     const [date, setDate] = useState("");
     
@@ -29,7 +29,7 @@ const EventInfo = ({ event, close_call_back }) => {
                     <div className={style.attribute}>
                         <span>
                             <BsFillFileEarmarkPersonFill></BsFillFileEarmarkPersonFill>
-                            Teacher
+                            { user_type !== EventConstants.USER_TYPE.TEACHER ? `Teacher` : `Student` }
                         </span>
                         <span>{event.Teacher.UserInfo.Name}</span>
                     </div>
@@ -61,14 +61,14 @@ const EventInfo = ({ event, close_call_back }) => {
                     <div className={style.attribute}>
                         <span>
                             <AiFillPhone></AiFillPhone>
-                            Teacher Phone
+                            { user_type !== EventConstants.USER_TYPE.TEACHER ? `Teacher Phone` : `Student Phone` }
                         </span>
                         <span>{event.Teacher.UserInfo.Phone}</span>
                     </div>
                     <div className={style.attribute}>
                         <span>
                             <AiOutlineMail></AiOutlineMail>
-                            Teacher Email
+                            { user_type !== EventConstants.USER_TYPE.TEACHER ? `Teacher Email` : `Student Email` }
                         </span>
                         <span>{event.Teacher.UserInfo.Email}</span>
                     </div>

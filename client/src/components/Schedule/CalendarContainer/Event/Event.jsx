@@ -71,7 +71,7 @@ const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventActi
       <p className={style.text}>{time}</p>
     </div>
     {actions_flag.current && action_section()}
-    {info_show && <EventInfo event={event} close_call_back={info_button_click}></EventInfo>}
+    {info_show && <EventInfo event={event} close_call_back={info_button_click} user_type={user_type}></EventInfo>}
     {edit_description_container && <EditDescriptionContainerConnector event_id={event.id} description={event.description} close_call_back={edit_button_click}></EditDescriptionContainerConnector>}
   </>);
 }
