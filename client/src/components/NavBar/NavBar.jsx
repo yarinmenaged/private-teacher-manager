@@ -1,10 +1,12 @@
 import style from './NavBar.module.css';
+import logo from '../../images/logo.jpg';
 import { useCookies } from "react-cookie";
 import React, { useCallback, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import USER_TYPE from './Constants';
+import { Flex } from 'monday-ui-react-core';
 
-function NavBar({ Type, logOutAction, UnsetCalendarToUserAction }) {
+function NavBar({ Type, logOutAction, UnsetCalendarToUserAction, loginStatus }) {
 
 	const [cookies, removeCookie] = useCookies(["token"]);
 	const navigate = useNavigate();
@@ -31,18 +33,28 @@ function NavBar({ Type, logOutAction, UnsetCalendarToUserAction }) {
 
 	return (
 		<div className={style.navBar}>
-			<a onClick={() => schedule_unset_callback()} className={style.button}>Schedule</a>
-			<Link to="/messenger" className={style.button}>Messenger</Link>
-			{
-				Type === USER_TYPE.Teacher
-					// teacher UI
-					? <Link to="/my-profile" className={style.button}> My Profile</Link>
+			<Flex>
+				<div style={{ backgroundColor: "rgb(78, 99, 165)" }}>
+					<img src={logo} alt="Private teacher manager" className={style.logo} />
+				</div>
+				{
+					loginStatus &&
+					<Flex className={style.width}>
+						<a onClick={() => schedule_unset_callback()} className={style.button}>Schedule</a>
+						<Link to="/messenger" className={style.button}>Messenger</Link>
+						{
+							Type === USER_TYPE.Teacher
+								// teacher UI
+								? <Link to="/my-profile" className={style.button}> My Profile</Link>
 
-					// student UI
-					: <Link to="/search-profile" className={style.button}> Search Teacher</Link>
-			}
-			<Link to="/settings" className={style.button}>Settings</Link>
-			<a href='' onClick={(event) => logOut(event)} className={style.button}>Log Out</a>
+								// student UI
+								: <Link to="/search-profile" className={style.button}> Search Teacher</Link>
+						}
+						<Link to="/settings" className={style.button}>Settings</Link>
+						<a href='' onClick={(event) => logOut(event)} className={style.button}>Log Out</a>
+					</Flex>
+				}
+			</Flex>
 		</div>
 	);
 }

@@ -1,5 +1,5 @@
 import "./App.css";
-import logo from './images/logo.jpg'
+import NavBar from "./components/NavBar/NavBar";
 import Login from "./components/Login/LoginConnector";
 import RegisterForm from "./components/RegisterForm/RegisterFormConnector";
 import Home from "./components/Home/HomeConnector";
@@ -28,10 +28,14 @@ function App({ loginStatus, getUserInfoByTokenAction }) {
 	return (
 		<div className="App-header">
 			<div className="container">
-				<div style={{backgroundColor: "rgb(78, 99, 165)"}}>
-					<img src={logo} alt="Private teacher manager" className="logo" />
-				 </div>
+				<div style={{ backgroundColor: "rgb(78, 99, 165)" }}>
+					{/* <img src={logo} alt="Private teacher manager" className="logo" /> */}
+				</div>
 				<Router>
+					{
+						!loginStatus &&
+						<NavBar />
+					}
 					{!loginStatus ? (
 						<Routes>
 							<Route path="/" exact element={<Landing />} />
