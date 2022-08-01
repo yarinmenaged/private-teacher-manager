@@ -9,7 +9,7 @@ import { UnsetCalendarToUserAction } from '../../redux/actions/calendarActions';
 const mapStateToProps = state => {
     const areTeachersFetched = getAreTeachersFetched(state);
     const selectedSubjects = getSelectedSubjects(state).map(subject => subject.Name);
-    const selectedTeachers = getSelectedTeachers(state, selectedSubjects);
+    const selectedTeachers = getSelectedTeachers(state);
     return {areTeachersFetched, selectedTeachers } ;
 };
 

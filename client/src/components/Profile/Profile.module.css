@@ -1,12 +1,8 @@
 .column {
     padding-left: 5%;
     padding-right: 10%;
-    width: 60%;
+    width: 40%;
     font-size: medium;
-}
-
-.flex {
-    display: flex;
 }
 
 .edit {
@@ -47,4 +43,13 @@ textarea {
     resize: none;
     height: 300px;
     width: 300px;
+  }
+
+  .card {
+    border: 1px solid;
+    padding-bottom: 15px;
+    width: 95vw;
+    margin-left: 30px;
+    margin-top: 10px;
+    border-radius: 10px;
   }

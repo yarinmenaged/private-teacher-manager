@@ -45,6 +45,7 @@ function MultipleSubjectsOptions({
                 value={selectedOptions}
                 onChange={(event) => selectSubject(event)}
                 onOptionRemove={(event) => removeSubject(event)}
+                clearable={false}
                 placeholder="Select Subjects"
                 className={cx("dropdown-stories-styles_with-chips", style.width)} />
     );
