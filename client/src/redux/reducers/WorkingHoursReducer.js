@@ -2,15 +2,7 @@ import ACTIONS from "../actions/actionConstants";
 
 const initState = {
   lessonLengthInMinuets: 60,
-  workingHours: {
-    Sunday: "",
-    Monday: "",
-    Tuesday: "",
-    Wednesday: "",
-    Thursday: "",
-    Friday: "",
-    Saturday: "",
-  },
+  workingHours: [{start: '', end: ''},{start: '', end: ''},{start: '', end: ''},{start: '', end: ''},{start: '', end: ''},{start: '', end: ''},{start: '', end: ''}],
 };
 
 const reducer = (state = initState, action) => {
@@ -22,7 +14,10 @@ const reducer = (state = initState, action) => {
     case ACTIONS.GET_SETTINGS_FOR_TEACHER:
       return { ...state };
     case ACTIONS.SET_DAILY_WORKING_HOURS:
-      return { workingHours: payload.workingHours[payload.day] };
+      
+      return { ...state, workingHours[day]: {
+          start: payload.workingHours[payload.day].start,
+          end: payload.workingHours[payload.day].end} };
     default:
       return state;
   }
