@@ -79,8 +79,9 @@ async function AddBlockedEventToTeacher(user, date) {
 async function AddEventFromStudent(student, teacher_id, date, subject_id) {
     const teacher = await GetTeacherById(teacher_id);
     const student_info = await GetStudentById(student.id);
+    const format_date = moment.utc(date);
     const add_event = await Event.create({
-        "date": date,
+        "date": format_date,
         "StudentId": student_info.id,
         "SubjectId": subject_id,
         "TeacherId": teacher.id
