@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import moment from "moment";
 import EventConstants from "./Constants";
 import style from "./Event.module.css";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
 import { BsInfoLg } from "react-icons/bs";
 import EventInfo from "./EventInfo/EventInfo";
+import EditDescriptionContainerConnector from "./EditDescriptionContainer/EditDescriptionContainerConnector";
 
 const Event = ({
 	event,
@@ -13,11 +14,15 @@ const Event = ({
 	calender_user_id,
 	DeleteEventAction,
 }) => {
-	const time = moment(event.date).format(EventConstants.TimeFormat);
+	const [time, setTime] = useState(
+		moment.utc([]).format(EventConstants.TimeFormat)
+	);
 	const actions_flag = useRef(true);
 	const [event_text, setEventText] = useState("");
 	const [style_for_event, setStyleForEvent] = useState("");
 	const [info_show, setInfoShow] = useState(false);
+	const [edit_description_container, setEditDescriptionContainer] =
+		useState(false);
 	const blocked_flag = useRef(false);
 
 	const delete_call_back = useCallback(() => {
@@ -28,50 +33,62 @@ const Event = ({
 		setInfoShow((value) => !value);
 	}, [setInfoShow]);
 
+	const edit_button_click = useCallback(() => {
+		setEditDescriptionContainer((value) => !value);
+	}, [setEditDescriptionContainer]);
+
 	const action_section = () => (
 		<div className={style.actions}>
 			<div className={style.delete} onClick={delete_call_back}>
 				<FaTrashAlt></FaTrashAlt>
 			</div>
-			<div className={style.info} onClick={info_button_click}>
-				<BsInfoLg></BsInfoLg>
-			</div>
+			{event && event.StudentId && (
+				<div className={style.info} onClick={info_button_click}>
+					<BsInfoLg></BsInfoLg>
+				</div>
+			)}
+			{event &&
+				event.StudentId &&
+				user_type === EventConstants.USER_TYPE.Teacher && (
+					<div className={style.edit} onClick={edit_button_click}>
+						<FaPencilAlt></FaPencilAlt>
+					</div>
+				)}
 		</div>
 	);
+
 	useEffect(() => {
-		if (
-			event.StudentId &&
-			event.Student.User_info_id === my_user_id &&
-			user_type !== EventConstants.USER_TYPE.Teacher
-		) {
-			blocked_flag.current = false;
-			if (calender_user_id === my_user_id) {
-				setEventText(
-					`You have a class with teacher: ${event.Teacher.UserInfo.Name}`
-				);
-			} else if (calender_user_id === event.Teacher.User_info_id)
-				setEventText(`You have a class with this teacher`);
-		} else if (
-			event.StudentId &&
-			user_type === EventConstants.USER_TYPE.Teacher
-		) {
-			blocked_flag.current = false;
-			setEventText(
-				`You have a class with student: ${event.Student.UserInfo.Name}`
-			);
-		} else {
-			blocked_flag.current = true;
-			if (user_type === EventConstants.USER_TYPE.Teacher) {
-				setEventText(`You blocked this hour.`);
+		if (event) {
+			if (
+				event.StudentId &&
+				event.Student.User_info_id === my_user_id &&
+				user_type !== EventConstants.USER_TYPE.Teacher
+			) {
+				blocked_flag.current = false;
+				if (calender_user_id === "")
+					setEventText(
+						`${event.Subject.Name} Teacher ${event.Teacher.UserInfo.Name} `
+					);
+				else if (calender_user_id === event.Teacher.User_info_id)
+					setEventText(`Your class in ${event.Subject.Name}`);
+			} else if (
+				event.StudentId &&
+				user_type === EventConstants.USER_TYPE.Teacher
+			) {
+				blocked_flag.current = false;
+				setEventText(`Student: ${event.Student.UserInfo.Name}`);
 			} else {
-				setEventText(`The teacher is unavailable at this hour.`);
-				actions_flag.current = false;
+				blocked_flag.current = true;
+				setEventText(`blocked`);
+				if (user_type !== EventConstants.USER_TYPE.Teacher)
+					actions_flag.current = false;
 			}
+			setStyleForEvent(
+				blocked_flag.current ? style.blocked : style[`color_${event.SubjectId}`]
+			);
+			setTime(moment.utc(event.date).format(EventConstants.TimeFormat));
 		}
-		setStyleForEvent(
-			blocked_flag.current ? style.blocked : style[`color_${event.SubjectId}`]
-		);
-	}, [event, user_type, calender_user_id, my_user_id]);
+	}, [event, user_type, my_user_id, calender_user_id]);
 
 	return (
 		<>
@@ -84,7 +101,15 @@ const Event = ({
 				<EventInfo
 					event={event}
 					close_call_back={info_button_click}
+					user_type={user_type}
 				></EventInfo>
+			)}
+			{edit_description_container && (
+				<EditDescriptionContainerConnector
+					event_id={event.id}
+					description={event.description}
+					close_call_back={edit_button_click}
+				></EditDescriptionContainerConnector>
 			)}
 		</>
 	);
