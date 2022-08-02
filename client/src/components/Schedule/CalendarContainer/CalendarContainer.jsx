@@ -10,6 +10,36 @@ import ConstantsCalendarContainer from "./Constants";
 import WeekSelectorConnector from "./WeekSelector/WeekSelectorConnector";
 
 const CalendarContainer = ({ week, GetEventsAction, user_id }) => {
+	const teacher_pref_mock = [
+		{
+			start: "08:00",
+			end: "12:00",
+		},
+		{
+			start: "07:00",
+			end: "14:00",
+		},
+		{
+			start: "00:00",
+			end: "00:00",
+		},
+		{
+			start: "07:00",
+			end: "14:00",
+		},
+		{
+			start: "12:00",
+			end: "14:00",
+		},
+		{
+			start: "11:00",
+			end: "17:00",
+		},
+		{
+			start: "00:00",
+			end: "00:00",
+		},
+	];
 	useEffect(() => {
 		GetEventsAction(user_id, week);
 	}, [week, GetEventsAction, user_id]);
@@ -25,8 +55,18 @@ const CalendarContainer = ({ week, GetEventsAction, user_id }) => {
 				<div className={`${style.tracks} ${style.syncscroll}`}>
 					<TimeTrack></TimeTrack>
 					{_.range(0, 7).map((value, index) => {
-						const date = moment().week(week).startOf("week").add(value, "d");
-						return <DayBlock date={date} key={`day-${index}`}></DayBlock>;
+						const date = moment
+							.utc()
+							.week(week)
+							.startOf("week")
+							.add(value, "d");
+						return (
+							<DayBlock
+								date={date}
+								key={`day-${index}`}
+								teacher_preferences={null}
+							></DayBlock>
+						);
 					})}
 				</div>
 			</div>

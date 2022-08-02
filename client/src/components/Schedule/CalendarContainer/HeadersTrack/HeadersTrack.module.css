@@ -1,11 +1,14 @@
 .headers {
-    top:50px;
-    position: -webkit-sticky;
-    position: sticky;
+    top:50px;    
     display: flex;
     justify-content: flex-end;
     z-index: 1;
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.04);
+}
+
+.sticky{
+    position: sticky;
+    position: -webkit-sticky;
 }
 
 .headers:first-child{
@@ -17,8 +20,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: -webkit-sticky;
-    position: sticky;
     top: 0;
     border: solid var(--bd-color);
     border-width: 1px;
@@ -26,4 +27,9 @@
     z-index: 1;
     background: var(--thead-bg);
     font-weight: 700;
+}
+
+.sticky > .heading{
+    position: sticky;
+    position: -webkit-sticky;
 }

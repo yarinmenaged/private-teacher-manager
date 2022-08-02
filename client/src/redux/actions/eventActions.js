@@ -10,7 +10,15 @@ const GetEvents = (id, week) => {
 	};
 };
 
-const AddEvent = (user_id, date, hour, user_type, teacher_id, subject_id) => {
+const AddEvent = (
+	user_id,
+	date,
+	hour,
+	user_type,
+	teacher_id,
+	subject_id,
+	subject_name
+) => {
 	return async (dispatch) => {
 		try {
 			const hash_id = crypto
@@ -34,7 +42,15 @@ const AddEvent = (user_id, date, hour, user_type, teacher_id, subject_id) => {
 			} else if (user_type === ReduxContents.USER_TYPE.Student && teacher_id) {
 				dispatch({
 					type: ACTIONS.ADD_EVENT,
-					payload: { user_id, date, hour, teacher_id, subject_id, hash_id },
+					payload: {
+						user_id,
+						date,
+						hour,
+						teacher_id,
+						subject_id,
+						subject_name,
+						hash_id,
+					},
 				});
 				const event = await EventService.AddEvent(
 					date,

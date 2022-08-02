@@ -5,25 +5,21 @@ import component_style from "./HeadersTrack.module.css";
 import global_style from "../CalendarContainer.module.css";
 import ConstantsCalendarContainer from "../Constants";
 
-const HeadersTrack = ({
-	type = ConstantsCalendarContainer.HEADERS_TYPES.DAYS,
-	week,
-}) => {
-	const [array_to_map, setArrayToMap] = useState(
-		ConstantsCalendarContainer.DAYS_IN_WEEK
-	);
+const HeadersTrack = ({ type = ConstantsCalendarContainer.HEADERS_TYPES.DAYS, week }) => {
+	const [array_to_map, setArrayToMap] = useState(ConstantsCalendarContainer.DAYS_IN_WEEK);
+	const [scroll, setScroll] = useState(false);
 	const getDatesInWeek = useCallback(() => {
 		if (week) {
-			const start_of_week = moment().week(week).startOf("week");
+			const start_of_week = moment.utc().week(week).startOf("week");
 			const start_of_week_formatted = start_of_week.format(
 				ConstantsCalendarContainer.DAY_MONTH_FORMAT
 			);
-			const end_of_week_formatted = moment()
+			const end_of_week_formatted = moment.utc()
 				.week(week)
 				.endOf("week")
 				.format(ConstantsCalendarContainer.DAY_MONTH_FORMAT);
 			const dates = _.range(1, 6).map((value) => {
-				return moment()
+				return moment.utc()
 					.week(week)
 					.startOf("week")
 					.add(value, "d")
@@ -41,8 +37,24 @@ const HeadersTrack = ({
 			: setArrayToMap(getDatesInWeek());
 	}, [getDatesInWeek, type, week]);
 
+	useEffect(() => {
+		const handleScroll = event => {
+			if (window.scrollY > 340)
+				setScroll(true);
+			else
+				setScroll(false);
+		};
+
+		window.addEventListener('scroll', handleScroll);
+
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	}, []);
+
+	const class_headers = scroll ? `${component_style.sticky} ${component_style.headers}` : ` ${component_style.headers}`;
 	return (
-		<div className={component_style.headers}>
+		<div className={class_headers}>
 			<div className={`${global_style.scroller} ${global_style.syncscroll}`}>
 				<div className={`${global_style.track} ${global_style.time}`}>
 					<div className={component_style.heading}>{type.label}</div>

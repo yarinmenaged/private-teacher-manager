@@ -11,7 +11,7 @@ function SubjectsFilter({
     subjectsList,
 }) {
     return (
-        <div>
+        <>
             {
                 window.location.href.includes("search-profile")
                     ? <MultipleSubjectsOptions
@@ -25,7 +25,7 @@ function SubjectsFilter({
                         selectSubjectAction={selectSubjectAction}
                         subjectsList={subjectsList} />
             }
-        </div>
+        </>
     );
 }
 

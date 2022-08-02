@@ -1,4 +1,5 @@
 import style from "../Profile.module.css";
+import { Link } from "react-router-dom";
 import NavBar from "../../NavBar/NavBarConnector";
 import { useState } from "react";
 import cx from "classnames";
