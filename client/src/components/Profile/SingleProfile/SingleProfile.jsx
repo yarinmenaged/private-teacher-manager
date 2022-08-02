@@ -1,7 +1,7 @@
 import style from "../Profile.module.css";
 import { useNavigate } from "react-router-dom";
 import SearchTeacher from "../../SearchTeacher/SearchTeacherConnector";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { Icon, Flex, Dropdown } from 'monday-ui-react-core';
 import {
     Email, PersonRound, Mobile, Description, Academy
@@ -28,6 +28,17 @@ function SingleProfile({
         }));
 
     const [value, reRender] = useState(0);
+
+    useEffect(() => {
+        if (value > 0) {
+            if (subjectsOptions.length > 1) {
+                setDisplayDropdown(!displayDropdown);
+            } else {
+                goToCalender();
+            }
+        }
+    }, [value]);
+
 
     const navigate = useNavigate();
 
@@ -77,12 +88,7 @@ function SingleProfile({
                     <Flex align={Flex.align.END}>
                         <button className={style.button}
                             onClick={() => {
-                                reRender(e => e + 1)
-                                if (subjectsOptions.length > 1) {
-                                    setDisplayDropdown(!displayDropdown);
-                                } else {
-                                    goToCalender();
-                                }
+                                reRender(e => e + 1);
                             }}>
                             Schedule a lesson!
                         </button><br />

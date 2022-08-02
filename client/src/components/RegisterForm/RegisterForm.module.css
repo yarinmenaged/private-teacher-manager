@@ -1,7 +1,6 @@
 .formContainer {
   display: flex;
   justify-content: center;
-  overflow-y: scroll;
   height: 400px;
 }
 
