@@ -1,7 +1,9 @@
 import filter from "lodash/filter";
 import find from "lodash/find";
+import { getSelectedSubjects } from "../selectors/subjectsSelector"
 
-export const getSelectedTeachers = (state, selectedSubjects) => {
+export const getSelectedTeachers = (state) => {
+    const selectedSubjects = getSelectedSubjects(state).map(subject => subject.Name);
     const teachers = state.teachersReducer.teachers;
     return filter(teachers, teacher => {
         const subjects = teacher.subjects.map(subject => subject.Name)
