@@ -4,20 +4,21 @@ import { connect } from 'react-redux';
 import { getUserInfoAction } from '../../redux/actions/userActions';
 import { getLoginStatus, getIfIncorrectPassword } from '../../redux/selectors/userSelector';
 
-const mapStateToProps = state => {
-    return {
-         loginStatus: getLoginStatus(state),
-         incorrectPassword: getIfIncorrectPassword(state),
-    };
+const mapStateToProps = (state) => {
+  return {
+    loginStatus: getLoginStatus(state),
+    incorrectPassword: getIfIncorrectPassword(state),
+  };
 };
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            getUserInfoAction,
+            getUserInfoAction
+            
         },
         dispatch
     );
 }
 
-  export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

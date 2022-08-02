@@ -1,43 +1,43 @@
 .formContainer {
-    display: flex;
-    justify-content: center;
-    overflow-y: scroll;
-    height: 400px;
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+  height: 400px;
 }
 
 .form {
-    color: black;
-    width: 80%;
+  color: black;
+  width: 80%;
 }
 
 .input {
-    background-color:rgb(232, 240, 254);
-    border-width: 1px;
-    border-radius: 5px;
-    margin: 8px 0px;
-    width: 100%;
-    height: 30px;
+  background-color: rgb(232, 240, 254);
+  border-width: 1px;
+  border-radius: 5px;
+  margin: 8px 0px;
+  width: 100%;
+  height: 30px;
 }
 
 select {
-    margin: 15px 0px;
+  margin: 15px 0px;
 }
 
 .submit {
-    background-color: rgb(78, 99, 165);
-    color: white;
-    height: 50px;
-    cursor: pointer;
-    width: 101%;
+  background-color: rgb(78, 99, 165);
+  color: white;
+  height: 50px;
+  cursor: pointer;
+  width: 101%;
 }
 
 .submit:hover {
-    opacity: 50%;
+  opacity: 50%;
 }
 
 .back {
-    color: blueviolet;
-    font-size: medium;
-    cursor: pointer;
-    text-decoration: underline;
+  color: blueviolet;
+  font-size: medium;
+  cursor: pointer;
+  text-decoration: underline;
 }

@@ -1,4 +1,6 @@
 import { combineReducers } from "redux";
+
+import settingsReducer from "./settingsReducer";
 import userReducer from './userReducer';
 import weekReducer from './weekReducer';
 import eventReducer from './eventReducer';
@@ -12,6 +14,7 @@ const allReducers = combineReducers({
   eventReducer,
   calendarReducer,
   teachersReducer,
+  settingsReducer,
   subjectsReducer,
 });
 

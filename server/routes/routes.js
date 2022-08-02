@@ -3,12 +3,12 @@ const express = require("express");
 const { authVerify } = require("../services/auth/auth");
 
 const {
-	addStudent,
-	addTeacher,
-	loginRouter,
-	setAbout,
-	getTeachers,
-	getUserByTokenRouter,
+  addStudent,
+  addTeacher,
+  loginRouter,
+  setAbout,
+  getTeachers,
+  getUserByTokenRouter,
 } = require("../controllers/userController");
 
 const router = express.Router();

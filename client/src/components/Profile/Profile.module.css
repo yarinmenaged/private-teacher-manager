@@ -44,7 +44,7 @@ textarea {
     height: 300px;
     width: 300px;
   }
-
+  
   .card {
     border: 1px solid;
     padding-bottom: 15px;
@@ -62,5 +62,5 @@ textarea {
   }
   
   .link {
-    color: rgb(0, 0, 0);
+    color: black;
   }

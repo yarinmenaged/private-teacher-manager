@@ -4,11 +4,11 @@ import ReduxContents from '../Constants';
 import crypto from 'crypto-js';
 
 const GetEvents = (id, week) => {
-    return async(dispatch) => {
-        const events = await EventService.GetEvents(id, week);
-        dispatch({ type: ACTIONS.GET_EVENTS, payload: events});
-    };
-}
+  return async (dispatch) => {
+    const events = await EventService.GetEvents(id, week);
+    dispatch({ type: ACTIONS.GET_EVENTS, payload: events });
+  };
+};
 
 const AddEvent = (user_id, date, hour, user_type, teacher_id, subject_id, subject_name) => {
     return async(dispatch) => {
@@ -56,9 +56,9 @@ const DeleteEvent = (event_id) => {
 };
 
 export const GetEventsAction = (id, week) => {
-    return (dispatch) => {
-        dispatch(GetEvents(id, week));
-    };
+  return (dispatch) => {
+    dispatch(GetEvents(id, week));
+  };
 };
 
 export const AddEventAction = (user_id, date, hour, user_type, teacher_id, subject_id) => {

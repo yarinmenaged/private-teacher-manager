@@ -8,7 +8,7 @@ const TeacherPreferencesBlock = ({ start, blocked_size }) => {
     const [start_formatted, setStartFormatted] = useState("");
     useEffect(() => {
         const blocks = blocked_size / 9;
-        const time = moment(start, "hh:mm:ss");
+        const time = moment.utc(start, "hh:mm:ss");
         setStartFormatted(time.format(EventConstants.TimeFormat));
         setEnd(time.add(blocks, 'hours').format(EventConstants.TimeFormat));
     }, []);

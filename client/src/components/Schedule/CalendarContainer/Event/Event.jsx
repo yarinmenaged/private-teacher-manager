@@ -8,7 +8,7 @@ import EventInfo from './EventInfo/EventInfo';
 import EditDescriptionContainerConnector from './EditDescriptionContainer/EditDescriptionContainerConnector';
 
 const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventAction }) => {
-  const [time, setTime] = useState(moment([]).format(EventConstants.TimeFormat));
+  const [time, setTime] = useState(moment.utc([]).format(EventConstants.TimeFormat));
   const actions_flag = useRef(true);
   const [event_text, setEventText] = useState("");
   const [style_for_event, setStyleForEvent] = useState("");
@@ -61,7 +61,7 @@ const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventActi
           actions_flag.current = false;
       }
     setStyleForEvent(blocked_flag.current ? style.blocked : style[`color_${event.SubjectId}`]);
-    setTime(moment(event.date).format(EventConstants.TimeFormat));
+    setTime(moment.utc(event.date).format(EventConstants.TimeFormat));
   }
   }, [event, user_type, my_user_id, calender_user_id]);
 
