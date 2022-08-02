@@ -53,8 +53,7 @@ function MyProfile({ userInfo,
             <NavBar />
             <Flex>
                 <div className={style.column}>
-                    <h3><Icon iconSize={30} icon={Academy} /> Teacher Profile</h3>
-                    <p><Icon iconSize={20} icon={PersonRound} /> {userInfo.Name}</p>
+                    <h3><Icon iconSize={30} icon={Academy} /> {userInfo.Name}</h3>
                     <p><Icon iconSize={20} icon={Email} /> {userInfo.Email}</p>
                     <p><Icon iconSize={20} icon={Mobile} /> {userInfo.Phone}</p>
                 </div>

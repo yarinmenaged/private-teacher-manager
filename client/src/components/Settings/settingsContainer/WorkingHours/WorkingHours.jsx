@@ -28,7 +28,7 @@ function WorkingHours({ setSettingsForTeacherAction, settings, GetSettingsAction
             return <option value={time} key={`lesson-length-${time}`}>{time}</option>;
         })}
       </select>
-      <p>Select the hours in which you are free to teach</p>
+      <p>Select the hours in which you are unavailable to teach</p>
       <ul className={style.hoursContainer}>
         {ConstantsCalendarContainer.DAYS_IN_WEEK.map((day) => {
           return <DailyWorkingHoursConnector day={day} key={`${day}-working-days`} />;

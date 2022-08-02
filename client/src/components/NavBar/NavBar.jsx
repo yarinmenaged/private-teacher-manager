@@ -21,10 +21,10 @@ function NavBar({ Type, logOutAction, UnsetCalendarToUserAction, loginStatus, ch
 		}
 	}, [logOutAction, removeCookie, navigate]);
 
-	const schedule_unset_callback = useCallback(async() => {
+	const schedule_unset_callback = useCallback(async () => {
 		await UnsetCalendarToUserAction();
-        chooseTeacherAction("");
-		if(Type === EventConstants.USER_TYPE.Student)
+		chooseTeacherAction("");
+		if (Type === EventConstants.USER_TYPE.Student)
 			UnsetTeacherSettingsAction();
 		navigate('/schedule');
 	}, [UnsetCalendarToUserAction, navigate, chooseTeacherAction, UnsetTeacherSettingsAction, Type]);
@@ -54,7 +54,10 @@ function NavBar({ Type, logOutAction, UnsetCalendarToUserAction, loginStatus, ch
 								// student UI
 								: <Link to="/search-profile" className={style.button}> Search Teacher</Link>
 						}
-						<Link to="/settings" className={style.button}>Settings</Link>
+						{
+							Type === USER_TYPE.Teacher &&
+							<Link to="/settings" className={style.button}>Settings</Link>
+						}
 						<a href='' onClick={(event) => logOut(event)} className={style.button}>Log Out</a>
 					</Flex>
 				}
