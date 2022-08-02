@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import SettingsContainer from "./settingsContainer/settingsContainer";
 import SettingsContainerConnector from "./settingsContainer/settingsContainerConnector";
 import NavBar from "../NavBar/NavBarConnector";
 

@@ -20,10 +20,21 @@ async function setSettings(settings) {
   }
 }
 
+async function getSettingsForSelectedTeacher(teacher_id){
+  try {
+    const settings = await ApiService.GetResourceRequest(`settings/${teacher_id}`);
+    return settings.settings;
+  } catch (error) {
+    //TODO error handle
+    throw error;
+  }
+}
+
 
 const SettingsService = {
   getSettings,
-  setSettings
+  setSettings,
+  getSettingsForSelectedTeacher
 };
 
 export default SettingsService;

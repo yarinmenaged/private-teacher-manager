@@ -11,6 +11,7 @@ function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
   useEffect(() => {
     if (loginStatus) navigate("/home");
   }, [loginStatus, navigate]);
+  
 
 	const handleSubmit = useCallback((event) => {
 		event.preventDefault();

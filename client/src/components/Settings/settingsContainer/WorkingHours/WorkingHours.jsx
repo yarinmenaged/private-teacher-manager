@@ -1,25 +1,31 @@
-import React, { useState } from "react";
-import { DailyWorkingHours } from "./DailyWorkingHours/DailyWorkingHours";
+import React, { useCallback, useEffect } from "react";
 import ConstantsCalendarContainer from "../../../Schedule/CalendarContainer/Constants";
 import style from "./WorkingHours.module.css";
-import { useRef } from "react";
 import DailyWorkingHoursConnector from "./DailyWorkingHours/DailyWorkingHoursConnector";
+import _ from "lodash";
 
-function WorkingHours({ setSettingsForTeacherAction, settings }) {
-  const lesson_length_ref = useRef(null);
+function WorkingHours({ setSettingsForTeacherAction, settings, GetSettingsAction, setLessonLengthAction }) {
 
-  const handleSaveChanges = (event) => {
+  useEffect(() => {
+    GetSettingsAction();
+  }, [GetSettingsAction])
+
+  const handleSaveChanges = useCallback((event) => {
     event.preventDefault();
-    const length = lesson_length_ref.current.value;
     setSettingsForTeacherAction(settings);
-  };
+  },[setSettingsForTeacherAction, settings]);
+
+  const handle_change_lesson_length = useCallback((event) => {
+    event.preventDefault();
+    setLessonLengthAction(event.currentTarget.value);
+  },[setLessonLengthAction]);
 
   return (
     <div className={style.container}>
       <p> Select your preferred lesson's length</p>
-      <select name="lesson-length" id="lesson-length" ref={lesson_length_ref}>
-        {[15, 20, 25, 30, 35, 40, 45, 50, 55, 60].map((time) => {
-          return <option value={time}>{time}</option>;
+      <select name="lesson-length" id="lesson-length" defaultValue={settings.lessonLength} onChange={handle_change_lesson_length}>
+        {_.range(15, 75, 15).map((time) => {
+            return <option value={time} key={`lesson-length-${time}`}>{time}</option>;
         })}
       </select>
       <p>Select the hours in which you are free to teach</p>

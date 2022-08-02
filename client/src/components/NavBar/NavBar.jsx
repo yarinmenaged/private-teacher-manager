@@ -5,8 +5,9 @@ import React, { useCallback, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import USER_TYPE from './Constants';
 import { Flex } from 'monday-ui-react-core';
+import EventConstants from '../Schedule/CalendarContainer/Event/Constants';
 
-function NavBar({ Type, logOutAction, UnsetCalendarToUserAction, loginStatus }) {
+function NavBar({ Type, logOutAction, UnsetCalendarToUserAction, loginStatus, chooseTeacherAction, UnsetTeacherSettingsAction }) {
 
 	const [cookies, removeCookie] = useCookies(["token"]);
 	const navigate = useNavigate();
@@ -22,8 +23,11 @@ function NavBar({ Type, logOutAction, UnsetCalendarToUserAction, loginStatus }) 
 
 	const schedule_unset_callback = useCallback(() => {
 		UnsetCalendarToUserAction();
+        chooseTeacherAction("");
+		if(Type === EventConstants.USER_TYPE.Student)
+			UnsetTeacherSettingsAction();
 		navigate('/schedule');
-	}, [UnsetCalendarToUserAction, navigate]);
+	}, [UnsetCalendarToUserAction, navigate, chooseTeacherAction, UnsetTeacherSettingsAction]);
 
 	useEffect(() => {
 		if (!cookies.token) {

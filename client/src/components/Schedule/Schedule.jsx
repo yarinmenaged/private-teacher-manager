@@ -7,7 +7,7 @@ import USER_TYPE from "../NavBar/Constants";
 import { Flex, Icon } from 'monday-ui-react-core';
 import { Calendar } from "monday-ui-react-core/dist/allIcons";
 
-function Schedule({ chosenTeacher, SetCalendarToUserAction, userInfo }) {
+function Schedule({ chosenTeacher, SetCalendarToUserAction, userInfo, GetSelectedTeacherSettingsAction }) {
   useEffect(() => {
     chosenTeacher
       ? SetCalendarToUserAction(chosenTeacher.id)
@@ -15,9 +15,11 @@ function Schedule({ chosenTeacher, SetCalendarToUserAction, userInfo }) {
   }, [chosenTeacher]);
 
     useEffect(() => {
-        if(chosenTeacher)
+        if(chosenTeacher){
             SetCalendarToUserAction(chosenTeacher.id);
-    }, [chosenTeacher, SetCalendarToUserAction]);
+            GetSelectedTeacherSettingsAction(chosenTeacher.id);
+        }
+    }, [chosenTeacher, SetCalendarToUserAction, GetSelectedTeacherSettingsAction]);
 
 
     return (
