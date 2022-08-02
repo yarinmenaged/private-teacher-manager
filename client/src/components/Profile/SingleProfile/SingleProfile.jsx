@@ -6,7 +6,8 @@ import { Icon, Flex, Dropdown } from 'monday-ui-react-core';
 import {
     Email, PersonRound, Mobile, Description, Academy
 } from "monday-ui-react-core/dist/allIcons";
-import cx from 'classnames'
+import cx from 'classnames';
+import { BsWhatsapp } from "react-icons/bs";
 
 function SingleProfile({
     teacherInfo,
@@ -48,8 +49,18 @@ function SingleProfile({
             <Flex className={style.card}>
                 <div className={style.column}>
                     <h3><Icon iconSize={30} icon={Academy} /> {teacherInfo.Name}</h3>
-                    <p><Icon iconSize={20} icon={Email} /> {teacherInfo.Email}</p>
-                    <p><Icon iconSize={20} icon={Mobile} /> {teacherInfo.Phone}</p>
+
+                    <Icon iconSize={20} icon={Email} />
+                    <a href={`mailto:${teacherInfo.Email}`}
+                        className={style.link} >{teacherInfo.Email}
+                    </a><br /><br />
+
+                    <BsWhatsapp className={style.whatsapp} />
+                    <a className={style.link}
+                        href={`https://api.WhatsApp.com/send?phone=${teacherInfo.Phone}`}>
+                        {" "}
+                        {teacherInfo.Phone}
+                    </a>
                 </div>
 
                 <div className={style.column}>

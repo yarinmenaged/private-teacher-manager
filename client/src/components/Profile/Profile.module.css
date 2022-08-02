@@ -56,3 +56,11 @@ textarea {
     background-color: rgba(209, 209, 209, 0.295);
     color: black;
   }
+
+  .whatsapp {
+    color: #25d366;
+  }
+  
+  .link {
+    color: rgb(0, 0, 0);
+  }
