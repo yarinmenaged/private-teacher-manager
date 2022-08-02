@@ -30,12 +30,12 @@ const HeadersTrack = ({ type = ConstantsCalendarContainer.HEADERS_TYPES.DAYS, we
 		return [];
 	}, [week]);
 
-	useEffect(() => {
-		const is_days = type === ConstantsCalendarContainer.HEADERS_TYPES.DAYS;
-		is_days
-			? setArrayToMap(ConstantsCalendarContainer.DAYS_IN_WEEK)
-			: setArrayToMap(getDatesInWeek());
-	}, [getDatesInWeek, type, week]);
+  useEffect(() => {
+    const is_days = type === ConstantsCalendarContainer.HEADERS_TYPES.DAYS;
+    is_days
+      ? setArrayToMap(ConstantsCalendarContainer.DAYS_IN_WEEK)
+      : setArrayToMap(getDatesInWeek());
+  }, [getDatesInWeek, type, week]);
 
 	useEffect(() => {
 		const handleScroll = event => {

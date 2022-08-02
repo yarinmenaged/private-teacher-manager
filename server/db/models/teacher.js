@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Teacher extends Model {
     /**
@@ -12,16 +10,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Teacher.belongsTo(models.UserInfo, {
-        foreignKey: "User_info_id"
+        foreignKey: "User_info_id",
       });
-      Teacher.belongsToMany(models.Subjects, { 
-        through: models.TeachersAnnouncements
-      });
-      Teacher.belongsToMany(models.Student, {
-        through: models.TeachersOpenHours
+      Teacher.belongsToMany(models.Subjects, {
+        through: models.TeachersAnnouncements,
       });
       Teacher.belongsToMany(models.Student, {
-        through: models.TeacherStudentRelationship
+        through: models.TeachersOpenHours,
+      });
+      Teacher.belongsToMany(models.Student, {
+        through: models.TeacherStudentRelationship,
       });
       Teacher.belongsToMany(models.Subjects, {
         through: {
@@ -31,20 +29,23 @@ module.exports = (sequelize, DataTypes) => {
       });
       Teacher.hasMany(models.Event);
       Teacher.belongsToMany(models.Subjects, {
-        through: models.TeachingSubjects
+        through: models.TeachingSubjects,
       });
     }
-  }  
-  Teacher.init({
-    id:{
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+  }
+  Teacher.init(
+    {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+      },
+      About: DataTypes.STRING,
     },
-    About: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Teacher',
-  });
+    {
+      sequelize,
+      modelName: "Teacher",
+    }
+  );
   return Teacher;
 };

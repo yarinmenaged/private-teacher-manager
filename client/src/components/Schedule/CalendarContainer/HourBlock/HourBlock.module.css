@@ -1,11 +1,10 @@
-.hour_block{
-    height: 75px;
-    width: -webkit-fill-available;
-    border-bottom: 1px solid #6b6b6b3d;
-    color: #00000090;
-    padding: 5px;
+.hour_block {
+  height: 75px;
+  width: -webkit-fill-available;
+  border-bottom: 1px solid #6b6b6b3d;
+  color: #00000090;
+  padding: 5px;
 }
-
 
 .entry {
     border: 1px solid #ebebeb;
@@ -22,14 +21,13 @@
 }
 
 .entry:not(:last-of-type) {
-    border-bottom-style: dashed;
+  border-bottom-style: dashed;
 }
 
-
 .double {
-    height: 18em;
+  height: 18em;
 }
 
 .treble {
-    height: 27em;
+  height: 27em;
 }

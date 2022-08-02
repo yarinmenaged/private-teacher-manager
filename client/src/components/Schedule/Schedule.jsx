@@ -1,18 +1,25 @@
 import SearchTeacher from "../SearchTeacher/SearchTeacherConnector";
 import { Link } from "react-router-dom";
-import NavBar from '../NavBar/NavBarConnector';
-import CalendarContainerConnector from './CalendarContainer/CalendarContainerConnector';
+import NavBar from "../NavBar/NavBarConnector";
+import CalendarContainerConnector from "./CalendarContainer/CalendarContainerConnector";
 import { useEffect } from "react";
 import USER_TYPE from "../NavBar/Constants";
 import { Flex, Icon } from 'monday-ui-react-core';
 import { Calendar } from "monday-ui-react-core/dist/allIcons";
 
-function Schedule({ chosenTeacher, SetCalendarToUserAction, userInfo }) {
+function Schedule({ chosenTeacher, SetCalendarToUserAction, userInfo, GetSelectedTeacherSettingsAction }) {
+  useEffect(() => {
+    chosenTeacher
+      ? SetCalendarToUserAction(chosenTeacher.id)
+      : SetCalendarToUserAction(userInfo.id);
+  }, [chosenTeacher]);
 
     useEffect(() => {
-        if(chosenTeacher)
+        if(chosenTeacher){
             SetCalendarToUserAction(chosenTeacher.id);
-    }, [chosenTeacher, SetCalendarToUserAction]);
+            GetSelectedTeacherSettingsAction(chosenTeacher.id);
+        }
+    }, [chosenTeacher, SetCalendarToUserAction, GetSelectedTeacherSettingsAction]);
 
 
     return (

@@ -21,6 +21,7 @@ function SearchProfile({
   selectSubjectAction,
   resetSubjectsAction,
   subjectsOptions,
+  GetSelectedTeacherSettingsAction
 }) {
   const navigate = useNavigate();
 
@@ -28,8 +29,9 @@ function SearchProfile({
 
   const goToCalender = useCallback(() => {
     SetCalendarToUserAction(chosenTeacher.id);
+    GetSelectedTeacherSettingsAction(chosenTeacher.id);
     navigate("/schedule");
-  }, [chosenTeacher, SetCalendarToUserAction, navigate]);
+  }, [chosenTeacher, SetCalendarToUserAction, navigate, GetSelectedTeacherSettingsAction]);
 
   const selectSubject = useCallback(
     (event) => {

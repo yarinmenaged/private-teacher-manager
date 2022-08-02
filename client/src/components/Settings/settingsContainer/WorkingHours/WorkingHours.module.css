@@ -1,0 +1,10 @@
+.container {
+  margin-left: 20px;
+}
+
+.hoursContainer {
+  list-style-type: none;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

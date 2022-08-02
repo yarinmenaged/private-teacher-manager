@@ -1,6 +1,3 @@
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import style from './SubjectsFilter.module.css';
 import MultipleSubjectsOptions from './MultipleSubjectsOptions/MultipleSubjectsOptionsConnector';
 import OneSubjectOption from './OneSubjectOption/OneSubjectOptionConnector';
 

@@ -19,7 +19,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return bindActionCreators({  ...ownProps, AddEventAction }, dispatch);
+  return bindActionCreators({ ...ownProps, AddEventAction }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HourBlock);
