@@ -8,16 +8,17 @@ function RegisterForm() {
   const navigate = useNavigate();
 
   const handleSubmit = useCallback(
-    (event) => {
+    async (event) => {
       event.preventDefault();
       const firstName = event.target.elements.firstName.value;
       const lastName = event.target.elements.lastName.value;
       const Name = `${firstName} ${lastName}`;
       const userType = event.target.elements.userType.value;
       const Email = event.target.elements.email.value;
+      const Location = event.target.elements.location.value;
       const Password = event.target.elements.password.value;
       const Phone = event.target.elements.phone.value;
-      serverConnection.addUser(Name, userType, Email, Password, Phone);
+      await serverConnection.addUser(Name, userType, Email, Password, Location, Phone);
       navigate("/login");
     },
     [navigate]
@@ -60,7 +61,7 @@ function RegisterForm() {
         </div>
         <br />
 
-        <label style={{ marginRight: "14px" }}>Are You:</label>
+        <label style={{ marginRight: "14px" }}>Are You:</label><br />
         <select name="userType" type="select" defaultValue="teacher" required>
           <option value="teacher">teacher</option>
           <option value="student">student</option>
@@ -84,10 +85,15 @@ function RegisterForm() {
         />
         <br />
 
+        <label>Location:</label>
+        <br />
+        <input name="location" type="text" className={style.input} required />
+        <br />
+
         <label>Mobile Number:</label>
         <br />
         <input name="phone" type="tel" className={style.input} required />
-        <br />
+        <br /><br />
 
         <input
           type="submit"
