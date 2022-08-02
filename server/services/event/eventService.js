@@ -2,6 +2,7 @@ const { UserType } = require("../storage/Constants");
 const EventStorageService = require("../storage/EventStorageService");
 const UserStorageService = require("../storage/UserStorageService");
 const moment = require("moment");
+const EventServiceConstants = require("./Constants");
 
 async function GetAllEventsOfUserInWeek(user_id, week) {
   try {
@@ -25,21 +26,21 @@ async function GetAllEventsOfUserInWeek(user_id, week) {
   }
 }
 
-async function AddEventBlockedToTeacher(user_id, date, hour){
+async function AddEventBlockedToTeacher(user_id, date, hour, lesson_length){
     try{
-        const format_date = moment.utc(date).format('MM-DD-YYYY');
-        const formatted_date = moment.utc(`${format_date} ${hour}`).format('MM-DD-YYYY HH:mm:ss');
-        return await EventStorageService.AddBlockedEventToTeacher(user_id, formatted_date);
+        const format_date = moment.utc(date).format(EventServiceConstants.DATE_FORMAT);
+        const formatted_date = moment.utc(`${format_date} ${hour}`).format(EventServiceConstants.DATE_WITH_TIME_FORMAT);
+        return await EventStorageService.AddBlockedEventToTeacher(user_id, formatted_date, lesson_length);
     }catch(error){
         throw error;
     }
 }
 
-async function AddEventFromStudent(student, teacher_id, date, hour, subject_id){
+async function AddEventFromStudent(student, teacher_id, date, hour, subject_id, lesson_length){
     try{
-        const format_date = moment.utc(date).format('MM-DD-YYYY');
-        const formatted_date = moment.utc(`${format_date} ${hour}`).format('MM-DD-YYYY HH:mm:ss');
-        return await EventStorageService.AddEventFromStudent(student, teacher_id, formatted_date, subject_id);
+        const format_date = moment.utc(date).format(EventServiceConstants.DATE_FORMAT);
+        const formatted_date = moment.utc(`${format_date} ${hour}`).format(EventServiceConstants.DATE_WITH_TIME_FORMAT);
+        return await EventStorageService.AddEventFromStudent(student, teacher_id, formatted_date, subject_id, lesson_length);
     }catch(error){
         throw error;
     }

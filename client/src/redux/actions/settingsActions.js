@@ -5,7 +5,7 @@ import SettingsService from '../../services/SettingsService';
 const setSettingsForTeacher = (settings) => {
   return async (dispatch) => {    
     dispatch({ type: ACTIONS.SET_SETTINGS_FOR_TEACHER, payload: settings });
-    const workingHours = await SettingsService.setSettings(settings);
+    const settings_req = await SettingsService.setSettings(settings);
   };
 };
 

@@ -4,6 +4,7 @@ import { Flex } from 'monday-ui-react-core';
 import { AiOutlineClose, AiOutlineFieldTime, AiFillPhone, AiOutlineMail } from 'react-icons/ai';
 import { BsFillFileEarmarkPersonFill } from 'react-icons/bs';
 import { MdDateRange, MdSubject, MdOutlineNotes } from 'react-icons/md';
+import { IoIosResize } from 'react-icons/io';
 import moment from 'moment';
 import EventConstants from '../Constants';
 
@@ -74,6 +75,13 @@ const EventInfo = ({ event, close_call_back, user_type }) => {
                     </div>
                 </Flex>
                 <Flex justify={Flex.justify.CENTER} gap={100}>
+                <div className={style.attribute}>
+                        <span>
+                            <IoIosResize></IoIosResize>
+                            Lesson Length
+                        </span>
+                        <span>{event.duration} min</span>
+                    </div>        
                     <div className={style.attribute}>
                         <span>
                             <MdOutlineNotes></MdOutlineNotes>

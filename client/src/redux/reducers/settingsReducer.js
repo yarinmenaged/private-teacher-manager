@@ -19,7 +19,7 @@ const reducer = (state = initState, action) => {
   switch (type) {
     case ACTIONS.SET_SETTINGS_FOR_TEACHER:
       if(!payload.lessonLength && !payload.workingHours)
-        return initState;
+        return {...initState};
       else
         return { lessonLength: payload.lessonLength, workingHours: payload.workingHours };
     case ACTIONS.SET_DAILY_WORKING_HOURS:
@@ -28,9 +28,9 @@ const reducer = (state = initState, action) => {
       day_obj.end = payload.end;
       return { ...state, workingHours: [...state.workingHours] };
     case ACTIONS.SET_LESSON_LENGTH:
-      return { ...state, lessonLength: payload.lesson_length };
+      return { ...state, lessonLength: payload };
     case ACTIONS.UNSET_TEACHER_SETTINGS:
-      return initState;
+      return {...initState};
     default:
       return state;
   }

@@ -10,20 +10,20 @@ const GetEvents = (id, week) => {
   };
 };
 
-const AddEvent = (user_id, date, hour, user_type, teacher_id, subject_id, subject_name) => {
+const AddEvent = (user_id, date, hour, user_type, teacher_id, subject_id, subject_name, lesson_length) => {
     return async(dispatch) => {
         try{
             const hash_id = crypto.SHA512(`${date} ${hour} ${user_type} ${teacher_id} ${subject_id} ${user_id}`).toString();
             if(user_type === ReduxContents.USER_TYPE.Teacher){         
                 if(teacher_id === user_id)                      
-                    dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour, hash_id }});
+                    dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour, hash_id, lesson_length }});
                 else
-                    dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour, teacher_id, hash_id }});
-                const event = await EventService.AddBlockedEvent(date, hour);
+                    dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour, teacher_id, hash_id, lesson_length }});
+                const event = await EventService.AddBlockedEvent(date, hour, lesson_length);
                 dispatch({ type: ACTIONS.UPDATE_EVENT, payload: { event, hash_id } });
             } else if(user_type === ReduxContents.USER_TYPE.Student && teacher_id){
-                dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour, teacher_id, subject_id, subject_name, hash_id }});
-                const event = await EventService.AddEvent(date, hour, teacher_id, subject_id);
+                dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour, teacher_id, subject_id, subject_name, hash_id, lesson_length }});
+                const event = await EventService.AddEvent(date, hour, teacher_id, subject_id, lesson_length);
                 dispatch({ type: ACTIONS.UPDATE_EVENT, payload: { event, hash_id } });
             }   
         }catch(error){
@@ -61,9 +61,9 @@ export const GetEventsAction = (id, week) => {
   };
 };
 
-export const AddEventAction = (user_id, date, hour, user_type, teacher_id, subject_id) => {
+export const AddEventAction = (user_id, date, hour, user_type, teacher_id, subject_id, subject_name, lesson_length) => {
     return (dispatch) => {
-        dispatch(AddEvent(user_id, date, hour, user_type, teacher_id, subject_id));
+        dispatch(AddEvent(user_id, date, hour, user_type, teacher_id, subject_id, subject_name, lesson_length));
     };
 };
 
