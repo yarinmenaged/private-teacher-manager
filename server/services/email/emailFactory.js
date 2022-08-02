@@ -1,4 +1,4 @@
-const { emailSender } = require("./mail");
+const { emailSender } = require("./emailConnection");
 const {
 	addingLessonTeacherMessage,
 	canceledLessonTeacherMessage,

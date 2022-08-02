@@ -6,7 +6,7 @@ import { UnsetCalendarToUserAction } from "../../redux/actions/calendarActions";
 import {
 	getUserType,
 	getLoginStatus,
-} from "../../redux/selectors/userSelector";
+} from "../../redux/selectors/userSelectors";
 
 const mapStateToProps = (state) => {
 	const Type = getUserType(state);

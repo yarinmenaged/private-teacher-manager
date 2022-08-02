@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import style from "./HourBlock.module.css";
 import ConstantsHourBlock from "./Constants";
 import { Tooltip } from "monday-ui-react-core";
@@ -15,12 +15,13 @@ const HourBlock = ({
 	user_id,
 	AddEventAction,
 	calender_user_id,
+	show_other_user_calendar,
 	subject_id,
 	subject_name,
 	blocked_size,
 }) => {
 	const [render_event, setRenderEvent] = useState(false);
-	const [event_obj] = useState(null);
+	const [event_obj, setEventObj] = useState(null);
 
 	const event_filtered = useCallback(
 		(blocks_date) => {
@@ -45,9 +46,9 @@ const HourBlock = ({
 	}, [date, hour, event_filtered]);
 
 	useEffect(() => {
-		event_obj.current = event();
-		event_obj.current ? setRenderEvent(true) : setRenderEvent(false);
-	}, [date, event, events, event_obj]);
+		setEventObj(event());
+		event_obj ? setRenderEvent(true) : setRenderEvent(false);
+	}, [date, event, event_obj]);
 
 	const hour_block_click_call__back = useCallback(
 		(event) => {
@@ -64,8 +65,6 @@ const HourBlock = ({
 			else event.preventDefault();
 		},
 		[
-			event_obj,
-			blocked_size,
 			AddEventAction,
 			user_id,
 			date,
@@ -73,7 +72,8 @@ const HourBlock = ({
 			user_type,
 			calender_user_id,
 			subject_id,
-			subject_name,
+			event_obj,
+			blocked_size,
 		]
 	);
 
@@ -87,7 +87,11 @@ const HourBlock = ({
 
 	const content_tool_tip = render_event
 		? ConstantsHourBlock.SHOW_MORE_INFO_ON_EVENT
-		: ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP;
+		: blocked_size
+		? ConstantsHourBlock.blocked_size
+		: show_other_user_calendar
+		? ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP
+		: ConstantsHourBlock.FREE_BLOCK;
 
 	return (
 		<Tooltip

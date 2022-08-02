@@ -2,25 +2,19 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import HourBlock from "./HourBlock";
 import { getEvents } from "../../../../redux/selectors/eventSelector";
-import { getUserInfo } from "../../../../redux/selectors/userSelector";
+import { getUserInfo } from "../../../../redux/selectors/userSelectors";
 import { AddEventAction } from "../../../../redux/actions/eventActions";
 import {
 	getShowCalenderOfOtherUser,
 	getUserId,
 } from "../../../../redux/selectors/calendarSelector";
-import {
-	getSelectedSubjectId,
-	getSelectedSubjects,
-} from "../../../../redux/selectors/subjectsSelector";
+import { getSelectedSubjects } from "../../../../redux/selectors/subjectsSelector";
 
 const mapStateToProps = (state, ownProps) => {
 	const events = getEvents(state);
 	const user_type = getUserInfo(state).Type;
 	const user_id = getUserInfo(state).id;
 	const calender_user_id = getUserId(state) === "" ? null : getUserId(state);
-	const subject_id = getSelectedSubjects(state).length
-		? getSelectedSubjectId(state)
-		: null;
 	const subject_name = getSelectedSubjects(state).length
 		? getSelectedSubjects(state)[0].Name
 		: null;
@@ -31,7 +25,6 @@ const mapStateToProps = (state, ownProps) => {
 		user_type,
 		user_id,
 		calender_user_id,
-		subject_id,
 		show_other_user_calendar,
 		subject_name,
 	};
