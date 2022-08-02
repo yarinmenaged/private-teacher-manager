@@ -1,7 +1,7 @@
 .column {
     padding-left: 5%;
     padding-right: 10%;
-    width: 40%;
+    width: 30%;
     font-size: medium;
 }
 
@@ -23,8 +23,8 @@
     margin-top: 8px;
     background-color: rgb(78, 99, 165);
     color: white;
-    padding: 8px 10px 8px 10px;
-    border-radius: 20px;
+    padding: 8.5px 15px 8.5px 15px;
+    border-radius: 5px;
     cursor: pointer;
     border-width: 0px;
 }
@@ -51,5 +51,8 @@ textarea {
     width: 95vw;
     margin-left: 30px;
     margin-top: 10px;
+    margin-bottom: 10px;
     border-radius: 10px;
+    background-color: rgba(209, 209, 209, 0.295);
+    color: black;
   }

@@ -11,17 +11,18 @@ import cx from 'classnames'
 
 import SingleProfile from "../SingleProfile/SingleProfileConnector";
 
-function SearchProfile({ selectedTeachers }) {
+function SearchProfile({ selectedTeachers, chosenTeacher }) {
 
-    console.log(selectedTeachers);
     return (
         <div>
             <NavBar />
             <SearchTeacher multipleOptions={true} />
-            {
-                selectedTeachers.length > 0 &&
-                selectedTeachers.map(teacher => {
-                    return <SingleProfile teacherInfo={teacher} />
+            {   
+                chosenTeacher
+                ? <SingleProfile teacherInfo={chosenTeacher} />
+                : selectedTeachers.length > 0 &&
+                  selectedTeachers.map(teacher => {
+                 return <SingleProfile key={teacher.id} teacherInfo={teacher} />
                 })
             }
         </div>

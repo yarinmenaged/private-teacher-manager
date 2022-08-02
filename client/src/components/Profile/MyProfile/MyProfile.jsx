@@ -51,7 +51,7 @@ function MyProfile({ userInfo,
     return (
         <div>
             <NavBar />
-            <div className={style.flex}>
+            <Flex>
                 <div className={style.column}>
                     <h3><Icon iconSize={30} icon={Academy} /> Teacher Profile</h3>
                     <p><Icon iconSize={20} icon={PersonRound} /> {userInfo.Name}</p>
@@ -70,7 +70,7 @@ function MyProfile({ userInfo,
                             : <p>{userInfo.About}</p>
                     }
                 </div>
-            </div>
+            </Flex>
             <Flex justify={Flex.justify.CENTER}>
                 <h3>I'm teaching:</h3>
                 <Dropdown

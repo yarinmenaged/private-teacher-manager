@@ -14,14 +14,28 @@ function SingleProfile({
     SetCalendarToUserAction,
     selectSubjectAction,
     resetSubjectsAction,
-    subjectsOptions,
+    chooseTeacherAction,
+    selectedSubjects,
 }) {
-console.log(teacherInfo);
+
+    useEffect(() => {
+console.log("hey");
+    }, [selectedSubjects]);
+
+    const teacherSubjects = teacherInfo.subjects.map(subject => subject.id);
+    const subjectsOptions = selectedSubjects.filter(subject =>
+        teacherSubjects.includes(subject.id)).map(subject =>
+        ({
+            value: subject.Name,
+            label: subject.Name,
+            id: subject.id,
+        }));
     const navigate = useNavigate();
 
     const [displayDropdown, setDisplayDropdown] = useState(false);
 
     const goToCalender = useCallback(() => {
+        chooseTeacherAction(teacherInfo.id);
         SetCalendarToUserAction(teacherInfo.id);
         navigate("/schedule");
     }, [teacherInfo, SetCalendarToUserAction, navigate]);
@@ -33,46 +47,46 @@ console.log(teacherInfo);
 
     return (
         <div>
-                <Flex className={style.card}>
-                    <div className={style.column}>
-                        <h3><Icon iconSize={30} icon={Academy} /> Teacher Profile</h3>
-                        <p><Icon iconSize={20} icon={PersonRound} /> {teacherInfo.Name}</p>
-                        <p><Icon iconSize={20} icon={Email} /> {teacherInfo.Email}</p>
-                        <p><Icon iconSize={20} icon={Mobile} /> {teacherInfo.Phone}</p>
-                    </div>
+            <Flex className={style.card}>
+                <div className={style.column}>
+                    <h3><Icon iconSize={30} icon={Academy} /> Teacher Profile</h3>
+                    <p><Icon iconSize={20} icon={PersonRound} /> {teacherInfo.Name}</p>
+                    <p><Icon iconSize={20} icon={Email} /> {teacherInfo.Email}</p>
+                    <p><Icon iconSize={20} icon={Mobile} /> {teacherInfo.Phone}</p>
+                </div>
 
-                    <div className={style.column}>
-                        <h3><Icon icon={Description} /> About</h3>
-                        <p>{teacherInfo.About}</p>
-                        <h3>I'm teaching:</h3>
-                        <Flex>
-                            {
-                                teacherInfo.subjects.map((subject, index) =>
-                                    <div key={index} style={{ marginRight: "20px" }}>{subject.Name}</div>
-                                )
-                            }
-                        </Flex><br />
-                        <Flex>
-                            <button className={style.button}
-                                onClick={() => setDisplayDropdown(!displayDropdown)}>
-                                Sounds interesting?
-                            </button><br />
-                            {
-                                displayDropdown &&
-                                <Dropdown
-                                    options={subjectsOptions}
-                                    onChange={(event) => {
-                                        selectSubject(event);
-                                        goToCalender();
-                                    }}
-                                    clearable={false}
-                                    size={Dropdown.size.SMALL}
-                                    placeholder="Select Subject"
-                                    className={cx("dropdown-stories-styles_big-spacing", style.smallDropDown)} />
-                            }
-                        </Flex>
-                    </div>
-                </Flex>
+                <div className={style.column}>
+                    <h3><Icon icon={Description} /> About</h3>
+                    <p>{teacherInfo.About}</p>
+                    <h3>I'm teaching:</h3>
+                    <Flex>
+                        {
+                            teacherInfo.subjects.map((subject, index) =>
+                                <div key={index} style={{ marginRight: "20px" }}>{subject.Name}</div>
+                            )
+                        }
+                    </Flex><br />
+                    <Flex align={Flex.align.END}>
+                        <button className={style.button}
+                            onClick={() => setDisplayDropdown(!displayDropdown)}>
+                            Schedule a lesson!
+                        </button><br />
+                        {
+                            displayDropdown &&
+                            <Dropdown
+                                options={subjectsOptions}
+                                onChange={(event) => {
+                                    selectSubject(event);
+                                    goToCalender();
+                                }}
+                                clearable={false}
+                                size={Dropdown.size.SMALL}
+                                placeholder="Select Subject"
+                                className={cx("dropdown-stories-styles_big-spacing", style.smallDropDown)} />
+                        }
+                    </Flex>
+                </div>
+            </Flex>
         </div>
     );
 }

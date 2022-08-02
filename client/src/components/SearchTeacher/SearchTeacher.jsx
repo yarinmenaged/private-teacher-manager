@@ -44,7 +44,8 @@ function SearchTeacher({
             <SubjectsFilter multipleOptions={multipleOptions} />
                 <Dropdown
                     options={allOptions}
-                    value={{ value: "Select Teacher", label: "Select Teacher" }}
+                    //defaultValue={{ value: "Select Teacher", label: "Select Teacher" }}
+                    placeholder={"Select teacher"}
                     onChange={(event) => chooseTeacher(event)}
                     clearable={false}
                     className={cx("dropdown-stories-styles_big-spacing", style.width)} />
