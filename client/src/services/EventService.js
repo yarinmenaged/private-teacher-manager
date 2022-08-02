@@ -2,13 +2,13 @@ import ConstantsHourBlock from "../components/Schedule/CalendarContainer/HourBlo
 import ApiService from "./ApiService";
 
 async function GetEvents(id, week) {
-    try{
-        const events = await ApiService.GetResourceRequest(`event/${id}/${week}`);
-        return events.events;
-    }catch(error){
-        //TODO error handle
-        throw error;
-    }
+  try {
+    const events = await ApiService.GetResourceRequest(`event/${id}/${week}`);
+    return events.events;
+  } catch (error) {
+    //TODO error handle
+    throw error;
+  }
 }
 
 async function AddBlockedEvent(date, hour){

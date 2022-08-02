@@ -4,6 +4,7 @@ import SearchProfile from './SearchProfile';
 import { getChosenTeacher } from '../../../redux/selectors/teachersSelector';
 import { SetCalendarToUserAction } from '../../../redux/actions/calendarActions';
 import { resetSubjectsAction, selectSubjectAction } from '../../../redux/actions/subjectsAction';
+import { GetSelectedTeacherSettingsAction } from '../../../redux/actions/settingsActions';
 
 const mapStateToProps = state => {
     const chosenTeacher = getChosenTeacher(state);
@@ -21,7 +22,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            SetCalendarToUserAction, selectSubjectAction, resetSubjectsAction
+            SetCalendarToUserAction, 
+            selectSubjectAction, 
+            resetSubjectsAction,
+            GetSelectedTeacherSettingsAction
         },
         dispatch
     );

@@ -9,9 +9,9 @@ import AppConnector from "./AppConnector";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-	<Provider store={store}>
-		<AppConnector />
-	</Provider>
+  <Provider store={store}>
+    <AppConnector />
+  </Provider>
 );
 
 reportWebVitals();

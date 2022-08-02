@@ -14,8 +14,8 @@ function SearchTeacher({
     selectedTeachers,
     mySchedule,
     multipleOptions,
-    UnsetCalendarToUserAction
-
+    UnsetCalendarToUserAction,
+    UnsetTeacherSettingsAction
 }) {
 
     const allOptions = selectedTeachers.map(teacher => ({
@@ -37,7 +37,8 @@ function SearchTeacher({
     const my_schedule_click = useCallback(() => {
         UnsetCalendarToUserAction();
         chooseTeacherAction("");
-    }, [UnsetCalendarToUserAction, chooseTeacherAction]);
+        UnsetTeacherSettingsAction();
+    }, [UnsetCalendarToUserAction, chooseTeacherAction, UnsetTeacherSettingsAction]);
 
     return (        
         <Flex align={Flex.align.END} justify={Flex.justify.CENTER} gap={15} style={{padding: "0 15px"}}>

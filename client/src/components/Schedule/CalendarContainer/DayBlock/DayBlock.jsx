@@ -32,9 +32,9 @@ const DayBlock = ({ date, teacher_preferences }) => {
         const diff_start = time_obj.diff(preferences_start, 'hours');
         const diff_end = time_obj.diff(preferences_end, 'hours');
         if (formatted_start === formatted_time) {
-          const block_size = preferences_diff * 9;
+          const block_size = (preferences_diff + 1) * 9;
           return <HourBlockConnector date={date} hour={formatted_time} key={`time_block-${index}`} blocked_size={block_size}></HourBlockConnector>
-        } else if (diff_end >= 0)
+        } else if (diff_end > 0)
           return <HourBlockConnector date={date} hour={formatted_time} key={`time_block-${index}`}></HourBlockConnector>
         else if (diff_start <= 0)
           return <HourBlockConnector date={date} hour={formatted_time} key={`time_block-${index}`}></HourBlockConnector>
@@ -43,6 +43,6 @@ const DayBlock = ({ date, teacher_preferences }) => {
       })}
     </div>
   );
-}
+};
 
 export default DayBlock;

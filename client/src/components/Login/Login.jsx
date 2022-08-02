@@ -6,11 +6,12 @@ import { Icon } from 'monday-ui-react-core';
 import { Close } from "monday-ui-react-core/dist/allIcons";
 
 function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	useEffect(() => {
-		if (loginStatus) navigate("/home");
-	}, [loginStatus, navigate]);
+  useEffect(() => {
+    if (loginStatus) navigate("/home");
+  }, [loginStatus, navigate]);
+  
 
 	const handleSubmit = useCallback((event) => {
 		event.preventDefault();
@@ -21,23 +22,23 @@ function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
 		[getUserInfoAction]
 	);
 
-	return (
-		<div className={style.inLine}>
-			<form
-				className={style.form}
-				onSubmit={(event) => {
-					handleSubmit(event);
-				}}
-			>
-				<h3>Log In</h3>
+  return (
+    <div className={style.inLine}>
+      <form
+        className={style.form}
+        onSubmit={(event) => {
+          handleSubmit(event);
+        }}
+      >
+        <h3>Log In</h3>
 
-				<input
-					type="email"
-					name="email"
-					placeholder="Email..."
-					className={style.input}
-					required
-				/>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email..."
+          className={style.input}
+          required
+        />
 
 				<input
 					type="password"
@@ -53,21 +54,21 @@ function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
 					</div>
 				}
 
-				<input
-					type="submit"
-					value="Continue"
-					className={cx(style.submit, style.input)}
-				/>
+        <input
+          type="submit"
+          value="Continue"
+          className={cx(style.submit, style.input)}
+        />
 
-				<p>
-					If you do not have an account?
-					<Link to="/register" className={style.span}>
-						Register
-					</Link>
-				</p>
-			</form >
-		</div >
-	);
+        <p>
+          If you do not have an account?
+          <Link to="/register" className={style.span}>
+            Register
+          </Link>
+        </p>
+      </form>
+    </div>
+  );
 }
 
 export default Login;

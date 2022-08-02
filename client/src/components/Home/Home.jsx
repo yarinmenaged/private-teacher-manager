@@ -1,12 +1,15 @@
 import style from './Home.module.css';
 import NavBar from '../NavBar/NavBarConnector';
 import { useEffect } from 'react';
+import EventConstants from '../Schedule/CalendarContainer/Event/Constants';
 
 
-function Home ({Name, getAllSubjectsAction}) {
+function Home ({Name, getAllSubjectsAction, user_type, GetSettingsAction}) {
 
     useEffect(() => {
         getAllSubjectsAction();
+        if(user_type === EventConstants.USER_TYPE.Teacher)
+            GetSettingsAction();
     }, []);
 
     return (

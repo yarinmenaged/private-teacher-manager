@@ -1,18 +1,21 @@
 import Home from "./Home";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { getUserName } from "../../redux/selectors/userSelector";
+import { getUserInfo, getUserName } from "../../redux/selectors/userSelector";
 import { getAllSubjectsAction } from '../../redux/actions/subjectsAction';
+import { GetSettingsAction } from '../../redux/actions/settingsActions';
 
 const mapStateToProps = (state) => {
 	const Name = getUserName(state);
-	return { Name };
+	const user_type = getUserInfo(state).Type;
+	return { Name, user_type };
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators(
 		{
-			getAllSubjectsAction
+			getAllSubjectsAction,
+			GetSettingsAction
 		},
 		dispatch);
 };

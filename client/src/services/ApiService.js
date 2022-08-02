@@ -55,9 +55,9 @@ export default class ApiService {
 		}
 	}
 
-	static CreateError(code, message) {
-		const error = new Error(message);
-		error.statusCode = code;
-		return error;
-	}
+  static CreateError(code, message) {
+    const error = new Error(message);
+    error.statusCode = code;
+    return error;
+  }
 }

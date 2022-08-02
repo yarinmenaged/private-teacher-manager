@@ -1,6 +1,6 @@
-import moment from 'moment';
-import ACTIONS from '../actions/actionConstants';
-import ReduxContents from '../Constants';
+import moment from "moment";
+import ACTIONS from "../actions/actionConstants";
+import ReduxContents from "../Constants";
 
 const initState = {
     events: [],
@@ -8,7 +8,7 @@ const initState = {
 };
 
 const reducer = (state = initState, action) => {
-    const { type, payload } = action;
+  const { type, payload } = action;
 
     switch (type) {
         case ACTIONS.GET_EVENTS:
