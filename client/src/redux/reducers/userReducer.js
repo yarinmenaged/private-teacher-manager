@@ -54,23 +54,19 @@ const reducer = (state = initState, action) => {
         About: payload.About,
         subjects: payload.subject,
       };
+		case ACTIONS.ADD_SUBJECT:
+			const subjects = state.subjects;
+			subjects.push(payload);
+			return { ...state, subjects: subjects };
 
-    case ACTIONS.LOG_OUT:
-      return {
-        loginStatus: false,
-        incorrectPassword: false,
-        id: undefined,
-        Name: "",
-        Email: "",
-        Phone: "",
-        Type: "",
-        About: "",
-        subjects: [],
-      };
-
-    default:
-      return state;
-  }
-};
+		case ACTIONS.REMOVE_SUBJECT:
+			const Subjects = state.subjects;
+			return { ...state, subjects: Subjects.filter(value => value.id !== payload.id) };
+		case ACTIONS.LOG_OUT:
+			return initState;
+		default:
+			return state;
+	}
+}
 
 export default reducer;

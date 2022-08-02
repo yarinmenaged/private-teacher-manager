@@ -148,20 +148,20 @@ async function setAboutTeacher(userId, newAbout) {
 }
 
 async function getSubjectsById(teacherId) {
-  const subjectIds = await TeachingSubjects.findAll({
-    where: { TeacherId: teacherId },
-    attributes: ["subjectId"],
-  });
+	const subjectIds = await TeachingSubjects.findAll({
+		where: { TeacherId: teacherId },
+		attributes: ["subjectId"],
+	});
 
-  return await Promise.all(
-    subjectIds.map(async (subjectId) => {
-      const subject = await Subjects.findOne({
-        where: { id: subjectId.dataValues.subjectId },
-        attributes: ["Name"],
-      });
-      return subject.dataValues.Name;
-    })
-  );
+	return await Promise.all(
+		subjectIds.map(async (subjectId) => {
+			const subject = await Subjects.findOne({
+				where: { id: subjectId.dataValues.subjectId },
+				attributes: ["id", "Name"],
+			});
+			return subject.dataValues;
+		})
+	);
 }
 
 async function getAllTeachers() {

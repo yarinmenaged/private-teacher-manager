@@ -1,8 +1,9 @@
 import style from "./Login.module.css";
 import cx from "classnames";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useCallback } from "react";
+import { useEffect, useCallback } from "react";
+import { Icon } from 'monday-ui-react-core';
+import { Close } from "monday-ui-react-core/dist/allIcons";
 
 function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
   const navigate = useNavigate();
@@ -11,15 +12,14 @@ function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
     if (loginStatus) navigate("/home");
   }, [loginStatus, navigate]);
 
-  const handleSubmit = useCallback(
-    async (event) => {
-      event.preventDefault();
-      const email = event.target.elements.email.value;
-      const password = event.target.elements.password.value;
-      getUserInfoAction(email, password);
-    },
-    [getUserInfoAction]
-  );
+	const handleSubmit = useCallback((event) => {
+		event.preventDefault();
+		const email = event.target.elements.email.value;
+		const password = event.target.elements.password.value;
+		getUserInfoAction(email, password);
+	},
+		[getUserInfoAction]
+	);
 
   return (
     <div className={style.inLine}>
@@ -39,18 +39,19 @@ function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
           required
         />
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password..."
-          className={style.input}
-          required
-        />
-        {incorrectPassword ? (
-          <div className={style.incorrect}>Incorrect email or password</div>
-        ) : (
-          <div />
-        )}
+				<input
+					type="password"
+					name="password"
+					placeholder="Password..."
+					className={style.input}
+					required
+				/>
+				{
+					incorrectPassword &&
+					< div className={style.incorrect}>
+						<Icon icon={Close} /> Incorrect email or password 
+					</div>
+				}
 
         <input
           type="submit"

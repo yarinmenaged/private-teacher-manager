@@ -2,43 +2,63 @@ import map from "lodash/map";
 import SubjectsFilter from "./SubjectsFilter/SubjectsFilterConnector";
 import { useEffect } from 'react'
 import { useCallback } from "react";
+import { Dropdown, Button, Flex } from 'monday-ui-react-core';
+import Calendar from "monday-ui-react-core/dist/icons/Calendar";
+import style from './SearchTeacher.module.css';
+import cx from 'classnames'
 
 function SearchTeacher({
     areTeachersFetched,
     fetchTeachersAction,
     chooseTeacherAction,
     selectedTeachers,
+    mySchedule,
+    multipleOptions,
+    UnsetCalendarToUserAction
+
 }) {
 
-    const DEFAULT = "default";
+    const allOptions = selectedTeachers.map(teacher => ({
+        value: teacher.Name,
+        label: teacher.Name,
+        id: teacher.id,
+    }));
 
     useEffect(() => {
         if (!areTeachersFetched) {
             fetchTeachersAction();
         }
-    }, [areTeachersFetched]);
+    }, []);
 
     const chooseTeacher = useCallback((event) => {
-        chooseTeacherAction(event.target.value)
+        chooseTeacherAction(event.id);
     }, [chooseTeacherAction]);
 
-    return (
-        <div>
-            <SubjectsFilter />
-            <select type="select" onChange={(event) => chooseTeacher(event)} value={DEFAULT}>
-                <option value={DEFAULT} disabled>select teacher</option>
+    const my_schedule_click = useCallback(() => {
+        UnsetCalendarToUserAction();
+        chooseTeacherAction("");
+    }, [UnsetCalendarToUserAction, chooseTeacherAction]);
+
+    return (        
+        <Flex align={Flex.align.END} justify={Flex.justify.CENTER} gap={15} style={{padding: "0 15px"}}>
+            <SubjectsFilter multipleOptions={multipleOptions} />
+                <Dropdown
+                    options={allOptions}
+                    value={{ value: "Select Teacher", label: "Select Teacher" }}
+                    onChange={(event) => chooseTeacher(event)}
+                    clearable={false}
+                    className={cx("dropdown-stories-styles_big-spacing", style.width)} />
                 {
-                    window.location.href.includes("search-profile")
-                    ? <dev />
-                    : <option style={{fontWeight: "bolder"}}>my own schedule</option>
+                    mySchedule &&
+                    <Button
+                        onClick={my_schedule_click}
+                        size={Button.sizes.MEDIUM}
+                        rightIcon={Calendar}
+                        className={style.button}>
+                        My Schedule
+                    </Button>
                 }
-                {
-                    map(selectedTeachers, teacher => {
-                        return <option value={teacher.id} key={teacher.id}>{teacher.Name}</option>
-                    })
-                }
-            </select>
-        </div>
+        </Flex>
     );
 }
 

@@ -57,6 +57,62 @@
 }
 
 .blocked {
-  --theme-color: #fff;
-  --theme-bg: #ff353c;
+    --theme-color: #fff;
+    --theme-bg: #ff353c;
+}
+
+.actions {
+    position: absolute;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 16pt;
+    background: #b7b7b76e;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.actions:hover {
+    opacity: 1;
+}
+
+.actions > div {
+    color: #ffffff;
+    padding: 15px;
+    border: 1px solid;
+    border-radius: 50%;
+    display: flex;
+    margin: 0 5px;
+}
+
+.delete {
+    background:#ff7a7a;
+}
+
+.delete:hover {
+    color: #ff7a7a;
+    background: #fff;
+}
+
+.info {
+    background: #3699ff;
+}
+
+.info:hover {
+    color: #3699ff;
+    background: #fff;
+}
+
+.edit {
+    background: #b2ff36;
+}
+
+.edit:hover {
+    color: #b2ff36;
+    background: #fff;
+
 }

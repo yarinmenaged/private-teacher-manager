@@ -6,22 +6,22 @@ import moment from "moment";
 import ConstantsHourBlock from "../HourBlock/Constants";
 
 const TimeTrack = () => {
-  const start_hour = 7;
-  const end_hour = 22;
-  return (
-    <div className={`${global_style.track} ${global_style.time}`}>
-      {_.range(start_hour, end_hour).map((value, index) => {
-        const formatted_time = moment(value.toString(), "LT").format("HH:mm");
-        return (
-          <HourBlock
-            type={ConstantsHourBlock.BLOCK_TYPES.TIME}
-            hour={formatted_time}
-            key={`time_block-${index}`}
-          ></HourBlock>
-        );
-      })}
-    </div>
-  );
+	const start_hour = 7;
+	const end_hour = 22;
+	return (
+		<div className={`${global_style.track} ${global_style.time}`}>
+			{_.range(start_hour, end_hour).map((value, index) => {
+				const formatted_time = moment.utc().hour(value.toString()).minute(0).format("HH:mm");
+				return (
+					<HourBlock
+						type={ConstantsHourBlock.BLOCK_TYPES.TIME}
+						hour={formatted_time}
+						key={`time_block-${index}`}
+					></HourBlock>
+				);
+			})}
+		</div>
+	);
 };
 
 export default TimeTrack;

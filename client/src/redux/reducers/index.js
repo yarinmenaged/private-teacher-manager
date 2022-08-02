@@ -1,11 +1,12 @@
 import { combineReducers } from "redux";
-import userReducer from "./userReducer";
-import weekReducer from "./weekReducer";
-import eventReducer from "./eventReducer";
-import calendarReducer from "./calendarReducer";
-import teachersReducer from "./teachersReducer";
-import sabjectsReducer from "./subjectsReducer";
+
 import settingsReducer from "./settingsReducer";
+import userReducer from './userReducer';
+import weekReducer from './weekReducer';
+import eventReducer from './eventReducer';
+import calendarReducer from './calendarReducer';
+import teachersReducer from './teachersReducer';
+import subjectsReducer from './subjectsReducer';
 
 const allReducers = combineReducers({
   userReducer,
@@ -13,8 +14,8 @@ const allReducers = combineReducers({
   eventReducer,
   calendarReducer,
   teachersReducer,
-  sabjectsReducer,
   settingsReducer,
+  subjectsReducer,
 });
 
 export default allReducers;

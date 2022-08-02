@@ -1,6 +1,4 @@
 .navBar {
-    display: flex;
-    justify-content: center;
     background-color: rgb(78, 99, 165);
 }
 
@@ -15,3 +13,13 @@
 .button:hover {
     opacity: 50%;
 }
+
+.logo {
+    height: 50px;
+    width: 180px;
+    margin: 20px 0px 10px 80px;
+  }
+
+  .width {
+    width: 100%;
+  }

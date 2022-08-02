@@ -7,15 +7,17 @@
 }
 
 .entry {
-  border: 1px solid #ebebeb;
-  border-top: 0;
-  background: var(--body-bg);
-  height: 9em;
-  padding: 1em;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-top: 0;
+    background: var(--body-bg);
+    height: 9em;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
 }
 
 .entry:not(:last-of-type) {
