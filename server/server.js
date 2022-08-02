@@ -6,9 +6,13 @@ const app = express();
 const router = require("./routes/routes");
 const subjects_router = require("./routes/subjectsRoute");
 const event_router = require("./routes/event");
+const { up } = require('./db/seeders/20220724075744-subjects');
 const settings_router = require('./routes/settingsRoute');
 
-sequelize.sync();
+Promise.resolve(sequelize.sync()).then(() => {
+  const queryInterface = sequelize.getQueryInterface();
+  up(queryInterface, sequelize);
+});
 
 app.use(express.json());
 app.use(cookieParser());

@@ -25,7 +25,8 @@ const reducer = (state = initState, action) => {
                         StudentId: null,
                         SubjectId: null,
                         Student: null,
-                        id: payload.hash_id
+                        id: payload.hash_id,
+                        duration: payload.lesson_length
                     }]
                 };
             else
@@ -36,6 +37,7 @@ const reducer = (state = initState, action) => {
                         date: format_date_with_hour,
                         StudentId: payload.user_id,
                         SubjectId: payload.subject_id,
+                        duration: payload.lesson_length,
                         Student: {
                             id: payload.user_id,
                             User_info_id: payload.user_id

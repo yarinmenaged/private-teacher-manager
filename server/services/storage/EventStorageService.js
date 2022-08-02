@@ -61,7 +61,7 @@ async function GetEventsByEventId(event_id) {
     return event;
 }
 
-async function AddBlockedEventToTeacher(user, date) {
+async function AddBlockedEventToTeacher(user, date, lesson_length) {
     const teacher = await GetTeacherById(user.id);
     const format_date = moment.utc(date);
     await Event.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null);
@@ -69,14 +69,15 @@ async function AddBlockedEventToTeacher(user, date) {
         "date": format_date,
         "StudentId": null,
         "SubjectId": null,
-        "TeacherId": teacher.id
+        "TeacherId": teacher.id,
+        "duration": lesson_length
     });
     await Event.sequelize.query("SET FOREIGN_KEY_CHECKS = 1", null);
     const event = GetEventsByEventId(add_blocked.id);
     return event;
 }
 
-async function AddEventFromStudent(student, teacher_id, date, subject_id) {
+async function AddEventFromStudent(student, teacher_id, date, subject_id, lesson_length) {
     const teacher = await GetTeacherById(teacher_id);
     const student_info = await GetStudentById(student.id);
     const format_date = moment.utc(date);
@@ -84,7 +85,8 @@ async function AddEventFromStudent(student, teacher_id, date, subject_id) {
         "date": format_date,
         "StudentId": student_info.id,
         "SubjectId": subject_id,
-        "TeacherId": teacher.id
+        "TeacherId": teacher.id,
+        "duration": lesson_length
     });
     const event = GetEventsByEventId(add_event.id);
     return event;
