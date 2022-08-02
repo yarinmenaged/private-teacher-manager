@@ -1,5 +1,4 @@
 import style from "../Profile.module.css";
-import { Link } from "react-router-dom";
 import NavBar from "../../NavBar/NavBarConnector";
 import { useState } from "react";
 import cx from "classnames";
@@ -48,13 +47,19 @@ function MyProfile({
 		setShowTextbox((showTextbox) => !showTextbox);
 	}, [setShowTextbox]);
 
-	const addSubject = useCallback(async (event) => {
-		addSubjectAction(event[event.length - 1]);
-	}, []);
+	const addSubject = useCallback(
+		async (event) => {
+			addSubjectAction(event[event.length - 1]);
+		},
+		[addSubjectAction]
+	);
 
-	const removeSubject = useCallback(async (event) => {
-		removeSubjectAction(event);
-	}, []);
+	const removeSubject = useCallback(
+		async (event) => {
+			removeSubjectAction(event);
+		},
+		[removeSubjectAction]
+	);
 
 	return (
 		<div>

@@ -1,9 +1,9 @@
 import style from "../Profile.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import NavBar from "../../NavBar/NavBarConnector";
 import cx from "classnames";
 import SearchTeacher from "../../SearchTeacher/SearchTeacherConnector";
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState } from "react";
 import { Icon, Flex, Dropdown } from "monday-ui-react-core";
 import { BsWhatsapp } from "react-icons/bs";
 import styles from "./SearchProfile.module.css";

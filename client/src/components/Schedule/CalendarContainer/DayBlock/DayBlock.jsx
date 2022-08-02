@@ -71,6 +71,7 @@ const DayBlock = ({ date, teacher_preferences }) => {
 							key={`time_block-${index}`}
 						></HourBlockConnector>
 					);
+				else return console.log("err handle here...");
 			})}
 		</div>
 	);
