@@ -44,7 +44,7 @@ function SearchTeacher({
             <SubjectsFilter multipleOptions={multipleOptions} />
                 <Dropdown
                     options={allOptions}
-                    //defaultValue={{ value: "Select Teacher", label: "Select Teacher" }}
+                    value={{ value: "Select Teacher", label: "Select Teacher" }}
                     placeholder={"Select teacher"}
                     onChange={(event) => chooseTeacher(event)}
                     clearable={false}

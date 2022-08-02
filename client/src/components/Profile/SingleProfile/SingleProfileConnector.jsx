@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import SingleProfile from './SingleProfile';
 import { SetCalendarToUserAction } from '../../../redux/actions/calendarActions';
 import { resetSubjectsAction, selectSubjectAction } from '../../../redux/actions/subjectsAction';
-import { getSubjects, getSelectedSubjects } from '../../../redux/selectors/subjectsSelector' 
+import { getSelectedSubjects } from '../../../redux/selectors/subjectsSelector' 
 import { chooseTeacherAction } from '../../../redux/actions/teachersActions'
 
 const mapStateToProps = state => {

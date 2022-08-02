@@ -2,8 +2,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import SearchProfile from './SearchProfile';
 import { getSelectedTeachers } from '../../../redux/selectors/teachersSelector';
-import { SetCalendarToUserAction } from '../../../redux/actions/calendarActions';
-import { resetSubjectsAction, selectSubjectAction } from '../../../redux/actions/subjectsAction';
 import { getChosenTeacher } from '../../../redux/selectors/teachersSelector'
 
 const mapStateToProps = state => {
