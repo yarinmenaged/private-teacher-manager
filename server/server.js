@@ -6,6 +6,7 @@ const app = express();
 const router = require("./routes/routes");
 const subjects_router = require("./routes/subjectsRoute");
 const event_router = require("./routes/event");
+const settings_router = require('./routes/settingsRoute');
 
 sequelize.sync();
 
@@ -27,5 +28,6 @@ app.use((req, res, next) => {
 app.use("/users", router);
 app.use("/subjects", subjects_router);
 app.use("/event", event_router);
+app.use("/settings", settings_router);
 
 app.listen(port, () => console.log(`server is listening on port ${port}`));

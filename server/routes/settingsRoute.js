@@ -4,7 +4,7 @@ const { authVerify } = require("../services/auth/auth");
 
 const router = express.Router();
 
-router.get("/settings", authVerify, SettingsController.getTeacherSettings);
-router.post("/settings", authVerify, SettingsController.addTeachersSettings);
+router.get("/", authVerify, SettingsController.getTeacherSettings);
+router.post("/", authVerify, SettingsController.setTeacherSettings);
 
 module.exports = router;

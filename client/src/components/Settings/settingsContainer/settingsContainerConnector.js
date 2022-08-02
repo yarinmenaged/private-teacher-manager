@@ -1,7 +1,7 @@
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import SettingsContainer from "./settingsContainer";
-import { getUserType } from "../../../redux/selectors/settingsSelector";
+import { getUserType } from "../../../redux/selectors/userSelectors";
 
 const mapStateToProps = (state) => {
   const type = getUserType(state);

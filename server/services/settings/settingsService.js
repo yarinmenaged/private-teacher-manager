@@ -3,33 +3,31 @@ const { Settings } = require("../../db/models");
 async function GetTeacherSettings(teacherId) {
   try {
     return await Settings.findOne({
-      where: { teacherId: Settings.teacherId },
+      where: { TeacherId: teacherId },
     });
   } catch (error) {
     throw error;
   }
 }
 
-async function CreateTeacherSettings(teacherId, workingHours) {
-  return await Teacher.create(
-    {
-      teacherId,
-      workingHours: JSON.parse(workingHours),
-    },
-    { transaction: transaction }
-  );
-}
-
-async function SetTeacherSettings(teacherId, workingHours) {
-  const settings = await GetTeacherSettings(teacherId);
+async function SetTeacherSettings(teacherId, workingHours, lessonLength) {
+  try{
+    const working_hours_json = await JSON.stringify(workingHours)
   return await Settings.update({
-    workingHours: JSON.parse(workingHours),
+    workingHours: working_hours_json,
+    lessonLength: lessonLength
+  }, {
+    where: {
+      TeacherId: teacherId
+    }
   });
+}catch(error){
+  throw error;
+}
 }
 
 const SettingsService = {
   GetTeacherSettings,
-  CreateTeacherSettings,
   SetTeacherSettings,
 };
 

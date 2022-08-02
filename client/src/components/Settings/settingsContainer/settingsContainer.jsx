@@ -1,5 +1,5 @@
 //import style from "./Settings.module.css";
-import WorkingHours from "./WorkingHours/WorkingHours";
+import WorkingHoursConnector from "./WorkingHours/WorkingHoursConnector";
 import style from "../Settings.module.css";
 
 function SettingsContainer({ type }) {
@@ -7,7 +7,7 @@ function SettingsContainer({ type }) {
     <div className={style.container}>
       {type === "Teacher" ? (
         <div>
-          <WorkingHours />
+          <WorkingHoursConnector />
         </div>
       ) : (
         <h2>

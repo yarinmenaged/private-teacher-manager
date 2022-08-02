@@ -1,17 +1,29 @@
 import ApiService from "./ApiService";
 
-async function getSettings(teacherId) {
+async function getSettings() {
   try {
-    const events = await ApiService.GetResourceRequest(`settings/${teacherId}`);
-    return events.events;
+    const settings = await ApiService.GetResourceRequest(`settings`);
+    return settings.settings;
   } catch (error) {
     //TODO error handle
     throw error;
   }
 }
 
+async function setSettings(settings) {
+  try {
+    const settings_req = await ApiService.AddNewResourceRequest(`settings`, {settings});
+    return settings_req.settings;
+  } catch (error) {
+    //TODO error handle
+    throw error;
+  }
+}
+
+
 const SettingsService = {
   getSettings,
+  setSettings
 };
 
 export default SettingsService;

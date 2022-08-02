@@ -5,7 +5,7 @@ import eventReducer from "./eventReducer";
 import calendarReducer from "./calendarReducer";
 import teachersReducer from "./teachersReducer";
 import sabjectsReducer from "./subjectsReducer";
-import WorkingHoursReducer from "./WorkingHoursReducer";
+import settingsReducer from "./settingsReducer";
 
 const allReducers = combineReducers({
   userReducer,
@@ -14,7 +14,7 @@ const allReducers = combineReducers({
   calendarReducer,
   teachersReducer,
   sabjectsReducer,
-  WorkingHoursReducer,
+  settingsReducer,
 });
 
 export default allReducers;

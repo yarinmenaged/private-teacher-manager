@@ -1,15 +1,15 @@
 import ACTIONS from "../actions/actionConstants";
 
 const initState = {
-  lessonLengthInMinuets: 60,
+  lessonLength: 60,
   workingHours: [
-    { start: "", end: "" },
-    { start: "", end: "" },
-    { start: "", end: "" },
-    { start: "", end: "" },
-    { start: "", end: "" },
-    { start: "", end: "" },
-    { start: "", end: "" },
+    { start: "00:00", end: "00:00" },
+    { start: "00:00", end: "00:00" },
+    { start: "00:00", end: "00:00" },
+    { start: "00:00", end: "00:00" },
+    { start: "00:00", end: "00:00" },
+    { start: "00:00", end: "00:00" },
+    { start: "00:00", end: "00:00" },
   ],
 };
 
@@ -18,15 +18,12 @@ const reducer = (state = initState, action) => {
 
   switch (type) {
     case ACTIONS.SET_SETTINGS_FOR_TEACHER:
-      return { ...state, workingHours: payload };
+      return { lessonLength: payload.lessonLength, workingHours: payload.workingHours };
     case ACTIONS.SET_DAILY_WORKING_HOURS:
       const day_obj = state.workingHours[payload.day];
       day_obj.start = payload.start;
       day_obj.end = payload.end;
-      const days_array_filterd = state.workingHours.filter(
-        (value, index) => index !== payload.day
-      );
-      return { ...state, workingHours: [...days_array_filterd, day_obj] };
+      return { ...state, workingHours: [...state.workingHours] };
     default:
       return state;
   }
