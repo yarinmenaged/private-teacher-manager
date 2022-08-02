@@ -21,13 +21,13 @@ function NavBar({ Type, logOutAction, UnsetCalendarToUserAction, loginStatus, ch
 		}
 	}, [logOutAction, removeCookie, navigate]);
 
-	const schedule_unset_callback = useCallback(() => {
-		UnsetCalendarToUserAction();
+	const schedule_unset_callback = useCallback(async() => {
+		await UnsetCalendarToUserAction();
         chooseTeacherAction("");
 		if(Type === EventConstants.USER_TYPE.Student)
 			UnsetTeacherSettingsAction();
 		navigate('/schedule');
-	}, [UnsetCalendarToUserAction, navigate, chooseTeacherAction, UnsetTeacherSettingsAction]);
+	}, [UnsetCalendarToUserAction, navigate, chooseTeacherAction, UnsetTeacherSettingsAction, Type]);
 
 	useEffect(() => {
 		if (!cookies.token) {
