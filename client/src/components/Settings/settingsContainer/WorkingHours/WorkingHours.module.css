@@ -1,10 +1,27 @@
 .container {
-  margin-left: 20px;
 }
 
 .hoursContainer {
-  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  align-content: flex-start;
+  list-style: none;
+  flex-direction: column;
+  padding: 0;
+  width: fit-content;
+}
 
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+.select_lesson_length_container{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-content: flex-start;
+}
+
+.select_box{
+  width: -webkit-fill-available;
+  margin: 0 20px;
 }

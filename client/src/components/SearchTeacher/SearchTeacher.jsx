@@ -41,7 +41,7 @@ function SearchTeacher({
     }, [UnsetCalendarToUserAction, chooseTeacherAction, UnsetTeacherSettingsAction]);
 
     return (        
-        <Flex align={Flex.align.END} justify={Flex.justify.CENTER} gap={15} style={{padding: "0 15px"}}>
+        <div className={style.container}>
             <SubjectsFilter multipleOptions={multipleOptions} />
                 <Dropdown
                     options={allOptions}
@@ -60,7 +60,7 @@ function SearchTeacher({
                         My Schedule
                     </Button>
                 }
-        </Flex>
+        </div>
     );
 }
 
