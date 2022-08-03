@@ -58,10 +58,15 @@ textarea {
   }
 
   .whatsapp {
-    color: #25d366;
+    color: #1fa24f;
   }
   
   .link {
     color: black;
     margin-left: 10px;
+  }
+
+  .bg {
+    background-color: rgb(78, 99, 165);
+    padding-bottom: 20px;
   }
