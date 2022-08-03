@@ -2,7 +2,8 @@ import LocationFilter from './LocationFilter';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { chooseLocationAction } from '../../../redux/actions/locationAction';
-import { getChosenLocation } from '../../../redux/selectors/locationSelector'
+import { getChosenLocation } from '../../../redux/selectors/locationSelector';
+import { unchooseTeacherAction } from '../../../redux/actions/teachersActions'
 
 const mapStateToProps = state => {
     const chosenLocation = getChosenLocation(state);
@@ -12,7 +13,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            chooseLocationAction,
+            chooseLocationAction, unchooseTeacherAction,
         },
         dispatch);
 }

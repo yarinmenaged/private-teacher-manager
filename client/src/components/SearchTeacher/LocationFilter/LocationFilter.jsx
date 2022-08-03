@@ -2,7 +2,7 @@ import { Dropdown } from 'monday-ui-react-core';
 import { useEffect, useState, useCallback } from 'react'
 import ApiService from '../../../services/ApiService'
 
-function LocationFilter({ chooseLocationAction, chosenLocation }) {
+function LocationFilter({ chooseLocationAction, chosenLocation, unchooseTeacherAction }) {
 
     const [citiesList, setCitiesList] = useState([
         { value: "All locations", label: "All locations" }
@@ -22,8 +22,9 @@ function LocationFilter({ chooseLocationAction, chosenLocation }) {
         }, []);
 
     const chooseLocation = useCallback((event) => {
-        chooseLocationAction(event.value)
-        }, [chooseLocationAction]);
+        unchooseTeacherAction();
+        chooseLocationAction(event.value);
+    }, [chooseLocationAction, unchooseTeacherAction]);
 
     return (
         <div style={{ width: "40%", marginRight: "15px" }}>
