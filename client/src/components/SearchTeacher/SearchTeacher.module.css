@@ -1,9 +1,14 @@
-.button{
-    margin-top: 20px;
-    margin-left: 10px;
-}
 
 .width {
     margin-top: 10px;
     width: 60%;
+}
+
+.container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: row;
+    gap: 15px;
+    width: 35%;
 }
