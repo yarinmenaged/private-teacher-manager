@@ -10,13 +10,12 @@ import ConstantsCalendarContainer from "./Constants";
 import WeekSelectorConnector from "./WeekSelector/WeekSelectorConnector";
 
 const CalendarContainer = ({ week, GetEventsAction, user_id, teacher_preferences }) => {
-	useEffect(() => {
+	useEffect(() => { 
 		GetEventsAction(user_id, week);
 	}, [week, GetEventsAction, user_id]);
 
 	return (
 		<div className={style.Calendar_container}>
-			<WeekSelectorConnector></WeekSelectorConnector>
 			<div className={style.table}>
 				<HeadersTrackConnector
 					type={ConstantsCalendarContainer.HEADERS_TYPES.DATES}

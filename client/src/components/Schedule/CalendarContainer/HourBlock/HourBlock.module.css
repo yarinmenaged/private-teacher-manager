@@ -10,7 +10,7 @@
     border: 1px solid #ebebeb;
     border-top: 0;
     background: var(--body-bg);
-    height: 9em;
+    height: 6em;
     padding: 1em;
     display: flex;
     flex-direction: column;

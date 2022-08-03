@@ -1,7 +1,7 @@
 import ACTIONS from "../actions/actionConstants";
 
 const initState = {
-  lessonLength: 60,
+  lessonLength: 0,
   workingHours: [
     { start: "00:00", end: "00:00" },
     { start: "00:00", end: "00:00" },
