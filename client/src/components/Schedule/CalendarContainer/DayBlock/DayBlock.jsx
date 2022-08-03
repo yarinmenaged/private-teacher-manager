@@ -4,6 +4,7 @@ import _ from 'lodash';
 import style from '../CalendarContainer.module.css';
 import moment from 'moment';
 import ConstantsCalendarContainer from '../Constants';
+import TeacherPreferencesConstants from '../TeacherPreferences/Constants';
 
 const DayBlock = ({ date, teacher_preferences }) => {
   const start_hour = 7;
@@ -32,7 +33,7 @@ const DayBlock = ({ date, teacher_preferences }) => {
         const diff_start = time_obj.diff(preferences_start, 'hours');
         const diff_end = time_obj.diff(preferences_end, 'hours');
         if (formatted_start === formatted_time) {
-          const block_size = (preferences_diff + 1) * 9;
+          const block_size = (preferences_diff + 1) * TeacherPreferencesConstants.ONE_BLOCK_SIZE_UNIT;
           return <HourBlockConnector date={date} hour={formatted_time} key={`time_block-${index}`} blocked_size={block_size}></HourBlockConnector>
         } else if (diff_end > 0)
           return <HourBlockConnector date={date} hour={formatted_time} key={`time_block-${index}`}></HourBlockConnector>

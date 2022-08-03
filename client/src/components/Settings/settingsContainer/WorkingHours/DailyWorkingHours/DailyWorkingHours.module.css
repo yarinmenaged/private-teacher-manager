@@ -1,7 +1,40 @@
 .dayLi {
-  margin-right: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  width: -webkit-fill-available;
 }
 
-tr {
-  padding-right: 150px;
+.title{
+  width: -webkit-fill-available;
+  margin: 10px;
+  flex: 1 0 26%;
+  text-align: start;
+}
+
+.time {
+  background: #eaeff1;
+  border: none;
+  border-bottom: 4px solid #c9d6da;
+  margin-bottom: 0.625em;
+  margin-top: 0.3em;
+  outline-offset: 3px;
+  padding: 0.45em 0.45em 0.45em 0.65em;
+  font-size: 15px;
+  width: -webkit-fill-available;
+}
+
+.time:before {
+  content: attr(placeholder) !important;
+  color: #aaa;
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+.time:focus {
+  outline: none;
+  background: #e6f8ff;
+  border-bottom: 4px solid #00b8ff;
 }

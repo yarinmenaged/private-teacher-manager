@@ -1,6 +1,7 @@
 import React, { useCallback, useRef, useEffect } from "react";
 import ConstantsCalendarContainer from "../../../../Schedule/CalendarContainer/Constants";
 import style from "./DailyWorkingHours.module.css";
+import { Heading } from 'monday-ui-react-core';
 
 function DailyWorkingHours({ day, setDailyWorkingHoursAction, working_hours }) {
   const start_ref = useRef(null);
@@ -20,9 +21,9 @@ function DailyWorkingHours({ day, setDailyWorkingHoursAction, working_hours }) {
 
   return (
     <li className={style.dayLi}>
-      {day}
-      <input type="time" id={`${day}-start-time`} onChange={handle_change_day_pref} ref={start_ref}></input>-
-      <input type="time" id={`${day}-end-time`} onChange={handle_change_day_pref} ref={end_ref}></input>
+      <Heading type={Heading.types.h5} value={day} className={style.title} />
+      <input type="time" className={style.time} onChange={handle_change_day_pref} ref={start_ref}></input>
+      <input type="time" className={style.time} onChange={handle_change_day_pref} ref={end_ref}></input>
     </li>
   );
 }
