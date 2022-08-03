@@ -6,6 +6,7 @@ import { Dropdown, Button, Flex } from 'monday-ui-react-core';
 import Calendar from "monday-ui-react-core/dist/icons/Calendar";
 import style from './SearchTeacher.module.css';
 import cx from 'classnames'
+import LocationFilter from "./LocationFilter/LocationFilter";
 
 function SearchTeacher({
     areTeachersFetched,
@@ -41,8 +42,9 @@ function SearchTeacher({
     }, [UnsetCalendarToUserAction, chooseTeacherAction, UnsetTeacherSettingsAction]);
 
     return (        
-        <div className={style.container}>
+        <Flex justify={Flex.justify.CENTER} align={Flex.justify.END} className={style.container}>
             <SubjectsFilter multipleOptions={multipleOptions} />
+            <LocationFilter />
                 <Dropdown
                     options={allOptions}
                     value={{ value: "Select Teacher", label: "Select Teacher" }}
@@ -60,7 +62,7 @@ function SearchTeacher({
                         My Schedule
                     </Button>
                 }
-        </div>
+        </Flex>
     );
 }
 
