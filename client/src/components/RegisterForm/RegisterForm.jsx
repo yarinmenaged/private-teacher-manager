@@ -2,10 +2,22 @@ import style from "./RegisterForm.module.css";
 import cx from "classnames";
 import { Link, useNavigate } from "react-router-dom";
 import serverConnection from "../../services/dbServices";
-import { useCallback } from "react";
+import ApiService from "../../services/ApiService";
+import { useCallback, useEffect, useState } from "react";
 
 function RegisterForm() {
   const navigate = useNavigate();
+
+  const [citiesList, setCitiesList] = useState([]);
+
+  useEffect(() => {
+    fetchCities();
+  }, []);
+
+  const fetchCities = useCallback(
+    async () => {
+      setCitiesList(await ApiService.getCities());
+    }, []);
 
   const handleSubmit = useCallback(
     async (event) => {
@@ -87,8 +99,15 @@ function RegisterForm() {
 
         <label>Location:</label>
         <br />
-        <input name="location" type="text" className={style.input} required />
-        <br />
+        <select name="location" type="select" defaultValue="default" required>
+          <option value="default" disabled>Select Location</option>
+          {
+            citiesList &&
+            citiesList.map((city, index) => {
+              return <option key={index} value={city.name}>{city.name}</option>
+            })
+          }
+        </select><br />
 
         <label>Mobile Number:</label>
         <br />
