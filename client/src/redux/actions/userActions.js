@@ -15,18 +15,31 @@ export const editAboutAction = (newAbout) => {
   };
 };
 
+const editPrice = (newPrice) => ({
+  type: ACTIONS.EDIT_PRICE,
+  payload: newPrice,
+});
+
+export const editPriceAction = (newPrice) => {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const id = state.userReducer.id;
+    await serverConnection.editPrice(id, newPrice);
+    dispatch(editPrice(newPrice));
+  };
+};
+
 const getUserInfo = (userInfo) => ({
   type: ACTIONS.GET_USER,
   payload: userInfo,
 });
 
 export const getUserInfoAction = (email, password) => {
-
-    return async(dispatch) => {
-        const userInfo = await serverConnection.getUserInfo(email, password);
-        await dispatch(getUserInfo(userInfo));
-    };
-}
+  return async (dispatch) => {
+    const userInfo = await serverConnection.getUserInfo(email, password);
+    await dispatch(getUserInfo(userInfo));
+  };
+};
 
 const getUserInfoByToken = (userInfo) => ({
   type: ACTIONS.GET_USER_BY_TOKEN,
@@ -51,31 +64,31 @@ export const logOutAction = () => {
 };
 
 const addSubject = (newSubject) => ({
-	type: ACTIONS.ADD_SUBJECT,
-	payload: newSubject
+  type: ACTIONS.ADD_SUBJECT,
+  payload: newSubject,
 });
 
 export const addSubjectAction = (subject) => {
-	return async (dispatch, getState) => {
-		const state = getState();
-		const userId = state.userReducer.id;
-		await serverConnection.addSubject(userId, subject.id);
-		const newSubject = { id: subject.id, Name: subject.value }
-		dispatch(addSubject(newSubject));
-	};
+  return async (dispatch, getState) => {
+    const state = getState();
+    const userId = state.userReducer.id;
+    await serverConnection.addSubject(userId, subject.id);
+    const newSubject = { id: subject.id, Name: subject.value };
+    dispatch(addSubject(newSubject));
+  };
 };
 
 const removeSubject = (removedSubject) => ({
-	type: ACTIONS.REMOVE_SUBJECT,
-	payload: removedSubject
+  type: ACTIONS.REMOVE_SUBJECT,
+  payload: removedSubject,
 });
 
 export const removeSubjectAction = (subject) => {
-	return async (dispatch, getState) => {
-		const state = getState();
-		const userId = state.userReducer.id;
-		await serverConnection.removeSubject(userId, subject.id);
-		const removedSubject = { id: subject.id, Name: subject.value }
-		dispatch(removeSubject(removedSubject));
-	};
+  return async (dispatch, getState) => {
+    const state = getState();
+    const userId = state.userReducer.id;
+    await serverConnection.removeSubject(userId, subject.id);
+    const removedSubject = { id: subject.id, Name: subject.value };
+    dispatch(removeSubject(removedSubject));
+  };
 };

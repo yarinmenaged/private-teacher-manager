@@ -20,7 +20,7 @@ function NavBar({
 
   const logOut = useCallback(
     (event) => {
-      event.preventDefault();
+      //event.preventDefault();
       if (window.confirm("Are you sure you want to log out?")) {
         removeCookie("token");
         logOutAction();
@@ -62,6 +62,7 @@ function NavBar({
         {loginStatus && (
           <Flex className={style.width}>
             <a
+              href="*"
               onClick={() => schedule_unset_callback()}
               className={style.button}
             >
@@ -89,7 +90,7 @@ function NavBar({
               </Link>
             )}
             <a
-              href=""
+              href="*"
               onClick={(event) => logOut(event)}
               className={style.button}
             >

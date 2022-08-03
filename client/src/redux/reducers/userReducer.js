@@ -11,6 +11,7 @@ const initState = {
   Phone: "",
   Type: "",
   About: "",
+  price: 0,
   subjects: [],
 };
 
@@ -19,6 +20,9 @@ const reducer = (state = initState, action) => {
   switch (type) {
     case ACTIONS.EDIT_ABOUT:
       return { ...state, About: payload };
+
+    case ACTIONS.EDIT_PRICE:
+      return { ...state, price: payload };
 
     case ACTIONS.GET_USER:
       if (payload.status) {
@@ -34,6 +38,7 @@ const reducer = (state = initState, action) => {
           Phone: payload.Phone,
           Type: payload.Type,
           About: payload.About,
+          price: payload.price,
           subjects: payload.subjects,
         };
       }
@@ -55,21 +60,26 @@ const reducer = (state = initState, action) => {
         Phone: payload.Phone,
         Type: payload.Type,
         About: payload.About,
+        price: payload.price,
         subjects: payload.subject,
       };
-		case ACTIONS.ADD_SUBJECT:
-			const subjects = state.subjects;
-			subjects.push(payload);
-			return { ...state, subjects: subjects };
+    case ACTIONS.ADD_SUBJECT:
+      const subjects = state.subjects;
+      subjects.push(payload);
+      return { ...state, subjects: subjects };
 
-		case ACTIONS.REMOVE_SUBJECT:
-			const Subjects = state.subjects;
-			return { ...state, subjects: Subjects.filter(value => value.id !== payload.id) };
-		case ACTIONS.LOG_OUT:
-			return initState;
-		default:
-			return state;
-	}
-}
+    case ACTIONS.REMOVE_SUBJECT:
+      const Subjects = state.subjects;
+      return {
+        ...state,
+        subjects: Subjects.filter((value) => value.id !== payload.id),
+      };
+    case ACTIONS.LOG_OUT:
+      return initState;
+
+    default:
+      return state;
+  }
+};
 
 export default reducer;
