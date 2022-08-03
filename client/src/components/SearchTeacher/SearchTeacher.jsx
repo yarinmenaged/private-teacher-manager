@@ -6,7 +6,7 @@ import { Dropdown, Button, Flex } from 'monday-ui-react-core';
 import Calendar from "monday-ui-react-core/dist/icons/Calendar";
 import style from './SearchTeacher.module.css';
 import cx from 'classnames'
-import LocationFilter from "./LocationFilter/LocationFilter";
+import LocationFilter from "./LocationFilter/LocationFilterConnector";
 
 function SearchTeacher({
     areTeachersFetched,
