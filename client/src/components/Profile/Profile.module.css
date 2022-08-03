@@ -2,7 +2,7 @@
     padding-left: 5%;
     padding-right: 10%;
     width: 30%;
-    font-size: medium;
+    font-size: large;
 }
 
 .edit {
@@ -63,4 +63,5 @@ textarea {
   
   .link {
     color: black;
+    margin-left: 10px;
   }

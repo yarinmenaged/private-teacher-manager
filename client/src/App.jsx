@@ -26,7 +26,6 @@ function App({ loginStatus, getUserInfoByTokenAction }) {
 	}, [loginStatus, getUserInfoByTokenAction, cookies]);
 
 	return (
-		<div className="App-header">
 			<div className="container">
 				<div style={{ backgroundColor: "rgb(78, 99, 165)" }}>
 					{/* <img src={logo} alt="Private teacher manager" className="logo" /> */}
@@ -59,7 +58,6 @@ function App({ loginStatus, getUserInfoByTokenAction }) {
 					)}
 				</Router>
 			</div>
-		</div>
 	);
 }
 

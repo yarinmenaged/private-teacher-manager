@@ -6,7 +6,7 @@
 
 .form {
   color: black;
-  width: 80%;
+  width: 70%;
 }
 
 .input {
@@ -20,6 +20,11 @@
 
 select {
   margin: 15px 0px;
+  width: 33vw;
+  height: 6vh;
+  border-radius: 5px;
+  background-color: rgb(232, 240, 254);
+  font-weight: bold;
 }
 
 .submit {

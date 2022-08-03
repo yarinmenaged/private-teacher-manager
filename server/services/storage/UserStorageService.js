@@ -42,6 +42,7 @@ async function InsertUserInfo(user_info, transaction) {
       Name: user_info.Name,
       Email: user_info.Email,
       Phone: user_info.Phone,
+      Location: user_info.Location,
       Password: user_info.Password,
     },
     { transaction: transaction }
@@ -88,7 +89,7 @@ async function getUserInfoByEmail(email) {
       where: {
         Email: email,
       },
-      attributes: ["id", "Name", "Email", "Password", "Phone"],
+      attributes: ["id", "Name", "Email", "Password", "Phone", "Location"],
     });
 
     return await getUserType(user);
@@ -115,7 +116,7 @@ async function getUserInfoById(userId) {
       where: {
         id: userId,
       },
-      attributes: ["id", "Name", "Email", "Password", "Phone"],
+      attributes: ["id", "Name", "Email", "Password", "Phone", "Location"],
     });
 
     return await getUserType(user);
@@ -173,7 +174,7 @@ async function getAllTeachers() {
     teacherIds.map(async (teacher) => {
       const info = await UserInfo.findOne({
         where: { id: teacher.User_info_id },
-        attributes: ["id", "Name", "Email", "Phone"],
+        attributes: ["id", "Name", "Email", "Phone", "Location"],
       });
       info.dataValues.About = teacher.About;
       info.dataValues.subjects = await getSubjectsById(teacher.dataValues.id);

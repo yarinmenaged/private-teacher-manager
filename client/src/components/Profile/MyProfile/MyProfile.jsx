@@ -6,7 +6,7 @@ import cx from 'classnames';
 import { useCallback } from 'react';
 import { Dropdown, Icon, Flex } from 'monday-ui-react-core';
 import {
-    Email, PersonRound, Mobile, Description, Academy, Edit, Add
+    Email, PersonRound, Mobile, Description, Academy, Edit, Add, Location
 } from "monday-ui-react-core/dist/allIcons";
 
 function MyProfile({ userInfo,
@@ -55,6 +55,7 @@ function MyProfile({ userInfo,
                 <div className={style.column}>
                     <h3><Icon iconSize={30} icon={Academy} /> {userInfo.Name}</h3>
                     <p><Icon iconSize={20} icon={Email} /> {userInfo.Email}</p>
+                    <p><Icon iconSize={20} icon={Location} /> {userInfo.Location}</p>
                     <p><Icon iconSize={20} icon={Mobile} /> {userInfo.Phone}</p>
                 </div>
 

@@ -1,10 +1,9 @@
 import style from "../Profile.module.css";
 import { useNavigate } from "react-router-dom";
-import SearchTeacher from "../../SearchTeacher/SearchTeacherConnector";
 import { useCallback, useState, useEffect } from "react";
 import { Icon, Flex, Dropdown } from 'monday-ui-react-core';
 import {
-    Email, PersonRound, Mobile, Description, Academy
+    Email, Description, Academy, Location
 } from "monday-ui-react-core/dist/allIcons";
 import cx from 'classnames';
 import { BsWhatsapp } from "react-icons/bs";
@@ -61,10 +60,12 @@ function SingleProfile({
                 <div className={style.column}>
                     <h3><Icon iconSize={30} icon={Academy} /> {teacherInfo.Name}</h3>
 
-                    <Icon iconSize={20} icon={Email} />
+                    <Icon iconSize={25} icon={Email} />
                     <a href={`mailto:${teacherInfo.Email}`}
                         className={style.link} >{teacherInfo.Email}
-                    </a><br /><br />
+                    </a><br />
+
+                    <p><Icon iconSize={25} icon={Location} /> {teacherInfo.Location}</p>
 
                     <BsWhatsapp className={style.whatsapp} />
                     <a className={style.link}
