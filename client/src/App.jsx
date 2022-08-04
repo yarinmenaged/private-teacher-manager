@@ -32,10 +32,7 @@ function App({ loginStatus, getUserInfoByTokenAction }) {
 					{/* <img src={logo} alt="Private teacher manager" className="logo" /> */}
 				</div>
 				<Router>
-					{
-						!loginStatus &&
-						<NavBar />
-					}
+					{!loginStatus && <NavBar />}
 					{!loginStatus ? (
 						<Routes>
 							<Route path="/" exact element={<Landing />} />

@@ -46,8 +46,8 @@ const generateCanceledLessonEmailToStudent = (student, teacher, date) => {
 	const lessonDate = moment.utc(date).format("DD/MM/YYYY");
 	const lessonTime = moment.utc(date).format("HH:mm");
 	const { text, subject } = canceledLessonStudentMessage(
-		teacher.UserInfo,
 		student.UserInfo,
+		teacher.UserInfo,
 		lessonDate,
 		lessonTime
 	);
