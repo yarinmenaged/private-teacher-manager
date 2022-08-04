@@ -1,7 +1,7 @@
 import ACTIONS from "../actions/actionConstants";
 
 const initState = {
-  // user info. shoud get it from server at the login!
+  // user info. should get it from server at the login!
   loginStatus: false,
   incorrectPassword: false,
   id: undefined,

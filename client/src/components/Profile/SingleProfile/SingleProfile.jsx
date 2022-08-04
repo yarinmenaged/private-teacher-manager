@@ -72,23 +72,27 @@ function SingleProfile({
             <Icon iconSize={25} icon={Location} /> {teacherInfo.Location}
           </p>
 
-          <p id="price">
+          <p>
             <HiOutlineCurrencyDollar /> {teacherInfo.price}
           </p>
 
-          <BsWhatsapp className={style.whatsapp} />
-          <a
-            className={style.link}
-            href={`https://api.WhatsApp.com/send?phone=${teacherInfo.Phone}`}
-          >
-            {" "}
-            {teacherInfo.Phone}
-          </a>
+          <p>
+            <BsWhatsapp className={style.whatsapp} />
+            <a
+              className={style.link}
+              href={`https://api.WhatsApp.com/send?phone=${teacherInfo.Phone}`}
+            >
+              {" "}
+              {teacherInfo.Phone}
+            </a>
+          </p>
 
-          <Icon iconSize={25} icon={Email} />
-          <a href={`mailto:${teacherInfo.Email}`} className={style.link}>
-            {teacherInfo.Email}
-          </a>
+          <p>
+            <Icon iconSize={25} icon={Email} />
+            <a href={`mailto:${teacherInfo.Email}`} className={style.link}>
+              {teacherInfo.Email}
+            </a>
+          </p>
           <br />
         </div>
 

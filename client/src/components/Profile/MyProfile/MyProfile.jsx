@@ -103,9 +103,6 @@ function MyProfile({
           ) : (
             <p>{userInfo.About}</p>
           )}
-        </div>
-
-        <div className={style.column}>
           <h3>
             <HiOutlineCurrencyDollar /> Price
             <label className={style.edit} onClick={setSliderDisplay}>
