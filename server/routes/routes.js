@@ -9,6 +9,7 @@ const {
   setAbout,
   getTeachers,
   getUserByTokenRouter,
+  setPrice,
 } = require("../controllers/userController");
 
 const router = express.Router();
@@ -18,5 +19,6 @@ router.post("/students", addStudent);
 router.post("/login", loginRouter);
 router.get("/verifies", getUserByTokenRouter);
 router.put("/about/:id", authVerify, setAbout);
+router.put("/price/:id", authVerify, setPrice);
 
 module.exports = router;
