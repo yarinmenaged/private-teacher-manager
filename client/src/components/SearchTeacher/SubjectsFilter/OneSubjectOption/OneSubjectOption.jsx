@@ -26,7 +26,6 @@ function OneSubjectOption({ resetSubjectsAction, selectSubjectAction, subjectsLi
     return (
             <Dropdown
                 options={allOptions}
-                //defaultValue={defaultValue}
                 onChange={(event) => selectSubject(event)}
                 clearable={false}
                 placeholder="Select Subject"
