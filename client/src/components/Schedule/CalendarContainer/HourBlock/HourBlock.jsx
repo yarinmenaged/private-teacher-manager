@@ -9,7 +9,7 @@ import _ from 'lodash';
 import QuarterHourBlock from './QuarterHourBlock/QuarterHourBlock';
 import AddEventDialogConnector from '../AddEventDialog/AddEventDialogConnector';
 
-const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, show_other_user_calendar, subject_id, subject_name, blocked_size, lesson_length }) => {
+const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, show_other_user_calendar, blocked_size }) => {
   const [show_event_dialog, setShowEventDialog] = useState(false);
   const [events_array, setEventsArray] = useState([])
 
@@ -30,8 +30,9 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
   const open_add_event = useCallback((event) => {
     event.stopPropagation();
     event.preventDefault();
-    setShowEventDialog(true);
-  }, [setShowEventDialog]);
+    if(show_other_user_calendar)
+      setShowEventDialog(true);
+  }, [setShowEventDialog, show_other_user_calendar]);
 
   const close_add_event = useCallback((event) => {
     event.preventDefault();
