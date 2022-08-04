@@ -10,8 +10,8 @@
     border: 1px solid #ebebeb;
     border-top: 0;
     background: var(--body-bg);
-    height: 6em;
-    padding: 1em;
+    height: 9em;
+    padding: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

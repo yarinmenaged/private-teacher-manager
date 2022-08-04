@@ -1,74 +1,101 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import style from './HourBlock.module.css';
 import ConstantsHourBlock from './Constants';
 import { Tooltip } from 'monday-ui-react-core';
 import EventConnector from '../Event/EventConnector';
 import TeacherPreferencesBlock from '../TeacherPreferences/TeacherPreferencesBlock';
 import moment from 'moment';
+import _ from 'lodash';
+import QuarterHourBlock from './QuarterHourBlock/QuarterHourBlock';
+import AddEventDialogConnector from '../AddEventDialog/AddEventDialogConnector';
 
-const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, calender_user_id, show_other_user_calendar, subject_id, subject_name, blocked_size, lesson_length }) => {
+const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, events, user_type, user_id, AddEventAction, show_other_user_calendar, subject_id, subject_name, blocked_size, lesson_length }) => {
+  const [show_event_dialog, setShowEventDialog] = useState(false);
+  const [events_array, setEventsArray] = useState([])
 
-  const [render_event, setRenderEvent] = useState(false);
-  const [event_obj, setEventObj] = useState(null);
-
-  const event_filtered = useCallback((blocks_date)  => {
-    return events.find((event) => {
-      const event_date = moment.utc(event.date).diff(blocks_date, 'milliseconds');
-      return event_date === 0;
-    });
-  }, [events]);
-
-  const event = useCallback(
-    () => {
-      if(date){
-        const blocks_date = moment.utc(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`);             
-        return event_filtered(blocks_date) || null;
-      }
-      return null;
-    },
-    [date, hour, event_filtered],
-  );
+  const events_filtered = useCallback(() => {
+    const blocks_date = moment.utc(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`);
+    return events.filter((event) => {
+      const event_date_diff = moment.utc(event.date).diff(blocks_date, 'minutes');
+      return event_date_diff < 60 && event_date_diff >= 0;
+    }) || [];
+  }, [events, date, hour]);
 
   useEffect(() => {
-    setEventObj(event());
-    event_obj ? setRenderEvent(true) : setRenderEvent(false);
-  }, [date, event, event_obj]);
+    if (date)
+      setEventsArray(events_filtered());
+  }, [date, events_filtered, events]);
 
-  const hour_block_click_call__back = useCallback((event) => {
-    if(!event_obj && !blocked_size)
-      AddEventAction(user_id, date, hour, user_type, calender_user_id, subject_id, subject_name, lesson_length);
-    else
-      event.preventDefault();    
-  }, [AddEventAction, user_id, date, hour, user_type, calender_user_id, subject_id, event_obj, blocked_size, subject_name, lesson_length]);
 
-  if (type === ConstantsHourBlock.BLOCK_TYPES.TIME) {
+  const open_add_event = useCallback((event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    setShowEventDialog(true);
+  }, [setShowEventDialog]);
+
+  const close_add_event = useCallback((event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setShowEventDialog(false);
+  }, [setShowEventDialog]);
+
+  const events_render = useCallback(() => {
+    let event_number = 0;
+    let num_of_rended_quarter = 0;
+    if (events_array.length) {
+        const max = (60 - events_array[0]?.duration) / 15 + 1;
+        const time_obj = moment.utc(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`);
+        return _.range(15, 75, 15).map((value, index) => {
+          let ret;
+          const event_time = moment.utc(events_array[event_number]?.date);
+          if(time_obj.diff(event_time, 'minutes') === 0){
+            ret = <EventConnector key={`event-${events_array[event_number]?.id}-day-${date.format(ConstantsHourBlock.DATE_FORMAT)}`} event={events_array[event_number]} user_type={user_type}></EventConnector>;
+            event_number++;
+          } else if (time_obj.diff(event_time, 'minutes') && num_of_rended_quarter + events_array.length !== max){
+            ret = <QuarterHourBlock key={`hour-${hour}-${value}-day-${date.format(ConstantsHourBlock.DATE_FORMAT)}`} section={value}></QuarterHourBlock>;
+            num_of_rended_quarter++;
+          } else
+            ret = '';
+          time_obj.add(15, 'minutes');
+          return ret;
+        });
+    }
+  }, [date, hour, events_array, user_type]);
+
+  const content_tool_tip = events_array.length ?
+    ConstantsHourBlock.SHOW_MORE_INFO_ON_EVENT
+    :
+    blocked_size ?
+      ConstantsHourBlock.blocked_size
+      :
+      show_other_user_calendar ?
+        ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP
+        :
+        ConstantsHourBlock.FREE_BLOCK;
+
+  if (type === ConstantsHourBlock.BLOCK_TYPES.TIME)
     return (
       <div className={style.entry}>
         <time>{hour}</time>
       </div>
     );
-  }
 
-  const content_tool_tip = render_event ? 
-                            ConstantsHourBlock.SHOW_MORE_INFO_ON_EVENT 
-                            : 
-                            blocked_size ?
-                            ConstantsHourBlock.blocked_size
-                            :
-                            show_other_user_calendar ?
-                            ConstantsHourBlock.ADD_NEW_EVENT_TOOLTIP 
-                            :
-                            ConstantsHourBlock.FREE_BLOCK;
-
-  return (<Tooltip 
-            immediateShowDelay={0} 
-            position={Tooltip.positions.BOTTOM}
-            content={content_tool_tip} >
-            <div className={`${style.entry}`} onClick={(event) => {hour_block_click_call__back(event)}} style={{height: `${blocked_size}em`}}>
-              { render_event && <EventConnector event={event_obj} user_type={user_type}></EventConnector>}
-              { blocked_size && <TeacherPreferencesBlock blocked_size={blocked_size} start={hour}></TeacherPreferencesBlock>}
-            </div>
-         </Tooltip>);
+  return (<>
+  <Tooltip
+    immediateShowDelay={0}
+    position={Tooltip.positions.BOTTOM}
+    content={content_tool_tip} >
+    <div className={`${style.entry}`} onClick={open_add_event} style={{ height: `${blocked_size}em` }}>
+      {!blocked_size && events_render()}
+      {blocked_size && <TeacherPreferencesBlock blocked_size={blocked_size} start={hour}></TeacherPreferencesBlock>}      
+    </div>    
+  </Tooltip>
+  {show_event_dialog && <AddEventDialogConnector
+    hour={hour}
+    date={date}
+    close_call_back={close_add_event}
+    events={events_array}></AddEventDialogConnector>}
+    </>);
 };
 
 export default HourBlock;
