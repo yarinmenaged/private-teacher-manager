@@ -62,7 +62,6 @@ function NavBar({
         {loginStatus && (
           <Flex className={style.width}>
             <a
-              href="*"
               onClick={() => schedule_unset_callback()}
               className={style.button}
             >
