@@ -190,7 +190,7 @@ async function getAllTeachers() {
         attributes: ["id", "Name", "Email", "Phone", "Location"],
       });
       info.dataValues.About = teacher.About;
-      info.dataValues.About = teacher.price;
+      info.dataValues.price = teacher.price;
       info.dataValues.subjects = await getSubjectsById(teacher.dataValues.id);
       return info;
     })
