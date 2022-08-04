@@ -48,7 +48,7 @@ const AddEventDialog = ({ hour, date, close_call_back, events, user_type, user_i
     }
   }, [events, setNumLessons, date, hour, lesson_length, num_lessons]);
 
-  const hour_block_click_call__back = useCallback((start) => {
+  const add_event_click = useCallback((start) => {
     AddEventAction(user_id, date, start, user_type, calender_user_id, subject_id, subject_name, lesson_length);
   }, [AddEventAction, user_id, date, user_type, calender_user_id, subject_id, subject_name, lesson_length]);
 
@@ -60,19 +60,19 @@ const AddEventDialog = ({ hour, date, close_call_back, events, user_type, user_i
       const disabled = available_lessons[value] ? true : false;
       return <div className={style.options_button} key={`lesson-${start_lesson}-${end_lesson}`}>
         <Button 
-        onClick={() => hour_block_click_call__back(start_lesson)} 
+        onClick={() => add_event_click(start_lesson)} 
         disabled={ disabled }
         key={`lesson-${start_lesson}-${end_lesson}`}>
           {start_lesson} - {end_lesson}
         </Button>
       </div>
     });
-  }, [time_obj, num_lessons, available_lessons, hour_block_click_call__back, lesson_length]);
+  }, [time_obj, num_lessons, available_lessons, add_event_click, lesson_length]);
 
   const close_function = useCallback((event) => {
     console.log(event.bubbles);
-    event.stopPropagation();
-    event.preventDefault();
+    //event.stopPropagation();
+    //event.preventDefault();
     close_call_back(event);
   }, [close_call_back]);
 
@@ -80,7 +80,7 @@ const AddEventDialog = ({ hour, date, close_call_back, events, user_type, user_i
     <div className={style.container}>
       <div className={style.inner_container}>
         <div className={style.controls}>
-          <AiOutlineClose onClick={(event) => close_function(event)}></AiOutlineClose>
+          <AiOutlineClose onClick={(event) => {return close_function(event)}}></AiOutlineClose>
         </div>
         <div className={style.content}>
           <Heading type={Heading.types.h2} value={AddEventDialogConstants.HEADING_TEXT(lesson_length, user_type)} />
