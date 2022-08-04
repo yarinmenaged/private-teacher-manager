@@ -1,11 +1,12 @@
 import ApiService from "./ApiService";
 
 export default class serverConnection {
-	static async addUser(Name, userType, Email, Password, Phone) {
+	static async addUser(Name, userType, Email, Password, Location, Phone) {
 		const newUser = {
 			Name,
 			Email,
 			Password,
+      Location,
 			Phone,
 		};
 		await ApiService.AddNewResourceRequest(`users/${userType}s`, newUser);

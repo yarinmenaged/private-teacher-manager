@@ -1,14 +1,9 @@
-
 .width {
     margin-top: 10px;
-    width: 60%;
+    width: 40%;
+    margin-right: 15px;
 }
 
 .container {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    flex-direction: row;
-    gap: 15px;
-    width: 35%;
+    width: 55%;
 }

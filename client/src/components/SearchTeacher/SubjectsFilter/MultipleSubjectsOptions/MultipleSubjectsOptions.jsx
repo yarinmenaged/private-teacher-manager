@@ -39,15 +39,15 @@ function MultipleSubjectsOptions({
     }, [deselectSubjectAction, unchooseTeacherAction]);
 
     return (
-            <Dropdown
-                multiline multi
-                options={allOptions}
-                value={selectedOptions}
-                onChange={(event) => selectSubject(event)}
-                onOptionRemove={(event) => removeSubject(event)}
-                clearable={false}
-                placeholder="Select Subjects"
-                className={cx("dropdown-stories-styles_with-chips", style.width)} />
+        <Dropdown
+            multi
+            options={allOptions}
+            value={selectedOptions}
+            onChange={(event) => selectSubject(event)}
+            onOptionRemove={(event) => removeSubject(event)}
+            clearable={false}
+            placeholder="Select Subjects"
+            className={cx("dropdown-stories-styles_with-chips", style.width)} />
     );
 }
 

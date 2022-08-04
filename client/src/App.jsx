@@ -31,7 +31,6 @@ function App({ loginStatus, getUserInfoByTokenAction, successful, failed, messag
 	}, [InitErrorSuccessAction])
 
 	return (
-		<div className="App-header">
 			<div className="container">
 				<Toast open={successful} 
 				type={Toast.types.POSITIVE} 
@@ -72,7 +71,6 @@ function App({ loginStatus, getUserInfoByTokenAction, successful, failed, messag
 					)}
 				</Router>
 			</div>
-		</div>
 	);
 }
 
