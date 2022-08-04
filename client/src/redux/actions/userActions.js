@@ -22,10 +22,14 @@ const editPrice = (newPrice) => ({
 
 export const editPriceAction = (newPrice) => {
   return async (dispatch, getState) => {
-    const state = getState();
-    const id = state.userReducer.id;
-    await serverConnection.editPrice(id, newPrice);
-    dispatch(editPrice(newPrice));
+    try {
+      const state = getState();
+      const id = state.userReducer.id;
+      dispatch(editPrice(newPrice));
+      await serverConnection.editPrice(id, newPrice);
+    } catch (error) {
+      dispatch(editPrice(0));
+    }
   };
 };
 
