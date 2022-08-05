@@ -35,11 +35,13 @@ function App({ loginStatus, getUserInfoByTokenAction, successful, failed, messag
 				<Toast open={successful} 
 				type={Toast.types.POSITIVE} 
 				autoHideDuration={3000} 
-				onClose={close_toast}>{message}</Toast> 
+				onClose={close_toast}
+				style={{"z-index": 999}}>{message}</Toast> 
 				<Toast open={failed} 
 				type={Toast.types.NEGATIVE} 
 				autoHideDuration={3000}
-				onClose={close_toast}>{message}</Toast> 
+				onClose={close_toast}
+				style={{"z-index": 999}}>{message}</Toast> 
 				<div style={{ backgroundColor: "rgb(78, 99, 165)" }}>
 					{/* <img src={logo} alt="Private teacher manager" className="logo" /> */}
 				</div>
