@@ -1,5 +1,4 @@
 import SearchTeacher from "../SearchTeacher/SearchTeacherConnector";
-import WeeklyIncomeConnector from "./WeeklyIncome/WeeklyIncomeConnector";
 import { Link } from "react-router-dom";
 import NavBar from "../NavBar/NavBarConnector";
 import CalendarContainerConnector from "./CalendarContainer/CalendarContainerConnector";
@@ -9,6 +8,8 @@ import USER_TYPE from "../NavBar/Constants";
 import { Flex, Icon } from "monday-ui-react-core";
 import style from "./Schedule.module.css";
 import { Calendar } from "monday-ui-react-core/dist/allIcons";
+import WeeklyIncomeConnector from "./WeeklyIncome/WeeklyIncomeConnector";
+//import WeeklyIncome from "./WeeklyIncome/WeeklyIncome";
 
 function Schedule({
   chosenTeacher,
@@ -45,7 +46,11 @@ function Schedule({
           </h2>
         </div>
         <WeekSelectorConnector></WeekSelectorConnector>
-        <WeeklyIncomeConnector></WeeklyIncomeConnector>
+        {userInfo.Type === USER_TYPE.Teacher ? (
+          <WeeklyIncomeConnector />
+        ) : (
+          <></>
+        )}
         {userInfo.Type === USER_TYPE.Student && (
           <SearchTeacher mySchedule={true} />
         )}
