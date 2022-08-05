@@ -4,6 +4,7 @@ const {
   setAboutTeacher,
   getAllTeachers,
   setLessonPrice,
+  addImg,
 } = require("../services/storage/UserStorageService");
 const { login } = require("../services/login/loginService");
 const { getUserInfoByToken } = require("../services/auth/auth");
@@ -62,6 +63,11 @@ async function getTeachers(req, res) {
   res.status(200).json(teachers);
 }
 
+async function addImgUrl(req, res) {
+  const imgUrl = await addImg(req.params.id, req.file.filename);
+  res.status(200).json(imgUrl);
+}
+
 module.exports = {
   addTeacher,
   addStudent,
@@ -70,4 +76,5 @@ module.exports = {
   getUserByTokenRouter,
   getTeachers,
   setPrice,
+  addImgUrl,
 };

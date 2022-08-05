@@ -11,6 +11,7 @@ import {
 import cx from "classnames";
 import { BsWhatsapp } from "react-icons/bs";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
+import teacherImg from '../../../images/unknown-person.png';
 
 function SingleProfile({
   teacherInfo,
@@ -62,18 +63,22 @@ function SingleProfile({
 
   return (
     <div>
-      <Flex className={style.card}>
-        <div className={style.column}>
+      <Flex className={style.card} align={Flex.align.START}>
+
+        <div className={style.column} style={{ width: "10%", paddingLeft: "40px", marginRight: "5%" }}>
+          <img src={teacherImg} className={style.profileImg} ></img>
+        </div>
+
+        <div className={style.column} style={{ width: "35%" }}>
           <h3>
             <Icon iconSize={30} icon={Academy} /> {teacherInfo.Name}
           </h3>
 
           <p>
-            <Icon iconSize={25} icon={Location} /> {teacherInfo.Location}
-          </p>
-
-          <p>
-            <HiOutlineCurrencyDollar /> {teacherInfo.price}
+            <Icon iconSize={25} icon={Email} />
+            <a href={`mailto:${teacherInfo.Email}`} className={style.link}>
+              {teacherInfo.Email}
+            </a>
           </p>
 
           <p>
@@ -88,15 +93,15 @@ function SingleProfile({
           </p>
 
           <p>
-            <Icon iconSize={25} icon={Email} />
-            <a href={`mailto:${teacherInfo.Email}`} className={style.link}>
-              {teacherInfo.Email}
-            </a>
+            <Icon iconSize={25} icon={Location} /> {teacherInfo.Location}
           </p>
-          <br />
+
+          <p>
+            <HiOutlineCurrencyDollar /> {teacherInfo.price}
+          </p><br />
         </div>
 
-        <div className={style.column}>
+        <div className={style.column} style={{ width: "50%" }}>
           <h3>
             <Icon icon={Description} /> About
           </h3>

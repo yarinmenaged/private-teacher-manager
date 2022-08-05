@@ -7,7 +7,6 @@ import { useCallback } from "react";
 import { Dropdown, Icon, Flex, Slider } from "monday-ui-react-core";
 import {
   Email,
-  PersonRound,
   Mobile,
   Description,
   Academy,
@@ -16,6 +15,7 @@ import {
   Location,
 } from "monday-ui-react-core/dist/allIcons";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
+import teacherImg from '../../../images/unknown-person.png';
 
 function MyProfile({
   userInfo,
@@ -75,7 +75,20 @@ function MyProfile({
   return (
     <div>
       <NavBar />
-      <Flex>
+      <Flex align={Flex.align.START} className={style.padding}>
+
+        <div className={style.column} style={{ width: "10%", paddingLeft: "40px", marginRight: "5%" }}>
+
+          <form action={`http://localhost:2000/users/upload/${userInfo.id}`} method="post" encType="multipart/form-data">
+            <Flex justify={Flex.justify.SPACE_BETWEEN} className={style.width}>
+              <input style={{ marginRight: "10px" }} className={style.button} type="submit" value="Save" />
+              <input type="file" name="profileImg" />
+            </Flex>
+          </form>
+
+          <img src={`http://localhost:2000/users/img`} className={style.profileImg} ></img>
+        </div>
+
         <div className={style.column}>
           <h3>
             <Icon iconSize={30} icon={Academy} /> {userInfo.Name}
