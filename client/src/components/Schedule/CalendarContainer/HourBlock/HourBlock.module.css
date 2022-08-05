@@ -10,8 +10,8 @@
     border: 1px solid #ebebeb;
     border-top: 0;
     background: var(--body-bg);
-    height: 6em;
-    padding: 1em;
+    height: 9em;
+    padding: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -24,10 +24,18 @@
   border-bottom-style: dashed;
 }
 
-.double {
-  height: 18em;
+.min_15 {
+  min-height: 2em;
 }
 
-.treble {
-  height: 27em;
+.min_30 {
+  min-height: 4em;
+}
+
+.min_45 {
+  min-height: 6em;
+}
+
+.min_60 {
+  min-height: 8em;
 }
