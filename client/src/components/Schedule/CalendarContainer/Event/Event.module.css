@@ -58,6 +58,36 @@
   --theme-bg: #bbbcbc;
 }
 
+.color_7 {
+  --theme-color: hsl(40, 50%, 30%);
+  --theme-bg: #ffd800;
+}
+
+.color_8 {
+  --theme-color: hsl(180, 50%, 30%);
+  --theme-bg: #00facd;
+}
+
+.color_9 {
+  --theme-color: hsl(200, 50%, 30%);
+  --theme-bg: #52f0fa;
+}
+
+.color_10 {
+  --theme-color: hsl(235, 75%, 90%);
+  --theme-bg: #473bbe;
+}
+
+.color_11 {
+  --theme-color: #471030;
+  --theme-bg: #f25081;
+}
+
+.color_12 {
+  --theme-color: rgb(138, 49, 94);
+  --theme-bg: #8f0f68;
+}
+
 .blocked {
     --theme-color: #fff;
     --theme-bg: #ff353c;

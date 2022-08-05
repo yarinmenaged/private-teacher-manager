@@ -14,7 +14,7 @@ const AddEventDialog = ({ hour, date, close_call_back, events, user_type, user_i
 
   useEffect(() => {
     if (lesson_length && date) {
-      setNumLessons(60 / lesson_length);
+      setNumLessons(Number.parseInt(60 / lesson_length));
       setTimeObj(moment.utc(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`));
     }
   }, [lesson_length, date, hour]);
@@ -56,16 +56,17 @@ const AddEventDialog = ({ hour, date, close_call_back, events, user_type, user_i
     const time = moment.utc(time_obj);
     return _.range(0, num_lessons).map(value => {
       const start_lesson = time.format(AddEventDialogConstants.TIME_FORMAT);
-      const end_lesson = time.add(lesson_length, 'minutes').format(AddEventDialogConstants.TIME_FORMAT);
+      const end_lesson = time.add(lesson_length, 'minutes');
+      const end_lesson_formatted = end_lesson.format(AddEventDialogConstants.TIME_FORMAT);
       const disabled = available_lessons[value] ? true : false;
-      return <div className={style.options_button} key={`lesson-${start_lesson}-${end_lesson}`}>
-        <Button 
-        onClick={() => add_event_click(start_lesson)} 
-        disabled={ disabled }
-        key={`lesson-${start_lesson}-${end_lesson}`}>
-          {start_lesson} - {end_lesson}
-        </Button>
-      </div>
+        return (<div className={style.options_button} key={`lesson-${start_lesson}-${end_lesson_formatted}`}>
+          <Button
+            onClick={() => add_event_click(start_lesson)}
+            disabled={disabled}
+            key={`lesson-${start_lesson}-${end_lesson_formatted}`}>
+            {start_lesson} - {end_lesson_formatted}
+          </Button>
+        </div>);
     });
   }, [time_obj, num_lessons, available_lessons, add_event_click, lesson_length]);
 
@@ -80,11 +81,11 @@ const AddEventDialog = ({ hour, date, close_call_back, events, user_type, user_i
     <div className={style.container}>
       <div className={style.inner_container}>
         <div className={style.controls}>
-          <AiOutlineClose onClick={(event) => {return close_function(event)}}></AiOutlineClose>
+          <AiOutlineClose onClick={(event) => { return close_function(event) }}></AiOutlineClose>
         </div>
         <div className={style.content}>
           <Heading type={Heading.types.h2} value={AddEventDialogConstants.HEADING_TEXT(lesson_length, user_type)} />
-          { render_lessons() }
+          {render_lessons()}
         </div>
       </div>
     </div>

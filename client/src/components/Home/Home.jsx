@@ -10,7 +10,7 @@ function Home ({Name, getAllSubjectsAction, user_type, GetSettingsAction}) {
         getAllSubjectsAction();
         if(user_type === EventConstants.USER_TYPE.Teacher)
             GetSettingsAction();
-    }, []);
+    }, [user_type, GetSettingsAction, getAllSubjectsAction]);
 
     return (
         <div>

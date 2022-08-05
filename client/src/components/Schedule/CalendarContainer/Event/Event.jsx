@@ -6,7 +6,7 @@ import { BsInfoLg } from 'react-icons/bs';
 import EventInfo from './EventInfo/EventInfo';
 import EditDescriptionContainerConnector from './EditDescriptionContainer/EditDescriptionContainerConnector';
 
-const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventAction }) => {
+const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventAction, className }) => {
   const actions_flag = useRef(true);
   const [event_text, setEventText] = useState("");
   const [style_for_event, setStyleForEvent] = useState("");
@@ -66,7 +66,7 @@ const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventActi
   }, [event, user_type, my_user_id, calender_user_id]);
 
   return (<>
-    <div className={`${style.event} ${style_for_event}`}>
+    <div className={`${style.event} ${style_for_event} ${className}`}>
       <h3 className={style.title}>{event_text}</h3>
       {actions_flag.current && action_section()}
     </div>

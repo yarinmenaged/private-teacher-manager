@@ -24,10 +24,18 @@
   border-bottom-style: dashed;
 }
 
-.double {
-  height: 18em;
+.min_15 {
+  min-height: 2em;
 }
 
-.treble {
-  height: 27em;
+.min_30 {
+  min-height: 4em;
+}
+
+.min_45 {
+  min-height: 6em;
+}
+
+.min_60 {
+  min-height: 8em;
 }

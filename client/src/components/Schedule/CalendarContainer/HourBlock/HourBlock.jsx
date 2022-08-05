@@ -46,18 +46,22 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
     if (events_array.length) {
         const max = (60 - events_array[0]?.duration) / 15 + 1;
         const time_obj = moment.utc(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`);
+        const hour_current = time_obj.hour();
         return _.range(15, 75, 15).map((value, index) => {
           let ret;
           const event_time = moment.utc(events_array[event_number]?.date);
-          if(time_obj.diff(event_time, 'minutes') === 0){
-            ret = <EventConnector key={`event-${events_array[event_number]?.id}-day-${date.format(ConstantsHourBlock.DATE_FORMAT)}`} event={events_array[event_number]} user_type={user_type}></EventConnector>;
+          if(time_obj.isSame(event_time)){
+            ret = <EventConnector className={style[`min_${events_array[event_number].duration}`]} key={`event-${events_array[event_number]?.id}-day-${date.format(ConstantsHourBlock.DATE_FORMAT)}`} event={events_array[event_number]} user_type={user_type}></EventConnector>;
+            time_obj.add(events_array[event_number].duration, 'minutes');
             event_number++;
-          } else if (time_obj.diff(event_time, 'minutes') && num_of_rended_quarter + events_array.length !== max){
+          } else if (!time_obj.isSame(event_time) && num_of_rended_quarter + events_array.length !== max && hour_current === time_obj.hour()){
             ret = <QuarterHourBlock key={`hour-${hour}-${value}-day-${date.format(ConstantsHourBlock.DATE_FORMAT)}`} section={value}></QuarterHourBlock>;
             num_of_rended_quarter++;
-          } else
+            time_obj.add(15, 'minutes');
+          } else {
             ret = '';
-          time_obj.add(15, 'minutes');
+            time_obj.add(15, 'minutes');
+          }
           return ret;
         });
     }

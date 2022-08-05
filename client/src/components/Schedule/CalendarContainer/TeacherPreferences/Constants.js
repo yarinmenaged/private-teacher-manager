@@ -1,4 +1,4 @@
-const ONE_BLOCK_SIZE_UNIT = 6;
+const ONE_BLOCK_SIZE_UNIT = 9;
 const TIME_FORMAT_WITH_SECONDS = "hh:mm:ss";
 
 const TeacherPreferencesConstants = {
