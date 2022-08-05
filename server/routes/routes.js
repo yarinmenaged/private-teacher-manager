@@ -14,6 +14,7 @@ const {
   getUserByTokenRouter,
   setPrice,
   addImgUrl,
+  getImgUrl
 } = require("../controllers/userController");
 
 const router = express.Router();
@@ -25,8 +26,6 @@ router.get("/verifies", getUserByTokenRouter);
 router.put("/about/:id", authVerify, setAbout);
 router.put("/price/:id", authVerify, setPrice);
 router.post("/upload/:id", upload.single('profileImg'), addImgUrl)
-router.get("/img"/*:id*/, (req, res) => {
-  res.sendFile(path.join(__dirname, `..//profileImages/cf045186ef41869e9f72b63b0f31d650`));
-});
+router.get("/img/:id", getImgUrl);
 
 module.exports = router;

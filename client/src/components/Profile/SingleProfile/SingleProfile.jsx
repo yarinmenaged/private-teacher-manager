@@ -32,6 +32,11 @@ function SingleProfile({
 
   const [value, reRender] = useState(0);
 
+  let img;
+  useEffect(() => {
+    
+  }, []);
+
   useEffect(() => {
     console.log({ teacherInfo });
     if (value > 0) {
@@ -66,7 +71,7 @@ function SingleProfile({
       <Flex className={style.card} align={Flex.align.START}>
 
         <div className={style.column} style={{ width: "10%", paddingLeft: "40px", marginRight: "5%" }}>
-          <img src={teacherImg} className={style.profileImg} ></img>
+          <img src={`http://localhost:2000/users/img/${teacherInfo.id}`} className={style.profileImg} ></img>
         </div>
 
         <div className={style.column} style={{ width: "35%" }}>

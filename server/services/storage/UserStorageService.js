@@ -197,13 +197,18 @@ async function getAllTeachers() {
   );
 }
 
-async function addImg(id , imgUrl) {
+async function addImg(id, imgUrl) {
   const teacher = await GetTeacherById(id);
-   return await teacher.update(
+  return await teacher.update(
     {
       image: imgUrl
     }
   );
+}
+
+async function getImg(id) {
+  const teacher = await GetTeacherById(id);
+  return teacher.image;
 }
 
 const UserStorageService = {
@@ -218,6 +223,7 @@ const UserStorageService = {
   getAllTeachers,
   setLessonPrice,
   addImg,
+  getImg,
 };
 
 module.exports = UserStorageService;

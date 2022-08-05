@@ -86,7 +86,7 @@ function MyProfile({
             </Flex>
           </form>
 
-          <img src={`http://localhost:2000/users/img`} className={style.profileImg} ></img>
+          <img src={`http://localhost:2000/users/img/${userInfo.id}`} className={style.profileImg} ></img>
         </div>
 
         <div className={style.column}>
