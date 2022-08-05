@@ -17,10 +17,7 @@ const CalendarContainer = ({ week, GetEventsAction, user_id, teacher_preferences
 	return (
 		<div className={style.Calendar_container}>
 			<div className={style.table}>
-				<HeadersTrackConnector
-					type={ConstantsCalendarContainer.HEADERS_TYPES.DATES}
-				></HeadersTrackConnector>
-				<HeadersTrack></HeadersTrack>
+				<HeadersTrackConnector></HeadersTrackConnector>
 				<div className={`${style.tracks} ${style.syncscroll}`}>
 					<TimeTrack></TimeTrack>
 					{_.range(0, 7).map((value, index) => {
