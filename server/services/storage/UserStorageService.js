@@ -110,6 +110,7 @@ const getUserType = async (user) => {
     user.dataValues.About = teacher.About;
     user.dataValues.subject = await getSubjectsById(teacher.dataValues.id);
     user.dataValues.Type = UserType.TEACHER;
+    user.dataValues.price = teacher.price;
   } else {
     user.dataValues.Type = UserType.STUDENT;
   }
