@@ -31,7 +31,10 @@ async function GetEventsByUserIdFilterByWeek(user_id, week, user_type) {
             date: {
                 [Op.between]: [start_of_week, end_of_week]
             }
-        }
+        },
+        order: [
+            ['date', 'ASC']
+        ]
     });
     return events_in_week;
 }

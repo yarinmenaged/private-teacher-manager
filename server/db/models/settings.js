@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Settings.init(
     {
-      lessonLength: DataTypes.INTEGER,
+      lessonLength: {
+        type: DataTypes.INTEGER,
+        defaultValue: 60
+      },
       workingHours: DataTypes.STRING,
     },
     {

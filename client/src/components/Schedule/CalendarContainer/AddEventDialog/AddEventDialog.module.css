@@ -1,0 +1,69 @@
+.container{
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    font-size: 20px;
+}
+
+.inner_container{
+    width: 50vw;
+    margin: 15% auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 0px 0px #181818;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.open_lesson {
+    padding: 5px;
+    background-color: #95c21b;
+    width: fit-content;
+    margin: 5px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    color:#fff
+}
+
+.closed_lesson {
+    padding: 5px;
+    background-color: #242424;
+    width: fit-content;
+    margin: 5px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: not-allowed;
+    color:#fff
+}
+
+.controls{
+    display: flex;
+    font-size: 25px;
+    justify-content: flex-end;
+}
+
+.controls > div {
+    cursor: pointer;
+    width: fit-content;
+}
+
+.controls > div:hover{
+    color: #ff004c;
+}
+
+
+.options_button {
+    margin: 10px 0;
+}

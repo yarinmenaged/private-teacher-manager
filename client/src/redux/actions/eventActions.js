@@ -2,6 +2,7 @@ import ACTIONS from './actionConstants';
 import EventService from '../../services/EventService';
 import ReduxContents from '../Constants';
 import crypto from 'crypto-js';
+import ErrorSuccessMessages from '../../ErrorSuccessMessages';
 
 const GetEvents = (id, week) => {
   return async (dispatch) => {
@@ -12,8 +13,8 @@ const GetEvents = (id, week) => {
 
 const AddEvent = (user_id, date, hour, user_type, teacher_id, subject_id, subject_name, lesson_length) => {
     return async(dispatch) => {
-        try{
-            const hash_id = crypto.SHA512(`${date} ${hour} ${user_type} ${teacher_id} ${subject_id} ${user_id}`).toString();
+        const hash_id = crypto.SHA512(`${date} ${hour} ${user_type} ${teacher_id} ${subject_id} ${user_id}`).toString();
+        try{            
             if(user_type === ReduxContents.USER_TYPE.Teacher){         
                 if(teacher_id === user_id)                      
                     dispatch({ type: ACTIONS.ADD_EVENT, payload: { user_id, date, hour, hash_id, lesson_length }});
@@ -27,8 +28,8 @@ const AddEvent = (user_id, date, hour, user_type, teacher_id, subject_id, subjec
                 dispatch({ type: ACTIONS.UPDATE_EVENT, payload: { event, hash_id } });
             }   
         }catch(error){
-            //dispatch({ type: ACTIONS.DELETE_EVENT });
-            // TODO ADD error action
+            dispatch({ type: ACTIONS.DELETE_EVENT, payload: hash_id });
+            dispatch({ type: ACTIONS.FAILED, payload: ErrorSuccessMessages.ADD_EVENT_ERROR });
         }
     }
 }
@@ -38,8 +39,10 @@ const UpdateDescription = (event_id, description) => {
         try{
             dispatch({ type: ACTIONS.UPDATE_DESCRIPTION, payload: { event_id, description }});
             await EventService.ChangeDescription(event_id, description);
+            dispatch({ type: ACTIONS.SUCCESSFUL, payload: ErrorSuccessMessages.CHANGE_DESCRIPTION_SUCCESSFUL });
         }catch(error){
-            // show error
+            dispatch({ type: ACTIONS.UPDATE_DESCRIPTION, payload: { event_id, description: "" }});
+            dispatch({ type: ACTIONS.FAILED, payload: ErrorSuccessMessages.CHANGE_DESCRIPTION_ERROR });
         }
     }
 };
@@ -49,8 +52,10 @@ const DeleteEvent = (event_id) => {
         try{
             dispatch({ type: ACTIONS.DELETE_EVENT, payload: event_id });
             await EventService.DeleteEvent(event_id);
+            dispatch({ type: ACTIONS.SUCCESSFUL, payload: ErrorSuccessMessages.DELETE_SUCCESSFUL });
         }catch(error){
             dispatch({ type: ACTIONS.RESTORE_EVENT });
+            dispatch({ type: ACTIONS.FAILED, payload: ErrorSuccessMessages.DELETE_ERROR });
         }
     }
 };

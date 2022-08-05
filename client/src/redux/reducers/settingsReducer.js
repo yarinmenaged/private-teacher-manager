@@ -1,7 +1,7 @@
 import ACTIONS from "../actions/actionConstants";
 
 const initState = {
-  lessonLength: 0,
+  lessonLength: 60,
   workingHours: [
     { start: "00:00", end: "00:00" },
     { start: "00:00", end: "00:00" },
@@ -21,7 +21,7 @@ const reducer = (state = initState, action) => {
       if(!payload.lessonLength && !payload.workingHours)
         return {...initState};
       else
-        return { lessonLength: payload.lessonLength, workingHours: payload.workingHours };
+        return { lessonLength: payload.lessonLength, workingHours: payload.workingHours || initState.workingHours };
     case ACTIONS.SET_DAILY_WORKING_HOURS:
       const day_obj = state.workingHours[payload.day];
       day_obj.start = payload.start;
