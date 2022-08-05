@@ -1,4 +1,6 @@
 const nodemailer = require("nodemailer");
+const moment = require("moment");
+const ical = require("ical-generator");
 const {
 	MAIL_SERVICE,
 	PRIVARE_TEACHER_MAIL,
@@ -15,13 +17,37 @@ const createNewTransport = () => {
 	});
 	return transporter;
 };
+const createNewCalendar = (
+	startTime,
+	duration,
+	summary,
+	description,
+	location
+) => {
+	const calendar = ical({ name: "Private Lesson" });
+	const cal = calendar.createEvent({
+		start: moment(startTime),
+		end: moment().add(duration, "minute"),
+		summary,
+		description,
+		location,
+		url: "http://sebbo.net/",
+	});
+	return cal.calendar.toString();
+};
 
-const mailOptions = (sendMailTo, subject, text) => {
+const mailOptions = (sendMailTo, subject, text, calendarEvent) => {
+	const calConnection = createNewCalendar(
+		calendarEvent.startTime,
+		calendarEvent.duration,
+		calendarEvent.summary,
+		calendarEvent.description,
+		calendarEvent.location
+	);
 	return {
 		from: PRIVARE_TEACHER_MAIL || "PrivateTeacher@outlook.co.il",
 		to: sendMailTo,
 		subject: subject,
-		// text: text,
 		html: text,
 		attachments: [
 			{
@@ -35,11 +61,16 @@ const mailOptions = (sendMailTo, subject, text) => {
 				cid: "sendEmailLogo",
 			},
 		],
+		icalEvent: {
+			filename: "invitation.ics",
+			method: calendarEvent.type || "publish",
+			content: calConnection,
+		},
 	};
 };
 
-const emailSender = async (sendMailTo, subject, text) => {
-	const mailOpt = mailOptions(sendMailTo, subject, text);
+const emailSender = async (sendMailTo, subject, text, calendarEvent) => {
+	const mailOpt = mailOptions(sendMailTo, subject, text, calendarEvent);
 	const transporter = createNewTransport();
 	transporter.sendMail(mailOpt, function (error, info) {
 		if (error) {

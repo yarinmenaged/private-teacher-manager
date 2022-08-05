@@ -20,8 +20,15 @@ const generateAddingLessonEmailToTeacher = async (
 		lessonDate,
 		lessonTime
 	);
-
-	emailSender(event.Teacher.UserInfo.Email, subject, text);
+	const calendarEvent = {
+		startTime,
+		duration,
+		summary,
+		description,
+		location,
+		type,
+	};
+	emailSender(event.Teacher.UserInfo.Email, subject, text, calendarEvent);
 };
 
 const generateCanceledLessonEmailToTeacher = (student, teacher, date) => {
