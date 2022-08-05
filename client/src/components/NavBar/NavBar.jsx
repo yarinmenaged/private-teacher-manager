@@ -87,7 +87,7 @@ function NavBar({
               </Link>
             )}
             <a
-              href=""
+              href="*"
               onClick={(event) => logOut(event)}
               className={style.button}
             >
