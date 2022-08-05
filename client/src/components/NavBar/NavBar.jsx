@@ -19,11 +19,9 @@ function NavBar({
 	const navigate = useNavigate();
 
 	const logOut = useCallback(() => {
-		if (window.confirm("Are you sure you want to log out?")) {
-			removeCookie("token");
-			logOutAction();
-			navigate("/login");
-		}
+		removeCookie("token");
+		logOutAction();
+		navigate("/login");
 	}, [logOutAction, removeCookie, navigate]);
 
 	const schedule_unset_callback = useCallback(async () => {
