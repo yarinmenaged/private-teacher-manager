@@ -121,7 +121,8 @@
 }
 
 .delete:hover {
-    background: rgb(180, 180, 180);
+  background: #ff7a7a;
+  color: #fff;
 }
 
 .info {
@@ -129,14 +130,15 @@
 }
 
 .info:hover {
-    background: rgb(180, 180, 180);
+  background: #3699ff;
+  color: #fff;
 }
 
 .edit {
-    color: #b2ff36;
+  color: #5c9400;
 }
 
 .edit:hover {
-    background: rgb(180, 180, 180);
-
+  background: #5c9400;
+  color: #fff;
 }

@@ -36,7 +36,6 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
   }, [setShowEventDialog, show_other_user_calendar, user_type]);
 
   const close_add_event = useCallback((event) => {
-    
     setShowEventDialog(false);
   }, [setShowEventDialog]);
 

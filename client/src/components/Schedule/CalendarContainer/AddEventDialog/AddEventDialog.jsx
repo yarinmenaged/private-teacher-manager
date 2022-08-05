@@ -70,18 +70,12 @@ const AddEventDialog = ({ hour, date, close_call_back, events, user_type, user_i
     });
   }, [time_obj, num_lessons, available_lessons, add_event_click, lesson_length]);
 
-  const close_function = useCallback((event) => {
-    console.log(event.bubbles);
-    //event.stopPropagation();
-    //event.preventDefault();
-    close_call_back(event);
-  }, [close_call_back]);
-
+ 
   return (
     <div className={style.container}>
       <div className={style.inner_container}>
         <div className={style.controls}>
-          <AiOutlineClose onClick={(event) => { return close_function(event) }}></AiOutlineClose>
+          <AiOutlineClose onClick={()=>close_call_back()}></AiOutlineClose>
         </div>
         <div className={style.content}>
           <Heading type={Heading.types.h2} value={AddEventDialogConstants.HEADING_TEXT(lesson_length, user_type)} />

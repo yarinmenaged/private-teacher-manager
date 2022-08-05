@@ -18,9 +18,7 @@ function NavBar({
   const [cookies, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
 
-  const logOut = useCallback(
-    (event) => {
-      event.preventDefault();
+  const logOut = useCallback(() => {
       if (window.confirm("Are you sure you want to log out?")) {
         removeCookie("token");
         logOutAction();

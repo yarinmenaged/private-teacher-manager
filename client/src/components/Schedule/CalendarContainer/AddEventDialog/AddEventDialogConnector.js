@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return bindActionCreators({ ...ownProps, AddEventAction }, dispatch);
+  return bindActionCreators({ AddEventAction }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddEventDialog);
