@@ -6,9 +6,7 @@ function Settings() {
   return (
     <div>
       <NavBar />
-      <p>settings</p>
       <SettingsContainerConnector />
-      <Link to="/home">back</Link>
     </div>
   );
 }

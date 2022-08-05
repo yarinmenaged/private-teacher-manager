@@ -1,9 +1,9 @@
-.button{
-    margin-top: 20px;
-    margin-left: 10px;
-}
-
 .width {
     margin-top: 10px;
-    width: 60%;
+    width: 40%;
+    margin-right: 15px;
+}
+
+.container {
+    width: 55%;
 }

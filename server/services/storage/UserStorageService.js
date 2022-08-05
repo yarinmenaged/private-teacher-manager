@@ -14,7 +14,10 @@ async function AddNewTeacher(user_info) {
   try {
     const user_info_row = await InsertUserInfo(user_info, transaction);
     const teacher_row = await InsertTeacher(user_info_row.id, transaction);
-    const teacher_pref_row = await InsertTeacherPref(teacher_row.id, transaction);
+    const teacher_pref_row = await InsertTeacherPref(
+      teacher_row.id,
+      transaction
+    );
     await transaction.commit();
     return Promise.all([user_info_row, teacher_row, teacher_pref_row]);
   } catch (error) {
@@ -42,6 +45,7 @@ async function InsertUserInfo(user_info, transaction) {
       Name: user_info.Name,
       Email: user_info.Email,
       Phone: user_info.Phone,
+      Location: user_info.Location,
       Password: user_info.Password,
     },
     { transaction: transaction }
@@ -58,10 +62,13 @@ async function InsertTeacher(user_info_id, transaction) {
   );
 }
 
-async function InsertTeacherPref(teacher_id, transaction){
-  return await Settings.create({
-    TeacherId: teacher_id
-  }, { transaction: transaction });
+async function InsertTeacherPref(teacher_id, transaction) {
+  return await Settings.create(
+    {
+      TeacherId: teacher_id,
+    },
+    { transaction: transaction }
+  );
 }
 
 async function InsertStudent(user_info_id, transaction) {
@@ -88,7 +95,7 @@ async function getUserInfoByEmail(email) {
       where: {
         Email: email,
       },
-      attributes: ["id", "Name", "Email", "Password", "Phone"],
+      attributes: ["id", "Name", "Email", "Password", "Phone", "Location"],
     });
 
     return await getUserType(user);
@@ -115,7 +122,7 @@ async function getUserInfoById(userId) {
       where: {
         id: userId,
       },
-      attributes: ["id", "Name", "Email", "Password", "Phone"],
+      attributes: ["id", "Name", "Email", "Password", "Phone", "Location"],
     });
 
     return await getUserType(user);
@@ -147,35 +154,43 @@ async function setAboutTeacher(userId, newAbout) {
   });
 }
 
-async function getSubjectsById(teacherId) {
-	const subjectIds = await TeachingSubjects.findAll({
-		where: { TeacherId: teacherId },
-		attributes: ["subjectId"],
-	});
+async function setLessonPrice(userId, newPrice) {
+  const teacher = await GetTeacherById(userId);
+  teacher.update({
+    price: newPrice,
+  });
+}
 
-	return await Promise.all(
-		subjectIds.map(async (subjectId) => {
-			const subject = await Subjects.findOne({
-				where: { id: subjectId.dataValues.subjectId },
-				attributes: ["id", "Name"],
-			});
-			return subject.dataValues;
-		})
-	);
+async function getSubjectsById(teacherId) {
+  const subjectIds = await TeachingSubjects.findAll({
+    where: { TeacherId: teacherId },
+    attributes: ["subjectId"],
+  });
+
+  return await Promise.all(
+    subjectIds.map(async (subjectId) => {
+      const subject = await Subjects.findOne({
+        where: { id: subjectId.dataValues.subjectId },
+        attributes: ["id", "Name"],
+      });
+      return subject.dataValues;
+    })
+  );
 }
 
 async function getAllTeachers() {
   const teacherIds = await Teacher.findAll({
-    attributes: ["id", "User_info_id", "About"],
+    attributes: ["id", "User_info_id", "About", "price"],
   });
 
   return await Promise.all(
     teacherIds.map(async (teacher) => {
       const info = await UserInfo.findOne({
         where: { id: teacher.User_info_id },
-        attributes: ["id", "Name", "Email", "Phone"],
+        attributes: ["id", "Name", "Email", "Phone", "Location"],
       });
       info.dataValues.About = teacher.About;
+      info.dataValues.price = teacher.price;
       info.dataValues.subjects = await getSubjectsById(teacher.dataValues.id);
       return info;
     })
@@ -192,6 +207,7 @@ const UserStorageService = {
   getUserInfoByEmail,
   getUserInfoById,
   getAllTeachers,
+  setLessonPrice,
 };
 
 module.exports = UserStorageService;

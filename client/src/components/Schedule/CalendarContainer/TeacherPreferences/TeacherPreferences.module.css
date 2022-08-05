@@ -4,7 +4,7 @@
     box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.50);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     border: 1px solid #EBECEE;
-    padding: 10px;
+    padding: 2px 5px;
     border-left: 5px solid var(--theme-bg);
     height: 100%;
 }
@@ -18,8 +18,12 @@
     line-height: 1.4;
     border-radius: 2px;
     color: var(--theme-color);
+    margin: 0;
 }
 
+.duration_text {
+    margin: 0;
+}
 
 .blocked_color {
     --theme-color: #fff;

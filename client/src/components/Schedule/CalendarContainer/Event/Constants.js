@@ -4,7 +4,7 @@ const DATE_FORMAT = 'DD/MM/YYYY';
 const USER_TYPE = {
     Student: "Student",
     Teacher: "Teacher"
-}
+};
 
 const EventConstants = {
     TimeFormat,

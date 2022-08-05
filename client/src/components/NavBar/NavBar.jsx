@@ -18,20 +18,16 @@ function NavBar({
 	const [cookies, removeCookie] = useCookies(["token"]);
 	const navigate = useNavigate();
 
-	const logOut = useCallback(
-		(event) => {
-			event.preventDefault();
-			if (window.confirm("Are you sure you want to log out?")) {
-				removeCookie("token");
-				logOutAction();
-				navigate("/login");
-			}
-		},
-		[logOutAction, removeCookie, navigate]
-	);
+	const logOut = useCallback(() => {
+		if (window.confirm("Are you sure you want to log out?")) {
+			removeCookie("token");
+			logOutAction();
+			navigate("/login");
+		}
+	}, [logOutAction, removeCookie, navigate]);
 
-	const schedule_unset_callback = useCallback(() => {
-		UnsetCalendarToUserAction();
+	const schedule_unset_callback = useCallback(async () => {
+		await UnsetCalendarToUserAction();
 		chooseTeacherAction("");
 		if (Type === EventConstants.USER_TYPE.Student) UnsetTeacherSettingsAction();
 		navigate("/schedule");
@@ -40,6 +36,7 @@ function NavBar({
 		navigate,
 		chooseTeacherAction,
 		UnsetTeacherSettingsAction,
+		Type,
 	]);
 
 	useEffect(() => {
@@ -60,12 +57,12 @@ function NavBar({
 				</div>
 				{loginStatus && (
 					<Flex className={style.width}>
-						<a
+						<div
 							onClick={() => schedule_unset_callback()}
 							className={style.button}
 						>
 							Schedule
-						</a>
+						</div>
 						<Link to="/messenger" className={style.button}>
 							Messenger
 						</Link>
@@ -82,11 +79,13 @@ function NavBar({
 								Search Teacher
 							</Link>
 						)}
-						<Link to="/settings" className={style.button}>
-							Settings
-						</Link>
+						{Type === USER_TYPE.Teacher && (
+							<Link to="/settings" className={style.button}>
+								Settings
+							</Link>
+						)}
 						<a
-							href=""
+							href="*"
 							onClick={(event) => logOut(event)}
 							className={style.button}
 						>

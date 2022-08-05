@@ -3,8 +3,8 @@ export const getUserInfo = (state) => {
 };
 
 export const getTeacherSubjects = (state) => {
-    return state.userReducer.subjects;
-}
+  return state.userReducer.subjects;
+};
 
 export const getUserType = (state) => {
   return state.userReducer.Type;

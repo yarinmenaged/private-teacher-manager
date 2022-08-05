@@ -1,0 +1,21 @@
+.calendar_controls{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    align-content: center;
+    box-shadow: 0 10px 50px rgb(0 0 0 / 4%);
+    padding: 10px 0;
+    background: var(--thead-bg);
+    width: -webkit-fill-available;
+}
+
+.calendar_controls > div {
+    align-self: center;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: fit-content;
+}

@@ -2,25 +2,20 @@
     top:0;
     display: flex;
     align-items: center;
-    justify-content: center;
-    z-index: 1;
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.04);
-    padding: 10px 0;
-    background: var(--thead-bg);
+    justify-content: flex-end;
     color:rgb(78, 99, 165);
 }
 
 .week_range{
-    height: 50px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    font-size: 32px;
+    align-items: flex-end;
+    font-size: 22px;
     font-weight: bold;
 }
 
 .change_week_button {
-    font-size: 22px;
+    font-size: 18px;
     display: flex;
     align-items: flex-end;
     margin: 0px 10px;

@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return bindActionCreators({  ...ownProps, UpdateDescriptionAction }, dispatch);
+    return bindActionCreators({ UpdateDescriptionAction }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditDescriptionContainer);
