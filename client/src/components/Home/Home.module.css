@@ -1,4 +1,12 @@
 .screenContainer {
-    text-align: center;
-    padding: 17%;
+  text-align: center;
+  padding: 15%;
+}
+
+.quote {
+  text-align: center;
+  color: rgb(78, 99, 165);
+  font-size: 24px;
+  font-style: italic;
+  font-weight: bold;
 }

@@ -12,7 +12,7 @@ import {
   Description,
   Academy,
   Edit,
-  Add,
+  Check,
   Location,
 } from "monday-ui-react-core/dist/allIcons";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
@@ -147,7 +147,7 @@ function EditAboutComponent({ editAbout, About }) {
       />
       <br />
       <button className={style.button} onClick={() => editAbout(inputValue)}>
-        <Icon iconSize={15} icon={Add} />
+        <Icon iconSize={15} icon={Check} />
       </button>
     </div>
   );
@@ -173,7 +173,7 @@ function EditPriceComponent({ editPrice, price }) {
         className={style.button}
         onClick={() => editPrice(priceInputValue)}
       >
-        <Icon iconSize={15} icon={Add} />
+        <Icon iconSize={15} icon={Check} />
       </button>
     </div>
   );
