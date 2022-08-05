@@ -3,7 +3,7 @@ import style from './EventInfo.module.css';
 import { Flex } from 'monday-ui-react-core';
 import { AiOutlineClose, AiOutlineFieldTime, AiFillPhone, AiOutlineMail } from 'react-icons/ai';
 import { BsFillFileEarmarkPersonFill } from 'react-icons/bs';
-import { MdDateRange, MdSubject, MdOutlineNotes } from 'react-icons/md';
+import { MdDateRange, MdSubject, MdOutlineNotes, MdLocationOn } from 'react-icons/md';
 import { IoIosResize } from 'react-icons/io';
 import moment from 'moment';
 import EventConstants from '../Constants';
@@ -84,13 +84,22 @@ const EventInfo = ({ event, close_call_back, user_type }) => {
                     </div>        
                     <div className={style.attribute}>
                         <span>
+                            <MdLocationOn></MdLocationOn>
+                            Location
+                        </span>
+                        <span>{event.Teacher.UserInfo.Location}</span>
+                    </div>                    
+                </Flex>
+                <Flex justify={Flex.justify.CENTER} gap={100}>
+                    <div className={style.attribute}>
+                        <span>
                             <MdOutlineNotes></MdOutlineNotes>
                             Description
                         </span>
                         <span>{event.description}</span>
                     </div>                    
                 </Flex>
-            </div>
+            </div>            
         </div>
     )
 }

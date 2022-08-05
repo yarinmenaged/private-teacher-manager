@@ -75,7 +75,9 @@ const AddEventDialog = ({ hour, date, close_call_back, events, user_type, user_i
     <div className={style.container}>
       <div className={style.inner_container}>
         <div className={style.controls}>
-          <AiOutlineClose onClick={()=>close_call_back()}></AiOutlineClose>
+          <div  onClick={()=>close_call_back()}>
+            <AiOutlineClose></AiOutlineClose>
+          </div>
         </div>
         <div className={style.content}>
           <Heading type={Heading.types.h2} value={AddEventDialogConstants.HEADING_TEXT(lesson_length, user_type)} />

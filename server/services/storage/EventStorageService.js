@@ -17,7 +17,7 @@ async function GetEventsByUserIdFilterByWeek(user_id, week, user_type) {
             model: Teacher,
             include: [{
                 model: UserInfo,
-                attributes: ["Name", "Email", "Phone"]
+                attributes: ["Name", "Email", "Phone", "Location"]
             }]
         }, {
             model: Student,
@@ -48,7 +48,7 @@ async function GetEventsByEventId(event_id) {
             model: Teacher,
             include: [{
                 model: UserInfo,
-                attributes: ["Name", "Email", "Phone"]
+                attributes: ["Name", "Email", "Phone", "Location"]
             }]
         }, {
             model: Student,
