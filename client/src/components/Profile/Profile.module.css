@@ -1,7 +1,5 @@
 .column {
-    padding-left: 5%;
     padding-right: 10%;
-    width: 30%;
     font-size: large;
 }
 
@@ -29,6 +27,11 @@
     border-width: 0px;
 }
 
+.upload {
+  width: 20vw;
+  margin-bottom: 10px;
+}
+
 .dropDown {
     width: 70%;
     margin-left: 20px;
@@ -47,13 +50,12 @@ textarea {
   
   .card {
     border: 1px solid;
-    padding-bottom: 15px;
     width: 95vw;
     margin-left: 30px;
     margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
-    background-color: rgba(209, 209, 209, 0.295);
+    background-color: rgba(209, 209, 209, 0.381);
     color: black;
   }
 
@@ -66,7 +68,16 @@ textarea {
     margin-left: 10px;
   }
 
+  .padding {
+    padding-top: 5%;
+  }
+
   .bg {
     background-color: rgb(78, 99, 165);
     padding-bottom: 20px;
+  }
+
+  .profileImg {
+    height: 45vh;
+    width: 18vw;
   }

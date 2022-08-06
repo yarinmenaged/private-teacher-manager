@@ -1,13 +1,12 @@
 import style from "../Profile.module.css";
 import { Link } from "react-router-dom";
 import NavBar from "../../NavBar/NavBarConnector";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cx from "classnames";
 import { useCallback } from "react";
 import { Dropdown, Icon, Flex, Slider } from "monday-ui-react-core";
 import {
   Email,
-  PersonRound,
   Mobile,
   Description,
   Academy,
@@ -16,6 +15,8 @@ import {
   Location,
 } from "monday-ui-react-core/dist/allIcons";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
+import unknownTeacher from '../../../images/unknown-person.png';
+import ApiService from "../../../services/ApiService";
 
 function MyProfile({
   userInfo,
@@ -72,10 +73,61 @@ function MyProfile({
     [setShowSlider, editPriceAction]
   );
 
+  const [value, reRender] = useState(0);
+  const [fileChosen, setFileChosen] = useState(false);
+  const [unknownProfileImg, setUnKnownProfileImg] = useState(false);
+
+  useEffect(() => {
+    setUnKnownProfileImg(true);
+    initProfileImg();
+  }, [value]);
+
+  const initProfileImg = useCallback(async () => {
+    const img = await ApiService.GetResourceRequest(`users/img/${userInfo.id}`);
+    if (img.status) {
+      setUnKnownProfileImg(true);
+    } else {
+      setUnKnownProfileImg(false);
+    }
+  }, [setUnKnownProfileImg]);
+
+  const submit_file = useCallback(async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const api_req = await ApiService.AddNewResourceRequest(`users/upload/${userInfo.id}`, data);
+    if (unknownProfileImg) {
+      alert("Profile image saved");
+      setUnKnownProfileImg(false);
+    } else {
+      alert("Profile image saved");
+      reRender((e) => e + 1)
+    }
+  }, [userInfo, setUnKnownProfileImg, reRender]);
+
   return (
     <div>
       <NavBar />
-      <Flex>
+      <Flex align={Flex.align.START} className={style.padding}>
+
+        <div className={style.column} style={{ width: "10%", paddingLeft: "40px", marginRight: "5%" }}>
+
+          <form encType="multipart/form-data" onSubmit={(event) => submit_file(event)}>
+            <Flex justify={Flex.justify.SPACE_BETWEEN} className={style.upload}>
+              {
+                fileChosen &&
+                < input style={{ marginRight: "10px" }} type="submit" value="Save" />
+              }
+
+              <input type="file" name="profileImg" onChange={() => setFileChosen(true)} />
+            </Flex>
+          </form>
+          {
+            unknownProfileImg
+              ? <img src={unknownTeacher} className={style.profileImg} ></img>
+              : <img src={`http://localhost:2000/users/img/${userInfo.id}`} className={style.profileImg} ></img>
+          }
+        </div>
+
         <div className={style.column}>
           <h3>
             <Icon iconSize={30} icon={Academy} /> {userInfo.Name}
