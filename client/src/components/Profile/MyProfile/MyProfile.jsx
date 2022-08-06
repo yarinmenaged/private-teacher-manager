@@ -16,6 +16,7 @@ import {
 } from "monday-ui-react-core/dist/allIcons";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
 import teacherImg from '../../../images/unknown-person.png';
+import ApiService from "../../../services/ApiService";
 
 function MyProfile({
   userInfo,
@@ -72,16 +73,21 @@ function MyProfile({
     [setShowSlider, editPriceAction]
   );
 
+  const submit_file = useCallback(async(event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);    
+    const api_req = await ApiService.AddNewResourceRequest(`users/upload/${userInfo.id}`, data);
+  }, [userInfo]);
+
   return (
     <div>
       <NavBar />
       <Flex align={Flex.align.START} className={style.padding}>
 
         <div className={style.column} style={{ width: "10%", paddingLeft: "40px", marginRight: "5%" }}>
-
-          <form action={`http://localhost:2000/users/upload/${userInfo.id}`} method="post" encType="multipart/form-data">
+          <form encType="multipart/form-data" onSubmit={(event) => submit_file(event)}>
             <Flex justify={Flex.justify.SPACE_BETWEEN} className={style.width}>
-              <input style={{ marginRight: "10px" }} className={style.button} type="submit" value="Save" />
+              <input style={{ marginRight: "10px" }} className={style.button} type="submit" value="Save"  />
               <input type="file" name="profileImg" />
             </Flex>
           </form>
