@@ -208,7 +208,11 @@ async function addImg(id, imgUrl) {
 
 async function getImg(id) {
   const teacher = await GetTeacherById(id);
-  return teacher.image;
+  if (teacher) {
+    return teacher.image;
+  } else {
+    return null;
+  }
 }
 
 const UserStorageService = {

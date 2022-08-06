@@ -11,7 +11,8 @@ import {
 import cx from "classnames";
 import { BsWhatsapp } from "react-icons/bs";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
-import teacherImg from '../../../images/unknown-person.png';
+import unknownTeacher from '../../../images/unknown-person.png';
+import ApiService from "../../../services/ApiService";
 
 function SingleProfile({
   teacherInfo,
@@ -31,11 +32,6 @@ function SingleProfile({
     }));
 
   const [value, reRender] = useState(0);
-
-  let img;
-  useEffect(() => {
-    
-  }, []);
 
   useEffect(() => {
     console.log({ teacherInfo });
@@ -66,12 +62,29 @@ function SingleProfile({
     [selectSubjectAction, resetSubjectsAction]
   );
 
+  const [unknownProfileImg, setUnKnownProfileImg] = useState(false);
+
+  useEffect(() => {
+    initProfileImg();
+  }, []);
+
+  const initProfileImg = useCallback(async () => {
+    const img = await ApiService.GetResourceRequest(`users/img/${teacherInfo.id}`);
+    if (img.status) {
+      setUnKnownProfileImg(true);
+    }
+  }, [setUnKnownProfileImg]);
+
   return (
     <div>
       <Flex className={style.card} align={Flex.align.START}>
 
         <div className={style.column} style={{ width: "10%", paddingLeft: "40px", marginRight: "5%" }}>
-          <img src={`http://localhost:2000/users/img/${teacherInfo.id}`} className={style.profileImg} ></img>
+          {
+            unknownProfileImg
+            ? <img src={unknownTeacher} className={style.profileImg} ></img>
+            : <img src={`http://localhost:2000/users/img/${teacherInfo.id}`} className={style.profileImg} ></img>
+          }
         </div>
 
         <div className={style.column} style={{ width: "35%" }}>

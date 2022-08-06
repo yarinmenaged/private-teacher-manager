@@ -72,7 +72,12 @@ async function addImgUrl(req, res) {
 
 async function getImgUrl(req, res) {
   const img = await getImg(req.params.id);
-  res.sendFile(path.join(__dirname, `../profileImages/${img}`));
+  if (img) {
+    res.sendFile(path.join(__dirname, `../profileImages/${img}`));
+  }
+  else {
+    res.status(200).json({status: "no image"})
+  }
 }
 
 module.exports = {
