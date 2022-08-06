@@ -4,7 +4,6 @@ import Login from "./components/Login/LoginConnector";
 import RegisterForm from "./components/RegisterForm/RegisterFormConnector";
 import Home from "./components/Home/HomeConnector";
 import Schedule from "./components/Schedule/ScheduleConnector";
-import Messenger from "./components/Messenger/MessengerConnector";
 import MyProfile from "./components/Profile/MyProfile/MyProfileConnector";
 import SearchProfile from "./components/Profile/SearchProfile/SearchProfileConnector";
 import Landing from "./components/Landing/Landing";
@@ -63,7 +62,6 @@ function App({ loginStatus, getUserInfoByTokenAction, successful, failed, messag
 								<Route path="/" element={<Home />} />
 								<Route path="/home" element={<Home />} />
 								<Route path="/schedule" element={<Schedule />} />
-								<Route path="/messenger" element={<Messenger />} />
 								<Route path="/my-profile" element={<MyProfile />} />
 								<Route path="/search-profile" element={<SearchProfile />} />
 								<Route path="/settings" element={<Settings />} />
