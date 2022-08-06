@@ -80,8 +80,8 @@ function MyProfile({
         <div className={style.column} style={{ width: "10%", paddingLeft: "40px", marginRight: "5%" }}>
 
           <form action={`http://localhost:2000/users/upload/${userInfo.id}`} method="post" encType="multipart/form-data">
-            <Flex justify={Flex.justify.SPACE_BETWEEN} className={style.width}>
-              <input style={{ marginRight: "10px" }} className={style.button} type="submit" value="Save" />
+            <Flex justify={Flex.justify.SPACE_BETWEEN} className={style.upload}>
+              <input style={{ marginRight: "10px" }}  type="submit" value="Save" />
               <input type="file" name="profileImg" />
             </Flex>
           </form>
