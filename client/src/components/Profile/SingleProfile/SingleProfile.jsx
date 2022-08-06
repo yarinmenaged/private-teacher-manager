@@ -34,11 +34,12 @@ function SingleProfile({
   const [value, reRender] = useState(0);
 
   useEffect(() => {
-    console.log({ teacherInfo });
     if (value > 0) {
       if (subjectsOptions.length > 1) {
         setDisplayDropdown(!displayDropdown);
       } else {
+        resetSubjectsAction();
+        selectSubjectAction({ id: subjectsOptions[0].id, value: subjectsOptions[0].value});
         goToCalender();
       }
     }
