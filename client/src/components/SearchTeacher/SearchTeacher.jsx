@@ -49,7 +49,7 @@ function SearchTeacher({
                 <Dropdown
                     options={allOptions}
                     value={{ value: chosenTeacher?.Name, label: chosenTeacher?.Name }}
-                    placeholder={"Select teacher"}
+                    placeholder={"Select Teacher"}
                     onChange={(event) => chooseTeacher(event)}
                     clearable={false}
                     className={cx("dropdown-stories-styles_big-spacing", style.width)} />

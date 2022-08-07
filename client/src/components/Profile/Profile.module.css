@@ -1,83 +1,107 @@
 .column {
-    padding-right: 10%;
-    font-size: large;
+  padding-right: 7em;
 }
 
 .edit {
-    text-decoration: underline;
-    color: rgba(78, 98, 165);
-     margin-left: 200px;
+  text-decoration: underline;
+  color: rgba(78, 98, 165);
+  margin-left: 9em;
 }
 
 .textbox {
-    border-radius: 10px;
-    border-width: 0;
-    background-color: rgba(78, 98, 165, 0.274);
-    word-break: break-word;
-    height: 50px;
+  border-radius: 10px;
+  border-width: 0;
+  background-color: rgba(78, 98, 165, 0.274);
+  word-break: break-word;
+  height: 10vh;
 }
 
 .button {
-    margin-top: 8px;
-    background-color: rgb(78, 99, 165);
-    color: white;
-    padding: 8.5px 15px 8.5px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    border-width: 0px;
+  background-color: rgb(78, 99, 165);
+  color: white;
+  padding: 0.2em 0.3em 0.2em 0.3em;
+  border-radius: 50%;
+  cursor: pointer;
+  border-width: 0;
+}
+
+.rectButton {
+  background-color: rgb(78, 99, 165);
+  color: white;
+  padding: 0.5em 1em 0.5em 1em;
+  cursor: pointer;
+  border-width: 0;
+  border-radius: 5px;
 }
 
 .upload {
   width: 20vw;
-  margin-bottom: 10px;
+  margin-left: 1.5em;
+  margin-top: 1em;
 }
 
 .dropDown {
-    width: 70%;
-    margin-left: 20px;
+  width: 43vw;
+  margin-left: 20px;
 }
 
 .smallDropDown {
-    width: 40%;
-    margin-left: 10px;
+  width: 8vw;
+  height: 0.5vh;
+  margin-left: 10px;
 }
 
 textarea {
-    resize: none;
-    height: 300px;
-    width: 300px;
-  }
-  
-  .card {
-    border: 1px solid;
-    width: 95vw;
-    margin-left: 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    background-color: rgba(209, 209, 209, 0.381);
-    color: black;
-  }
+  resize: none;
+  height: 5vh;
+  width: 24vw;
+}
 
-  .whatsapp {
-    color: #1fa24f;
-  }
-  
-  .link {
-    color: black;
-    margin-left: 10px;
-  }
+.card {
+  border: 1px solid;
+  width: 82vw;
+  margin-left: 7.4em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  border-radius: 10px;
+  background-color: rgba(228, 226, 226, 0.941);
+  color: black;
+  font-size: 1.2em;
+}
 
-  .padding {
-    padding-top: 5%;
-  }
+.whatsapp {
+  color: #1fa24f;
+}
 
-  .bg {
-    background-color: rgb(78, 99, 165);
-    padding-bottom: 20px;
-  }
+.link {
+  color: black;
+  margin-left: 10px;
+}
 
-  .profileImg {
-    height: 45vh;
-    width: 18vw;
-  }
+.profileContainer {
+  padding-top: 5em;
+  padding-left: 6em;
+  font-size: 1.5em;
+}
+
+.bg {
+  background-color: rgb(78, 99, 165);
+  padding-bottom: 1em;
+}
+
+.profileImgContainer {
+  width: 12vw;
+  padding-left: 4em;
+  padding-top: 18px;
+  margin-right: 2.5em;
+}
+
+.profileImg {
+  height: 37vh;
+  width: 17vw;
+  border-radius: 50%;
+}
+
+.subjects {
+  padding-left: 36em;
+}

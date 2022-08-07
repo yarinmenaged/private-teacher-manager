@@ -67,6 +67,7 @@ function MyProfile({
 
   const editPrice = useCallback(
     (newPrice) => {
+      console.log(newPrice)
       editPriceAction(newPrice);
       setShowSlider(false);
     },
@@ -107,10 +108,14 @@ function MyProfile({
   return (
     <div>
       <NavBar />
-      <Flex align={Flex.align.START} className={style.padding}>
+      <Flex align={Flex.align.START} className={style.profileContainer}>
 
         <div className={style.column} style={{ width: "10%", paddingLeft: "40px", marginRight: "5%" }}>
-
+          {
+            unknownProfileImg
+              ? <img src={unknownTeacher} className={style.profileImg} ></img>
+              : <img src={`http://localhost:2000/users/img/${userInfo.id}`} className={style.profileImg} ></img>
+          }
           <form encType="multipart/form-data" onSubmit={(event) => submit_file(event)}>
             <Flex justify={Flex.justify.SPACE_BETWEEN} className={style.upload}>
               {
@@ -121,13 +126,8 @@ function MyProfile({
               <input type="file" name="profileImg" onChange={() => setFileChosen(true)} />
             </Flex>
           </form>
-          {
-            unknownProfileImg
-              ? <img src={unknownTeacher} className={style.profileImg} ></img>
-              : <img src={`http://localhost:2000/users/img/${userInfo.id}`} className={style.profileImg} ></img>
-          }
         </div>
-
+            
         <div className={style.column}>
           <h3>
             <Icon iconSize={30} icon={Academy} /> {userInfo.Name}
@@ -168,10 +168,9 @@ function MyProfile({
           )}
         </div>
       </Flex>
-      <Flex justify={Flex.justify.CENTER}>
+      <Flex justify={Flex.justify.START} className={style.subjects}>
         <h3>I'm teaching:</h3>
         <Dropdown
-          multiline
           multi
           options={allOptions}
           value={teacherOptions}

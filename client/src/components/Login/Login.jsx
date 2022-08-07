@@ -2,7 +2,7 @@ import style from "./Login.module.css";
 import cx from "classnames";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useCallback } from "react";
-import { Icon } from 'monday-ui-react-core';
+import { Icon, Flex } from 'monday-ui-react-core';
 import { Close } from "monday-ui-react-core/dist/allIcons";
 
 function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
@@ -23,14 +23,14 @@ function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
 	);
 
   return (
-    <div className={style.inLine}>
+    <Flex justify={Flex.justify.CENTER}>
       <form
         className={style.form}
         onSubmit={(event) => {
           handleSubmit(event);
         }}
       >
-        <h3>Log In</h3>
+        <h2>Log In</h2>
 
         <input
           type="email"
@@ -67,7 +67,7 @@ function Login({ getUserInfoAction, loginStatus, incorrectPassword }) {
           </Link>
         </p>
       </form>
-    </div>
+    </Flex>
   );
 }
 
