@@ -1,18 +1,20 @@
 .event {
   border-radius: 4px;
-  background: #fff;
+  background: var(--theme-bg);
   box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   border: 1px solid #ebecee;
-  padding: 10px;
   border-left: 5px solid var(--theme-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: 100%;
 }
 
 .title {
   font-size: 12px;
   background: var(--theme-bg);
-  padding: 2px 5px;
+  margin: 0;
   font-weight: 600;
   line-height: 1.4;
   border-radius: 2px;
@@ -23,7 +25,7 @@
   font-size: 12px;
   color: #333;
   font-weight: 500;
-  margin: 0;
+  margin: 2px 0 0 0 ;
 }
 
 .color_1 {
@@ -56,24 +58,51 @@
   --theme-bg: #bbbcbc;
 }
 
+.color_7 {
+  --theme-color: hsl(40, 50%, 30%);
+  --theme-bg: #ffd800;
+}
+
+.color_8 {
+  --theme-color: hsl(180, 50%, 30%);
+  --theme-bg: #00facd;
+}
+
+.color_9 {
+  --theme-color: hsl(200, 50%, 30%);
+  --theme-bg: #52f0fa;
+}
+
+.color_10 {
+  --theme-color: hsl(235, 75%, 90%);
+  --theme-bg: #473bbe;
+}
+
+.color_11 {
+  --theme-color: #471030;
+  --theme-bg: #f25081;
+}
+
+.color_12 {
+  --theme-color: rgb(138, 49, 94);
+  --theme-bg: #8f0f68;
+}
+
 .blocked {
-    --theme-color: #fff;
-    --theme-bg: #ff353c;
+  background: repeating-linear-gradient( 45deg, #fff, #fff 10px, #ff6262 10px, #ff6262 20px );
+  color: #fff;
+  
 }
 
 .actions {
-    position: absolute;
-    width: -webkit-fill-available;
     height: -webkit-fill-available;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     font-size: 16pt;
-    background: #b7b7b76e;
-    top: 0;
-    left: 0;
     opacity: 0;
+    background: #fff;
 }
 
 .actions:hover {
@@ -81,38 +110,36 @@
 }
 
 .actions > div {
-    color: #ffffff;
-    padding: 15px;
-    border: 1px solid;
-    border-radius: 50%;
+    padding: 2px;
+    border-radius: 5px;
     display: flex;
-    margin: 0 5px;
+    height: 100%;
+    align-items: center;
 }
 
 .delete {
-    background:#ff7a7a;
+  color: #ff7a7a;
 }
 
 .delete:hover {
-    color: #ff7a7a;
-    background: #fff;
+  background: #ff7a7a;
+  color: #fff;
 }
 
 .info {
-    background: #3699ff;
+  color: #3699ff;
 }
 
 .info:hover {
-    color: #3699ff;
-    background: #fff;
+  background: #3699ff;
+  color: #fff;
 }
 
 .edit {
-    background: #b2ff36;
+  color: #5c9400;
 }
 
 .edit:hover {
-    color: #b2ff36;
-    background: #fff;
-
+  background: #5c9400;
+  color: #fff;
 }

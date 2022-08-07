@@ -1,40 +1,52 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ConstantsCalendarContainer from "../../../Schedule/CalendarContainer/Constants";
 import style from "./WorkingHours.module.css";
 import DailyWorkingHoursConnector from "./DailyWorkingHours/DailyWorkingHoursConnector";
 import _ from "lodash";
+import { Heading, Dropdown, Button } from 'monday-ui-react-core';
 
 function WorkingHours({ setSettingsForTeacherAction, settings, GetSettingsAction, setLessonLengthAction }) {
-
+  const [lesson_option, setLessonOption] = useState([]);
   useEffect(() => {
     GetSettingsAction();
-  }, [GetSettingsAction])
+  }, [GetSettingsAction]);
+
+  useEffect(() => {
+    setLessonOption([..._.range(15, 75, 15).map((time) => {
+      return { label: `${time} min`, value: `${time}` };
+    })]);
+  }, []);
 
   const handleSaveChanges = useCallback((event) => {
     event.preventDefault();
     setSettingsForTeacherAction(settings);
-  },[setSettingsForTeacherAction, settings]);
+  }, [setSettingsForTeacherAction, settings]);
 
   const handle_change_lesson_length = useCallback((event) => {
-    event.preventDefault();
-    setLessonLengthAction(event.currentTarget.value);
-  },[setLessonLengthAction]);
+    setLessonLengthAction(event.value);
+  }, [setLessonLengthAction]);
 
   return (
-    <div className={style.container}>
-      <p> Select your preferred lesson's length</p>
-      <select name="lesson-length" id="lesson-length" defaultValue={settings.lessonLength} onChange={handle_change_lesson_length}>
-        {_.range(15, 75, 15).map((time) => {
-            return <option value={time} key={`lesson-length-${time}`}>{time}</option>;
-        })}
-      </select>
-      <p>Select the hours in which you are free to teach</p>
+    <div className={style.container}>     
+      <Heading type={Heading.types.h2} value="Select unavailable hours" />
       <ul className={style.hoursContainer}>
         {ConstantsCalendarContainer.DAYS_IN_WEEK.map((day) => {
           return <DailyWorkingHoursConnector day={day} key={`${day}-working-days`} />;
         })}
-      </ul>
-      <button onClick={handleSaveChanges}>Save Changes</button>
+      </ul> 
+      <div className={style.select_lesson_length_container}>
+        <Heading type={Heading.types.h2} value="Preferred lesson's length" />
+        <Dropdown
+          className={style.select_box}
+          options={lesson_option}
+          onChange={handle_change_lesson_length}
+          placeholder="Select Lesson Length"
+          defaultValue={settings.lessonLength ? [{ label: `${settings.lessonLength} min`, value: `${settings.lessonLength}` }] : []}
+        />
+      </div>
+      <div className={style.save_button}>
+        <Button onClick={handleSaveChanges}>Save Changes</Button>
+      </div>
     </div>
   );
 }

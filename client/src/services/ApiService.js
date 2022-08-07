@@ -60,4 +60,17 @@ export default class ApiService {
     error.statusCode = code;
     return error;
   }
+
+  static async getCities() {
+    const response = await fetch(
+      'https://parseapi.back4app.com/classes/Israelcities_City?limit=160&order=name&keys=name',
+      {
+        headers: {
+          'X-Parse-Application-Id': 'SWcuHCOiaROAlsemQSQ9z9UqyYxb7RC2vfdIAztV', 
+          'X-Parse-REST-API-Key': 'ZngKHlHYjrAROm4G0ITIrZZzpC75a5lzXaTnFZFW',
+        }
+      });
+      const data = await response.json();
+      return data.results;
+	}
 }

@@ -1,10 +1,37 @@
 .container {
-  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 }
 
 .hoursContainer {
-  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  align-content: flex-start;
+  list-style: none;
+  flex-direction: row;
+  padding: 0;
+  width: -moz-fit-content;
+  width: 99vw;
+}
 
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+.select_lesson_length_container{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-content: flex-start;
+  width: fit-content;
+}
+
+.select_box{
+  width: -webkit-fill-available;
+  margin: 0 20px;
+}
+
+.save_button {
+  margin: 10px auto;
 }

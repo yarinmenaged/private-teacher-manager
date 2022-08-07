@@ -17,9 +17,9 @@ async function GetAllEventsOfUserInWeek(req, res, next){
 
 async function AddEventBlocked(req, res, next){
     try{
-        const { date, hour } = req.body;
+        const { date, hour, lesson_length } = req.body;
         const user_id = await getUserInfoByToken(req.cookies.token);
-        const add_blocked_event = await EventService.AddEventBlockedToTeacher(user_id, date, hour);
+        const add_blocked_event = await EventService.AddEventBlockedToTeacher(user_id, date, hour, lesson_length);
         return res.status(200).json({
             status: 200,
             add_event_status: true,
@@ -32,9 +32,9 @@ async function AddEventBlocked(req, res, next){
 
 async function AddEventFromStudent(req, res, next){
     try{
-        const { teacher_id, subject_id, date, hour } = req.body;
+        const { teacher_id, subject_id, date, hour, lesson_length } = req.body;
         const student = await getUserInfoByToken(req.cookies.token);
-        const add_event = await EventService.AddEventFromStudent(student, teacher_id, date, hour, subject_id);
+        const add_event = await EventService.AddEventFromStudent(student, teacher_id, date, hour, subject_id, lesson_length);
         return res.status(200).json({
             status: 200,
             add_event_status: true,

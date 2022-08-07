@@ -9,6 +9,7 @@ const SHOW_MORE_INFO_ON_EVENT = "Click here to show more info.";
 const DATE_FORMAT = 'MM-DD-YYYY';
 const BLOCKED = "Blocked";
 const FREE_BLOCK = "Free time";
+const TIME_FORMAT = "HH:mm"
 
 const ConstantsHourBlock = {
     BLOCK_TYPES,
@@ -17,6 +18,7 @@ const ConstantsHourBlock = {
     SHOW_MORE_INFO_ON_EVENT,
     BLOCKED, 
     FREE_BLOCK,
+    TIME_FORMAT,
     DATE_FORMAT
 }
 

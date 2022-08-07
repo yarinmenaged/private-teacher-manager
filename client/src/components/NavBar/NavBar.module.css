@@ -8,6 +8,7 @@
     text-align: center;
     padding: 1.5%;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .button:hover {

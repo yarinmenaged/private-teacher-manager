@@ -2,27 +2,40 @@
     top:0;
     display: flex;
     align-items: center;
-    justify-content: center;
-    z-index: 1;
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.04);
-    padding: 10px 0;
-    background: var(--thead-bg);
-    color:rgb(78, 99, 165);
+    justify-content: flex-end;
+    font-size: 22px;
+    color: #999999;
 }
 
 .week_range{
-    height: 50px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    font-size: 32px;
-    font-weight: bold;
+    align-items: flex-end;
+    color: #000;
 }
 
 .change_week_button {
-    font-size: 22px;
-    display: flex;
-    align-items: flex-end;
-    margin: 0px 10px;
+    background-color: #fff;
+    border: 1px solid #d5d9d9;
+    border-radius: 2px;
+    box-shadow: rgb(213 217 217 / 50%) 0 2px 5px 0;
+    box-sizing: border-box;
+    color: #0f1111;
     cursor: pointer;
+    display: inline-block;
+    font-family: "Amazon Ember",sans-serif;
+    font-size: 18px;
+    line-height: 35px;
+    padding: 0 10px 0 11px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+.month {
+    margin: 0 10px;
 }

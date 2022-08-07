@@ -20,6 +20,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     top: 0;
     border: solid var(--bd-color);
     border-width: 1px;
@@ -32,4 +33,21 @@
 .sticky > .heading{
     position: sticky;
     position: -webkit-sticky;
+}
+
+.dates_text {
+    margin: 1px auto;
+    color: #999999;
+}
+
+.current_day::before{    
+    content: '\25be';
+}
+
+.current_day{
+    color:rgb(0, 174, 218);
+}
+
+.current_day > p {
+    color:rgb(0, 174, 218);
 }

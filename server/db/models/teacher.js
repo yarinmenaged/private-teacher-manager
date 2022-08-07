@@ -24,8 +24,8 @@ module.exports = (sequelize, DataTypes) => {
       Teacher.belongsToMany(models.Subjects, {
         through: {
           model: models.Event,
-          unique: false
-        }
+          unique: false,
+        },
       });
       Teacher.hasMany(models.Event);
       Teacher.belongsToMany(models.Subjects, {
@@ -41,6 +41,9 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
       },
       About: DataTypes.STRING,
+      price:
+        { type: DataTypes.INTEGER, defaultValue: 100 },
+      image: DataTypes.STRING,
     },
     {
       sequelize,

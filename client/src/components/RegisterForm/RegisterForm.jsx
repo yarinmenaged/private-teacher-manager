@@ -2,29 +2,43 @@ import style from "./RegisterForm.module.css";
 import cx from "classnames";
 import { Link, useNavigate } from "react-router-dom";
 import serverConnection from "../../services/dbServices";
-import { useCallback } from "react";
+import ApiService from "../../services/ApiService";
+import { useCallback, useEffect, useState } from "react";
+import { Flex } from 'monday-ui-react-core';
 
 function RegisterForm() {
   const navigate = useNavigate();
 
+  const [citiesList, setCitiesList] = useState([]);
+
+  useEffect(() => {
+    fetchCities();
+  }, []);
+
+  const fetchCities = useCallback(
+    async () => {
+      setCitiesList(await ApiService.getCities());
+    }, []);
+
   const handleSubmit = useCallback(
-    (event) => {
+    async (event) => {
       event.preventDefault();
       const firstName = event.target.elements.firstName.value;
       const lastName = event.target.elements.lastName.value;
       const Name = `${firstName} ${lastName}`;
       const userType = event.target.elements.userType.value;
       const Email = event.target.elements.email.value;
+      const Location = event.target.elements.location.value;
       const Password = event.target.elements.password.value;
       const Phone = event.target.elements.phone.value;
-      serverConnection.addUser(Name, userType, Email, Password, Phone);
+      await serverConnection.addUser(Name, userType, Email, Password, Location, Phone);
       navigate("/login");
     },
     [navigate]
   );
 
   return (
-    <div className={style.formContainer}>
+    <Flex justify={Flex.justify.CENTER}>
       <form
         className={style.form}
         onSubmit={(event) => {
@@ -60,7 +74,7 @@ function RegisterForm() {
         </div>
         <br />
 
-        <label style={{ marginRight: "14px" }}>Are You:</label>
+        <label style={{ marginRight: "14px" }}>Are You:</label><br />
         <select name="userType" type="select" defaultValue="teacher" required>
           <option value="teacher">teacher</option>
           <option value="student">student</option>
@@ -84,10 +98,22 @@ function RegisterForm() {
         />
         <br />
 
+        <label>Location:</label>
+        <br />
+        <select name="location" type="select" defaultValue="default" required>
+          <option value="default" disabled>Select Location</option>
+          {
+            citiesList &&
+            citiesList.map((city, index) => {
+              return <option key={index} value={city.name}>{city.name}</option>
+            })
+          }
+        </select><br />
+
         <label>Mobile Number:</label>
         <br />
         <input name="phone" type="tel" className={style.input} required />
-        <br />
+        <br /><br />
 
         <input
           type="submit"
@@ -98,7 +124,7 @@ function RegisterForm() {
           Back
         </Link>
       </form>
-    </div>
+    </Flex>
   );
 }
 
