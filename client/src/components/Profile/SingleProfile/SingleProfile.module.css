@@ -2,7 +2,7 @@
     background: #fff;
     width: 400px;
     height: 320px;  
-    font-size: 23px;
+    font-size: 18px;
     text-align: center;
     border-width: 1px;
     border-style: solid;
@@ -25,6 +25,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.button {
+    width: 9vw;
+    height: 6vh;
+    font-size: 12px;
 }
 
 .card_img {

@@ -12,7 +12,7 @@ function SearchProfile({ selectedTeachers, chosenTeacher }) {
             <Flex justify={Flex.justify.CENTER} className={style.bg}>
                 <SearchTeacher multipleOptions={true} />
             </Flex>
-            <Flex justify={Flex.justify.CENTER} gap={15}>
+            <Flex justify={Flex.justify.CENTER} wrap={true} gap={15}>
                 {
                     chosenTeacher
                         ? <SingleProfile teacherInfo={chosenTeacher} />

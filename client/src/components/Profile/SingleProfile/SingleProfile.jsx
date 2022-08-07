@@ -144,7 +144,7 @@ function SingleProfile({
             </a>
       </span>
       <span>
-        <Icon iconSize={25} icon={Email} />
+        <Icon iconSize={15} icon={Email} />
         <a href={`mailto:${teacherInfo.Email}`} className={style.link}>
           {teacherInfo.Email}
         </a>
