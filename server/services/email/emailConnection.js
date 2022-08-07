@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const moment = require("moment");
 const ical = require("ical-generator");
+const { saveCalendarId } = require("../storage/EventStorageService");
 const {
 	MAIL_SERVICE,
 	PRIVARE_TEACHER_MAIL,
@@ -17,13 +18,15 @@ const createNewTransport = () => {
 	});
 	return transporter;
 };
-const createNewCalendar = (
+const createNewCalendar = async (
 	startTime,
 	duration,
 	organizer,
 	summary,
 	description,
-	location
+	location,
+	eventId,
+	calenderEventId
 ) => {
 	const calendar = ical({ name: "Private Lesson" });
 	const cal = calendar.createEvent({
@@ -33,19 +36,29 @@ const createNewCalendar = (
 		summary,
 		description,
 		location,
+		UID: calenderEventId,
 		url: "private-teachers.heroku.com",
 	});
+	if (calenderEventId) {
+		cal.calendar.data.UID = calenderEventId;
+		cal.data.status = "CANCELLED";
+	} else {
+		cal.calendar.data.UID = cal.data.id;
+		const saveClaId = await saveCalendarId(eventId, cal.data.id);
+	}
 	return cal.calendar.toString();
 };
 
-const mailOptions = (sendMailTo, subject, text, calendarEvent) => {
-	const calConnection = createNewCalendar(
+const mailOptions = async (sendMailTo, subject, text, calendarEvent) => {
+	const calConnection = await createNewCalendar(
 		calendarEvent.startTime,
 		calendarEvent.duration,
 		calendarEvent.organizer,
 		calendarEvent.summary,
 		calendarEvent.description,
-		calendarEvent.location
+		calendarEvent.location,
+		calendarEvent.eventId,
+		calendarEvent.calenderEventId
 	);
 	return {
 		from: PRIVARE_TEACHER_MAIL || "PrivateTeacher@outlook.co.il",
@@ -73,7 +86,7 @@ const mailOptions = (sendMailTo, subject, text, calendarEvent) => {
 };
 
 const emailSender = async (sendMailTo, subject, text, calendarEvent) => {
-	const mailOpt = mailOptions(sendMailTo, subject, text, calendarEvent);
+	const mailOpt = await mailOptions(sendMailTo, subject, text, calendarEvent);
 	const transporter = createNewTransport();
 	transporter.sendMail(mailOpt, function (error, info) {
 		if (error) {

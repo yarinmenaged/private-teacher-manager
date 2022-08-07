@@ -161,6 +161,19 @@ async function ChangeDescription(event_id, description) {
 	);
 }
 
+async function saveCalendarId(eventId, calendarId) {
+	return await Event.update(
+		{
+			calenderEventId: calendarId,
+		},
+		{
+			where: {
+				id: eventId,
+			},
+		}
+	);
+}
+
 const EventStorageService = {
 	GetEventsByUserIdFilterByWeek,
 	AddBlockedEventToTeacher,
@@ -168,6 +181,7 @@ const EventStorageService = {
 	DeleteEvent,
 	ChangeDescription,
 	GetEventsByEventId,
+	saveCalendarId,
 };
 
 module.exports = EventStorageService;

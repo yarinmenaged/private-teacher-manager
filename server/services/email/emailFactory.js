@@ -8,7 +8,7 @@ const {
 const { GetEventsByEventId } = require("../storage/EventStorageService");
 const calendarType = {
 	PUBLISH: "PUBLISH",
-	CANCEL: "CANCEL",
+	CANCEL: "REQUEST",
 };
 
 const generateAddingLessonEmailToTeacher = async (
@@ -33,6 +33,8 @@ const generateAddingLessonEmailToTeacher = async (
 		description: event.description,
 		location: event.Teacher.UserInfo.Location,
 		type: calendarType.PUBLISH,
+		eventId: event.id,
+		calenderEventId: event.calenderEventId,
 	};
 	emailSender(event.Teacher.UserInfo.Email, subject, text, calendarEvent);
 };
@@ -93,8 +95,9 @@ const sendEmailDeleteEvent = async (eventId) => {
 		summary,
 		description: event.description,
 		location: event.Teacher.UserInfo.Location,
-		status: "declined",
 		type: calendarType.CANCEL,
+		eventId: event.id,
+		calenderEventId: event.calenderEventId,
 	};
 	emailSender(teacherEmail, teacherSubject, teacherText, calendarEvent);
 	emailSender(studentEmail, studentSubject, studentTExt, calendarEvent);
