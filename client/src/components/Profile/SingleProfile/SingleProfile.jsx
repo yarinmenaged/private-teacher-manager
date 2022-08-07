@@ -88,7 +88,7 @@ function SingleProfile({
           }
         </div>
 
-        <div className={style.column} style={{ width: "35%" }}>
+        <div className={style.column} style={{ width: "40vw" }}>
           <h3>
             <Icon iconSize={30} icon={Academy} /> {teacherInfo.Name}
           </h3>
@@ -120,7 +120,7 @@ function SingleProfile({
           </p><br />
         </div>
 
-        <div className={style.column} style={{ width: "50%" }}>
+        <div className={style.column} style={{ width: "40vw" }}>
           <h3>
             <Icon icon={Description} /> About
           </h3>
@@ -128,7 +128,7 @@ function SingleProfile({
           <h3>I'm teaching:</h3>
           <Flex>
             {teacherInfo.subjects.map((subject, index) => (
-              <div key={index} style={{ marginRight: "20px" }}>
+              <div key={index} style={{ marginRight: "1em" }}>
                 {subject.Name}
               </div>
             ))}
