@@ -6,7 +6,6 @@ import { getUserInfo } from "../../../redux/selectors/userSelector";
 
 const mapStateToProps = (state) => {
   const events = getEvents(state).filter(element => element.StudentId);
-  console.log(events);
   const userInfo = getUserInfo(state);
   const price = userInfo.price;
   return { events, price };
