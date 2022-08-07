@@ -3,7 +3,11 @@ import { Label } from "monday-ui-react-core";
 
 function WeeklyIncome({ events, price }) {
   const totalWeeklyIncome = () => {
-    return events.length * price;
+    let income = 0;
+    events.forEach(event => {
+      income += price * (event.duration / 60);
+    })
+    return income;
   };
 
   return (
