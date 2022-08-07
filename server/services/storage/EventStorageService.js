@@ -75,7 +75,7 @@ async function GetEventsByEventId(event_id) {
 				include: [
 					{
 						model: UserInfo,
-						attributes: ["Name", "Email", "Phone", "Loaction"],
+						attributes: ["Name", "Email", "Phone", "Location"],
 					},
 				],
 			},

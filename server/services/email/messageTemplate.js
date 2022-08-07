@@ -19,6 +19,7 @@ const addingLessonTeacherMessage = (
 		<a style="margin-left:15px" href="mailto:${student.Email}"><img width="50" height="50" src="cid:sendEmailLogo"></a>
 		<a style="margin-left:15px" href=https://api.WhatsApp.com/send?phone=${student.Phone}><img width="50" height="50" src="cid:whatsappLogo"></a><br/><br/>
     ${masseges.AppName}`,
+		summary: `A new lesson is scheduled by ${student.Name}`,
 	};
 };
 
@@ -38,6 +39,7 @@ const canceledLessonTeacherMessage = (
 		<a style="margin-left:15px" href="mailto:${student.Email}"><img width="50" height="50" src="cid:sendEmailLogo"></a>
 		<a style="margin-left:15px" href=https://api.WhatsApp.com/send?phone=${student.Phone}><img width="50" height="50" src="cid:whatsappLogo"></a><br/><br/>
     ${masseges.AppName}`,
+		summary: `This lesson was canceled`,
 	};
 };
 
@@ -57,6 +59,7 @@ const canceledLessonStudentMessage = (
 		<a style="margin-left:15px" href="mailto:${teacher.Email}"><img width="50" height="50" src="cid:sendEmailLogo"></a>
 		<a style="margin-left:15px" href=https://api.WhatsApp.com/send?phone=${teacher.Phone}><img width="50" height="50" src="cid:whatsappLogo"></a><br/><br/>
     ${masseges.AppName}`,
+		summary: `This lesson was canceled`,
 	};
 };
 

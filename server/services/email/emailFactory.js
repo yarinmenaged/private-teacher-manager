@@ -6,6 +6,10 @@ const {
 	canceledLessonStudentMessage,
 } = require("./messageTemplate");
 const { GetEventsByEventId } = require("../storage/EventStorageService");
+const calendarType = {
+	PUBLISH: "PUBLISH",
+	CANCEL: "CANCEL",
+};
 
 const generateAddingLessonEmailToTeacher = async (
 	eventId,
@@ -14,19 +18,21 @@ const generateAddingLessonEmailToTeacher = async (
 ) => {
 	const event = await GetEventsByEventId(eventId);
 
-	const { text, subject } = addingLessonTeacherMessage(
+	const { text, subject, summary } = addingLessonTeacherMessage(
 		event.Teacher.UserInfo,
 		event.Student.UserInfo,
 		lessonDate,
 		lessonTime
 	);
+
 	const calendarEvent = {
-		startTime,
-		duration,
+		startTime: event.date,
+		duration: event.duration,
+		organizer: event.Teacher.UserInfo.Email,
 		summary,
-		description,
-		location,
-		type,
+		description: event.description,
+		location: event.Teacher.UserInfo.Location,
+		type: calendarType.PUBLISH,
 	};
 	emailSender(event.Teacher.UserInfo.Email, subject, text, calendarEvent);
 };
@@ -35,7 +41,7 @@ const generateCanceledLessonEmailToTeacher = (student, teacher, date) => {
 	const lessonDate = moment.utc(date).format("DD/MM/YYYY");
 	const lessonTime = moment.utc(date).format("HH:mm");
 
-	const { text, subject } = canceledLessonTeacherMessage(
+	const { text, subject, summary } = canceledLessonTeacherMessage(
 		student.UserInfo,
 		teacher.UserInfo,
 		lessonDate,
@@ -46,6 +52,7 @@ const generateCanceledLessonEmailToTeacher = (student, teacher, date) => {
 		teacherEmail: teacher.UserInfo.Email,
 		teacherSubject: subject,
 		teacherText: text,
+		summary,
 	};
 };
 
@@ -67,7 +74,7 @@ const generateCanceledLessonEmailToStudent = (student, teacher, date) => {
 
 const sendEmailDeleteEvent = async (eventId) => {
 	const event = await GetEventsByEventId(eventId);
-	const { teacherEmail, teacherSubject, teacherText } =
+	const { teacherEmail, teacherSubject, teacherText, summary } =
 		generateCanceledLessonEmailToTeacher(
 			event.Student,
 			event.Teacher,
@@ -79,8 +86,18 @@ const sendEmailDeleteEvent = async (eventId) => {
 			event.Teacher,
 			event.date
 		);
-	emailSender(teacherEmail, teacherSubject, teacherText);
-	emailSender(studentEmail, studentSubject, studentTExt);
+	const calendarEvent = {
+		startTime: event.date,
+		duration: event.duration,
+		organizer: event.Teacher.UserInfo.Email,
+		summary,
+		description: event.description,
+		location: event.Teacher.UserInfo.Location,
+		status: "declined",
+		type: calendarType.CANCEL,
+	};
+	emailSender(teacherEmail, teacherSubject, teacherText, calendarEvent);
+	emailSender(studentEmail, studentSubject, studentTExt, calendarEvent);
 };
 module.exports = {
 	generateAddingLessonEmailToTeacher,

@@ -20,18 +20,20 @@ const createNewTransport = () => {
 const createNewCalendar = (
 	startTime,
 	duration,
+	organizer,
 	summary,
 	description,
 	location
 ) => {
 	const calendar = ical({ name: "Private Lesson" });
 	const cal = calendar.createEvent({
-		start: moment(startTime),
-		end: moment().add(duration, "minute"),
+		start: moment.utc(startTime),
+		end: moment.utc(startTime).add(duration, "minute"),
+		organizer,
 		summary,
 		description,
 		location,
-		url: "http://sebbo.net/",
+		url: "private-teachers.heroku.com",
 	});
 	return cal.calendar.toString();
 };
@@ -40,6 +42,7 @@ const mailOptions = (sendMailTo, subject, text, calendarEvent) => {
 	const calConnection = createNewCalendar(
 		calendarEvent.startTime,
 		calendarEvent.duration,
+		calendarEvent.organizer,
 		calendarEvent.summary,
 		calendarEvent.description,
 		calendarEvent.location
@@ -63,7 +66,7 @@ const mailOptions = (sendMailTo, subject, text, calendarEvent) => {
 		],
 		icalEvent: {
 			filename: "invitation.ics",
-			method: calendarEvent.type || "publish",
+			method: calendarEvent.type,
 			content: calConnection,
 		},
 	};
