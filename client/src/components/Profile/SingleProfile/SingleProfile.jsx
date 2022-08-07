@@ -80,7 +80,7 @@ function SingleProfile({
     <div>
       <Flex className={style.card} align={Flex.align.START}>
 
-        <div className={style.column} style={{ width: "10%", paddingLeft: "40px", marginRight: "5%" }}>
+        <div className={cx(style.column, style.profileImgContainer)}>
           {
             unknownProfileImg
             ? <img src={unknownTeacher} className={style.profileImg} ></img>
@@ -94,7 +94,7 @@ function SingleProfile({
           </h3>
 
           <p>
-            <Icon iconSize={25} icon={Email} />
+            <Icon iconSize={20} icon={Email} />
             <a href={`mailto:${teacherInfo.Email}`} className={style.link}>
               {teacherInfo.Email}
             </a>
@@ -112,7 +112,7 @@ function SingleProfile({
           </p>
 
           <p>
-            <Icon iconSize={25} icon={Location} /> {teacherInfo.Location}
+            <Icon iconSize={20} icon={Location} /> {teacherInfo.Location}
           </p>
 
           <p>
@@ -136,7 +136,7 @@ function SingleProfile({
           <br />
           <Flex align={Flex.align.END}>
             <button
-              className={style.button}
+              className={style.rectButton}
               onClick={() => {
                 reRender((e) => e + 1);
               }}

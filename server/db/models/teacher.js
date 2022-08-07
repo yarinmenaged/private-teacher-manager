@@ -41,7 +41,8 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
       },
       About: DataTypes.STRING,
-      price: DataTypes.INTEGER,
+      price:
+        { type: DataTypes.INTEGER, defaultValue: 100 },
       image: DataTypes.STRING,
     },
     {
