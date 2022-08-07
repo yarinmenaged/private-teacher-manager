@@ -3,7 +3,7 @@ import style from '../SubjectsFilter.module.css';
 import { Dropdown } from 'monday-ui-react-core';
 import cx from 'classnames';
 
-function OneSubjectOption({ resetSubjectsAction, selectSubjectAction, subjectsList, selctedSubjects }) {
+function OneSubjectOption({ resetSubjectsAction, selectSubjectAction, subjectsList, selectedSubjects }) {
 
     const allOptions = subjectsList.map(subject => ({
         value: subject.Name,
@@ -12,9 +12,9 @@ function OneSubjectOption({ resetSubjectsAction, selectSubjectAction, subjectsLi
     }));
 
     useEffect(() => {
-        if (selctedSubjects.length > 1) {
+        if (selectedSubjects.length > 1) {
             resetSubjectsAction();
-            selectSubjectAction({ id: selctedSubjects[0].id, value: selctedSubjects[0].Name });
+            selectSubjectAction({ id: selectedSubjects[0].id, value: selectedSubjects[0].Name });
         }
     }, []);
 
@@ -27,9 +27,8 @@ function OneSubjectOption({ resetSubjectsAction, selectSubjectAction, subjectsLi
             <Dropdown
                 options={allOptions}
                 onChange={(event) => selectSubject(event)}
-                value={{value: selctedSubjects[0]?.Name, label: selctedSubjects[0]?.Name}}
+                value={{value: selectedSubjects[0]?.Name, label: selectedSubjects[0]?.Name}}
                 clearable={false}
-                placeholder="Select Subject"
                 className={cx("dropdown-stories-styles_big-spacing", style.width)} />
     );
 }

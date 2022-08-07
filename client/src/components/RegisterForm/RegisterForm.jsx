@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import serverConnection from "../../services/dbServices";
 import ApiService from "../../services/ApiService";
 import { useCallback, useEffect, useState } from "react";
+import { Flex } from 'monday-ui-react-core';
 
 function RegisterForm() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function RegisterForm() {
   );
 
   return (
-    <div className={style.formContainer}>
+    <Flex justify={Flex.justify.CENTER}>
       <form
         className={style.form}
         onSubmit={(event) => {
@@ -123,7 +124,7 @@ function RegisterForm() {
           Back
         </Link>
       </form>
-    </div>
+    </Flex>
   );
 }
 
