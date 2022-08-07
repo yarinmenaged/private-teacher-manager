@@ -7,13 +7,17 @@ const {
 	PRIVARE_TEACHER_MAIL,
 	PRIVARE_TEACHER_PASSWORD,
 } = require("../../envModule");
+const currentMail = {
+	email: "PrivateTeacher@outlook.co.il",
+	pass: "Privatet1",
+};
 
 const createNewTransport = () => {
 	const transporter = nodemailer.createTransport({
 		service: MAIL_SERVICE || "hotmail",
 		auth: {
-			user: PRIVARE_TEACHER_MAIL || "PrivateTeacher@outlook.co.il",
-			pass: PRIVARE_TEACHER_PASSWORD || "Privatet1",
+			user: PRIVARE_TEACHER_MAIL || currentMail.email,
+			pass: PRIVARE_TEACHER_PASSWORD || currentMail.pass,
 		},
 	});
 	return transporter;
