@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 15px;
-  width: -webkit-fill-available;
+  width: 32%;
 }
 
 .title{

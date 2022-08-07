@@ -6,7 +6,7 @@ import { BsInfoLg } from 'react-icons/bs';
 import EventInfo from './EventInfo/EventInfo';
 import EditDescriptionContainerConnector from './EditDescriptionContainer/EditDescriptionContainerConnector';
 
-const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventAction, className }) => {
+const Event = ({ event, user_type, my_user_id, show_calendar_other_user, DeleteEventAction, className, events }) => {
   const actions_flag = useRef(true);
   const [event_text, setEventText] = useState("");
   const [style_for_event, setStyleForEvent] = useState("");
@@ -48,22 +48,40 @@ const Event = ({ event, user_type, my_user_id, calender_user_id, DeleteEventActi
     if (event){
       if (event.StudentId && event.Student.User_info_id === my_user_id && user_type !== EventConstants.USER_TYPE.Teacher) {
         blocked_flag.current = false;
-        if (calender_user_id === '')
+        if (!show_calendar_other_user)
           setEventText(`${event.Subject.Name} ${event.Teacher.UserInfo.Name} | ${event.duration} min`);
-        else if (calender_user_id === event.Teacher.User_info_id)
+        else
           setEventText(`${event.duration} min ${event.Subject.Name}`);
       } else if (event.StudentId && user_type === EventConstants.USER_TYPE.Teacher) {
         blocked_flag.current = false;
         setEventText(`${event.Subject.Name} ${event.Student.UserInfo.Name} | ${event.duration} min`);
-      } else {
+      } else if (!event.StudentId) {
         blocked_flag.current = true;
-        setEventText(`blocked`);
+        setEventText('');
         if (user_type !== EventConstants.USER_TYPE.Teacher)          
           actions_flag.current = false;
       }
     setStyleForEvent(blocked_flag.current ? style.blocked : style[`color_${event.SubjectId}`]);
   }
-  }, [event, user_type, my_user_id, calender_user_id]);
+  if (event.id === 34){
+    if (event.StudentId && event.Student.User_info_id === my_user_id && user_type !== EventConstants.USER_TYPE.Teacher) {
+      blocked_flag.current = false;
+      if (!show_calendar_other_user)
+        setEventText(`${event.Subject.Name} ${event.Teacher.UserInfo.Name} | ${event.duration} min`);
+      else
+        setEventText(`${event.duration} min ${event.Subject.Name}`);
+    } else if (event.StudentId && user_type === EventConstants.USER_TYPE.Teacher) {
+      blocked_flag.current = false;
+      setEventText(`${event.Subject.Name} ${event.Student.UserInfo.Name} | ${event.duration} min`);
+    } else if (!event.StudentId) {
+      blocked_flag.current = true;
+      setEventText('');
+      if (user_type !== EventConstants.USER_TYPE.Teacher)          
+        actions_flag.current = false;
+    }
+  setStyleForEvent(blocked_flag.current ? style.blocked : style[`color_${event.SubjectId}`]);
+}
+  }, [event, user_type, my_user_id, show_calendar_other_user, events]);
 
   return (<>
     <div className={`${style.event} ${style_for_event} ${className}`}>

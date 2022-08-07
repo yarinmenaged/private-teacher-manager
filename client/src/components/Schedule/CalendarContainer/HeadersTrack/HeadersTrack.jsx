@@ -55,9 +55,14 @@ const HeadersTrack = ({ week }) => {
 					<div className={component_style.heading}>Date</div>
 				</div>
 				{array_to_map.map((value, index) => {
+					const today = moment.utc([]).format(ConstantsCalendarContainer.DAY_MONTH_FORMAT);
+					const current_class = today === value ? component_style.current_day : '';
 					return (
 						<div key={`track-${value}`} className={global_style.track}>
-							<div className={component_style.heading}>{value} | {ConstantsCalendarContainer.DAYS_IN_WEEK[index]}</div>
+							<div className={`${component_style.heading} ${current_class}`}>
+								{ConstantsCalendarContainer.DAYS_IN_WEEK[index]}
+								<p className={component_style.dates_text}>{value}</p>
+							</div>
 						</div>
 					);
 				})}

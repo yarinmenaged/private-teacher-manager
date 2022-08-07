@@ -68,7 +68,7 @@ const AddEventDialog = ({ hour, date, close_call_back, events, user_type, user_i
           </Button>
         </div>);
     });
-  }, [time_obj, num_lessons, available_lessons, add_event_click, lesson_length]);
+  }, [time_obj, num_lessons, available_lessons, add_event_click, lesson_length, events]);
 
  
   return (
