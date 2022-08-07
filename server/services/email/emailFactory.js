@@ -8,7 +8,7 @@ const {
 const { GetEventsByEventId } = require("../storage/EventStorageService");
 const calendarType = {
 	PUBLISH: "PUBLISH",
-	CANCEL: "REQUEST",
+	CANCEL: "CANCEL",
 };
 
 const generateAddingLessonEmailToTeacher = async (

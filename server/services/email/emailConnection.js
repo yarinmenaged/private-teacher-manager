@@ -40,8 +40,7 @@ const createNewCalendar = async (
 		url: "private-teachers.heroku.com",
 	});
 	if (calenderEventId) {
-		cal.calendar.data.UID = calenderEventId;
-		cal.data.status = "CANCELLED";
+		cal.calendar.data.method = "CANCEL";
 	} else {
 		cal.calendar.data.UID = cal.data.id;
 		const saveClaId = await saveCalendarId(eventId, cal.data.id);
