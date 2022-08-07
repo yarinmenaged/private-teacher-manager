@@ -1,4 +1,4 @@
-import style from "../Profile.module.css";
+import style from "./SingleProfile.module.css";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useState, useEffect } from "react";
 import { Icon, Flex, Dropdown } from "monday-ui-react-core";
@@ -76,95 +76,136 @@ function SingleProfile({
     }
   }, [setUnKnownProfileImg]);
 
-  return (
-    <div>
-      <Flex className={style.card} align={Flex.align.START}>
-
-        <div className={style.column} style={{ width: "10%", paddingLeft: "40px", marginRight: "5%" }}>
-          {
-            unknownProfileImg
-            ? <img src={unknownTeacher} className={style.profileImg} ></img>
-            : <img src={`http://localhost:2000/users/img/${teacherInfo.id}`} className={style.profileImg} ></img>
-          }
-        </div>
-
-        <div className={style.column} style={{ width: "35%" }}>
-          <h3>
-            <Icon iconSize={30} icon={Academy} /> {teacherInfo.Name}
-          </h3>
-
-          <p>
-            <Icon iconSize={25} icon={Email} />
-            <a href={`mailto:${teacherInfo.Email}`} className={style.link}>
-              {teacherInfo.Email}
-            </a>
-          </p>
-
-          <p>
-            <BsWhatsapp className={style.whatsapp} />
-            <a
-              className={style.link}
-              href={`https://api.WhatsApp.com/send?phone=${teacherInfo.Phone}`}
-            >
-              {" "}
-              {teacherInfo.Phone}
-            </a>
-          </p>
-
-          <p>
-            <Icon iconSize={25} icon={Location} /> {teacherInfo.Location}
-          </p>
-
-          <p>
-            <HiOutlineCurrencyDollar /> {teacherInfo.price}
-          </p><br />
-        </div>
-
-        <div className={style.column} style={{ width: "50%" }}>
-          <h3>
-            <Icon icon={Description} /> About
-          </h3>
-          <p>{teacherInfo.About}</p>
-          <h3>I'm teaching:</h3>
-          <Flex>
-            {teacherInfo.subjects.map((subject, index) => (
-              <div key={index} style={{ marginRight: "20px" }}>
-                {subject.Name}
-              </div>
-            ))}
-          </Flex>
-          <br />
-          <Flex align={Flex.align.END}>
-            <button
-              className={style.button}
-              onClick={() => {
-                reRender((e) => e + 1);
-              }}
-            >
-              Schedule a lesson!
-            </button>
-            <br />
-            {displayDropdown && (
-              <Dropdown
-                options={subjectsOptions}
-                onChange={(event) => {
-                  selectSubject(event);
-                  goToCalender();
-                }}
-                clearable={false}
-                size={Dropdown.size.SMALL}
-                placeholder="Select Subject"
-                className={cx(
-                  "dropdown-stories-styles_big-spacing",
-                  style.smallDropDown
-                )}
-              />
-            )}
-          </Flex>
-        </div>
-      </Flex>
+  return <div className={style.card_container}>
+    <div className={style.card_img}>
+    {
+      unknownProfileImg
+      ? <img src={unknownTeacher} className={style.profileImg} ></img>
+      : <img src={`http://localhost:2000/users/img/${teacherInfo.id}`} className={style.profileImg} ></img>
+    }
     </div>
-  );
+    <div className={style.card_title}></div>
+    <div className={style.card_more_info}>
+      <span>
+        {teacherInfo.Name}
+      </span>
+      <span>
+      {teacherInfo.Location}
+      </span>
+      <span>
+      {teacherInfo.Price}
+      </span>
+    </div>
+    <div className={style.actions}>
+    <button
+      className={style.button}
+      onClick={() => {
+        reRender((e) => e + 1);
+      }}>
+      Schedule a lesson!
+    </button>
+    <br />
+    {displayDropdown && (
+      <Dropdown
+        options={subjectsOptions}
+        onChange={(event) => {
+          selectSubject(event);
+          goToCalender();
+        }}
+        clearable={false}
+        size={Dropdown.size.SMALL}
+        placeholder="Select Subject"
+        className={cx(
+          "dropdown-stories-styles_big-spacing",
+          style.smallDropDown
+        )}
+      />
+    )}
+    </div>
+  </div>
+
+  // return (
+  //   <div>
+  //     <Flex className={style.card} align={Flex.align.START}>
+  //       <div className={style.column} style={{ width: "10%", paddingLeft: "40px", marginRight: "5%" }}>
+  //         {
+  //           unknownProfileImg
+  //           ? <img src={unknownTeacher} className={style.profileImg} ></img>
+  //           : <img src={`http://localhost:2000/users/img/${teacherInfo.id}`} className={style.profileImg} ></img>
+  //         }
+  //       </div>
+  //       <div className={style.column} style={{ width: "35%" }}>
+  //         <h3>
+  //           <Icon iconSize={30} icon={Academy} /> {teacherInfo.Name}
+  //         </h3>
+  //         <p>
+  //           <Icon iconSize={25} icon={Email} />
+  //           <a href={`mailto:${teacherInfo.Email}`} className={style.link}>
+  //             {teacherInfo.Email}
+  //           </a>
+  //         </p>
+  //         <p>
+  //           <BsWhatsapp className={style.whatsapp} />
+  //           <a
+  //             className={style.link}
+  //             href={`https://api.WhatsApp.com/send?phone=${teacherInfo.Phone}`}
+  //           >
+  //             {" "}
+  //             {teacherInfo.Phone}
+  //           </a>
+  //         </p>
+  //         <p>
+  //           <Icon iconSize={25} icon={Location} /> {teacherInfo.Location}
+  //         </p>
+  //         <p>
+  //           <HiOutlineCurrencyDollar /> {teacherInfo.price}
+  //         </p><br />
+  //       </div>
+  //       <div className={style.column} style={{ width: "50%" }}>
+  //         <h3>
+  //           <Icon icon={Description} /> About
+  //         </h3>
+  //         <p>{teacherInfo.About}</p>
+  //         <h3>I'm teaching:</h3>
+  //         <Flex>
+  //           {teacherInfo.subjects.map((subject, index) => (
+  //             <div key={index} style={{ marginRight: "20px" }}>
+  //               {subject.Name}
+  //             </div>
+  //           ))}
+  //         </Flex>
+  //         <br />
+  //         <Flex align={Flex.align.END}>
+  //           <button
+  //             className={style.button}
+  //             onClick={() => {
+  //               reRender((e) => e + 1);
+  //             }}
+  //           >
+  //             Schedule a lesson!
+  //           </button>
+  //           <br />
+  //           {displayDropdown && (
+  //             <Dropdown
+  //               options={subjectsOptions}
+  //               onChange={(event) => {
+  //                 selectSubject(event);
+  //                 goToCalender();
+  //               }}
+  //               clearable={false}
+  //               size={Dropdown.size.SMALL}
+  //               placeholder="Select Subject"
+  //               className={cx(
+  //                 "dropdown-stories-styles_big-spacing",
+  //                 style.smallDropDown
+  //               )}
+  //             />
+  //           )}
+  //         </Flex>
+  //       </div>
+  //     </Flex>
+  //   </div>
+  // );
 }
 
 export default SingleProfile;
