@@ -18,13 +18,14 @@ function NavBar({
   const [cookies, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
 
-  const logOut = useCallback(() => {
-      if (window.confirm("Are you sure you want to log out?")) {
-        removeCookie("token");
-        logOutAction();
-        navigate("/login");
-      }
-    },
+  const logOut = useCallback((event) => {
+    event.preventDefault();
+    if (window.confirm("Are you sure you want to log out?")) {
+      removeCookie("token");
+      logOutAction();
+      navigate("/login");
+    }
+  },
     [logOutAction, removeCookie, navigate]
   );
 
