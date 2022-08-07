@@ -6,7 +6,6 @@ import Home from "./components/Home/HomeConnector";
 import Schedule from "./components/Schedule/ScheduleConnector";
 import MyProfile from "./components/Profile/MyProfile/MyProfileConnector";
 import SearchProfile from "./components/Profile/SearchProfile/SearchProfileConnector";
-import Landing from "./components/Landing/Landing";
 import Settings from "./components/Settings/Settings";
 import { Toast } from 'monday-ui-react-core';
 import { useCookies, CookiesProvider } from "react-cookie";
