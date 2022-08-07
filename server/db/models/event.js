@@ -26,7 +26,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     date: DataTypes.DATE,
     description: DataTypes.STRING,
-    duration: DataTypes.INTEGER
+    duration: DataTypes.INTEGER,
+    calenderEventId: {
+      type: DataTypes.STRING
+    }
   }, {
     sequelize,
     modelName: 'Event',
