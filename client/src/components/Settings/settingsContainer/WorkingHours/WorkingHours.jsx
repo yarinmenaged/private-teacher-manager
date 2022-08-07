@@ -27,9 +27,15 @@ function WorkingHours({ setSettingsForTeacherAction, settings, GetSettingsAction
   }, [setLessonLengthAction]);
 
   return (
-    <div className={style.container}>
+    <div className={style.container}>     
+      <Heading type={Heading.types.h2} value="Select unavailable hours" />
+      <ul className={style.hoursContainer}>
+        {ConstantsCalendarContainer.DAYS_IN_WEEK.map((day) => {
+          return <DailyWorkingHoursConnector day={day} key={`${day}-working-days`} />;
+        })}
+      </ul> 
       <div className={style.select_lesson_length_container}>
-        <Heading type={Heading.types.h2} value="Select your preferred lesson's length" />
+        <Heading type={Heading.types.h2} value="Preferred lesson's length" />
         <Dropdown
           className={style.select_box}
           options={lesson_option}
@@ -38,13 +44,9 @@ function WorkingHours({ setSettingsForTeacherAction, settings, GetSettingsAction
           defaultValue={settings.lessonLength ? [{ label: `${settings.lessonLength} min`, value: `${settings.lessonLength}` }] : []}
         />
       </div>
-      <Heading type={Heading.types.h2} value="Select the hours in which you are unavailable to teach" />
-      <ul className={style.hoursContainer}>
-        {ConstantsCalendarContainer.DAYS_IN_WEEK.map((day) => {
-          return <DailyWorkingHoursConnector day={day} key={`${day}-working-days`} />;
-        })}
-      </ul>
-      <Button onClick={handleSaveChanges}>Save Changes</Button>
+      <div className={style.save_button}>
+        <Button onClick={handleSaveChanges}>Save Changes</Button>
+      </div>
     </div>
   );
 }

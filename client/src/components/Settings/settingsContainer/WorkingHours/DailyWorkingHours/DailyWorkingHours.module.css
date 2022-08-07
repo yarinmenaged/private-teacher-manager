@@ -4,13 +4,13 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 15px;
-  width: -webkit-fill-available;
+  width: 32%;
 }
 
 .title{
   width: -webkit-fill-available;
   margin: 10px;
-  flex: 1 0 26%;
+  flex: 1 0 23%;
   text-align: start;
 }
 
@@ -37,4 +37,16 @@
   outline: none;
   background: #e6f8ff;
   border-bottom: 4px solid #00b8ff;
+}
+
+.rest_button {
+  color: #ff2a2a;
+  font-size: 20px;
+  line-height: 2.5;
+  cursor: pointer;
+}
+
+.rest_button:hover{
+  color: #fff;
+  background-color: #ff2a2a;
 }
