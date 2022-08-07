@@ -1,17 +1,13 @@
 import style from "./SingleProfile.module.css";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useState, useEffect } from "react";
-import { Icon, Flex, Dropdown, Button } from "monday-ui-react-core";
+import { Icon, Dropdown, Button } from "monday-ui-react-core";
 import {
   Email,
   Description,
-  Academy,
-  Location,
+  Academy
 } from "monday-ui-react-core/dist/allIcons";
-import cx from "classnames";
 import { BsWhatsapp } from "react-icons/bs";
-import { HiOutlineCurrencyDollar } from "react-icons/hi";
-import { GiTeacher } from 'react-icons/gi';
 import { FaDollarSign } from 'react-icons/fa';
 import { MdLocationPin, MdSubject } from 'react-icons/md';
 import unknownTeacher from '../../../images/unknown-person.png';
