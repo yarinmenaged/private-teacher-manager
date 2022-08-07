@@ -43,9 +43,11 @@ function NavBar({
 
   useEffect(() => {
     if (!cookies.token) {
-      logOut();
+      removeCookie("token");
+      logOutAction();
+      navigate("/login");
     }
-  }, [cookies.token, logOut]);
+  }, [cookies.token, removeCookie, logOutAction, navigate]);
 
   return (
     <div className={style.navBar}>
