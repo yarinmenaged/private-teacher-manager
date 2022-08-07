@@ -41,9 +41,6 @@ function App({ loginStatus, getUserInfoByTokenAction, successful, failed, messag
 				autoHideDuration={3000}
 				onClose={close_toast}
 				style={{"z-index": 999}}>{message}</Toast> 
-				<div style={{ backgroundColor: "rgb(78, 99, 165)" }}>
-					{/* <img src={logo} alt="Private teacher manager" className="logo" /> */}
-				</div>
 				<Router>
 					{
 						!loginStatus &&
@@ -51,8 +48,7 @@ function App({ loginStatus, getUserInfoByTokenAction, successful, failed, messag
 					}
 					{!loginStatus ? (
 						<Routes>
-							<Route path="/" exact element={<Landing />} />
-							<Route path="/login" element={<Login />} />
+							<Route path="/" element={<Login />} />
 							<Route path="/register" element={<RegisterForm />} />
 							<Route path="*" element={<Navigate to="/" />} />
 						</Routes>
