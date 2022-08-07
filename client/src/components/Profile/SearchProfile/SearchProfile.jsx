@@ -12,14 +12,16 @@ function SearchProfile({ selectedTeachers, chosenTeacher }) {
             <Flex justify={Flex.justify.CENTER} className={style.bg}>
                 <SearchTeacher multipleOptions={true} />
             </Flex>
-            {
-                chosenTeacher
-                    ? <SingleProfile teacherInfo={chosenTeacher} />
-                    : selectedTeachers.length > 0 &&
-                    selectedTeachers.map(teacher => {
-                        return <SingleProfile key={teacher.id} teacherInfo={teacher} />
-                    })
-            }
+            <Flex justify={Flex.justify.CENTER} gap={15}>
+                {
+                    chosenTeacher
+                        ? <SingleProfile teacherInfo={chosenTeacher} />
+                        : selectedTeachers.length > 0 &&
+                        selectedTeachers.map(teacher => {
+                            return <SingleProfile key={teacher.id} teacherInfo={teacher} />
+                        })
+                }
+            </Flex>
         </div>
     )
 }
