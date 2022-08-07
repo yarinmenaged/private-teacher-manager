@@ -16,10 +16,16 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
 
   const events_filtered = useCallback(() => {
     const blocks_date = moment.utc(`${date.format(ConstantsHourBlock.DATE_FORMAT)} ${hour}`);
-    return events.filter((event) => {
+    const array = events.filter((event) => {
       const event_date_diff = moment.utc(event.date).diff(blocks_date, 'minutes');
       return event_date_diff < 60 && event_date_diff >= 0;
     }) || [];
+    array.sort((event1, event2) => {
+      const event1_time = moment.utc(event1.date);
+      const event2_time = moment.utc(event2.date);
+      return event1_time.diff(event2_time, 'minutes');
+    });
+    return array;
   }, [events, date, hour]);
 
   useEffect(() => {
@@ -64,7 +70,7 @@ const HourBlock = ({ type = ConstantsHourBlock.BLOCK_TYPES.EVENT, hour, date, ev
           return ret;
         });
     }
-  }, [date, hour, events_array, user_type]);
+  }, [date, hour, events_array, user_type, events]);
 
   const content_tool_tip = events_array.length ?
     ConstantsHourBlock.SHOW_MORE_INFO_ON_EVENT

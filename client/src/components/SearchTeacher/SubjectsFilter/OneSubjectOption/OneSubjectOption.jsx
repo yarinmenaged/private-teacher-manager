@@ -27,7 +27,7 @@ function OneSubjectOption({ resetSubjectsAction, selectSubjectAction, subjectsLi
             <Dropdown
                 options={allOptions}
                 onChange={(event) => selectSubject(event)}
-                value={{value: selctedSubjects[0].Name, label: selctedSubjects[0].Name}}
+                value={{value: selctedSubjects[0]?.Name, label: selctedSubjects[0]?.Name}}
                 clearable={false}
                 placeholder="Select Subject"
                 className={cx("dropdown-stories-styles_big-spacing", style.width)} />
