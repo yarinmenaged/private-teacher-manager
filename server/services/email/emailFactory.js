@@ -100,7 +100,7 @@ const sendEmailDeleteEvent = async (eventId) => {
 		calenderEventId: event.calenderEventId,
 	};
 	emailSender(teacherEmail, teacherSubject, teacherText, calendarEvent);
-	emailSender(studentEmail, studentSubject, studentTExt, calendarEvent);
+	// emailSender(studentEmail, studentSubject, studentTExt, calendarEvent);
 };
 module.exports = {
 	generateAddingLessonEmailToTeacher,

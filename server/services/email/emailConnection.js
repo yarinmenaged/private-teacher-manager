@@ -16,7 +16,7 @@ const createNewTransport = () => {
 	const transporter = nodemailer.createTransport({
 		service: MAIL_SERVICE || "hotmail",
 		auth: {
-			user: PRIVARE_TEACHER_MAIL || currentMail.email,
+			user: PRIVARE_TEACHER_MAIL || "private_teacher@outlook.co.il",
 			pass: PRIVARE_TEACHER_PASSWORD || currentMail.pass,
 		},
 	});
@@ -40,13 +40,14 @@ const createNewCalendar = async (
 		summary,
 		description,
 		location,
-		UID: calenderEventId,
+		timezone: "israel",
+		id: calenderEventId,
 		url: "private-teachers.heroku.com",
 	});
 	if (calenderEventId) {
 		cal.calendar.data.method = "CANCEL";
+		// cal.data.id = calenderEventId;
 	} else {
-		cal.calendar.data.UID = cal.data.id;
 		const saveClaId = await saveCalendarId(eventId, cal.data.id);
 	}
 	return cal.calendar.toString();
@@ -64,7 +65,7 @@ const mailOptions = async (sendMailTo, subject, text, calendarEvent) => {
 		calendarEvent.calenderEventId
 	);
 	return {
-		from: PRIVARE_TEACHER_MAIL || "PrivateTeacher@outlook.co.il",
+		from: PRIVARE_TEACHER_MAIL || "private_teacher@outlook.co.il",
 		to: sendMailTo,
 		subject: subject,
 		html: text,
@@ -91,7 +92,7 @@ const mailOptions = async (sendMailTo, subject, text, calendarEvent) => {
 const emailSender = async (sendMailTo, subject, text, calendarEvent) => {
 	const mailOpt = await mailOptions(sendMailTo, subject, text, calendarEvent);
 	const transporter = createNewTransport();
-	transporter.sendMail(mailOpt, function (error, info) {
+	await transporter.sendMail(mailOpt, function (error, info) {
 		if (error) {
 			console.log(error);
 		} else {
