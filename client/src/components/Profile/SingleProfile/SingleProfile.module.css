@@ -1,0 +1,133 @@
+.card_container {
+    background: #fff;
+    width: 400px;
+    height: 320px;  
+    font-size: 23px;
+    text-align: center;
+    border-width: 1px;
+    border-style: solid;
+    border-image: 
+    linear-gradient(
+      to top, 
+      #fff,
+      rgb(163, 163, 163), 
+      rgba(255, 255, 255, 0.164)      
+    ) 1 100%;
+    box-shadow: 0 11px 17px -14px rgb(0 0 0 / 40%);
+    padding-bottom: 5px;
+    position: relative;
+}
+
+.card_container_inner {
+    overflow: hidden;
+    position: relative;
+    padding: 80px 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card_img {
+    position: absolute;
+    top: 0;
+}
+
+.card_img > img{
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    border: 2px solid rgb(78, 99, 165);
+    object-fit: cover;
+}
+
+.card_more_info{
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    align-items: flex-start;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.card_more_info > span {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.card_info{    
+    width: -webkit-fill-available;
+    padding-bottom: 10px; 
+    box-shadow: 0 -8px 17px -14px rgb(0 0 0 / 40%);   
+    padding-top: 50px;
+}
+
+.card_more_info > div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.price {
+    position: absolute;
+    top: 20px;
+    left: -50px;
+    transform: rotate(-45deg);
+    color: #fff;
+    padding: 5px;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0px 2px 3px rgba(136, 136, 136, 0.25);
+    background: #4dbe3b;
+    width: 160px;
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.actions {    
+    display: flex;   
+    padding: 0 10px;
+    gap: 15px;
+    align-items: center;
+    position: absolute;
+    bottom: 5px;
+}
+
+.actions > div{
+    width: 170px;
+}
+
+.actions .menu {
+    z-index: 999;
+    position: relative;
+}
+
+.extra_data {
+    display: flex;
+    background-color: rgb(255 255 255 / 97%);
+    position: absolute;
+    height: 270px;
+    top: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    width: -webkit-fill-available;
+    gap: 15px;
+    opacity: 0;
+    padding-left: 20px;
+}
+
+.card_container_inner:hover, .extra_data:hover {
+    opacity: 1;
+}
+
+.whatsapp {
+    color: #1fa24f;
+  }
+  
+  .link {
+    color: black;
+    margin-left: 10px;
+  }
