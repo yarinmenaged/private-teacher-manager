@@ -10,9 +10,10 @@ const event_router = require("./routes/event");
 const { up } = require('./db/seeders/20220724075744-subjects');
 const settings_router = require('./routes/settingsRoute');
 
-Promise.resolve(sequelize.sync({ force: true })).then(() => {
-  const queryInterface = sequelize.getQueryInterface();
-  up(queryInterface, sequelize);
+
+Promise.resolve(sequelize.sync({force: true})).then(() => {
+	const queryInterface = sequelize.getQueryInterface();
+	up(queryInterface, sequelize);
 });
 
 app.use(express.json());

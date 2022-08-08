@@ -41,10 +41,7 @@ function App({ loginStatus, getUserInfoByTokenAction, successful, failed, messag
 				onClose={close_toast}
 				style={{"z-index": 999}}>{message}</Toast> 
 				<Router>
-					{
-						!loginStatus &&
-						<NavBar />
-					}
+					{!loginStatus && <NavBar />}
 					{!loginStatus ? (
 						<Routes>
 							<Route path="/" element={<Login />} />
