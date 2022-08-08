@@ -41,14 +41,13 @@ const createNewCalendar = async (
 		description,
 		location,
 		timezone: "israel",
-		id: calenderEventId,
 		url: "private-teachers.heroku.com",
 	});
 	if (calenderEventId) {
 		cal.calendar.data.method = "CANCEL";
-		// cal.data.id = calenderEventId;
+		cal.data.id = calenderEventId;
 	} else {
-		const saveClaId = await saveCalendarId(eventId, cal.data.id);
+		await saveCalendarId(eventId, cal.data.id);
 	}
 	return cal.calendar.toString();
 };
