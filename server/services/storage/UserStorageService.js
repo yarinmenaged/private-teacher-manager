@@ -105,7 +105,7 @@ async function getUserInfoByEmail(email) {
 }
 
 const getUserType = async (user) => {
-  const teacher = await GetTeacherById(user.id);
+  const teacher = await GetTeacherById(user?.id);
   if (teacher) {
     user.dataValues.About = teacher.About;
     user.dataValues.subject = await getSubjectsById(teacher.dataValues.id);
