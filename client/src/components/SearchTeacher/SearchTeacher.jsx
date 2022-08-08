@@ -16,7 +16,8 @@ function SearchTeacher({
     mySchedule,
     multipleOptions,
     UnsetCalendarToUserAction,
-    UnsetTeacherSettingsAction
+    UnsetTeacherSettingsAction,
+    chosenTeacher,
 }) {
 
     const allOptions = selectedTeachers.map(teacher => ({
@@ -47,8 +48,8 @@ function SearchTeacher({
             <LocationFilter />
                 <Dropdown
                     options={allOptions}
-                    value={{ value: "Select Teacher", label: "Select Teacher" }}
-                    placeholder={"Select teacher"}
+                    value={{ value: chosenTeacher?.Name, label: chosenTeacher?.Name }}
+                    placeholder={"Select Teacher"}
                     onChange={(event) => chooseTeacher(event)}
                     clearable={false}
                     className={cx("dropdown-stories-styles_big-spacing", style.width)} />

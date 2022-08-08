@@ -4,7 +4,6 @@ import Login from "./components/Login/LoginConnector";
 import RegisterForm from "./components/RegisterForm/RegisterFormConnector";
 import Home from "./components/Home/HomeConnector";
 import Schedule from "./components/Schedule/ScheduleConnector";
-import Messenger from "./components/Messenger/MessengerConnector";
 import MyProfile from "./components/Profile/MyProfile/MyProfileConnector";
 import SearchProfile from "./components/Profile/SearchProfile/SearchProfileConnector";
 import Landing from "./components/Landing/Landing";
@@ -35,20 +34,18 @@ function App({ loginStatus, getUserInfoByTokenAction, successful, failed, messag
 				<Toast open={successful} 
 				type={Toast.types.POSITIVE} 
 				autoHideDuration={3000} 
-				onClose={close_toast}>{message}</Toast> 
+				onClose={close_toast}
+				style={{"z-index": 999}}>{message}</Toast> 
 				<Toast open={failed} 
 				type={Toast.types.NEGATIVE} 
 				autoHideDuration={3000}
-				onClose={close_toast}>{message}</Toast> 
-				<div style={{ backgroundColor: "rgb(78, 99, 165)" }}>
-					{/* <img src={logo} alt="Private teacher manager" className="logo" /> */}
-				</div>
+				onClose={close_toast}
+				style={{"z-index": 999}}>{message}</Toast> 
 				<Router>
 					{!loginStatus && <NavBar />}
 					{!loginStatus ? (
 						<Routes>
-							<Route path="/" exact element={<Landing />} />
-							<Route path="/login" element={<Login />} />
+							<Route path="/" element={<Login />} />
 							<Route path="/register" element={<RegisterForm />} />
 							<Route path="*" element={<Navigate to="/" />} />
 						</Routes>
@@ -58,7 +55,6 @@ function App({ loginStatus, getUserInfoByTokenAction, successful, failed, messag
 								<Route path="/" element={<Home />} />
 								<Route path="/home" element={<Home />} />
 								<Route path="/schedule" element={<Schedule />} />
-								<Route path="/messenger" element={<Messenger />} />
 								<Route path="/my-profile" element={<MyProfile />} />
 								<Route path="/search-profile" element={<SearchProfile />} />
 								<Route path="/settings" element={<Settings />} />

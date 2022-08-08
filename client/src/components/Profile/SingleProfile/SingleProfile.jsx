@@ -1,16 +1,17 @@
-import style from "../Profile.module.css";
+import style from "./SingleProfile.module.css";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useState, useEffect } from "react";
-import { Icon, Flex, Dropdown } from "monday-ui-react-core";
+import { Icon, Dropdown, Button } from "monday-ui-react-core";
 import {
   Email,
   Description,
-  Academy,
-  Location,
+  Academy
 } from "monday-ui-react-core/dist/allIcons";
-import cx from "classnames";
 import { BsWhatsapp } from "react-icons/bs";
-import { HiOutlineCurrencyDollar } from "react-icons/hi";
+import { FaDollarSign } from 'react-icons/fa';
+import { MdLocationPin, MdSubject } from 'react-icons/md';
+import unknownTeacher from '../../../images/unknown-person.png';
+import ApiService from "../../../services/ApiService";
 
 function SingleProfile({
   teacherInfo,
@@ -31,17 +32,6 @@ function SingleProfile({
 
   const [value, reRender] = useState(0);
 
-  useEffect(() => {
-    console.log({ teacherInfo });
-    if (value > 0) {
-      if (subjectsOptions.length > 1) {
-        setDisplayDropdown(!displayDropdown);
-      } else {
-        goToCalender();
-      }
-    }
-  }, [value]);
-
   const navigate = useNavigate();
 
   const [displayDropdown, setDisplayDropdown] = useState(false);
@@ -60,87 +50,107 @@ function SingleProfile({
     [selectSubjectAction, resetSubjectsAction]
   );
 
-  return (
-    <div>
-      <Flex className={style.card}>
-        <div className={style.column}>
-          <h3>
-            <Icon iconSize={30} icon={Academy} /> {teacherInfo.Name}
-          </h3>
+  const [unknownProfileImg, setUnKnownProfileImg] = useState(false);
 
-          <p>
-            <Icon iconSize={25} icon={Location} /> {teacherInfo.Location}
-          </p>
+  useEffect(() => {
+    initProfileImg();
+  }, []);
 
-          <p>
-            <HiOutlineCurrencyDollar /> {teacherInfo.price}
-          </p>
+  const initProfileImg = useCallback(async () => {
+    const img = await ApiService.GetResourceRequest(`users/img/${teacherInfo.id}`);
+    if (img.status) {
+      setUnKnownProfileImg(true);
+    }
+  }, [setUnKnownProfileImg]);
 
-          <p>
-            <BsWhatsapp className={style.whatsapp} />
-            <a
-              className={style.link}
-              href={`https://api.WhatsApp.com/send?phone=${teacherInfo.Phone}`}
-            >
-              {" "}
-              {teacherInfo.Phone}
-            </a>
-          </p>
+  useEffect(() => {
+    if (value > 0) {
+      if (subjectsOptions.length > 1) {
+        setDisplayDropdown(value => !value);
+      } else {
+        resetSubjectsAction();
+        selectSubjectAction({ id: subjectsOptions[0].id, value: subjectsOptions[0].value });
+        goToCalender();
+      }
+    }
+  }, [value, resetSubjectsAction, selectSubjectAction, goToCalender]);
 
-          <p>
-            <Icon iconSize={25} icon={Email} />
-            <a href={`mailto:${teacherInfo.Email}`} className={style.link}>
-              {teacherInfo.Email}
-            </a>
-          </p>
-          <br />
+  return (<div className={style.card_container}>
+    <div className={style.card_container_inner}>
+      <div className={style.card_img}>
+        {
+          unknownProfileImg
+            ? <img src={unknownTeacher} className={style.profileImg} ></img>
+            : <img src={`http://localhost:2000/users/img/${teacherInfo.id}`} className={style.profileImg} ></img>
+        }
+      </div>
+      <div className={style.price}>
+        <FaDollarSign></FaDollarSign>
+        {teacherInfo.price}
+      </div>
+      <div className={style.card_info}>
+        <div className={style.card_more_info}>
+          <span>
+          <Icon iconSize={30} icon={Academy} />
+            {teacherInfo.Name}
+          </span>
+          <span>
+            <MdLocationPin></MdLocationPin>
+            {teacherInfo.Location}
+          </span>
+          <span className={style.subjects}>
+            <MdSubject></MdSubject>
+            {teacherInfo.subjects.map(subject => `${subject.Name} `)}
+          </span>
         </div>
-
-        <div className={style.column}>
-          <h3>
-            <Icon icon={Description} /> About
-          </h3>
-          <p>{teacherInfo.About}</p>
-          <h3>I'm teaching:</h3>
-          <Flex>
-            {teacherInfo.subjects.map((subject, index) => (
-              <div key={index} style={{ marginRight: "20px" }}>
-                {subject.Name}
-              </div>
-            ))}
-          </Flex>
-          <br />
-          <Flex align={Flex.align.END}>
-            <button
-              className={style.button}
-              onClick={() => {
-                reRender((e) => e + 1);
-              }}
-            >
-              Schedule a lesson!
-            </button>
-            <br />
-            {displayDropdown && (
-              <Dropdown
-                options={subjectsOptions}
-                onChange={(event) => {
-                  selectSubject(event);
-                  goToCalender();
-                }}
-                clearable={false}
-                size={Dropdown.size.SMALL}
-                placeholder="Select Subject"
-                className={cx(
-                  "dropdown-stories-styles_big-spacing",
-                  style.smallDropDown
-                )}
-              />
-            )}
-          </Flex>
-        </div>
-      </Flex>
+      </div>
     </div>
-  );
+    
+      <div className={style.actions}>
+        <Button
+          className={style.button}
+          onClick={() => {
+            reRender((e) => e + 1);
+          }}>
+          Schedule a lesson!
+        </Button>
+        {displayDropdown &&
+          <Dropdown
+            options={subjectsOptions}
+            onChange={(event) => {
+              selectSubject(event);
+              goToCalender();
+            }}
+            clearable={false}
+            size={Dropdown.size.SMALL}
+            placeholder="Select Subject" />
+        }
+      </div>
+      <div className={style.extra_data}>
+      <span>
+        <h3>
+          <Icon icon={Description} /> 
+          About
+        </h3>
+        <p>{teacherInfo.About}</p>
+      </span>
+      <span>
+      <BsWhatsapp className={style.whatsapp}></BsWhatsapp>
+          <a
+            className={style.link}
+            href={`https://api.WhatsApp.com/send?phone=${teacherInfo.Phone}`}>
+            {" "}
+            {teacherInfo.Phone}
+            </a>
+      </span>
+      <span>
+        <Icon iconSize={15} icon={Email} />
+        <a href={`mailto:${teacherInfo.Email}`} className={style.link}>
+          {teacherInfo.Email}
+        </a>
+      </span>
+    </div>
+    </div>);
 }
 
 export default SingleProfile;

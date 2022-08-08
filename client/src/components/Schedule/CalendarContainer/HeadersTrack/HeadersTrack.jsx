@@ -5,15 +5,13 @@ import component_style from "./HeadersTrack.module.css";
 import global_style from "../CalendarContainer.module.css";
 import ConstantsCalendarContainer from "../Constants";
 
-const HeadersTrack = ({ type = ConstantsCalendarContainer.HEADERS_TYPES.DAYS, week }) => {
-	const [array_to_map, setArrayToMap] = useState(ConstantsCalendarContainer.DAYS_IN_WEEK);
+const HeadersTrack = ({ week }) => {
+	const [array_to_map, setArrayToMap] = useState([]);
 	const [scroll, setScroll] = useState(false);
 	const getDatesInWeek = useCallback(() => {
 		if (week) {
 			const start_of_week = moment.utc().week(week).startOf("week");
-			const start_of_week_formatted = start_of_week.format(
-				ConstantsCalendarContainer.DAY_MONTH_FORMAT
-			);
+			const start_of_week_formatted = start_of_week.format(ConstantsCalendarContainer.DAY_MONTH_FORMAT);
 			const end_of_week_formatted = moment.utc()
 				.week(week)
 				.endOf("week")
@@ -31,11 +29,8 @@ const HeadersTrack = ({ type = ConstantsCalendarContainer.HEADERS_TYPES.DAYS, we
 	}, [week]);
 
   useEffect(() => {
-    const is_days = type === ConstantsCalendarContainer.HEADERS_TYPES.DAYS;
-    is_days
-      ? setArrayToMap(ConstantsCalendarContainer.DAYS_IN_WEEK)
-      : setArrayToMap(getDatesInWeek());
-  }, [getDatesInWeek, type, week]);
+	setArrayToMap(getDatesInWeek());
+  }, [getDatesInWeek, week]);
 
 	useEffect(() => {
 		const handleScroll = event => {
@@ -57,12 +52,17 @@ const HeadersTrack = ({ type = ConstantsCalendarContainer.HEADERS_TYPES.DAYS, we
 		<div className={class_headers}>
 			<div className={`${global_style.scroller} ${global_style.syncscroll}`}>
 				<div className={`${global_style.track} ${global_style.time}`}>
-					<div className={component_style.heading}>{type.label}</div>
+					<div className={component_style.heading}>Date</div>
 				</div>
 				{array_to_map.map((value, index) => {
+					const today = moment.utc([]).format(ConstantsCalendarContainer.DAY_MONTH_FORMAT);
+					const current_class = today === value ? component_style.current_day : '';
 					return (
 						<div key={`track-${value}`} className={global_style.track}>
-							<div className={component_style.heading}>{value}</div>
+							<div className={`${component_style.heading} ${current_class}`}>
+								{ConstantsCalendarContainer.DAYS_IN_WEEK[index]}
+								<p className={component_style.dates_text}>{value}</p>
+							</div>
 						</div>
 					);
 				})}

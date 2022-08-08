@@ -12,6 +12,8 @@ const TIME_FORMAT = "HH:mm:ss";
 const CURRENT_DATE = undefined;
 const TIME_AS_NUMBER = "HH";
 const DATE_FORMAT = 'YYYY-MM-DD';
+const DAY = "DD";
+const MONTH = "MMMM";
 
 const ConstantsCalendarContainer = {
     DAYS_IN_WEEK,
@@ -20,7 +22,9 @@ const ConstantsCalendarContainer = {
     CURRENT_DATE,
     TIME_FORMAT,
     TIME_AS_NUMBER,
-    DATE_FORMAT
+    DATE_FORMAT,
+    DAY,
+    MONTH
 }
 
 

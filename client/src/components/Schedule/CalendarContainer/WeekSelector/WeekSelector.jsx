@@ -7,10 +7,16 @@ import ConstantsCalendarContainer from '../Constants';
 const WeekSelector = ({ week, IncrementWeekAction, DecrementWeekAction }) => {
   const [start_of_week, setStartOfWeek] = useState("");
   const [end_of_week, setEndOfWeek] = useState("");
+  const [start_month, setStartMonth] = useState("");
+  const [end_month, setEndMonth] = useState("");
 
   useEffect(() => {
-    setStartOfWeek(moment.utc().week(week).startOf('week').format(ConstantsCalendarContainer.DAY_MONTH_FORMAT));
-    setEndOfWeek(moment.utc().week(week).endOf('week').format(ConstantsCalendarContainer.DAY_MONTH_FORMAT));
+    const start = moment.utc().week(week).startOf('week');
+    const end = moment.utc().week(week).endOf('week');
+    setStartOfWeek(start.format(ConstantsCalendarContainer.DAY));
+    setEndOfWeek(end.format(ConstantsCalendarContainer.DAY));
+    setStartMonth(start.format(ConstantsCalendarContainer.MONTH));
+    setEndMonth(end.format(ConstantsCalendarContainer.MONTH));
   }, [week]);
 
   const increment = useCallback(() => {
@@ -26,14 +32,18 @@ const WeekSelector = ({ week, IncrementWeekAction, DecrementWeekAction }) => {
   
   return (
     <div className={style.week_selector_container}>
-      <div className={style.change_week_button} onClick={decrement}>
-        <BsFillArrowLeftSquareFill></BsFillArrowLeftSquareFill>
-      </div>
+      
       <div className={style.week_range}>
         { start_of_week } - { end_of_week }
       </div>
+      <div className={style.month}>
+        { start_month !==  end_month ? `${start_month} - ${end_month}` : start_month } 
+      </div>
+      <div className={style.change_week_button} onClick={decrement}>
+        {`<`}
+      </div>
       <div className={style.change_week_button} onClick={increment}>
-        <BsFillArrowRightSquareFill></BsFillArrowRightSquareFill>
+        {`>`}
       </div>
     </div>
   );

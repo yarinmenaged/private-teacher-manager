@@ -89,8 +89,9 @@
 }
 
 .blocked {
-    --theme-color: #fff;
-    --theme-bg: #ff353c;
+  background: repeating-linear-gradient( 45deg, #fff, #fff 10px, #ff6262 10px, #ff6262 20px );
+  color: #fff;
+  
 }
 
 .actions {

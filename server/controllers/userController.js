@@ -4,9 +4,12 @@ const {
   setAboutTeacher,
   getAllTeachers,
   setLessonPrice,
+  addImg,
+  getImg,
 } = require("../services/storage/UserStorageService");
 const { login } = require("../services/login/loginService");
 const { getUserInfoByToken } = require("../services/auth/auth");
+const path = require("path");
 const oneDayMilliseconds = 86400000;
 
 async function addTeacher(req, res) {
@@ -62,6 +65,21 @@ async function getTeachers(req, res) {
   res.status(200).json(teachers);
 }
 
+async function addImgUrl(req, res) {
+  const imgUrl = await addImg(req.params.id, req.file.filename);
+  res.status(200).json(imgUrl);
+}
+
+async function getImgUrl(req, res) {
+  const img = await getImg(req.params.id);
+  if (img) {
+    res.sendFile(path.join(__dirname, `../profileImages/${img}`));
+  }
+  else {
+    res.status(200).json({status: "no image"})
+  }
+}
+
 module.exports = {
   addTeacher,
   addStudent,
@@ -70,4 +88,6 @@ module.exports = {
   getUserByTokenRouter,
   getTeachers,
   setPrice,
+  addImgUrl,
+  getImgUrl,
 };

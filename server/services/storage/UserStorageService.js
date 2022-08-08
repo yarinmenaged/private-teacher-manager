@@ -110,6 +110,7 @@ const getUserType = async (user) => {
     user.dataValues.About = teacher.About;
     user.dataValues.subject = await getSubjectsById(teacher.dataValues.id);
     user.dataValues.Type = UserType.TEACHER;
+    user.dataValues.price = teacher.price;
   } else {
     user.dataValues.Type = UserType.STUDENT;
   }
@@ -197,6 +198,24 @@ async function getAllTeachers() {
   );
 }
 
+async function addImg(id, imgUrl) {
+  const teacher = await GetTeacherById(id);
+  return await teacher.update(
+    {
+      image: imgUrl
+    }
+  );
+}
+
+async function getImg(id) {
+  const teacher = await GetTeacherById(id);
+  if (teacher) {
+    return teacher.image;
+  } else {
+    return null;
+  }
+}
+
 const UserStorageService = {
   AddNewStudent,
   AddNewTeacher,
@@ -208,6 +227,8 @@ const UserStorageService = {
   getUserInfoById,
   getAllTeachers,
   setLessonPrice,
+  addImg,
+  getImg,
 };
 
 module.exports = UserStorageService;

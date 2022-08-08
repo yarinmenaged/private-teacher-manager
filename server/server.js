@@ -34,3 +34,4 @@ app.use("/subjects", subjects_router);
 app.use("/event", event_router);
 
 app.listen(port, () => console.log(`server is listening on port ${port}`));
+

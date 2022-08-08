@@ -61,9 +61,6 @@ function NavBar({
 						>
 							Schedule
 						</div>
-						<Link to="/messenger" className={style.button}>
-							Messenger
-						</Link>
 						{Type === USER_TYPE.Teacher ? (
 							// teacher UI
 							<Link to="/my-profile" className={style.button}>
