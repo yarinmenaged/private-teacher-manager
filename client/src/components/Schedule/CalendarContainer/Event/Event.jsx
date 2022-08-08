@@ -63,24 +63,6 @@ const Event = ({ event, user_type, my_user_id, show_calendar_other_user, DeleteE
       }
     setStyleForEvent(blocked_flag.current ? style.blocked : style[`color_${event.SubjectId}`]);
   }
-  if (event.id === 34){
-    if (event.StudentId && event.Student.User_info_id === my_user_id && user_type !== EventConstants.USER_TYPE.Teacher) {
-      blocked_flag.current = false;
-      if (!show_calendar_other_user)
-        setEventText(`${event.Subject.Name} ${event.Teacher.UserInfo.Name} | ${event.duration} min`);
-      else
-        setEventText(`${event.duration} min ${event.Subject.Name}`);
-    } else if (event.StudentId && user_type === EventConstants.USER_TYPE.Teacher) {
-      blocked_flag.current = false;
-      setEventText(`${event.Subject.Name} ${event.Student.UserInfo.Name} | ${event.duration} min`);
-    } else if (!event.StudentId) {
-      blocked_flag.current = true;
-      setEventText('');
-      if (user_type !== EventConstants.USER_TYPE.Teacher)          
-        actions_flag.current = false;
-    }
-  setStyleForEvent(blocked_flag.current ? style.blocked : style[`color_${event.SubjectId}`]);
-}
   }, [event, user_type, my_user_id, show_calendar_other_user, events]);
 
   return (<>
