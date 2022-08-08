@@ -9,7 +9,7 @@ const event_router = require("./routes/event");
 const { up } = require("./db/seeders/20220724075744-subjects");
 const settings_router = require("./routes/settingsRoute");
 
-Promise.resolve(sequelize.sync()).then(() => {
+Promise.resolve(sequelize.sync({force: true})).then(() => {
 	const queryInterface = sequelize.getQueryInterface();
 	up(queryInterface, sequelize);
 });
@@ -32,6 +32,7 @@ app.use((req, res, next) => {
 app.use("/users", router);
 app.use("/subjects", subjects_router);
 app.use("/event", event_router);
+app.use("/settings", settings_router);
 
 app.listen(port, () => console.log(`server is listening on port ${port}`));
 
