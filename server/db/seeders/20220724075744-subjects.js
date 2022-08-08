@@ -3,59 +3,55 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
    await queryInterface.bulkInsert('Subjects', [{
-      Name: 'History',
+      Name: 'Git',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      Name: 'English',
+      Name: 'Html',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      Name: 'Math',
+      Name: 'Css',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      Name: 'Art',
+      Name: 'JavaScript',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      Name: 'Music',
+      Name: 'Node.js',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      Name: 'Spanish',
+      Name: 'MySql',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      Name: 'Biology',
+      Name: 'Sequelize',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      Name: 'French',
+      Name: 'React',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      Name: 'science',
+      Name: 'Redux',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      Name: 'geography',
+      Name: 'Jest',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      Name: 'algebra',
+      Name: 'Cypress',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      Name: 'geometry',
+      Name: 'CI/CD',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      Name: 'chemistry',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },{
-      Name: 'physics',
+      Name: 'SOLID',
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});

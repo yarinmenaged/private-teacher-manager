@@ -59,33 +59,38 @@
 }
 
 .color_7 {
-  --theme-color: hsl(40, 50%, 30%);
-  --theme-bg: #ffd800;
+  --theme-color: #cacaca;
+  --theme-bg: hsl(174, 50%, 30%);
 }
 
 .color_8 {
-  --theme-color: hsl(180, 50%, 30%);
-  --theme-bg: #00facd;
+  --theme-color: #ffffff;
+  --theme-bg: hsl(289, 100%, 38%);
 }
 
 .color_9 {
-  --theme-color: hsl(200, 50%, 30%);
-  --theme-bg: #52f0fa;
+  --theme-color: #ffffff;
+  --theme-bg: hsl(321, 100%, 50%);
 }
 
 .color_10 {
   --theme-color: hsl(235, 75%, 90%);
-  --theme-bg: #473bbe;
+  --theme-bg: #0b0085;
 }
 
 .color_11 {
-  --theme-color: #471030;
-  --theme-bg: #f25081;
+  --theme-color: #000000;
+  --theme-bg: #f2ea50;
 }
 
 .color_12 {
-  --theme-color: rgb(138, 49, 94);
-  --theme-bg: #8f0f68;
+  --theme-color: rgb(255, 255, 255);
+  --theme-bg: #006709;
+}
+
+.color_13 {
+  --theme-color: rgb(255, 255, 255);
+  --theme-bg: #674f00;
 }
 
 .blocked {

@@ -12,12 +12,14 @@ const currentMail = {
 	pass: "Privatet1",
 };
 
+const gmail = { mail: "privateteacher29@gmail.com", pass: "ijcveztvonuhlipp" };
+
 const createNewTransport = () => {
 	const transporter = nodemailer.createTransport({
-		service: MAIL_SERVICE || "hotmail",
+		service: MAIL_SERVICE || "gmail",
 		auth: {
-			user: PRIVARE_TEACHER_MAIL || "private_teacher@outlook.co.il",
-			pass: PRIVARE_TEACHER_PASSWORD || currentMail.pass,
+			user: PRIVARE_TEACHER_MAIL || gmail.mail,
+			pass: PRIVARE_TEACHER_PASSWORD || gmail.pass,
 		},
 	});
 	return transporter;
@@ -91,7 +93,7 @@ const mailOptions = async (sendMailTo, subject, text, calendarEvent) => {
 const emailSender = async (sendMailTo, subject, text, calendarEvent) => {
 	const mailOpt = await mailOptions(sendMailTo, subject, text, calendarEvent);
 	const transporter = createNewTransport();
-	await transporter.sendMail(mailOpt, function (error, info) {
+	transporter.sendMail(mailOpt, function (error, info) {
 		if (error) {
 			console.log(error);
 		} else {
