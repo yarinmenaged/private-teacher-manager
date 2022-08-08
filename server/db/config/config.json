@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "gjeg9ie91kaxc9hx",
-    "password": "k8upggacj5lsla9m",
-    "database": "vxh7p980bsq2i70w",
-    "host": "xlf3ljx3beaucz9x.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "username": "pnsiy2pbeqz7syx2",
+    "password": "dq43945hqmuklrj5",
+    "database": "t7zpr311zgweog6l",
+    "host": "clwxydcjair55xn0.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
     "dialect": "mysql",
     "timezone": "+03:00"
   },
